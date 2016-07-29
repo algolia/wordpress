@@ -1,0 +1,632 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Customize Autocomplete</title>
+    <meta name="description" content="Learn how to customize the Algolia Search for WordPress autocomplete search experience.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
+    <link rel="stylesheet" href="css/app.css">
+
+    <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
+</head>
+<body>
+
+<div class='ac-nav'>
+    <div class="row">
+        <div class="large-12 columns">
+            <div class='ac-nav-container'>
+                <div class='ac-nav-brand'>
+                    <a class='ac-logo' href='https://community.algolia.com/' title='Algolia Community'>
+                        <img alt='Algolia Community' class='ac-logo__lg' src='https://res.cloudinary.com/hilnmyskv/image/upload/logo-community-inline-dark.svg' width='150'>
+                        <img alt='Algolia Community' class='ac-logo__sm' src='https://res.cloudinary.com/hilnmyskv/image/upload/v1461180081/logo-community-sm.svg'>
+                    </a>
+                    <span class='ac-nav-brand-breadcrumb'></span>
+                    <a class='ac-nav-brand-title' href='./' title='Home'>WordPress plugin</a>
+                </div>
+                <div class='ac-nav-menu'>
+                    <div class='ac-nav-searchbox'>
+                        <div class='svg-icons' style='height: 0; width: 0; position: absolute; visibility: hidden'>
+                            <svg xmlns='http://www.w3.org/2000/svg'>
+                                <symbol id="sbx-icon-clear-3" viewBox="0 0 40 40"><path d="M16.228 20L1.886 5.657 0 3.772 3.772 0l1.885 1.886L20 16.228 34.343 1.886 36.228 0 40 3.772l-1.886 1.885L23.772 20l14.342 14.343L40 36.228 36.228 40l-1.885-1.886L20 23.772 5.657 38.114 3.772 40 0 36.228l1.886-1.885L16.228 20z" fill-rule="evenodd"/></symbol>
+                                <symbol id="sbx-icon-search-13" viewBox="0 0 12 12"><path d="M12 11.077c0-.245-.1-.483-.267-.65L9.26 7.955c.584-.843.894-1.853.894-2.877C10.154 2.272 7.882 0 5.077 0S0 2.272 0 5.077s2.272 5.077 5.077 5.077c1.024 0 2.034-.31 2.877-.894l2.474 2.466c.166.173.404.274.65.274.504 0 .922-.418.922-.923zm-3.692-6c0 1.78-1.45 3.23-3.23 3.23-1.782 0-3.232-1.45-3.232-3.23s1.45-3.23 3.23-3.23c1.782 0 3.232 1.45 3.232 3.23z" fill="#FFF" fill-rule="evenodd" opacity="0.85"/></symbol>
+                            </svg>
+                        </div>
+                    </div>
+                    <ul class='ac-nav-menu-list'>
+                        <li class='ac-nav-menu-list-item'>
+                            <a href="/">Home</a>
+                        </li>
+                        <li class='ac-nav-menu-list-item active'>
+                            <a href="installation.html">Documentation</a>
+                        </li>
+                        <li class='ac-nav-menu-list-icon'>
+                            <a class='ac-icon' href='https://github.com/algolia/algoliasearch-wordpress-plugin/' title='GitHub repository'>
+                                <span class='ac-icon ac-icon-github'></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<header id="top-section">
+    <div class="row">
+        <div class="large-12 columns">
+            <img class="header-logo" src="https://res.cloudinary.com/hilnmyskv/image/upload/logo-algolia-dark.png">
+            <p class="lead header-lead">
+                Plugin for
+                <span>WordPress</span>
+            </p>
+        </div>
+    </div>
+</header>
+
+<div class="row">
+    <div class="medium-9 large-9 medium-push-3 large-push-3 columns">
+        <article>
+            <header>
+                <h1>Customize Autocomplete</h1>
+
+                <p class="lead">Learn how to customize the Algolia Search for WordPress autocomplete search experience.</p>
+
+                <ul class="menu simple">
+                    <li><a href="https://github.com/algolia/algoliasearch-wordpress-plugin/edit/master/docs/src/customize-autocomplete.md" target="_blank"><i class="fi-pencil"></i> <span>Edit this Page</span></a></li>
+                    <li><a href="https://github.com/algolia/algoliasearch-wordpress-plugin/issues/new?title=%5BCustomize Autocomplete%5D%20ISSUE%20NAME%20HERE" target="_blank"><i class="fi-social-github"></i> <span>Report a Bug</span></a></li>
+                    <li><a href="http://stackoverflow.com/questions/tagged/algolia+wordpress" target="_blank"><i class="fi-comment"></i> <span>Get Help</span></a></li>
+                </ul>
+            </header>
+
+            <hr>
+
+            <div class="row">
+
+                <div class="large-12 columns" id="content">
+                    <h2 id="introduction" data-magellan-target="introduction"><a class="heading-anchor" href="#introduction"><span></span></a>Introduction</h2>
+<p>As a reminder, here is what the autocomplete feature looks like by default when you enable it:</p>
+<p><img src="img/customize-autocomplete/preview.png" alt="Autocomplete preview"></p>
+<p>This search experience is based on the <a href="https://github.com/algolia/autocomplete.js">Algolia Autocomplete.js library</a> and by default uses the configuration provided on the Autocomplete admin page of this plugin.</p>
+<h2 id="resources" data-magellan-target="resources"><a class="heading-anchor" href="#resources"><span></span></a>Resources</h2>
+<p>Here is a list of resources that are injected into the frontend when we detect that the autocomplete is enabled:</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>File Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CSS</td>
+<td>algolia-autocomplete</td>
+<td>public/css/algolia-autocomplete.css</td>
+<td>The default autocomplete styles.</td>
+</tr>
+<tr>
+<td>JS</td>
+<td>algolia-autocomplete</td>
+<td>public/js/autocomplete.min.js</td>
+<td>The official Algolia autocomplete library.</td>
+</tr>
+<tr>
+<td>JS</td>
+<td>algolia-search</td>
+<td>public/js/algoliasearch.jquery.min.js</td>
+<td>The official Algolia JS client to communicate with the API.</td>
+</tr>
+<tr>
+<td>JS</td>
+<td>algolia-public-autocomplete</td>
+<td>public/js/algolia-public-autocomplete.js</td>
+<td>Enables autocomplete according to configuration.</td>
+</tr>
+<tr>
+<td>JS</td>
+<td>tether</td>
+<td>public/js/tether.min.js</td>
+<td>Library that allows to move the search dropdown when it becomes partly hided.</td>
+</tr>
+</tbody>
+</table>
+<p>If for whatever reason you want to remove the injection of one of the above static assets, you can do the following:</p>
+<pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">remove_assets</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-comment">// Remove style by name.</span>
+    wp_deregister_style( <span class="hljs-string">&apos;algolia-autocomplete&apos;</span> );
+
+    <span class="hljs-comment">// Remove script by name.</span>
+    wp_deregister_script( <span class="hljs-string">&apos;algolia-public-autocomplete&apos;</span> );
+}
+
+add_action( <span class="hljs-string">&apos;algolia_autocomplete_assets&apos;</span>, <span class="hljs-string">&apos;remove_assets&apos;</span> );</code></pre>
+
+<h2 id="customize-the-look-feel" data-magellan-target="customize-the-look-feel"><a class="heading-anchor" href="#customize-the-look-feel"><span></span></a>Customize The Look &amp; Feel</h2>
+<p>If you simply want to adjust the look &amp; feel of the autocomplete dropdown, we suggest you inject your custom styles from your plugin.</p>
+<p>Here are the default styles:</p>
+<pre><code class="hljs css"><span class="hljs-tag">span</span><span class="hljs-class">.algolia-autocomplete</span> <span class="hljs-rules">{
+    <span class="hljs-rule"><span class="hljs-attribute">display</span>:<span class="hljs-value"> inherit <span class="hljs-important">!important</span></span></span>;
+}</span>
+<span class="hljs-class">.aa-dropdown-menu</span> <span class="hljs-rules">{
+    <span class="hljs-rule"><span class="hljs-attribute">width</span>:<span class="hljs-value"> <span class="hljs-number">350px</span></span></span>;
+    <span class="hljs-rule"><span class="hljs-attribute">font-family</span>:<span class="hljs-value"> sans-serif</span></span>;
+    <span class="hljs-rule"><span class="hljs-attribute">z-index</span>:<span class="hljs-value"> <span class="hljs-number">999999</span></span></span>;
+    <span class="hljs-rule"><span class="hljs-attribute">background-color</span>:<span class="hljs-value"> <span class="hljs-hexcolor">#fff</span></span></span>;
+    <span class="hljs-rule"><span class="hljs-attribute">border-top</span>:<span class="hljs-value"> none</span></span>;
+    <span class="hljs-rule"><span class="hljs-attribute">border-bottom-left-radius</span>:<span class="hljs-value"> <span class="hljs-number">4px</span></span></span>;
+    <span class="hljs-rule"><span class="hljs-attribute">border-bottom-right-radius</span>:<span class="hljs-value"> <span class="hljs-number">4px</span></span></span>;
+    <span class="hljs-rule"><span class="hljs-attribute">box-shadow</span>:<span class="hljs-value"> <span class="hljs-number">0</span> <span class="hljs-number">1px</span> <span class="hljs-number">2px</span> <span class="hljs-function">rgba</span>(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,.<span class="hljs-number">25</span>),<span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">1px</span> <span class="hljs-function">rgba</span>(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,.<span class="hljs-number">35</span>)</span></span>;
+}</span>
+
+<span class="hljs-at_rule">@<span class="hljs-keyword">media</span> only screen and (max-width: <span class="hljs-number">768px</span>) </span>{
+    <span class="hljs-comment">/* For mobile phones: */</span>
+    <span class="hljs-class">.aa-dropdown-menu</span> <span class="hljs-rules">{
+        <span class="hljs-rule"><span class="hljs-attribute">min-width</span>:<span class="hljs-value"> inherit</span></span>;
+        <span class="hljs-rule"><span class="hljs-attribute">max-width</span>:<span class="hljs-value"> inherit</span></span>;
+        <span class="hljs-rule"><span class="hljs-attribute">width</span>:<span class="hljs-value"> <span class="hljs-number">70%</span></span></span>;
+    }</span>
+}
+
+<span class="hljs-class">.aa-dropdown-menu</span> <span class="hljs-class">.aa-input</span>, <span class="hljs-class">.aa-dropdown-menu</span> <span class="hljs-class">.aa-hint</span> <span class="hljs-rules">{
+    <span class="hljs-rule"><span class="hljs-attribute">width</span>:<span class="hljs-value"> <span class="hljs-number">100%</span></span></span>;
+}</span>
+<span class="hljs-class">.aa-dropdown-menu</span> <span class="hljs-class">.aa-hint</span> <span class="hljs-rules">{
+    <span class="hljs-rule"><span class="hljs-attribute">color</span>:<span class="hljs-value"> <span class="hljs-hexcolor">#999</span></span></span>;
+}</span>
+
+<span class="hljs-class">.aa-dropdown-menu</span> <span class="hljs-class">.aa-suggestion</span><span class="hljs-class">.aa-cursor</span> <span class="hljs-rules">{
+    <span class="hljs-rule"><span class="hljs-attribute">background-color</span>:<span class="hljs-value"> <span class="hljs-hexcolor">#f9f9f9</span></span></span>;
+
+}</span>
+
+<span class="hljs-class">.aa-dropdown-menu</span> <span class="hljs-class">.aa-suggestion</span><span class="hljs-class">.aa-cursor</span> <span class="hljs-class">.suggestion-post-title</span><span class="hljs-rules">{
+    <span class="hljs-rule"><span class="hljs-attribute">text-decoration</span>:<span class="hljs-value"> underline</span></span>;
+}</span>
+
+<span class="hljs-class">.aa-dropdown-menu</span> <span class="hljs-class">.aa-suggestion</span> <span class="hljs-tag">em</span> <span class="hljs-rules">{
+    <span class="hljs-rule"><span class="hljs-attribute">font-weight</span>:<span class="hljs-value"> bold</span></span>;
+    <span class="hljs-rule"><span class="hljs-attribute">font-style</span>:<span class="hljs-value"> normal</span></span>;
+}</span>
+
+<span class="hljs-comment">/* Font */</span>
+<span class="hljs-class">.aa-dropdown-menu</span> <span class="hljs-rules">{
+    <span class="hljs-rule"><span class="hljs-attribute">color</span>:<span class="hljs-value"> <span class="hljs-hexcolor">#1a1a1a</span></span></span>;
+    <span class="hljs-rule"><span class="hljs-attribute">font-size</span>:<span class="hljs-value"> <span class="hljs-number">12px</span></span></span>;
+}</span>
+
+<span class="hljs-comment">/* Header */</span>
+<span class="hljs-class">.aa-dropdown-menu</span> <span class="hljs-class">.autocomplete-header</span> <span class="hljs-rules">{
+    <span class="hljs-rule"><span class="hljs-attribute">margin</span>:<span class="hljs-value"> <span class="hljs-number">15px</span> <span class="hljs-number">14px</span> <span class="hljs-number">0</span></span></span>;
+    <span class="hljs-rule"><span class="hljs-attribute">padding-bottom</span>:<span class="hljs-value"> <span class="hljs-number">8px</span></span></span>;
+    <span class="hljs-rule"><span class="hljs-attribute">border-bottom</span>:<span class="hljs-value"> <span class="hljs-number">1px</span> solid <span class="hljs-function">rgba</span>(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,.<span class="hljs-number">05</span>)</span></span>;
+}</span>
+<span class="hljs-class">.aa-dropdown-menu</span> <span class="hljs-class">.autocomplete-header-title</span>,
+<span class="hljs-class">.aa-dropdown-menu</span> <span class="hljs-class">.autocomplete-header-more</span>
+<span class="hljs-rules">{
+    <span class="hljs-rule"><span class="hljs-attribute">letter-spacing</span>:<span class="hljs-value"> <span class="hljs-number">1px</span></span></span>;
+    <span class="hljs-rule"><span class="hljs-attribute">text-transform</span>:<span class="hljs-value"> uppercase</span></span>;
+    <span class="hljs-rule"><span class="hljs-attribute">font-weight</span>:<span class="hljs-value"> bold</span></span>;
+}</span>
+
+<span class="hljs-class">.aa-dropdown-menu</span> <span class="hljs-class">.autocomplete-header-title</span> <span class="hljs-rules">{
+    <span class="hljs-rule"><span class="hljs-attribute">float</span>:<span class="hljs-value"> left</span></span>;
+}</span>
+
+<span class="hljs-class">.aa-dropdown-menu</span> <span class="hljs-class">.autocomplete-header-more</span> <span class="hljs-rules">{
+    <span class="hljs-rule"><span class="hljs-attribute">float</span>:<span class="hljs-value"> right</span></span>;
+}</span>
+
+<span class="hljs-class">.aa-dropdown-menu</span> <span class="hljs-class">.autocomplete-header-more</span> <span class="hljs-tag">a</span> <span class="hljs-rules">{
+    <span class="hljs-rule"><span class="hljs-attribute">color</span>:<span class="hljs-value"> <span class="hljs-function">rgba</span>(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,.<span class="hljs-number">3</span>)</span></span>;
+    <span class="hljs-rule"><span class="hljs-attribute">font-weight</span>:<span class="hljs-value"> bold</span></span>;
+}</span>
+
+<span class="hljs-class">.aa-dropdown-menu</span> <span class="hljs-class">.autocomplete-header-more</span> <span class="hljs-tag">a</span><span class="hljs-pseudo">:hover</span> <span class="hljs-rules">{
+    <span class="hljs-rule"><span class="hljs-attribute">color</span>:<span class="hljs-value">  <span class="hljs-function">rgba</span>(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,.<span class="hljs-number">4</span>)</span></span>;
+}</span>
+
+<span class="hljs-class">.aa-dropdown-menu</span> <span class="hljs-tag">a</span> <span class="hljs-rules">{
+    <span class="hljs-rule"><span class="hljs-attribute">color</span>:<span class="hljs-value"> <span class="hljs-function">rgba</span>(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,.<span class="hljs-number">3</span>)</span></span>;
+    <span class="hljs-rule"><span class="hljs-attribute">font-weight</span>:<span class="hljs-value"> normal</span></span>;
+}</span>
+<span class="hljs-class">.aa-dropdown-menu</span> <span class="hljs-tag">a</span><span class="hljs-pseudo">:hover</span> <span class="hljs-rules">{
+    <span class="hljs-rule"><span class="hljs-attribute">text-decoration</span>:<span class="hljs-value"> none</span></span>;
+}</span>
+
+<span class="hljs-comment">/* Suggestion */</span>
+<span class="hljs-class">.aa-dropdown-menu</span> <span class="hljs-class">.aa-suggestion</span> <span class="hljs-rules">{
+    <span class="hljs-rule"><span class="hljs-attribute">line-height</span>:<span class="hljs-value"> <span class="hljs-number">32px</span></span></span>;
+}</span>
+<span class="hljs-class">.aa-dropdown-menu</span> <span class="hljs-tag">a</span><span class="hljs-class">.suggestion-link</span> <span class="hljs-rules">{
+    <span class="hljs-rule"><span class="hljs-attribute">display</span>:<span class="hljs-value"> block</span></span>;
+    <span class="hljs-rule"><span class="hljs-attribute">padding</span>:<span class="hljs-value"> <span class="hljs-number">5px</span> <span class="hljs-number">14px</span></span></span>;
+    <span class="hljs-rule"><span class="hljs-attribute">white-space</span>:<span class="hljs-value"> nowrap <span class="hljs-important">!important</span></span></span>;
+    <span class="hljs-rule"><span class="hljs-attribute">text-overflow</span>:<span class="hljs-value"> ellipsis</span></span>;
+    <span class="hljs-rule"><span class="hljs-attribute">overflow</span>:<span class="hljs-value"> hidden</span></span>;
+    <span class="hljs-rule"><span class="hljs-attribute">color</span>:<span class="hljs-value"> <span class="hljs-hexcolor">#1a1a1a</span></span></span>;
+}</span>
+
+<span class="hljs-class">.aa-dropdown-menu</span> <span class="hljs-tag">a</span><span class="hljs-class">.suggestion-link</span> <span class="hljs-tag">svg</span> <span class="hljs-rules">{
+    <span class="hljs-rule"><span class="hljs-attribute">vertical-align</span>:<span class="hljs-value"> middle</span></span>;
+    <span class="hljs-rule"><span class="hljs-attribute">fill</span>:<span class="hljs-value"> <span class="hljs-function">rgba</span>(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,.<span class="hljs-number">3</span>)</span></span>;
+}</span>
+
+<span class="hljs-class">.aa-dropdown-menu</span> <span class="hljs-class">.suggestion-post-thumbnail</span> <span class="hljs-rules">{
+    <span class="hljs-rule"><span class="hljs-attribute">float</span>:<span class="hljs-value"> left</span></span>;
+    <span class="hljs-rule"><span class="hljs-attribute">margin-right</span>:<span class="hljs-value"> <span class="hljs-number">5px</span></span></span>;
+    <span class="hljs-rule"><span class="hljs-attribute">border-radius</span>:<span class="hljs-value"> <span class="hljs-number">3px</span></span></span>;
+}</span>
+
+<span class="hljs-class">.aa-dropdown-menu</span> <span class="hljs-class">.suggestion-user-thumbnail</span> <span class="hljs-rules">{
+    <span class="hljs-rule"><span class="hljs-attribute">float</span>:<span class="hljs-value"> left</span></span>;
+    <span class="hljs-rule"><span class="hljs-attribute">margin-right</span>:<span class="hljs-value"> <span class="hljs-number">5px</span></span></span>;
+    <span class="hljs-rule"><span class="hljs-attribute">border-radius</span>:<span class="hljs-value"> <span class="hljs-number">16px</span></span></span>;
+}</span>
+
+<span class="hljs-comment">/* Footer */</span>
+<span class="hljs-class">.aa-dropdown-menu</span> <span class="hljs-class">.autocomplete-footer-branding</span> <span class="hljs-rules">{
+    <span class="hljs-rule"><span class="hljs-attribute">padding</span>:<span class="hljs-value"> <span class="hljs-number">15px</span> <span class="hljs-number">14px</span> <span class="hljs-number">0px</span></span></span>;
+    <span class="hljs-rule"><span class="hljs-attribute">float</span>:<span class="hljs-value"> right</span></span>;
+    <span class="hljs-rule"><span class="hljs-attribute">color</span>:<span class="hljs-value"> <span class="hljs-function">rgba</span>(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,.<span class="hljs-number">3</span>)</span></span>;
+    <span class="hljs-rule"><span class="hljs-attribute">margin-bottom</span>:<span class="hljs-value"> <span class="hljs-number">7px</span></span></span>;
+}</span>
+
+<span class="hljs-class">.aa-dropdown-menu</span> <span class="hljs-class">.autocomplete-footer-branding</span> <span class="hljs-class">.algolia-logo</span> <span class="hljs-rules">{
+    <span class="hljs-rule"><span class="hljs-attribute">width</span>:<span class="hljs-value"> <span class="hljs-number">55px</span></span></span>;
+    <span class="hljs-rule"><span class="hljs-attribute">vertical-align</span>:<span class="hljs-value"> top</span></span>;
+}</span>
+
+<span class="hljs-comment">/* Clearfix */</span>
+<span class="hljs-class">.aa-dropdown-menu</span> <span class="hljs-class">.clear</span> <span class="hljs-rules">{
+    <span class="hljs-rule"><span class="hljs-attribute">clear</span>:<span class="hljs-value"> both</span></span>;
+}</span></code></pre>
+
+<p><strong>When designing your autocomplete, turn on the WordPress debug mode to force the autocomplete dropdown to stay open.</strong></p>
+<p>To do so, simply ensure this line is present in your <code>wp-config.php</code> file:</p>
+<pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
+<span class="hljs-comment">// [...]</span>
+define( <span class="hljs-string">&apos;WP_DEBUG&apos;</span>, <span class="hljs-keyword">true</span> );
+<span class="hljs-comment">// [...]</span></code></pre>
+
+<p>To properly inject your custom styles into the page only when required, you should do so by reacting to the <code>algolia_autocomplete_assets</code> action as follow:</p>
+<pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">custom_autocomplete_assets</span><span class="hljs-params">()</span> </span>{
+    wp_enqueue_style( <span class="hljs-string">&apos;custom-autocomplete-styles&apos;</span>, get_template_directory_uri() . <span class="hljs-string">&apos;/css/custom-autocomplete.css&apos;</span> );
+}
+
+add_action( <span class="hljs-string">&apos;algolia_autocomplete_assets&apos;</span> );</code></pre>
+
+<p>Read more about injecting styles and scripts in <a href="https://developer.wordpress.org/themes/basics/including-css-javascript/">the WordPress developers documentation</a>.</p>
+<h2 id="customize-behaviour" data-magellan-target="customize-behaviour"><a class="heading-anchor" href="#customize-behaviour"><span></span></a>Customize Behaviour</h2>
+<p>This plugin provide with a filter hook to customize the autocomplete configuration.</p>
+<pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">custom_autocomplete_config</span><span class="hljs-params">( <span class="hljs-variable">$config</span> )</span> </span>{
+    <span class="hljs-comment">/* Make changes to the default config here and return the array afterwards. */</span>
+
+    <span class="hljs-keyword">return</span> <span class="hljs-variable">$config</span>;
+}
+
+add_filter( <span class="hljs-string">&apos;algolia_autocomplete_config&apos;</span>, <span class="hljs-string">&apos;custom_autocomplete_config&apos;</span> );</code></pre>
+
+<p>Here is an example of what looks like an autocomplete configuration array:</p>
+<pre><code class="hljs"><span class="hljs-built_in">array</span>(<span class="hljs-number">4</span>) {
+  [<span class="hljs-number">0</span>]=&gt;
+  <span class="hljs-built_in">array</span>(<span class="hljs-number">9</span>) {
+    [<span class="hljs-string">&quot;name&quot;</span>]=&gt;
+    <span class="hljs-built_in">string</span>(<span class="hljs-number">15</span>) <span class="hljs-string">&quot;post_type__post&quot;</span>
+    [<span class="hljs-string">&quot;position&quot;</span>]=&gt;
+    <span class="hljs-built_in">int</span>(<span class="hljs-number">10</span>)
+    [<span class="hljs-string">&quot;max_suggestions&quot;</span>]=&gt;
+    <span class="hljs-built_in">int</span>(<span class="hljs-number">5</span>)
+    [<span class="hljs-string">&quot;distinct&quot;</span>]=&gt;
+    <span class="hljs-built_in">bool</span>(<span class="hljs-literal">true</span>)
+    [<span class="hljs-string">&quot;label&quot;</span>]=&gt;
+    <span class="hljs-built_in">string</span>(<span class="hljs-number">5</span>) <span class="hljs-string">&quot;Posts&quot;</span>
+    [<span class="hljs-string">&quot;index&quot;</span>]=&gt;
+    <span class="hljs-built_in">string</span>(<span class="hljs-number">12</span>) <span class="hljs-string">&quot;wp_post_post&quot;</span>
+    [<span class="hljs-string">&quot;tmpl_suggestion&quot;</span>]=&gt;
+    <span class="hljs-built_in">string</span>(<span class="hljs-number">28</span>) <span class="hljs-string">&quot;autocomplete-post-suggestion&quot;</span>
+    [<span class="hljs-string">&quot;enabled&quot;</span>]=&gt;
+    <span class="hljs-built_in">bool</span>(<span class="hljs-literal">true</span>)
+    [<span class="hljs-string">&quot;tmpl_header&quot;</span>]=&gt;
+    <span class="hljs-built_in">string</span>(<span class="hljs-number">19</span>) <span class="hljs-string">&quot;autocomplete-header&quot;</span>
+  }
+  [<span class="hljs-number">1</span>]=&gt;
+  <span class="hljs-built_in">array</span>(<span class="hljs-number">9</span>) {
+    [<span class="hljs-string">&quot;name&quot;</span>]=&gt;
+    <span class="hljs-built_in">string</span>(<span class="hljs-number">15</span>) <span class="hljs-string">&quot;post_type__page&quot;</span>
+    [<span class="hljs-string">&quot;position&quot;</span>]=&gt;
+    <span class="hljs-built_in">int</span>(<span class="hljs-number">10</span>)
+    [<span class="hljs-string">&quot;max_suggestions&quot;</span>]=&gt;
+    <span class="hljs-built_in">int</span>(<span class="hljs-number">2</span>)
+    [<span class="hljs-string">&quot;distinct&quot;</span>]=&gt;
+    <span class="hljs-built_in">bool</span>(<span class="hljs-literal">true</span>)
+    [<span class="hljs-string">&quot;label&quot;</span>]=&gt;
+    <span class="hljs-built_in">string</span>(<span class="hljs-number">5</span>) <span class="hljs-string">&quot;Pages&quot;</span>
+    [<span class="hljs-string">&quot;index&quot;</span>]=&gt;
+    <span class="hljs-built_in">string</span>(<span class="hljs-number">12</span>) <span class="hljs-string">&quot;wp_post_page&quot;</span>
+    [<span class="hljs-string">&quot;tmpl_suggestion&quot;</span>]=&gt;
+    <span class="hljs-built_in">string</span>(<span class="hljs-number">28</span>) <span class="hljs-string">&quot;autocomplete-post-suggestion&quot;</span>
+    [<span class="hljs-string">&quot;enabled&quot;</span>]=&gt;
+    <span class="hljs-built_in">bool</span>(<span class="hljs-literal">true</span>)
+    [<span class="hljs-string">&quot;tmpl_header&quot;</span>]=&gt;
+    <span class="hljs-built_in">string</span>(<span class="hljs-number">19</span>) <span class="hljs-string">&quot;autocomplete-header&quot;</span>
+  }
+  [<span class="hljs-number">2</span>]=&gt;
+  <span class="hljs-built_in">array</span>(<span class="hljs-number">9</span>) {
+    [<span class="hljs-string">&quot;name&quot;</span>]=&gt;
+    <span class="hljs-built_in">string</span>(<span class="hljs-number">18</span>) <span class="hljs-string">&quot;taxonomy__post_tag&quot;</span>
+    [<span class="hljs-string">&quot;position&quot;</span>]=&gt;
+    <span class="hljs-built_in">int</span>(<span class="hljs-number">20</span>)
+    [<span class="hljs-string">&quot;max_suggestions&quot;</span>]=&gt;
+    <span class="hljs-built_in">int</span>(<span class="hljs-number">3</span>)
+    [<span class="hljs-string">&quot;distinct&quot;</span>]=&gt;
+    <span class="hljs-built_in">bool</span>(<span class="hljs-literal">false</span>)
+    [<span class="hljs-string">&quot;label&quot;</span>]=&gt;
+    <span class="hljs-built_in">string</span>(<span class="hljs-number">4</span>) <span class="hljs-string">&quot;Tags&quot;</span>
+    [<span class="hljs-string">&quot;index&quot;</span>]=&gt;
+    <span class="hljs-built_in">string</span>(<span class="hljs-number">20</span>) <span class="hljs-string">&quot;wp_taxonomy_post_tag&quot;</span>
+    [<span class="hljs-string">&quot;tmpl_suggestion&quot;</span>]=&gt;
+    <span class="hljs-built_in">string</span>(<span class="hljs-number">28</span>) <span class="hljs-string">&quot;autocomplete-term-suggestion&quot;</span>
+    [<span class="hljs-string">&quot;enabled&quot;</span>]=&gt;
+    <span class="hljs-built_in">bool</span>(<span class="hljs-literal">true</span>)
+    [<span class="hljs-string">&quot;tmpl_header&quot;</span>]=&gt;
+    <span class="hljs-built_in">string</span>(<span class="hljs-number">19</span>) <span class="hljs-string">&quot;autocomplete-header&quot;</span>
+  }
+  [<span class="hljs-number">3</span>]=&gt;
+  <span class="hljs-built_in">array</span>(<span class="hljs-number">9</span>) {
+    [<span class="hljs-string">&quot;name&quot;</span>]=&gt;
+    <span class="hljs-built_in">string</span>(<span class="hljs-number">5</span>) <span class="hljs-string">&quot;users&quot;</span>
+    [<span class="hljs-string">&quot;position&quot;</span>]=&gt;
+    <span class="hljs-built_in">int</span>(<span class="hljs-number">30</span>)
+    [<span class="hljs-string">&quot;max_suggestions&quot;</span>]=&gt;
+    <span class="hljs-built_in">int</span>(<span class="hljs-number">3</span>)
+    [<span class="hljs-string">&quot;distinct&quot;</span>]=&gt;
+    <span class="hljs-built_in">bool</span>(<span class="hljs-literal">false</span>)
+    [<span class="hljs-string">&quot;label&quot;</span>]=&gt;
+    <span class="hljs-built_in">string</span>(<span class="hljs-number">5</span>) <span class="hljs-string">&quot;Users&quot;</span>
+    [<span class="hljs-string">&quot;index&quot;</span>]=&gt;
+    <span class="hljs-built_in">string</span>(<span class="hljs-number">8</span>) <span class="hljs-string">&quot;wp_users&quot;</span>
+    [<span class="hljs-string">&quot;tmpl_suggestion&quot;</span>]=&gt;
+    <span class="hljs-built_in">string</span>(<span class="hljs-number">28</span>) <span class="hljs-string">&quot;autocomplete-user-suggestion&quot;</span>
+    [<span class="hljs-string">&quot;enabled&quot;</span>]=&gt;
+    <span class="hljs-built_in">bool</span>(<span class="hljs-literal">true</span>)
+    [<span class="hljs-string">&quot;tmpl_header&quot;</span>]=&gt;
+    <span class="hljs-built_in">string</span>(<span class="hljs-number">19</span>) <span class="hljs-string">&quot;autocomplete-header&quot;</span>
+  }
+}</code></pre>
+
+<p>Each item if the configuration represents an index in Algolia. Here are the meanings of the different values:</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>Used internally as unique way to identify the index. Do not change unless you know what you are doing.</td>
+</tr>
+<tr>
+<td>position</td>
+<td>The bigger the value, the most at the bottom the content type results will be displayed.</td>
+</tr>
+<tr>
+<td>max_suggestions</td>
+<td>The number of suggestions to display at once for the index.</td>
+</tr>
+<tr>
+<td>label</td>
+<td>Displayed as header above the suggestions for the content type.</td>
+</tr>
+<tr>
+<td>index</td>
+<td>The index name as for Algolia.</td>
+</tr>
+<tr>
+<td>tmpl_suggestion</td>
+<td>The id of the suggestion html without the <code>tmpl-</code> prefix.</td>
+</tr>
+<tr>
+<td>enabled</td>
+<td>True if this index should be searched on, false otherwise.</td>
+</tr>
+<tr>
+<td>tmpl_header</td>
+<td>Same as <code>tmpl_suggestion</code> but for header section.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="customize-template" data-magellan-target="customize-template"><a class="heading-anchor" href="#customize-template"><span></span></a>Customize Template</h2>
+<p>To display the results suggestion we inject some html templates wrapped into script tags so that they can be handled by the WordPress template preprocessor which in turn is based uglify.</p>
+<p>Here is what the post suggestion template looks like:</p>
+<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">&quot;text/html&quot;</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">&quot;tmpl-autocomplete-post-suggestion&quot;</span>&gt;</span><span class="handlebars"><span class="xml">
+    <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;suggestion-link&quot;</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">&quot;</span></span></span><span class="hljs-expression">{{ <span class="hljs-variable">data.permalink</span> }}</span><span class="xml"><span class="hljs-tag"><span class="hljs-value">&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">#</span> <span class="hljs-attribute">if</span> ( <span class="hljs-attribute">data.thumbnail_url</span> ) { #&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">img</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;suggestion-post-thumbnail&quot;</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">&quot;</span></span></span><span class="hljs-expression">{{ <span class="hljs-variable">data.thumbnail</span>_<span class="hljs-variable">url</span> }}</span><span class="xml"><span class="hljs-tag"><span class="hljs-value">&quot;</span> <span class="hljs-attribute">width</span>=<span class="hljs-value">&quot;32&quot;</span> <span class="hljs-attribute">height</span>=<span class="hljs-value">&quot;32&quot;</span> <span class="hljs-attribute">alt</span>=<span class="hljs-value">&quot;</span></span></span><span class="hljs-expression">{{ <span class="hljs-variable">data.post</span>_<span class="hljs-variable">title</span> }}</span><span class="xml"><span class="hljs-tag"><span class="hljs-value">&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">#</span> } #&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;suggestion-post-title&quot;</span>&gt;</span></span><span class="hljs-expression">{{{ <span class="hljs-variable">data.</span>_<span class="hljs-variable">highlightResult.post</span>_<span class="hljs-variable">title.value</span> }}</span><span class="xml">}<span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+</span></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span></code></pre>
+
+<p>The <code>data</code> represent the Algolia single hit item. You can access all the indexed attributes. For a complete list of default attributes, see <a href="index-schema.md">this page</a>.</p>
+<p>If you have pushed custom attributes, you will also be able to access them.</p>
+<p>In this example we also use some of the features of Algolia like highlighting matched strings. For a complete list of features, please checkout the <a href="https://www.algolia.com/doc/">official Algolia documentation</a>.</p>
+<p>Let&apos;s say that you now want to add the content excerpt of posts in the suggestions. In that case you would need to:</p>
+<ul>
+<li>Inject your custom html template,</li>
+<li>Adjust the CSS for obtaining a correct look &amp; feel.</li>
+</ul>
+<p>To replace the default templates with yours you can use the <code>algolia_autocomplete_templates</code> filter.</p>
+<p>By default, here is the list of templates we use:</p>
+<pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
+
+<span class="hljs-variable">$templates</span> = <span class="hljs-keyword">array</span>(
+    <span class="hljs-string">&apos;header&apos;</span>          =&gt; plugin_dir_path( <span class="hljs-keyword">__FILE__</span> ) . <span class="hljs-string">&apos;partials/algolia-autocomplete-header.php&apos;</span>,
+      <span class="hljs-string">&apos;post-suggestion&apos;</span> =&gt; plugin_dir_path( <span class="hljs-keyword">__FILE__</span> ) . <span class="hljs-string">&apos;partials/algolia-autocomplete-post-suggestion.php&apos;</span>,
+      <span class="hljs-string">&apos;term-suggestion&apos;</span> =&gt; plugin_dir_path( <span class="hljs-keyword">__FILE__</span> ) . <span class="hljs-string">&apos;partials/algolia-autocomplete-term-suggestion.php&apos;</span>,
+      <span class="hljs-string">&apos;user-suggestion&apos;</span> =&gt; plugin_dir_path( <span class="hljs-keyword">__FILE__</span> ) . <span class="hljs-string">&apos;partials/algolia-autocomplete-user-suggestion.php&apos;</span>,
+      <span class="hljs-string">&apos;footer&apos;</span>          =&gt; plugin_dir_path( <span class="hljs-keyword">__FILE__</span> ) . <span class="hljs-string">&apos;partials/algolia-autocomplete-footer.php&apos;</span>,
+      <span class="hljs-string">&apos;empty&apos;</span>           =&gt; plugin_dir_path( <span class="hljs-keyword">__FILE__</span> ) . <span class="hljs-string">&apos;partials/algolia-autocomplete-empty.php&apos;</span>,
+);</code></pre>
+
+<p>Now lets replace the post template with your custom one:</p>
+<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">&quot;text/html&quot;</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">&quot;tmpl-autocomplete-post-suggestion&quot;</span>&gt;</span><span class="handlebars"><span class="xml">
+    <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;suggestion-link&quot;</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">&quot;</span></span></span><span class="hljs-expression">{{ <span class="hljs-variable">data.permalink</span> }}</span><span class="xml"><span class="hljs-tag"><span class="hljs-value">&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">#</span> <span class="hljs-attribute">if</span> ( <span class="hljs-attribute">data.thumbnail_url</span> ) { #&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">img</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;suggestion-post-thumbnail&quot;</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">&quot;</span></span></span><span class="hljs-expression">{{ <span class="hljs-variable">data.thumbnail</span>_<span class="hljs-variable">url</span> }}</span><span class="xml"><span class="hljs-tag"><span class="hljs-value">&quot;</span> <span class="hljs-attribute">width</span>=<span class="hljs-value">&quot;32&quot;</span> <span class="hljs-attribute">height</span>=<span class="hljs-value">&quot;32&quot;</span> <span class="hljs-attribute">alt</span>=<span class="hljs-value">&quot;</span></span></span><span class="hljs-expression">{{ <span class="hljs-variable">data.post</span>_<span class="hljs-variable">title</span> }}</span><span class="xml"><span class="hljs-tag"><span class="hljs-value">&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">#</span> } #&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;suggestion-post-title&quot;</span>&gt;</span></span><span class="hljs-expression">{{{ <span class="hljs-variable">data.</span>_<span class="hljs-variable">highlightResult.post</span>_<span class="hljs-variable">title.value</span> }}</span><span class="xml">}<span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">br</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;suggestion-content&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">#</span> <span class="hljs-attribute">if</span> ( <span class="hljs-attribute">data._snippetResult.content.value</span> ) { #&gt;</span>
+                </span><span class="hljs-expression">{{{ <span class="hljs-variable">data.</span>_<span class="hljs-variable">snippetResult.content.value</span> }}</span><span class="xml">}
+            <span class="hljs-tag">&lt;<span class="hljs-title">#</span> } #&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+</span></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">style</span>&gt;</span><span class="css">
+    <span class="hljs-class">.suggestion-link</span> <span class="hljs-class">.suggestion-content</span> <span class="hljs-rules">{
+        <span class="hljs-rule"><span class="hljs-attribute">white-space</span>:<span class="hljs-value"> normal</span></span>;
+        <span class="hljs-rule"><span class="hljs-attribute">font-style</span>:<span class="hljs-value"> italic</span></span>;
+        <span class="hljs-rule"><span class="hljs-attribute">margin</span>:<span class="hljs-value"> <span class="hljs-number">5px</span> <span class="hljs-number">0</span> <span class="hljs-number">10px</span></span></span>;
+        <span class="hljs-rule"><span class="hljs-attribute">display</span>:<span class="hljs-value"> inline-block</span></span>;
+        <span class="hljs-rule"><span class="hljs-attribute">border-left</span>:<span class="hljs-value"> <span class="hljs-number">2px</span> solid <span class="hljs-hexcolor">#A1A1A1</span></span></span>;
+        <span class="hljs-rule"><span class="hljs-attribute">padding</span>:<span class="hljs-value"> <span class="hljs-number">0</span> <span class="hljs-number">10px</span></span></span>;
+        <span class="hljs-rule"><span class="hljs-attribute">background</span>:<span class="hljs-value"> <span class="hljs-hexcolor">#f1f1f1</span></span></span>;
+        <span class="hljs-rule"><span class="hljs-attribute">width</span>:<span class="hljs-value"> <span class="hljs-number">100%</span></span></span>;
+    }</span>
+</span><span class="hljs-tag">&lt;/<span class="hljs-title">style</span>&gt;</span></code></pre>
+
+<p><strong>Note that we have inlined the styles for the sake of briefness. In your project, inject your CSS properly as explained previously on this page.</strong></p>
+<p>Now let&apos;s override the default template:</p>
+<pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">custom_autocomplete_templates</span><span class="hljs-params">( <span class="hljs-variable">$templates</span> )</span> </span>{
+    <span class="hljs-variable">$templates</span>[<span class="hljs-string">&apos;post-suggestion&apos;</span>] = plugin_dir_path( <span class="hljs-keyword">__FILE__</span> ) . <span class="hljs-string">&apos;custom-autocomplete-post-suggestion.php&apos;</span>;
+
+    <span class="hljs-keyword">return</span> <span class="hljs-variable">$templates</span>;
+}
+
+add_filter( <span class="hljs-string">&apos;algolia_autocomplete_templates&apos;</span>, <span class="hljs-string">&apos;custom_autocomplete_templates&apos;</span> );</code></pre>
+
+<p>Here is what you would get:</p>
+<p><img src="img/customize-autocomplete/custom-template.png" alt="custom template"></p>
+<h2 id="advanced-templating" data-magellan-target="advanced-templating"><a class="heading-anchor" href="#advanced-templating"><span></span></a>Advanced Templating</h2>
+<p>If you want to go further, you could also manually override every templates directly in the config.</p>
+<p>For example, let&apos;s say that you want a special template only for the post type &quot;page&quot;.</p>
+<pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
+
+<span class="hljs-comment">// Register our new template for injection into the footer of the html.</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">custom_autocomplete_templates</span><span class="hljs-params">( <span class="hljs-variable">$templates</span> )</span> </span>{
+    <span class="hljs-variable">$templates</span>[<span class="hljs-string">&apos;post-page-suggestion&apos;</span>] = plugin_dir_path( <span class="hljs-keyword">__FILE__</span> ) . <span class="hljs-string">&apos;custom-autocomplete-post-page-suggestion.php&apos;</span>;
+
+    <span class="hljs-keyword">return</span> <span class="hljs-variable">$templates</span>;
+}
+
+add_filter( <span class="hljs-string">&apos;algolia_autocomplete_templates&apos;</span>, <span class="hljs-string">&apos;custom_autocomplete_templates&apos;</span> );
+
+
+<span class="hljs-comment">// Assign the template ID for the chosen page post type.</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">custom_page_template</span><span class="hljs-params">( <span class="hljs-variable">$config</span> )</span> </span>{
+    <span class="hljs-keyword">foreach</span> ( <span class="hljs-variable">$config</span> <span class="hljs-keyword">as</span> &amp;<span class="hljs-variable">$source</span> ) {
+        <span class="hljs-keyword">if</span> ( <span class="hljs-string">&apos;post_type__page&apos;</span> === <span class="hljs-variable">$source</span>[<span class="hljs-string">&apos;name&apos;</span>] ) {
+            <span class="hljs-variable">$source</span>[<span class="hljs-string">&apos;tmpl_suggestion&apos;</span>] = <span class="hljs-string">&apos;autocomplete-post-page-suggestion&apos;</span>;
+            <span class="hljs-keyword">break</span>;
+        }
+    }
+
+    <span class="hljs-keyword">return</span> <span class="hljs-variable">$config</span>;
+}
+
+add_filter( <span class="hljs-string">&apos;algolia_autocomplete_config&apos;</span>, <span class="hljs-string">&apos;custom_page_template&apos;</span> );</code></pre>
+                </div>
+
+            </div>
+
+        </article>
+    </div>
+
+    <div class="medium-3 large-3 medium-pull-9 large-pull-9 columns">
+        <ul class="vertical menu" id="main-nav">
+
+            <li class="menu-text">Getting Started</li>
+            <li ><a href="installation.html">Installation</a></li>
+            <li ><a href="configuration.html">Configuration</a></li>
+            <li ><a href="instantsearch.html">Instantsearch</a></li>
+
+            <li class="menu-text">Indexing</li>
+            <li ><a href="index-schema.html">Schemas</a></li>
+            <li ><a href="indexing-settings.html">Settings</a></li>
+            <li ><a href="indexing-flow.html">Flow</a></li>
+            <li ><a href="synonyms.html">Synonyms</a></li>
+            <li ><a href="custom-attributes.html">Custom Attributes</a></li>
+
+            <li class="menu-text">Extend</li>
+            <li ><a href="extend-basics.html">Basics</a></li>
+            <li class="active"><a href="customize-autocomplete.html">Autocomplete</a></li>
+            <li ><a href="custom-search.html">Custom Search</a></li>
+
+            <li class="menu-text">Other</li>
+            <li ><a href="internationalization.html">Internationalization</a></li>
+            <li ><a href="common-issues.html">Common Issues</a></li>
+            <li ><a href="resources.html">Additional Resources</a></li>
+            <li ><a href="contribute.html">Contribute</a></li>
+        </ul>
+    </div>
+
+</div>
+
+<section class="ac-footer">
+    <div class="ac-footer-container">
+        <p class="ac-footer-links">
+            Code licensed under
+            <a href="#" class="ac-footer-link-item">MIT</a>
+            <br>
+            <a href="#" class="ac-footer-link-item">Github</a>
+            <a href="#" class="ac-footer-link-item">issues</a>
+        </p>
+    </div>
+
+    <div class="ac-footer-container ac-footer-brand">
+        <p>This project is part of</p>
+        <img class="ac-footer-brand-icon" src="http://res.cloudinary.com/hilnmyskv/image/upload/logo-community.svg">
+        <figure>
+            <img class="ac-footer-brand-logo" src="http://res.cloudinary.com/hilnmyskv/image/upload/v1463417234/algolia-community_n6tixd.svg">
+            <figcaption>Algolia Community</figcaption>
+        </figure>
+        <a href="https://community.algolia.com/" class="ac-footer-btn ac-footer-btn-cta">See More</a>
+        <span class="ac-icon ac-icon-love-dark"></span>
+    </div>
+
+    <p class="ac-footer-version">Latest version: 0.2.4</p>
+
+    <div class="ac-footer-actions">
+        <div class="footer-container">
+            <p>Build unique search experiences with Algolia</p>
+            <a href="https://www.algolia.com/why?utm_medium=social-owned&utm_source=wordpress%20website&utm_campaign=homepage&utm_term=why" class="ac-footer-btn ac-footer-btn-ghost-grey">
+                See Why
+                <span class="ac-icon-triangle"></span>
+            </a>
+            <a href="https://www.algolia.com/users/sign_up?utm_medium=social-owned&utm_source=wordpress%20website&utm_campaign=homepage&utm_term=get_started" class="ac-footer-btn ac-footer-btn-ghost-pink">Get Started For Free</a>
+        </div>
+    </div>
+</section>
+
+<script src="vendor/jquery/jquery.js"></script>
+<script src="vendor/foundation-sites/foundation.js"></script>
+<script src="js/app.js"></script>
+
+
+
+</body>
+</html>

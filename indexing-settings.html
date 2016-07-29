@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Indexing Settings</title>
+    <meta name="description" content="Understand the ranking and other settings.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
+    <link rel="stylesheet" href="css/app.css">
+
+    <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
+</head>
+<body>
+
+<div class='ac-nav'>
+    <div class="row">
+        <div class="large-12 columns">
+            <div class='ac-nav-container'>
+                <div class='ac-nav-brand'>
+                    <a class='ac-logo' href='https://community.algolia.com/' title='Algolia Community'>
+                        <img alt='Algolia Community' class='ac-logo__lg' src='https://res.cloudinary.com/hilnmyskv/image/upload/logo-community-inline-dark.svg' width='150'>
+                        <img alt='Algolia Community' class='ac-logo__sm' src='https://res.cloudinary.com/hilnmyskv/image/upload/v1461180081/logo-community-sm.svg'>
+                    </a>
+                    <span class='ac-nav-brand-breadcrumb'></span>
+                    <a class='ac-nav-brand-title' href='./' title='Home'>WordPress plugin</a>
+                </div>
+                <div class='ac-nav-menu'>
+                    <div class='ac-nav-searchbox'>
+                        <div class='svg-icons' style='height: 0; width: 0; position: absolute; visibility: hidden'>
+                            <svg xmlns='http://www.w3.org/2000/svg'>
+                                <symbol id="sbx-icon-clear-3" viewBox="0 0 40 40"><path d="M16.228 20L1.886 5.657 0 3.772 3.772 0l1.885 1.886L20 16.228 34.343 1.886 36.228 0 40 3.772l-1.886 1.885L23.772 20l14.342 14.343L40 36.228 36.228 40l-1.885-1.886L20 23.772 5.657 38.114 3.772 40 0 36.228l1.886-1.885L16.228 20z" fill-rule="evenodd"/></symbol>
+                                <symbol id="sbx-icon-search-13" viewBox="0 0 12 12"><path d="M12 11.077c0-.245-.1-.483-.267-.65L9.26 7.955c.584-.843.894-1.853.894-2.877C10.154 2.272 7.882 0 5.077 0S0 2.272 0 5.077s2.272 5.077 5.077 5.077c1.024 0 2.034-.31 2.877-.894l2.474 2.466c.166.173.404.274.65.274.504 0 .922-.418.922-.923zm-3.692-6c0 1.78-1.45 3.23-3.23 3.23-1.782 0-3.232-1.45-3.232-3.23s1.45-3.23 3.23-3.23c1.782 0 3.232 1.45 3.232 3.23z" fill="#FFF" fill-rule="evenodd" opacity="0.85"/></symbol>
+                            </svg>
+                        </div>
+                    </div>
+                    <ul class='ac-nav-menu-list'>
+                        <li class='ac-nav-menu-list-item'>
+                            <a href="/">Home</a>
+                        </li>
+                        <li class='ac-nav-menu-list-item active'>
+                            <a href="installation.html">Documentation</a>
+                        </li>
+                        <li class='ac-nav-menu-list-icon'>
+                            <a class='ac-icon' href='https://github.com/algolia/algoliasearch-wordpress-plugin/' title='GitHub repository'>
+                                <span class='ac-icon ac-icon-github'></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<header id="top-section">
+    <div class="row">
+        <div class="large-12 columns">
+            <img class="header-logo" src="https://res.cloudinary.com/hilnmyskv/image/upload/logo-algolia-dark.png">
+            <p class="lead header-lead">
+                Plugin for
+                <span>WordPress</span>
+            </p>
+        </div>
+    </div>
+</header>
+
+<div class="row">
+    <div class="medium-9 large-9 medium-push-3 large-push-3 columns">
+        <article>
+            <header>
+                <h1>Indexing Settings</h1>
+
+                <p class="lead">Understand the ranking and other settings.</p>
+
+                <ul class="menu simple">
+                    <li><a href="https://github.com/algolia/algoliasearch-wordpress-plugin/edit/master/docs/src/indexing-settings.md" target="_blank"><i class="fi-pencil"></i> <span>Edit this Page</span></a></li>
+                    <li><a href="https://github.com/algolia/algoliasearch-wordpress-plugin/issues/new?title=%5BIndexing Settings%5D%20ISSUE%20NAME%20HERE" target="_blank"><i class="fi-social-github"></i> <span>Report a Bug</span></a></li>
+                    <li><a href="http://stackoverflow.com/questions/tagged/algolia+wordpress" target="_blank"><i class="fi-comment"></i> <span>Get Help</span></a></li>
+                </ul>
+            </header>
+
+            <hr>
+
+            <div class="row">
+
+                <div class="large-12 columns" id="content">
+                    <h2 id="introduction" data-magellan-target="introduction"><a class="heading-anchor" href="#introduction"><span></span></a>Introduction</h2>
+<p>Algolia allows you to configure a lot settings to improve your search results relevancy.</p>
+<p><a href="https://www.algolia.com/doc/php#index-settings">A complete list of these settings can be found here</a>.</p>
+<p>This plugin automatically sets the settings for every index, and you will find detailed information about each configuration in the next sections of this page.</p>
+<p><strong>Every time an index is re-indexed, the settings will be pushed and override existing ones. This means that you should not edit your settings directly in the Algolia Dashboard. Instead, you should hook into this plugin to alter the settings.</strong></p>
+<h2 id="settings-anatomy" data-magellan-target="settings-anatomy"><a class="heading-anchor" href="#settings-anatomy"><span></span></a>Settings Anatomy</h2>
+<p>Before telling you about the default settings per content type and how to customize them, let&apos;s have a quick overview of the settings anatomy.</p>
+<p><strong>attributesToIndex</strong>:
+Refers to the attributes that the search will be based on. By default we will generally list here all the text attributes that the user would like to search in.
+Unless we wrap our attribute name in <code>unordered()</code>, word match position matters, meaning that if a word is find earlier in the indexed attribute, it will be considered a better match.</p>
+<p><strong>customRanking</strong>
+Internally, the Algolia Search engine uses a Tie breaking algorithm, which means that at every step of the search process, it will keep only the most relevant results by applying consequently every available ranking algorithm.
+There are a lot of ranking strategies provided out of the box, like <code>typo</code>, <code>geo</code>, etc. If the search engine has more results to offer than expected, we consider as best practice to provide the engine with some custom metrics to take the best decisions.
+In this plugin we provide some sensible defaults so that your search results are as accurate as possible. Feel free to add your custom business metrics.</p>
+<p><strong>attributesForDistinct</strong>
+For the <code>post</code> content type we actually store multiple records for the same item. Why we do that is explained in <a href="index-schema.html">the index schema</a>.
+Even though we have multiple records for a unique <code>post</code>, we only want to display one post as part of the result. For this we use the Algolia <code>attributeForDistinct</code> &amp; <code>distinct</code> feature which is kind of similar to the SQL <code>DISTINCT</code> feature.
+By using this feature, the search engine will only return the most relevant record for a given query.</p>
+<p><strong>attributesForFaceting</strong>
+Algolia allows to prepare your records for faceting. Faceting is the feature allowing you for example to list all posts of a category.
+Even though we do not yet provide out of the box usage of faceting in the plugin, we tried to already push some sensible default values for the <code>attributesForFaceting</code>.</p>
+<p>Feel free to dig further into the Algolia Search engine to optimize even more your search relevancy: <a href="https://www.algolia.com/doc#relevance">Relevancy in Algolia&apos;s documentation</a>.</p>
+<h2 id="searchable-posts-settings" data-magellan-target="searchable-posts-settings"><a class="heading-anchor" href="#searchable-posts-settings"><span></span></a>Searchable Posts Settings</h2>
+<p><strong>Default searchable posts settings:</strong></p>
+<pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
+<span class="hljs-variable">$settings</span> = <span class="hljs-keyword">array</span>(
+    <span class="hljs-string">&apos;attributesToIndex&apos;</span> =&gt; <span class="hljs-keyword">array</span>(
+        <span class="hljs-string">&apos;unordered(post_title)&apos;</span>,
+        <span class="hljs-string">&apos;unordered(title1)&apos;</span>,
+        <span class="hljs-string">&apos;unordered(title2)&apos;</span>,
+        <span class="hljs-string">&apos;unordered(title3)&apos;</span>,
+        <span class="hljs-string">&apos;unordered(title4)&apos;</span>,
+        <span class="hljs-string">&apos;unordered(title5)&apos;</span>,
+        <span class="hljs-string">&apos;unordered(title6)&apos;</span>,
+        <span class="hljs-string">&apos;unordered(content)&apos;</span>,
+    ),
+    <span class="hljs-string">&apos;customRanking&apos;</span> =&gt; <span class="hljs-keyword">array</span>(
+        <span class="hljs-string">&apos;desc(is_sticky)&apos;</span>,
+        <span class="hljs-string">&apos;desc(post_date)&apos;</span>,
+    ),
+    <span class="hljs-string">&apos;attributeForDistinct&apos;</span>  =&gt; <span class="hljs-string">&apos;post_id&apos;</span>,
+    <span class="hljs-string">&apos;distinct&apos;</span>              =&gt; <span class="hljs-keyword">true</span>,
+    <span class="hljs-string">&apos;attributesForFaceting&apos;</span> =&gt; <span class="hljs-keyword">array</span>(
+        <span class="hljs-string">&apos;taxonomy_post_tag&apos;</span>,
+        <span class="hljs-string">&apos;taxonomy_category&apos;</span>,
+        <span class="hljs-string">&apos;post_author.display_name&apos;</span>,
+        <span class="hljs-string">&apos;post_type_label&apos;</span>,
+    ),
+    <span class="hljs-string">&apos;attributesToSnippet&apos;</span> =&gt; <span class="hljs-keyword">array</span>(
+        <span class="hljs-string">&apos;post_title:30&apos;</span>,
+        <span class="hljs-string">&apos;title1:30&apos;</span>,
+        <span class="hljs-string">&apos;title2:30&apos;</span>,
+        <span class="hljs-string">&apos;title3:30&apos;</span>,
+        <span class="hljs-string">&apos;title4:30&apos;</span>,
+        <span class="hljs-string">&apos;title5:30&apos;</span>,
+        <span class="hljs-string">&apos;title6:30&apos;</span>,
+        <span class="hljs-string">&apos;content:30&apos;</span>,
+    ),
+    <span class="hljs-string">&apos;snippetEllipsisText&apos;</span> =&gt; <span class="hljs-string">&apos;&#x2026;&apos;</span>,
+);</code></pre>
+
+<h2 id="posts-settings" data-magellan-target="posts-settings"><a class="heading-anchor" href="#posts-settings"><span></span></a>Posts Settings</h2>
+<p><strong>Default posts settings:</strong></p>
+<pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
+<span class="hljs-variable">$settings</span> = <span class="hljs-keyword">array</span>(
+    <span class="hljs-string">&apos;attributesToIndex&apos;</span> =&gt; <span class="hljs-keyword">array</span>(
+        <span class="hljs-string">&apos;unordered(post_title)&apos;</span>,
+        <span class="hljs-string">&apos;unordered(title1)&apos;</span>,
+        <span class="hljs-string">&apos;unordered(title2)&apos;</span>,
+        <span class="hljs-string">&apos;unordered(title3)&apos;</span>,
+        <span class="hljs-string">&apos;unordered(title4)&apos;</span>,
+        <span class="hljs-string">&apos;unordered(title5)&apos;</span>,
+        <span class="hljs-string">&apos;unordered(title6)&apos;</span>,
+        <span class="hljs-string">&apos;unordered(content)&apos;</span>,
+    ),
+    <span class="hljs-string">&apos;customRanking&apos;</span> =&gt; <span class="hljs-keyword">array</span>(
+        <span class="hljs-string">&apos;desc(is_sticky)&apos;</span>,
+        <span class="hljs-string">&apos;desc(post_date)&apos;</span>,
+    ),
+    <span class="hljs-string">&apos;attributeForDistinct&apos;</span>  =&gt; <span class="hljs-string">&apos;post_id&apos;</span>,
+    <span class="hljs-string">&apos;distinct&apos;</span>              =&gt; <span class="hljs-keyword">true</span>,
+    <span class="hljs-string">&apos;attributesForFaceting&apos;</span> =&gt; <span class="hljs-keyword">array</span>(
+        <span class="hljs-string">&apos;taxonomy_post_tag&apos;</span>,
+        <span class="hljs-string">&apos;taxonomy_category&apos;</span>,
+        <span class="hljs-string">&apos;post_author.display_name&apos;</span>,
+    ),
+    <span class="hljs-string">&apos;attributesToSnippet&apos;</span> =&gt; <span class="hljs-keyword">array</span>(
+        <span class="hljs-string">&apos;post_title:30&apos;</span>,
+        <span class="hljs-string">&apos;title1:30&apos;</span>,
+        <span class="hljs-string">&apos;title2:30&apos;</span>,
+        <span class="hljs-string">&apos;title3:30&apos;</span>,
+        <span class="hljs-string">&apos;title4:30&apos;</span>,
+        <span class="hljs-string">&apos;title5:30&apos;</span>,
+        <span class="hljs-string">&apos;title6:30&apos;</span>,
+        <span class="hljs-string">&apos;content:30&apos;</span>,
+    ),
+    <span class="hljs-string">&apos;snippetEllipsisText&apos;</span> =&gt; <span class="hljs-string">&apos;&#x2026;&apos;</span>,
+);</code></pre>
+
+<h2 id="terms-settings" data-magellan-target="terms-settings"><a class="heading-anchor" href="#terms-settings"><span></span></a>Terms Settings</h2>
+<p><strong>Default terms settings:</strong></p>
+<pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
+<span class="hljs-variable">$settings</span> = <span class="hljs-keyword">array</span>(
+    <span class="hljs-string">&apos;attributesToIndex&apos;</span> =&gt; <span class="hljs-keyword">array</span>(
+        <span class="hljs-string">&apos;unordered(name)&apos;</span>,
+        <span class="hljs-string">&apos;unordered(description)&apos;</span>,
+    ),
+    <span class="hljs-string">&apos;customRanking&apos;</span> =&gt; <span class="hljs-keyword">array</span>(
+        <span class="hljs-string">&apos;desc(posts_count)&apos;</span>,
+    ),
+);</code></pre>
+
+<h2 id="users-settings" data-magellan-target="users-settings"><a class="heading-anchor" href="#users-settings"><span></span></a>Users Settings</h2>
+<p><strong>Default users settings:</strong></p>
+<pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
+<span class="hljs-variable">$settings</span> = <span class="hljs-keyword">array</span>(
+    <span class="hljs-string">&apos;attributesToIndex&apos;</span> =&gt; <span class="hljs-keyword">array</span>(
+        <span class="hljs-string">&apos;unordered(display_name)&apos;</span>,
+    ),
+    <span class="hljs-string">&apos;customRanking&apos;</span> =&gt; <span class="hljs-keyword">array</span>(
+        <span class="hljs-string">&apos;desc(posts_count)&apos;</span>,
+    ),
+);</code></pre>
+
+<h2 id="custom-settings" data-magellan-target="custom-settings"><a class="heading-anchor" href="#custom-settings"><span></span></a>Custom Settings</h2>
+<p>You can customize the settings pushed to Algolia for every content type.
+To do so simply use the available filters:</p>
+<table>
+<thead>
+<tr>
+<th>Filter Name</th>
+<th>Params</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>algolia_posts_index_settings</td>
+<td><code>$settings</code>, the posts index settings. <code>$post_type</code>, the post type, like &quot;page&quot; or &quot;post&quot;.</td>
+</tr>
+<tr>
+<td>algolia_posts_{$post_type}_index_settings</td>
+<td><code>$settings</code>, the posts index settings.</td>
+</tr>
+<tr>
+<td>algolia_terms_index_settings</td>
+<td><code>$settings</code>, the terms index settings. <code>$taxonomy</code>, the taxonomy like &quot;post_tag&quot; or &quot;category&quot;.</td>
+</tr>
+<tr>
+<td>algolia_terms_{$taxonomy}_index_settings</td>
+<td><code>$settings</code>, the terms index settings.</td>
+</tr>
+<tr>
+<td>algolia_users_index_settings</td>
+<td><code>$settings</code>, the users index settings.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="custom-settings-example" data-magellan-target="custom-settings-example"><a class="heading-anchor" href="#custom-settings-example"><span></span></a>Custom Settings Example</h2>
+<p>Let&apos;s say you have some custom metric named <code>visits_count</code> and you would like to add a custom ranking rule on that one:</p>
+<pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">custom_posts_index_settings</span><span class="hljs-params">( array <span class="hljs-variable">$settings</span> )</span> </span>{
+    <span class="hljs-variable">$custom_ranking</span> = <span class="hljs-variable">$settings</span>[<span class="hljs-string">&apos;customRanking&apos;</span>];
+    array_unshift( <span class="hljs-variable">$custom_ranking</span>, <span class="hljs-string">&apos;desc(visits_count)&apos;</span> );
+    <span class="hljs-variable">$settings</span>[<span class="hljs-string">&apos;customRanking&apos;</span>] = <span class="hljs-variable">$custom_ranking</span>;
+
+    <span class="hljs-keyword">return</span> <span class="hljs-variable">$settings</span>;
+}
+add_filter( <span class="hljs-string">&apos;algolia_posts_index_settings&apos;</span>, <span class="hljs-string">&apos;custom_posts_index_settings&apos;</span> );</code></pre>
+
+<p>Every post type having it&apos;s own index in Algolia, we can also determine custom settings per post type like:</p>
+<pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
+
+<span class="hljs-comment">// Customize settings for pages only.</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">custom_pages_index_settings</span><span class="hljs-params">( array <span class="hljs-variable">$settings</span> )</span> </span>{
+    <span class="hljs-comment">/* Your adjustments */</span>
+
+    <span class="hljs-keyword">return</span> <span class="hljs-variable">$settings</span>;
+}
+add_filter( <span class="hljs-string">&apos;algolia_posts_page_index_settings&apos;</span>, <span class="hljs-string">&apos;custom_pages_index_settings&apos;</span> );
+
+<span class="hljs-comment">// OR customize for posts only.</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">custom_posts_index_settings</span><span class="hljs-params">( array <span class="hljs-variable">$settings</span> )</span> </span>{
+    <span class="hljs-comment">/* Your adjustments */</span>
+
+    <span class="hljs-keyword">return</span> <span class="hljs-variable">$settings</span>;
+}
+add_filter( <span class="hljs-string">&apos;algolia_posts_post_index_settings&apos;</span>, <span class="hljs-string">&apos;custom_posts_index_settings&apos;</span> );</code></pre>
+                </div>
+
+            </div>
+
+        </article>
+    </div>
+
+    <div class="medium-3 large-3 medium-pull-9 large-pull-9 columns">
+        <ul class="vertical menu" id="main-nav">
+
+            <li class="menu-text">Getting Started</li>
+            <li ><a href="installation.html">Installation</a></li>
+            <li ><a href="configuration.html">Configuration</a></li>
+            <li ><a href="instantsearch.html">Instantsearch</a></li>
+
+            <li class="menu-text">Indexing</li>
+            <li ><a href="index-schema.html">Schemas</a></li>
+            <li class="active"><a href="indexing-settings.html">Settings</a></li>
+            <li ><a href="indexing-flow.html">Flow</a></li>
+            <li ><a href="synonyms.html">Synonyms</a></li>
+            <li ><a href="custom-attributes.html">Custom Attributes</a></li>
+
+            <li class="menu-text">Extend</li>
+            <li ><a href="extend-basics.html">Basics</a></li>
+            <li ><a href="customize-autocomplete.html">Autocomplete</a></li>
+            <li ><a href="custom-search.html">Custom Search</a></li>
+
+            <li class="menu-text">Other</li>
+            <li ><a href="internationalization.html">Internationalization</a></li>
+            <li ><a href="common-issues.html">Common Issues</a></li>
+            <li ><a href="resources.html">Additional Resources</a></li>
+            <li ><a href="contribute.html">Contribute</a></li>
+        </ul>
+    </div>
+
+</div>
+
+<section class="ac-footer">
+    <div class="ac-footer-container">
+        <p class="ac-footer-links">
+            Code licensed under
+            <a href="#" class="ac-footer-link-item">MIT</a>
+            <br>
+            <a href="#" class="ac-footer-link-item">Github</a>
+            <a href="#" class="ac-footer-link-item">issues</a>
+        </p>
+    </div>
+
+    <div class="ac-footer-container ac-footer-brand">
+        <p>This project is part of</p>
+        <img class="ac-footer-brand-icon" src="http://res.cloudinary.com/hilnmyskv/image/upload/logo-community.svg">
+        <figure>
+            <img class="ac-footer-brand-logo" src="http://res.cloudinary.com/hilnmyskv/image/upload/v1463417234/algolia-community_n6tixd.svg">
+            <figcaption>Algolia Community</figcaption>
+        </figure>
+        <a href="https://community.algolia.com/" class="ac-footer-btn ac-footer-btn-cta">See More</a>
+        <span class="ac-icon ac-icon-love-dark"></span>
+    </div>
+
+    <p class="ac-footer-version">Latest version: 0.2.4</p>
+
+    <div class="ac-footer-actions">
+        <div class="footer-container">
+            <p>Build unique search experiences with Algolia</p>
+            <a href="https://www.algolia.com/why?utm_medium=social-owned&utm_source=wordpress%20website&utm_campaign=homepage&utm_term=why" class="ac-footer-btn ac-footer-btn-ghost-grey">
+                See Why
+                <span class="ac-icon-triangle"></span>
+            </a>
+            <a href="https://www.algolia.com/users/sign_up?utm_medium=social-owned&utm_source=wordpress%20website&utm_campaign=homepage&utm_term=get_started" class="ac-footer-btn ac-footer-btn-ghost-pink">Get Started For Free</a>
+        </div>
+    </div>
+</section>
+
+<script src="vendor/jquery/jquery.js"></script>
+<script src="vendor/foundation-sites/foundation.js"></script>
+<script src="js/app.js"></script>
+
+
+
+</body>
+</html>

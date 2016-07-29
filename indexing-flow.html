@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Indexing Flow</title>
+    <meta name="description" content="Understand the indexing flow and the generated operations.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
+    <link rel="stylesheet" href="css/app.css">
+
+    <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
+</head>
+<body>
+
+<div class='ac-nav'>
+    <div class="row">
+        <div class="large-12 columns">
+            <div class='ac-nav-container'>
+                <div class='ac-nav-brand'>
+                    <a class='ac-logo' href='https://community.algolia.com/' title='Algolia Community'>
+                        <img alt='Algolia Community' class='ac-logo__lg' src='https://res.cloudinary.com/hilnmyskv/image/upload/logo-community-inline-dark.svg' width='150'>
+                        <img alt='Algolia Community' class='ac-logo__sm' src='https://res.cloudinary.com/hilnmyskv/image/upload/v1461180081/logo-community-sm.svg'>
+                    </a>
+                    <span class='ac-nav-brand-breadcrumb'></span>
+                    <a class='ac-nav-brand-title' href='./' title='Home'>WordPress plugin</a>
+                </div>
+                <div class='ac-nav-menu'>
+                    <div class='ac-nav-searchbox'>
+                        <div class='svg-icons' style='height: 0; width: 0; position: absolute; visibility: hidden'>
+                            <svg xmlns='http://www.w3.org/2000/svg'>
+                                <symbol id="sbx-icon-clear-3" viewBox="0 0 40 40"><path d="M16.228 20L1.886 5.657 0 3.772 3.772 0l1.885 1.886L20 16.228 34.343 1.886 36.228 0 40 3.772l-1.886 1.885L23.772 20l14.342 14.343L40 36.228 36.228 40l-1.885-1.886L20 23.772 5.657 38.114 3.772 40 0 36.228l1.886-1.885L16.228 20z" fill-rule="evenodd"/></symbol>
+                                <symbol id="sbx-icon-search-13" viewBox="0 0 12 12"><path d="M12 11.077c0-.245-.1-.483-.267-.65L9.26 7.955c.584-.843.894-1.853.894-2.877C10.154 2.272 7.882 0 5.077 0S0 2.272 0 5.077s2.272 5.077 5.077 5.077c1.024 0 2.034-.31 2.877-.894l2.474 2.466c.166.173.404.274.65.274.504 0 .922-.418.922-.923zm-3.692-6c0 1.78-1.45 3.23-3.23 3.23-1.782 0-3.232-1.45-3.232-3.23s1.45-3.23 3.23-3.23c1.782 0 3.232 1.45 3.232 3.23z" fill="#FFF" fill-rule="evenodd" opacity="0.85"/></symbol>
+                            </svg>
+                        </div>
+                    </div>
+                    <ul class='ac-nav-menu-list'>
+                        <li class='ac-nav-menu-list-item'>
+                            <a href="/">Home</a>
+                        </li>
+                        <li class='ac-nav-menu-list-item active'>
+                            <a href="installation.html">Documentation</a>
+                        </li>
+                        <li class='ac-nav-menu-list-icon'>
+                            <a class='ac-icon' href='https://github.com/algolia/algoliasearch-wordpress-plugin/' title='GitHub repository'>
+                                <span class='ac-icon ac-icon-github'></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<header id="top-section">
+    <div class="row">
+        <div class="large-12 columns">
+            <img class="header-logo" src="https://res.cloudinary.com/hilnmyskv/image/upload/logo-algolia-dark.png">
+            <p class="lead header-lead">
+                Plugin for
+                <span>WordPress</span>
+            </p>
+        </div>
+    </div>
+</header>
+
+<div class="row">
+    <div class="medium-9 large-9 medium-push-3 large-push-3 columns">
+        <article>
+            <header>
+                <h1>Indexing Flow</h1>
+
+                <p class="lead">Understand the indexing flow and the generated operations.</p>
+
+                <ul class="menu simple">
+                    <li><a href="https://github.com/algolia/algoliasearch-wordpress-plugin/edit/master/docs/src/indexing-flow.md" target="_blank"><i class="fi-pencil"></i> <span>Edit this Page</span></a></li>
+                    <li><a href="https://github.com/algolia/algoliasearch-wordpress-plugin/issues/new?title=%5BIndexing Flow%5D%20ISSUE%20NAME%20HERE" target="_blank"><i class="fi-social-github"></i> <span>Report a Bug</span></a></li>
+                    <li><a href="http://stackoverflow.com/questions/tagged/algolia+wordpress" target="_blank"><i class="fi-comment"></i> <span>Get Help</span></a></li>
+                </ul>
+            </header>
+
+            <hr>
+
+            <div class="row">
+
+                <div class="large-12 columns" id="content">
+                    <h2 id="introduction" data-magellan-target="introduction"><a class="heading-anchor" href="#introduction"><span></span></a>Introduction</h2>
+<p>The objectives of this plugin are:</p>
+<ul>
+<li>To offer webmasters a way to easily provide a better search experience to their visitors,</li>
+<li>To offer developers a way to easily adapt the search experience by extending this plugin with actions and filters.</li>
+</ul>
+<p>This page aims to explain how we index your data.</p>
+<p>As for now we support the indexing of 3 types of content:</p>
+<ul>
+<li>Post Types,</li>
+<li>Taxonomies,</li>
+<li>Users.</li>
+</ul>
+<p>Each content type has its own indexing flow.</p>
+<h2 id="triggers" data-magellan-target="triggers"><a class="heading-anchor" href="#triggers"><span></span></a>Triggers</h2>
+<p>We try as much as possible to automate the indexing for you. That means that we listen for events like &apos;post was saved&apos; to push the new data to Algolia&apos;s API.</p>
+<p><strong>We synchronize posts when:</strong></p>
+<ul>
+<li>A post was created or updated</li>
+<li>A post was deleted</li>
+<li>The featured image was changed</li>
+</ul>
+<p><strong>We synchronize taxonomy terms when:</strong></p>
+<ul>
+<li>A term was created or updated</li>
+<li>A term was deleted</li>
+</ul>
+<p><strong>We synchronize users when:</strong></p>
+<ul>
+<li>A user was created or updated</li>
+<li>A term was deleted</li>
+<li>A post was created or updated</li>
+<li>A post was deleted</li>
+</ul>
+<p><strong>We synchronize without trying to detect if the updates has lead to real changes. This ensures consistency and easier extensibility.</strong></p>
+<h2 id="indexing-decision" data-magellan-target="indexing-decision"><a class="heading-anchor" href="#indexing-decision"><span></span></a>Indexing Decision</h2>
+<p>The existence of an indexing task, does not necessarily mean that the data will be pushed to Algolia.</p>
+<p>Indeed, before each post, term and user indexing, we decide if the item should be indexed or not.</p>
+<p>If it should, then we re-push the data for the item otherwise we remove it from the index.</p>
+<p><strong>Default decisions:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Content Type</th>
+<th>Rule</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Searchable Post</td>
+<td>We only index a post when it is in the <code>published</code> state and if its post type is not <code>excluded_from_search</code>.</td>
+</tr>
+<tr>
+<td>Post</td>
+<td>We only index a post when it is in the <code>published</code> state if it has no password.</td>
+</tr>
+<tr>
+<td>Term</td>
+<td>We only index a term if it has been assigned to at least 1 post (count &gt; 0).</td>
+</tr>
+<tr>
+<td>User</td>
+<td>We index a user if he has authored at least 1 post.</td>
+</tr>
+</tbody>
+</table>
+<p>You can hook into the indexing decision making for searchable posts, posts, terms and users by using respectively the <code>algolia_should_index_searchable_post</code>, <code>algolia_should_index_post</code>, <code>algolia_should_index_term</code> and <code>algolia_should_index_user</code> filters.</p>
+<p><strong>Here is an example for filtering user indexing:</strong></p>
+<pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
+
+<span class="hljs-comment">/**
+ * <span class="hljs-doctag">@param</span> bool $should_index
+ * <span class="hljs-doctag">@param</span> WP_User $user
+ *
+ * <span class="hljs-doctag">@return</span> bool
+ */</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">filter_user</span><span class="hljs-params">( <span class="hljs-variable">$should_index</span>, <span class="hljs-variable">$user</span> )</span> </span>{
+    <span class="hljs-keyword">if</span> ( <span class="hljs-keyword">false</span> === <span class="hljs-variable">$should_index</span> ) {
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+    }
+
+    <span class="hljs-keyword">return</span> <span class="hljs-variable">$user</span>-&gt;ID !== <span class="hljs-number">1</span>;
+}
+
+add_filter( <span class="hljs-string">&apos;algolia_should_index_user&apos;</span>, <span class="hljs-string">&apos;filter_user&apos;</span>, <span class="hljs-number">10</span>, <span class="hljs-number">2</span> );</code></pre>
+
+<p>In the above example, User with ID 1 would never get indexed. This example is trivial, but at least gives you a quick overview on how to filter your items to index.
+Also note how we return <code>false</code> early on if the decision has already been taken to not index the content.</p>
+<h2 id="queue-tasks" data-magellan-target="queue-tasks"><a class="heading-anchor" href="#queue-tasks"><span></span></a>Queue Tasks</h2>
+<p>Every time an indexing task is triggered, see <a href="#triggers">previous section</a>, we queue a synchronization task with the minimum required information for the task to be handled.</p>
+<p>Every time one or multiple tasks are queued, we automatically trigger the processing of the queue.</p>
+<p>The queue is then processed with a FIFO logic, and ensures there is only one task handled at the same time.</p>
+<p>For scalability reasons, each task handling is done in its own process and triggered by an asynchronous http call.</p>
+<p><strong>By default WordPress will ensure that your ssl certificate is valid on every remote call. If you have an invalid ssl certificate, the queue processing won&apos;t work.</strong></p>
+
+                </div>
+
+            </div>
+
+        </article>
+    </div>
+
+    <div class="medium-3 large-3 medium-pull-9 large-pull-9 columns">
+        <ul class="vertical menu" id="main-nav">
+
+            <li class="menu-text">Getting Started</li>
+            <li ><a href="installation.html">Installation</a></li>
+            <li ><a href="configuration.html">Configuration</a></li>
+            <li ><a href="instantsearch.html">Instantsearch</a></li>
+
+            <li class="menu-text">Indexing</li>
+            <li ><a href="index-schema.html">Schemas</a></li>
+            <li ><a href="indexing-settings.html">Settings</a></li>
+            <li class="active"><a href="indexing-flow.html">Flow</a></li>
+            <li ><a href="synonyms.html">Synonyms</a></li>
+            <li ><a href="custom-attributes.html">Custom Attributes</a></li>
+
+            <li class="menu-text">Extend</li>
+            <li ><a href="extend-basics.html">Basics</a></li>
+            <li ><a href="customize-autocomplete.html">Autocomplete</a></li>
+            <li ><a href="custom-search.html">Custom Search</a></li>
+
+            <li class="menu-text">Other</li>
+            <li ><a href="internationalization.html">Internationalization</a></li>
+            <li ><a href="common-issues.html">Common Issues</a></li>
+            <li ><a href="resources.html">Additional Resources</a></li>
+            <li ><a href="contribute.html">Contribute</a></li>
+        </ul>
+    </div>
+
+</div>
+
+<section class="ac-footer">
+    <div class="ac-footer-container">
+        <p class="ac-footer-links">
+            Code licensed under
+            <a href="#" class="ac-footer-link-item">MIT</a>
+            <br>
+            <a href="#" class="ac-footer-link-item">Github</a>
+            <a href="#" class="ac-footer-link-item">issues</a>
+        </p>
+    </div>
+
+    <div class="ac-footer-container ac-footer-brand">
+        <p>This project is part of</p>
+        <img class="ac-footer-brand-icon" src="http://res.cloudinary.com/hilnmyskv/image/upload/logo-community.svg">
+        <figure>
+            <img class="ac-footer-brand-logo" src="http://res.cloudinary.com/hilnmyskv/image/upload/v1463417234/algolia-community_n6tixd.svg">
+            <figcaption>Algolia Community</figcaption>
+        </figure>
+        <a href="https://community.algolia.com/" class="ac-footer-btn ac-footer-btn-cta">See More</a>
+        <span class="ac-icon ac-icon-love-dark"></span>
+    </div>
+
+    <p class="ac-footer-version">Latest version: 0.2.4</p>
+
+    <div class="ac-footer-actions">
+        <div class="footer-container">
+            <p>Build unique search experiences with Algolia</p>
+            <a href="https://www.algolia.com/why?utm_medium=social-owned&utm_source=wordpress%20website&utm_campaign=homepage&utm_term=why" class="ac-footer-btn ac-footer-btn-ghost-grey">
+                See Why
+                <span class="ac-icon-triangle"></span>
+            </a>
+            <a href="https://www.algolia.com/users/sign_up?utm_medium=social-owned&utm_source=wordpress%20website&utm_campaign=homepage&utm_term=get_started" class="ac-footer-btn ac-footer-btn-ghost-pink">Get Started For Free</a>
+        </div>
+    </div>
+</section>
+
+<script src="vendor/jquery/jquery.js"></script>
+<script src="vendor/foundation-sites/foundation.js"></script>
+<script src="js/app.js"></script>
+
+
+
+</body>
+</html>

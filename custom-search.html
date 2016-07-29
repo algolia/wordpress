@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Custom Search</title>
+    <meta name="description" content="Discover how to build your custom WordPress search experience with the Algolia plugin.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
+    <link rel="stylesheet" href="css/app.css">
+
+    <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
+</head>
+<body>
+
+<div class='ac-nav'>
+    <div class="row">
+        <div class="large-12 columns">
+            <div class='ac-nav-container'>
+                <div class='ac-nav-brand'>
+                    <a class='ac-logo' href='https://community.algolia.com/' title='Algolia Community'>
+                        <img alt='Algolia Community' class='ac-logo__lg' src='https://res.cloudinary.com/hilnmyskv/image/upload/logo-community-inline-dark.svg' width='150'>
+                        <img alt='Algolia Community' class='ac-logo__sm' src='https://res.cloudinary.com/hilnmyskv/image/upload/v1461180081/logo-community-sm.svg'>
+                    </a>
+                    <span class='ac-nav-brand-breadcrumb'></span>
+                    <a class='ac-nav-brand-title' href='./' title='Home'>WordPress plugin</a>
+                </div>
+                <div class='ac-nav-menu'>
+                    <div class='ac-nav-searchbox'>
+                        <div class='svg-icons' style='height: 0; width: 0; position: absolute; visibility: hidden'>
+                            <svg xmlns='http://www.w3.org/2000/svg'>
+                                <symbol id="sbx-icon-clear-3" viewBox="0 0 40 40"><path d="M16.228 20L1.886 5.657 0 3.772 3.772 0l1.885 1.886L20 16.228 34.343 1.886 36.228 0 40 3.772l-1.886 1.885L23.772 20l14.342 14.343L40 36.228 36.228 40l-1.885-1.886L20 23.772 5.657 38.114 3.772 40 0 36.228l1.886-1.885L16.228 20z" fill-rule="evenodd"/></symbol>
+                                <symbol id="sbx-icon-search-13" viewBox="0 0 12 12"><path d="M12 11.077c0-.245-.1-.483-.267-.65L9.26 7.955c.584-.843.894-1.853.894-2.877C10.154 2.272 7.882 0 5.077 0S0 2.272 0 5.077s2.272 5.077 5.077 5.077c1.024 0 2.034-.31 2.877-.894l2.474 2.466c.166.173.404.274.65.274.504 0 .922-.418.922-.923zm-3.692-6c0 1.78-1.45 3.23-3.23 3.23-1.782 0-3.232-1.45-3.232-3.23s1.45-3.23 3.23-3.23c1.782 0 3.232 1.45 3.232 3.23z" fill="#FFF" fill-rule="evenodd" opacity="0.85"/></symbol>
+                            </svg>
+                        </div>
+                    </div>
+                    <ul class='ac-nav-menu-list'>
+                        <li class='ac-nav-menu-list-item'>
+                            <a href="/">Home</a>
+                        </li>
+                        <li class='ac-nav-menu-list-item active'>
+                            <a href="installation.html">Documentation</a>
+                        </li>
+                        <li class='ac-nav-menu-list-icon'>
+                            <a class='ac-icon' href='https://github.com/algolia/algoliasearch-wordpress-plugin/' title='GitHub repository'>
+                                <span class='ac-icon ac-icon-github'></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<header id="top-section">
+    <div class="row">
+        <div class="large-12 columns">
+            <img class="header-logo" src="https://res.cloudinary.com/hilnmyskv/image/upload/logo-algolia-dark.png">
+            <p class="lead header-lead">
+                Plugin for
+                <span>WordPress</span>
+            </p>
+        </div>
+    </div>
+</header>
+
+<div class="row">
+    <div class="medium-9 large-9 medium-push-3 large-push-3 columns">
+        <article>
+            <header>
+                <h1>Custom Search</h1>
+
+                <p class="lead">Discover how to build your custom WordPress search experience with the Algolia plugin.</p>
+
+                <ul class="menu simple">
+                    <li><a href="https://github.com/algolia/algoliasearch-wordpress-plugin/edit/master/docs/src/custom-search.md" target="_blank"><i class="fi-pencil"></i> <span>Edit this Page</span></a></li>
+                    <li><a href="https://github.com/algolia/algoliasearch-wordpress-plugin/issues/new?title=%5BCustom Search%5D%20ISSUE%20NAME%20HERE" target="_blank"><i class="fi-social-github"></i> <span>Report a Bug</span></a></li>
+                    <li><a href="http://stackoverflow.com/questions/tagged/algolia+wordpress" target="_blank"><i class="fi-comment"></i> <span>Get Help</span></a></li>
+                </ul>
+            </header>
+
+            <hr>
+
+            <div class="row">
+
+                <div class="large-12 columns" id="content">
+                    <h2 id="introduction" data-magellan-target="introduction"><a class="heading-anchor" href="#introduction"><span></span></a>Introduction</h2>
+<p>By default, this plugin is shipped with a way to override the default WordPress search and also provides an as you type experience called &quot;autocomplete&quot;.</p>
+<p>In your case you pay want to provide some very specific search experience depending of the data you have, in the UI you want to build.</p>
+<p>Here we are not going to show you the whole process of creating a full featured custom search experience, because it would probably not be useful for your needs.</p>
+<p>That said we are going to give you some of the resources end extension points the plugin provides allowing you to build any kind of search experience you&apos;d like!</p>
+<h2 id="static-assets" data-magellan-target="static-assets"><a class="heading-anchor" href="#static-assets"><span></span></a>Static Assets</h2>
+<p>This plugin ships with several javascript libraries that can be used for implementing your custom search experience.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>algolia-search</td>
+<td>The official Algolia Javascript API Client: <a href="https://www.algolia.com/doc/javascript">https://www.algolia.com/doc/javascript</a></td>
+</tr>
+<tr>
+<td>algolia-autocomplete</td>
+<td>The official autocomplete.js library: <a href="https://github.com/algolia/autocomplete.js">https://github.com/algolia/autocomplete.js</a></td>
+</tr>
+</tbody>
+</table>
+<p>By default these scripts are only loaded when the autocomplete should be displayed.</p>
+<p>If you want to create your custom search experience, you should take care to &quot;enqueue&quot; the required scripts regardless of the autocomplete presence.</p>
+<p>The best way would be to declare the scripts as required dependencies:</p>
+<pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">register_custom_search_assets</span><span class="hljs-params">()</span> </span>{
+    wp_enqueue_script( <span class="hljs-string">&apos;custom-search&apos;</span>, plugins_url( <span class="hljs-string">&apos;js/custom-search.js&apos;</span>, dirname(<span class="hljs-keyword">__FILE__</span>) ), <span class="hljs-keyword">array</span>( <span class="hljs-string">&apos;algolia-search&apos;</span>, <span class="hljs-string">&apos;algolia-autocomplete&apos;</span> ) );
+}
+
+add_action( <span class="hljs-string">&apos;wp_enqueue_scripts&apos;</span>, <span class="hljs-string">&apos;register_custom_search_assets&apos;</span> );</code></pre>
+This code will ensure that the &apos;algolia-search&apos; and &apos;algolia-autocomplete&apos; scripts are also happened to the page.
+
+In this example, you can now use the Algolia JS client and the autocomplete library in your custom search script.
+Please consult the documentation of these libraries by following the links shared above.
+
+## Work With The Existing Indices
+
+The Algolia Plugin exports a global `$algolia` variable. That variable contains a reference to the `Algolia_Plugin` class.
+
+That class gives you access to all of the features of the plugin.
+
+Here is one way to get the class instance:
+
+<pre><code class="hljs php"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">custom_algolia_usage</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-comment">/** <span class="hljs-doctag">@var</span> Algolia_Plugin $algolia */</span>
+    <span class="hljs-keyword">global</span> <span class="hljs-variable">$algolia</span>;
+
+    <span class="hljs-comment">// Use the Algolia plugin in your own.</span>
+}
+
+add_action( <span class="hljs-string">&apos;plugins_loaded&apos;</span>, <span class="hljs-string">&apos;custom_algolia_usage&apos;</span> );</code></pre>
+
+<p><strong>You should always access the variable once the plugins are loaded. Otherwise, depending on the order in which the user enabled the plugins it could fail.</strong></p>
+<p>Now that you have access to the <code>Algolia_Plugin</code> instance, you can start using it.</p>
+<p>Also be sure to checkout the <a href="custom-attributes.html">custom attributes documentation</a> which contains a detailed example of a plugin creation.</p>
+
+                </div>
+
+            </div>
+
+        </article>
+    </div>
+
+    <div class="medium-3 large-3 medium-pull-9 large-pull-9 columns">
+        <ul class="vertical menu" id="main-nav">
+
+            <li class="menu-text">Getting Started</li>
+            <li ><a href="installation.html">Installation</a></li>
+            <li ><a href="configuration.html">Configuration</a></li>
+            <li ><a href="instantsearch.html">Instantsearch</a></li>
+
+            <li class="menu-text">Indexing</li>
+            <li ><a href="index-schema.html">Schemas</a></li>
+            <li ><a href="indexing-settings.html">Settings</a></li>
+            <li ><a href="indexing-flow.html">Flow</a></li>
+            <li ><a href="synonyms.html">Synonyms</a></li>
+            <li ><a href="custom-attributes.html">Custom Attributes</a></li>
+
+            <li class="menu-text">Extend</li>
+            <li ><a href="extend-basics.html">Basics</a></li>
+            <li ><a href="customize-autocomplete.html">Autocomplete</a></li>
+            <li class="active"><a href="custom-search.html">Custom Search</a></li>
+
+            <li class="menu-text">Other</li>
+            <li ><a href="internationalization.html">Internationalization</a></li>
+            <li ><a href="common-issues.html">Common Issues</a></li>
+            <li ><a href="resources.html">Additional Resources</a></li>
+            <li ><a href="contribute.html">Contribute</a></li>
+        </ul>
+    </div>
+
+</div>
+
+<section class="ac-footer">
+    <div class="ac-footer-container">
+        <p class="ac-footer-links">
+            Code licensed under
+            <a href="#" class="ac-footer-link-item">MIT</a>
+            <br>
+            <a href="#" class="ac-footer-link-item">Github</a>
+            <a href="#" class="ac-footer-link-item">issues</a>
+        </p>
+    </div>
+
+    <div class="ac-footer-container ac-footer-brand">
+        <p>This project is part of</p>
+        <img class="ac-footer-brand-icon" src="http://res.cloudinary.com/hilnmyskv/image/upload/logo-community.svg">
+        <figure>
+            <img class="ac-footer-brand-logo" src="http://res.cloudinary.com/hilnmyskv/image/upload/v1463417234/algolia-community_n6tixd.svg">
+            <figcaption>Algolia Community</figcaption>
+        </figure>
+        <a href="https://community.algolia.com/" class="ac-footer-btn ac-footer-btn-cta">See More</a>
+        <span class="ac-icon ac-icon-love-dark"></span>
+    </div>
+
+    <p class="ac-footer-version">Latest version: 0.2.4</p>
+
+    <div class="ac-footer-actions">
+        <div class="footer-container">
+            <p>Build unique search experiences with Algolia</p>
+            <a href="https://www.algolia.com/why?utm_medium=social-owned&utm_source=wordpress%20website&utm_campaign=homepage&utm_term=why" class="ac-footer-btn ac-footer-btn-ghost-grey">
+                See Why
+                <span class="ac-icon-triangle"></span>
+            </a>
+            <a href="https://www.algolia.com/users/sign_up?utm_medium=social-owned&utm_source=wordpress%20website&utm_campaign=homepage&utm_term=get_started" class="ac-footer-btn ac-footer-btn-ghost-pink">Get Started For Free</a>
+        </div>
+    </div>
+</section>
+
+<script src="vendor/jquery/jquery.js"></script>
+<script src="vendor/foundation-sites/foundation.js"></script>
+<script src="js/app.js"></script>
+
+
+
+</body>
+</html>

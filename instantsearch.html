@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Instantsearch</title>
+    <meta name="description" content="Quick tutorial on how to implement instantsearch.js on your WordPress website.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
+    <link rel="stylesheet" href="css/app.css">
+
+    <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
+</head>
+<body>
+
+<div class='ac-nav'>
+    <div class="row">
+        <div class="large-12 columns">
+            <div class='ac-nav-container'>
+                <div class='ac-nav-brand'>
+                    <a class='ac-logo' href='https://community.algolia.com/' title='Algolia Community'>
+                        <img alt='Algolia Community' class='ac-logo__lg' src='https://res.cloudinary.com/hilnmyskv/image/upload/logo-community-inline-dark.svg' width='150'>
+                        <img alt='Algolia Community' class='ac-logo__sm' src='https://res.cloudinary.com/hilnmyskv/image/upload/v1461180081/logo-community-sm.svg'>
+                    </a>
+                    <span class='ac-nav-brand-breadcrumb'></span>
+                    <a class='ac-nav-brand-title' href='./' title='Home'>WordPress plugin</a>
+                </div>
+                <div class='ac-nav-menu'>
+                    <div class='ac-nav-searchbox'>
+                        <div class='svg-icons' style='height: 0; width: 0; position: absolute; visibility: hidden'>
+                            <svg xmlns='http://www.w3.org/2000/svg'>
+                                <symbol id="sbx-icon-clear-3" viewBox="0 0 40 40"><path d="M16.228 20L1.886 5.657 0 3.772 3.772 0l1.885 1.886L20 16.228 34.343 1.886 36.228 0 40 3.772l-1.886 1.885L23.772 20l14.342 14.343L40 36.228 36.228 40l-1.885-1.886L20 23.772 5.657 38.114 3.772 40 0 36.228l1.886-1.885L16.228 20z" fill-rule="evenodd"/></symbol>
+                                <symbol id="sbx-icon-search-13" viewBox="0 0 12 12"><path d="M12 11.077c0-.245-.1-.483-.267-.65L9.26 7.955c.584-.843.894-1.853.894-2.877C10.154 2.272 7.882 0 5.077 0S0 2.272 0 5.077s2.272 5.077 5.077 5.077c1.024 0 2.034-.31 2.877-.894l2.474 2.466c.166.173.404.274.65.274.504 0 .922-.418.922-.923zm-3.692-6c0 1.78-1.45 3.23-3.23 3.23-1.782 0-3.232-1.45-3.232-3.23s1.45-3.23 3.23-3.23c1.782 0 3.232 1.45 3.232 3.23z" fill="#FFF" fill-rule="evenodd" opacity="0.85"/></symbol>
+                            </svg>
+                        </div>
+                    </div>
+                    <ul class='ac-nav-menu-list'>
+                        <li class='ac-nav-menu-list-item'>
+                            <a href="/">Home</a>
+                        </li>
+                        <li class='ac-nav-menu-list-item active'>
+                            <a href="installation.html">Documentation</a>
+                        </li>
+                        <li class='ac-nav-menu-list-icon'>
+                            <a class='ac-icon' href='https://github.com/algolia/algoliasearch-wordpress-plugin/' title='GitHub repository'>
+                                <span class='ac-icon ac-icon-github'></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<header id="top-section">
+    <div class="row">
+        <div class="large-12 columns">
+            <img class="header-logo" src="https://res.cloudinary.com/hilnmyskv/image/upload/logo-algolia-dark.png">
+            <p class="lead header-lead">
+                Plugin for
+                <span>WordPress</span>
+            </p>
+        </div>
+    </div>
+</header>
+
+<div class="row">
+    <div class="medium-9 large-9 medium-push-3 large-push-3 columns">
+        <article>
+            <header>
+                <h1>Instantsearch</h1>
+
+                <p class="lead">Quick tutorial on how to implement instantsearch.js on your WordPress website.</p>
+
+                <ul class="menu simple">
+                    <li><a href="https://github.com/algolia/algoliasearch-wordpress-plugin/edit/master/docs/src/instantsearch.md" target="_blank"><i class="fi-pencil"></i> <span>Edit this Page</span></a></li>
+                    <li><a href="https://github.com/algolia/algoliasearch-wordpress-plugin/issues/new?title=%5BInstantsearch%5D%20ISSUE%20NAME%20HERE" target="_blank"><i class="fi-social-github"></i> <span>Report a Bug</span></a></li>
+                    <li><a href="http://stackoverflow.com/questions/tagged/algolia+wordpress" target="_blank"><i class="fi-comment"></i> <span>Get Help</span></a></li>
+                </ul>
+            </header>
+
+            <hr>
+
+            <div class="row">
+
+                <div class="large-12 columns" id="content">
+                    <h2 id="introduction" data-magellan-target="introduction"><a class="heading-anchor" href="#introduction"><span></span></a>Introduction</h2>
+<p>Instantsearch.js is a javascript library that eases the process of building rich search experiences.</p>
+<p>Please checkout the <a href="https://community.algolia.com/instantsearch.js/">official website of the instantsearch.js website</a>.</p>
+<p>Also take a look at some examples of <a href="https://community.algolia.com/instantsearch.js/examples/">what can be achieved with instantsearch.js</a>.</p>
+<h2 id="implementing-instantsearch-js" data-magellan-target="implementing-instantsearch-js"><a class="heading-anchor" href="#implementing-instantsearch-js"><span></span></a>Implementing Instantsearch.js</h2>
+<p>Every WordPress theme being different, we do not ship a plug &amp; play feature for building Instantsearch.js pages.</p>
+<p>That said, we provide with a default implementation to get you started quickly.</p>
+<ol>
+<li>Create the css/ais-wp.css file into your theme directory</li>
+<li>Create the js/ais-wp.js file into your theme directory</li>
+<li>Create a search.php template file in your theme directory. If it already exist you could try to merge the content we provide with your own.</li>
+<li>Create or add the enqueuing of the css and js files into your theme function.js file</li>
+</ol>
+<p><a href="https://gist.github.com/rayrutjes/0814a08ec0ad78e370299b572840405b">Checkout the files in this Gist</a></p>
+<p>By default the instantsearch.js implementation is based on the <code>Searchable Posts Index</code>. Please be sure that the corresponding index was flagged for sync on the admin <code>Indexing</code> page.</p>
+<p><img src="img/instantsearch/searchable-posts.png" alt="Searchable posts"></p>
+<p>From here, you should now have a working instantsearch.js experience like:</p>
+<p><img src="img/instantsearch/instantsearch.gif" alt="Searchable posts"></p>
+<h2 id="customizing-implementation" data-magellan-target="customizing-implementation"><a class="heading-anchor" href="#customizing-implementation"><span></span></a>Customizing Implementation</h2>
+<p>You can customize the look and feel by editing the <code>ais-wp.css</code> file you copied into your theme directory.</p>
+<p>You customize the javascript implementation in the <code>ais-wp.js</code>.</p>
+<p>And you can of course edit the html in <code>search.php</code>.</p>
+<p>Whatever changes you make, be sure to understand how the instantsearch.js library works by checking out the <a href="https://community.algolia.com/instantsearch.js/documentation/">official documentation</a>.</p>
+
+                </div>
+
+            </div>
+
+        </article>
+    </div>
+
+    <div class="medium-3 large-3 medium-pull-9 large-pull-9 columns">
+        <ul class="vertical menu" id="main-nav">
+
+            <li class="menu-text">Getting Started</li>
+            <li ><a href="installation.html">Installation</a></li>
+            <li ><a href="configuration.html">Configuration</a></li>
+            <li class="active"><a href="instantsearch.html">Instantsearch</a></li>
+
+            <li class="menu-text">Indexing</li>
+            <li ><a href="index-schema.html">Schemas</a></li>
+            <li ><a href="indexing-settings.html">Settings</a></li>
+            <li ><a href="indexing-flow.html">Flow</a></li>
+            <li ><a href="synonyms.html">Synonyms</a></li>
+            <li ><a href="custom-attributes.html">Custom Attributes</a></li>
+
+            <li class="menu-text">Extend</li>
+            <li ><a href="extend-basics.html">Basics</a></li>
+            <li ><a href="customize-autocomplete.html">Autocomplete</a></li>
+            <li ><a href="custom-search.html">Custom Search</a></li>
+
+            <li class="menu-text">Other</li>
+            <li ><a href="internationalization.html">Internationalization</a></li>
+            <li ><a href="common-issues.html">Common Issues</a></li>
+            <li ><a href="resources.html">Additional Resources</a></li>
+            <li ><a href="contribute.html">Contribute</a></li>
+        </ul>
+    </div>
+
+</div>
+
+<section class="ac-footer">
+    <div class="ac-footer-container">
+        <p class="ac-footer-links">
+            Code licensed under
+            <a href="#" class="ac-footer-link-item">MIT</a>
+            <br>
+            <a href="#" class="ac-footer-link-item">Github</a>
+            <a href="#" class="ac-footer-link-item">issues</a>
+        </p>
+    </div>
+
+    <div class="ac-footer-container ac-footer-brand">
+        <p>This project is part of</p>
+        <img class="ac-footer-brand-icon" src="http://res.cloudinary.com/hilnmyskv/image/upload/logo-community.svg">
+        <figure>
+            <img class="ac-footer-brand-logo" src="http://res.cloudinary.com/hilnmyskv/image/upload/v1463417234/algolia-community_n6tixd.svg">
+            <figcaption>Algolia Community</figcaption>
+        </figure>
+        <a href="https://community.algolia.com/" class="ac-footer-btn ac-footer-btn-cta">See More</a>
+        <span class="ac-icon ac-icon-love-dark"></span>
+    </div>
+
+    <p class="ac-footer-version">Latest version: 0.2.4</p>
+
+    <div class="ac-footer-actions">
+        <div class="footer-container">
+            <p>Build unique search experiences with Algolia</p>
+            <a href="https://www.algolia.com/why?utm_medium=social-owned&utm_source=wordpress%20website&utm_campaign=homepage&utm_term=why" class="ac-footer-btn ac-footer-btn-ghost-grey">
+                See Why
+                <span class="ac-icon-triangle"></span>
+            </a>
+            <a href="https://www.algolia.com/users/sign_up?utm_medium=social-owned&utm_source=wordpress%20website&utm_campaign=homepage&utm_term=get_started" class="ac-footer-btn ac-footer-btn-ghost-pink">Get Started For Free</a>
+        </div>
+    </div>
+</section>
+
+<script src="vendor/jquery/jquery.js"></script>
+<script src="vendor/foundation-sites/foundation.js"></script>
+<script src="js/app.js"></script>
+
+
+
+</body>
+</html>
