@@ -265,12 +265,12 @@ This will also disable tasks being generated for that content type.</p>
 <p>Let&apos;s say we want to log every post indexing task.</p>
 <pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">mb_log_post_index_updated</span><span class="hljs-params">( <span class="hljs-variable">$post</span> )</span> </span>{
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">mb_log_posts_index_updated</span><span class="hljs-params">( <span class="hljs-variable">$post</span> )</span> </span>{
     <span class="hljs-variable">$log</span> = print_r( <span class="hljs-variable">$post</span>-&gt;to_array(), <span class="hljs-keyword">true</span> );
     file_put_contents( <span class="hljs-string">&apos;../mb_logs.txt&apos;</span>, <span class="hljs-variable">$log</span>, FILE_APPEND );
 }
 
-add_action( <span class="hljs-string">&apos;algolia_index_post_updated&apos;</span>, <span class="hljs-string">&apos;mb_log_post_index_updated&apos;</span> );</code></pre>
+add_action( <span class="hljs-string">&apos;algolia_posts_index_post_updated&apos;</span>, <span class="hljs-string">&apos;mb_log_post_index_updated&apos;</span> );</code></pre>
 
 <p>Note that an action does not need to return anything. If it does, it will be ignored anyway.</p>
 <p>In this example, we would simply log an array representation of the post that has been re-indexed.</p>
