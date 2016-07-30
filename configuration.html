@@ -9,7 +9,7 @@
     <meta name="description" content="Now that your plugin is installed, here is how to configure it.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
-    <link rel="stylesheet" href="css/app.css?v=1469874901239">
+    <link rel="stylesheet" href="css/app.css?v=1469880137099">
 
     <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
 </head>
@@ -91,7 +91,7 @@
             <div class="row">
 
                 <div class="large-12 columns" id="content">
-                    <h2 id="algolia-credentials" data-magellan-target="algolia-credentials"><a class="heading-anchor" href="#algolia-credentials"><span></span></a>Algolia Credentials</h2>
+                    <h2 id="algolia-credentials"><a class="heading-anchor" href="#algolia-credentials"><span></span></a>Algolia Credentials</h2>
 <p>When connected to the WordPress admin panel, search for the following Algolia Search entry in the left sidebar, and click on it.</p>
 <p><img src="img/configuration/algolia-search-menu-entry.png" alt="Algolia Search menu entry"></p>
 <p>You will face the following form asking for your Algolia credentials.</p>
@@ -111,7 +111,7 @@
 <p>If you provided the correct keys, a green success message will appear, otherwise you will get an error message.</p>
 <p>If you do get an error message, please ensure that you have correctly copy pasted the right key in the right WordPress admin field. Also be sure to use the copy button as showed earlier.</p>
 <p><strong>For security reasons, the Search-Only API key should only have the <code>search</code> ACL has it will be display publicly in your html templates.</strong></p>
-<h2 id="indexing" data-magellan-target="indexing"><a class="heading-anchor" href="#indexing"><span></span></a>Indexing</h2>
+<h2 id="indexing"><a class="heading-anchor" href="#indexing"><span></span></a>Indexing</h2>
 <p>Once you have correctly provided WordPress with your Algolia keys as explained in <a href="#algolia-credentials">the previous step</a>, you will now see that the Algolia Search menu entry has now expanded:</p>
 <p><img src="img/configuration/menu-exanded.png" alt="expanded menu"></p>
 <p>For now, lets head to the <code>Indexing</code> entry where you will be able to tell WordPress which indices you want to synchronize with Algolia.</p>
@@ -131,14 +131,14 @@
 <p>By changing this you will update all the synchronized indices prefixes. This feature comes in handy when you want for example to use a same Algolia account for staging and production.</p>
 <p>In that case you would use for example <code>wp_staging_</code> and <code>wp_production_</code> for respectively staging and production environments.</p>
 <p><strong>Changing the index name prefix will automatically queue a move task to make existing indices adopt the new convention. No need to re-index everything after this kind of change.</strong></p>
-<h2 id="verify-synchronization" data-magellan-target="verify-synchronization"><a class="heading-anchor" href="#verify-synchronization"><span></span></a>Verify Synchronization</h2>
+<h2 id="verify-synchronization"><a class="heading-anchor" href="#verify-synchronization"><span></span></a>Verify Synchronization</h2>
 <p>At this stage indices you selected in the <a href="#indexing">previous step</a> should now be available in Algolia.</p>
 <p>If you want to make sure the synchronization has succeeded you could go to your Algolia dashboard, on the <a href="https://www.algolia.com/explorer">indices page</a>.
 From the dropdown near the title, you should see the 3 indices we chose to push from WordPress to Algolia.</p>
 <p><img src="img/configuration/indices-dropdown.png" alt="indices dropdown"></p>
 <p>If your indices do not appear yet, you may want to check your logs. <a href="logs.html">Read more about logs here</a>.</p>
 <p><strong>Note that there can be more than 1 record per Post entry. To understand why, please read <a href="index-schema.html">our section about Indexing Schemas</a>.</strong></p>
-<h2 id="autocomplete" data-magellan-target="autocomplete"><a class="heading-anchor" href="#autocomplete"><span></span></a>Autocomplete</h2>
+<h2 id="autocomplete"><a class="heading-anchor" href="#autocomplete"><span></span></a>Autocomplete</h2>
 <p>Now that Algolia knows about your content, it is time to offer your users a nice <code>as you type</code> search experience.
 First of all, here is the search experience you will get out of the box at the end of this section:</p>
 <p><img src="img/configuration/autocomplete-preview.png" alt="autocomplete preview"></p>
@@ -179,17 +179,17 @@ For now, check the box!</p>
 </table>
 <p>Let&apos;s keep the default settings and enable all 3 content types for the <code>as you type</code> autocomplete experience. Do not forget to hit the <code>Save Changes</code> buttons once your finished.</p>
 <p>You should now be able to use the Algolia powered autocomplete on your website.</p>
-<h2 id="native-search" data-magellan-target="native-search"><a class="heading-anchor" href="#native-search"><span></span></a>Native Search</h2>
+<h2 id="native-search"><a class="heading-anchor" href="#native-search"><span></span></a>Native Search</h2>
 <p>This feature is a bit more complex to understand but once you get it, you will understand why it plays so nicely with the <a href="#autocomplete">previously discovered autocomplete feature</a>.</p>
 <p>WordPress has a built in search engine relying on SQL queries. The problem is that it does not support the features of the Algolia search engine like typo tolerance, custom ranking, and a lot more that you can check out on the <a href="https://www.algolia.com/">https://www.algolia.com/</a> website.</p>
 <p>This is the very reason this plugin comes with a feature that overrides the native WordPress search engine with Algolia. This ensures that you get the same results between the <code>autocomplete</code> feature and the native search pages.</p>
-<h3 id="let-s-make-it-obvious" data-magellan-target="let-s-make-it-obvious"><a class="heading-anchor" href="#let-s-make-it-obvious"><span></span></a>Let&apos;s Make It Obvious</h3>
+<h3 id="let-s-make-it-obvious"><a class="heading-anchor" href="#let-s-make-it-obvious"><span></span></a>Let&apos;s Make It Obvious</h3>
 <p>Let&apos;s say you have a post titled: <code>My awesome post</code> and you search into your autocompleted search input for <code>awsome</code>.
 The Algolia search engine is smart enough to understand that you made a typo on the word <code>awesome</code>, and will give relevant results:</p>
 <p><img src="img/configuration/autocomplete-typo.png" alt="autocomplete typo"></p>
 <p>If you where now to press the return/enter keyboard key without directly clicking on the giving suggestion, you will be redirected to the native WordPress search results page, but with no results:</p>
 <p><img src="img/configuration/no-results.png" alt="WordPress search no results"></p>
-<h3 id="let-s-fix-the-wordpress-native-search" data-magellan-target="let-s-fix-the-wordpress-native-search"><a class="heading-anchor" href="#let-s-fix-the-wordpress-native-search"><span></span></a>Let&apos;s fix the WordPress Native Search</h3>
+<h3 id="let-s-fix-the-wordpress-native-search"><a class="heading-anchor" href="#let-s-fix-the-wordpress-native-search"><span></span></a>Let&apos;s fix the WordPress Native Search</h3>
 <p>Leat&apos;s head back to the WordPress admin interface and click on the <code>Native Search</code> entry under the <code>Algolia Search</code> menu entry.</p>
 <p>Here is what you will see:</p>
 <p><img src="img/configuration/native-search-form.png" alt="native search form"></p>
@@ -203,10 +203,10 @@ You will now see an additional configuration option:</p>
 <p>If we now go back to our previous experimentation and we reach the stage where we access the native WordPress search results page, we now see that we get our expected result:</p>
 <p><img src="img/configuration/expected-result.png" alt="native search form"></p>
 <p><strong>We highly recommend you turn this feature on if you also have turned on the autocomplete feature. Otherwise, it might lead to a confusing user experience!</strong></p>
-<h3 id="final-word-about-the-native-search-override" data-magellan-target="final-word-about-the-native-search-override"><a class="heading-anchor" href="#final-word-about-the-native-search-override"><span></span></a>Final Word about the Native Search override</h3>
+<h3 id="final-word-about-the-native-search-override"><a class="heading-anchor" href="#final-word-about-the-native-search-override"><span></span></a>Final Word about the Native Search override</h3>
 <p>The nice part of the way we override the native WordPress search engine is that your templates will remain un-altered.
 This means that you can use this plugin without the fear of breaking your look &amp; feel.</p>
-<h2 id="from-here-on-out" data-magellan-target="from-here-on-out"><a class="heading-anchor" href="#from-here-on-out"><span></span></a>From Here On Out</h2>
+<h2 id="from-here-on-out"><a class="heading-anchor" href="#from-here-on-out"><span></span></a>From Here On Out</h2>
 <p>You want to understand more in depth what Algolia is and how you can benefit from it?</p>
 <p>Please consult your gettting started: <a href="https://www.algolia.com/doc/getting-started">https://www.algolia.com/doc/getting-started</a></p>
 <p>Struggling with something? Go to the <a href="frequently-asked-questions.html">Q&amp;A section</a>.</p>
@@ -290,6 +290,65 @@ This means that you can use this plugin without the fear of breaking your look &
 <script src="js/app.js"></script>
 
 
+
+    <!-- GA -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-32446386-12', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-N8JP8G" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-N8JP8G');</script>
+<!-- Twitter -->
+<script src="//platform.twitter.com/oct.js" type="text/javascript"></script>
+<script type="text/javascript">twttr.conversion.trackPid('ntr1j', { tw_sale_amount: 0, tw_order_quantity: 0 });</script>
+<noscript>
+  <img height="1" width="1" style="display:none;" alt="" src="https://analytics.twitter.com/i/adsct?txn_id=ntr1j&amp;p_id=Twitter&amp;tw_sale_amount=0&amp;tw_order_quantity=0">
+  <img height="1" width="1" style="display:none;" alt="" src="//t.co/i/adsct?txn_id=ntr1j&amp;p_id=Twitter&amp;tw_sale_amount=0&amp;tw_order_quantity=0">
+</noscript>
+<!-- Facebook -->
+<script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+  document,'script','//connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1654938174769952');
+  fbq('track', "PageView");</script>
+<noscript>
+  <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1654938174769952&amp;ev=PageView&amp;noscript=1">
+</noscript>
+<!-- Addroll -->
+<script type="text/javascript">
+  adroll_adv_id = "TGR7R4XSGVGYVPX4LQBDFQ";
+  adroll_pix_id = "YQNWNHGUUBD2JMY7BVOBWM";
+  // adroll_email = "username@example.com"; // OPTIONAL: provide email to improve user identification
+  (function () {
+    var _onload = function(){
+      if (document.readyState && !/loaded|complete/.test(document.readyState)){setTimeout(_onload, 10);return}
+      if (!window.__adroll_loaded){__adroll_loaded=true;setTimeout(_onload, 50);return}
+      var scr = document.createElement("script");
+      var host = (("https:" == document.location.protocol) ? "https://s.adroll.com" : "http://a.adroll.com");
+      scr.setAttribute('async', 'true');
+      scr.type = "text/javascript";
+      scr.src = host + "/j/roundtrip.js";
+      ((document.getElementsByTagName('head') || [null])[0] ||
+        document.getElementsByTagName('script')[0].parentNode).appendChild(scr);
+    };
+    if (window.addEventListener) {window.addEventListener('load', _onload, false);}
+    else {window.attachEvent('onload', _onload)}
+  }());
+</script>
+    
 
 </body>
 </html>
