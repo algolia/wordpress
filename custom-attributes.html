@@ -9,7 +9,7 @@
     <meta name="description" content="Discover how to push your custom attributes and adapt your Algolia ranking settings.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
-    <link rel="stylesheet" href="css/app.css?v=1470129077422">
+    <link rel="stylesheet" href="css/app.css?v=1470129336490">
 
     <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
 </head>
@@ -234,9 +234,12 @@ add_filter( <span class="hljs-string">&apos;algolia_posts_index_settings&apos;</
 
     <span class="hljs-variable">$task_queue</span> = <span class="hljs-variable">$algolia</span>-&gt;get_task_queue();
 
-    <span class="hljs-variable">$post_types</span> = <span class="hljs-variable">$algolia</span>-&gt;get_settings()-&gt;get_indexed_post_types();
-    <span class="hljs-keyword">foreach</span> ( <span class="hljs-variable">$post_types</span> <span class="hljs-keyword">as</span> <span class="hljs-variable">$post_type</span> ) {
-        <span class="hljs-variable">$task_queue</span>-&gt;queue( <span class="hljs-string">&apos;re_index_posts&apos;</span>, <span class="hljs-keyword">array</span>( <span class="hljs-string">&apos;post_type&apos;</span> =&gt; <span class="hljs-variable">$post_type</span> ) );
+    <span class="hljs-variable">$indices</span> = <span class="hljs-variable">$algolia</span>-&gt;get_indices( <span class="hljs-keyword">array</span>(
+        <span class="hljs-string">&apos;enabled&apos;</span> =&gt; <span class="hljs-keyword">true</span>,
+        <span class="hljs-string">&apos;contains&apos;</span> =&gt; <span class="hljs-string">&apos;posts&apos;</span>,
+    ) );
+    <span class="hljs-keyword">foreach</span> ( <span class="hljs-variable">$indices</span> <span class="hljs-keyword">as</span> <span class="hljs-variable">$index</span> ) {
+        <span class="hljs-variable">$task_queue</span>-&gt;queue( <span class="hljs-string">&apos;re_index_items&apos;</span>, <span class="hljs-keyword">array</span>( <span class="hljs-string">&apos;index_id&apos;</span> =&gt; <span class="hljs-variable">$index</span>-&gt;get_id() ) );
     }
 }
 <span class="hljs-comment">// This action is required for wp_schedule_event binding.</span>
