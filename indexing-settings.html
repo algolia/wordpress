@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
-    <title>Indexing Settings</title>
+    <title>Indices Settings</title>
 
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 
-    <meta name="description" content="Understand the ranking and other settings.">
+    <meta name="description" content="Understand the indices default settings and how to customize the ranking.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
-    <link rel="stylesheet" href="css/app.css?v=1470173548856">
+    <link rel="stylesheet" href="css/app.css?v=1470177175998">
 
     <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
 
@@ -88,13 +88,13 @@
 
         <article>
             <header>
-                <h1>Indexing Settings</h1>
+                <h1>Indices Settings</h1>
 
-                <p class="lead">Understand the ranking and other settings.</p>
+                <p class="lead">Understand the indices default settings and how to customize the ranking.</p>
 
                 <ul class="menu simple">
                     <li><a href="https://github.com/algolia/algoliasearch-wordpress/edit/master/docs/src/indexing-settings.md" target="_blank"><i class="fi-pencil"></i> <span>Edit this Page</span></a></li>
-                    <li><a href="https://github.com/algolia/algoliasearch-wordpress/issues/new?title=%5BIndexing Settings%5D%20ISSUE%20NAME%20HERE" target="_blank"><i class="fi-social-github"></i> <span>Report a Bug</span></a></li>
+                    <li><a href="https://github.com/algolia/algoliasearch-wordpress/issues/new?title=%5BIndices Settings%5D%20ISSUE%20NAME%20HERE" target="_blank"><i class="fi-social-github"></i> <span>Report a Bug</span></a></li>
                     <li><a href="http://stackoverflow.com/questions/tagged/algolia+wordpress" target="_blank"><i class="fi-comment"></i> <span>Get Help</span></a></li>
                 </ul>
             </header>
@@ -105,12 +105,12 @@
 
                 <div class="large-12 columns" id="content">
                     <h2 id="introduction"><a class="heading-anchor" href="#introduction"><span></span></a>Introduction</h2>
-<p>Algolia allows you to configure a lot settings to improve your search results relevancy.</p>
-<p><a href="https://www.algolia.com/doc/php#index-settings">A complete list of these settings can be found here</a>.</p>
-<p>This plugin automatically sets the settings for every index, and you will find detailed information about each configuration in the next sections of this page.</p>
-<p><strong>Every time an index is re-indexed, the settings will be pushed and override existing ones. This means that you should not edit your settings directly in the Algolia Dashboard. Instead, you should hook into this plugin to alter the settings.</strong></p>
+<p>Algolia allows you to configure your indices to improve the relevancy of your search results.</p>
+<p>Each index comes with its own customizable settings and <a href="https://www.algolia.com/doc/php#index-settings">a complete list of the settings parameters can be found here</a>.</p>
+<p>This plugin automatically configures each index with some sensible default settings, that being said, you can of course <a href="#custom-index-settings">customize the settings by using some filters</a>.</p>
+<p><strong>Every time an index is re-indexed, the settings will be pushed and override existing ones. This means that you should not edit your settings directly in the Algolia Dashboard. Instead, you should use <code>filters</code>  to hook into this plugin and alter the settings.</strong></p>
 <h2 id="settings-anatomy"><a class="heading-anchor" href="#settings-anatomy"><span></span></a>Settings Anatomy</h2>
-<p>Before telling you about the default settings per content type and how to customize them, let&apos;s have a quick overview of the settings anatomy.</p>
+<p>Before telling you about the default settings per content type and how to customize them, let&apos;s have a quick overview of a few parameters.</p>
 <p><strong>attributesToIndex</strong>:
 Refers to the attributes that the search will be based on. By default we will generally list here all the text attributes that the user would like to search in.
 Unless we wrap our attribute name in <code>unordered()</code>, word match position matters, meaning that if a word is find earlier in the indexed attribute, it will be considered a better match.</p>
@@ -126,7 +126,7 @@ By using this feature, the search engine will only return the most relevant reco
 Algolia allows to prepare your records for faceting. Faceting is the feature allowing you for example to list all posts of a category.
 Even though we do not yet provide out of the box usage of faceting in the plugin, we tried to already push some sensible default values for the <code>attributesForFaceting</code>.</p>
 <p>Feel free to dig further into the Algolia Search engine to optimize even more your search relevancy: <a href="https://www.algolia.com/doc#relevance">Relevancy in Algolia&apos;s documentation</a>.</p>
-<h2 id="searchable-posts-settings"><a class="heading-anchor" href="#searchable-posts-settings"><span></span></a>Searchable Posts Settings</h2>
+<h2 id="searchable-posts-index-settings"><a class="heading-anchor" href="#searchable-posts-index-settings"><span></span></a>Searchable Posts Index Settings</h2>
 <p><strong>Default searchable posts settings:</strong></p>
 <pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
 <span class="hljs-variable">$settings</span> = <span class="hljs-keyword">array</span>(
@@ -165,7 +165,7 @@ Even though we do not yet provide out of the box usage of faceting in the plugin
     <span class="hljs-string">&apos;snippetEllipsisText&apos;</span> =&gt; <span class="hljs-string">&apos;&#x2026;&apos;</span>,
 );</code></pre>
 
-<h2 id="posts-settings"><a class="heading-anchor" href="#posts-settings"><span></span></a>Posts Settings</h2>
+<h2 id="posts-index-settings"><a class="heading-anchor" href="#posts-index-settings"><span></span></a>Posts Index Settings</h2>
 <p><strong>Default posts settings:</strong></p>
 <pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
 <span class="hljs-variable">$settings</span> = <span class="hljs-keyword">array</span>(
@@ -203,7 +203,7 @@ Even though we do not yet provide out of the box usage of faceting in the plugin
     <span class="hljs-string">&apos;snippetEllipsisText&apos;</span> =&gt; <span class="hljs-string">&apos;&#x2026;&apos;</span>,
 );</code></pre>
 
-<h2 id="terms-settings"><a class="heading-anchor" href="#terms-settings"><span></span></a>Terms Settings</h2>
+<h2 id="terms-index-settings"><a class="heading-anchor" href="#terms-index-settings"><span></span></a>Terms Index Settings</h2>
 <p><strong>Default terms settings:</strong></p>
 <pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
 <span class="hljs-variable">$settings</span> = <span class="hljs-keyword">array</span>(
@@ -216,7 +216,7 @@ Even though we do not yet provide out of the box usage of faceting in the plugin
     ),
 );</code></pre>
 
-<h2 id="users-settings"><a class="heading-anchor" href="#users-settings"><span></span></a>Users Settings</h2>
+<h2 id="users-index-settings"><a class="heading-anchor" href="#users-index-settings"><span></span></a>Users Index Settings</h2>
 <p><strong>Default users settings:</strong></p>
 <pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
 <span class="hljs-variable">$settings</span> = <span class="hljs-keyword">array</span>(
@@ -228,7 +228,7 @@ Even though we do not yet provide out of the box usage of faceting in the plugin
     ),
 );</code></pre>
 
-<h2 id="custom-settings"><a class="heading-anchor" href="#custom-settings"><span></span></a>Custom Settings</h2>
+<h2 id="custom-index-settings"><a class="heading-anchor" href="#custom-index-settings"><span></span></a>Custom Index Settings</h2>
 <p>You can customize the settings pushed to Algolia for every content type.
 To do so simply use the available filters:</p>
 <table>
@@ -261,7 +261,7 @@ To do so simply use the available filters:</p>
 </tr>
 </tbody>
 </table>
-<h2 id="custom-settings-example"><a class="heading-anchor" href="#custom-settings-example"><span></span></a>Custom Settings Example</h2>
+<h2 id="custom-index-settings-example"><a class="heading-anchor" href="#custom-index-settings-example"><span></span></a>Custom Index Settings Example</h2>
 <p>Let&apos;s say you have some custom metric named <code>visits_count</code> and you would like to add a custom ranking rule on that one:</p>
 <pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
 
