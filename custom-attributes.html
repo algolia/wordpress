@@ -9,7 +9,7 @@
     <meta name="description" content="Discover how to push your custom attributes and adapt your Algolia ranking settings.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
-    <link rel="stylesheet" href="css/app.css?v=1470073909673">
+    <link rel="stylesheet" href="css/app.css?v=1470129077422">
 
     <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
 </head>
@@ -137,7 +137,7 @@ Plugin Name: Visits Matters
 
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">vm_increment_post_visit_count</span><span class="hljs-params">( <span class="hljs-variable">$post_id</span> )</span> </span>{
     <span class="hljs-variable">$visits_count</span> = vm_get_post_visit_count( <span class="hljs-variable">$post_id</span> );
-    update_post_meta( <span class="hljs-variable">$post_id</span>, <span class="hljs-string">&apos;vm_visits_counter&apos;</span>, (string) ++<span class="hljs-variable">$visits_count</span>, (string) --<span class="hljs-variable">$visits_count</span> );
+    update_post_meta( <span class="hljs-variable">$post_id</span>, <span class="hljs-string">&apos;vm_visits_counter&apos;</span>, (string) ++<span class="hljs-variable">$visits_count</span>, (string) --<span class="hljs-variable">$visits_count</span>);
 }
 
 add_filter( <span class="hljs-string">&apos;wp&apos;</span>, <span class="hljs-string">&apos;vm_increment_post_counter&apos;</span> );</code></pre>
@@ -146,7 +146,9 @@ add_filter( <span class="hljs-string">&apos;wp&apos;</span>, <span class="hljs-s
 <p>We also prepared an easy way to get the current post visits count: <code>vm_get_post_visit_count</code>. This will be very handy when preparing the data for Algolia.</p>
 <h2 id="push-your-visits-count-to-algolia"><a class="heading-anchor" href="#push-your-visits-count-to-algolia"><span></span></a>Push Your Visits Count To Algolia</h2>
 <p>Now that we have a way to retrieve visits count for every post, let&apos;s add it to every Algolia post records.</p>
-<pre><code class="hljs php"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">vm_post_shared_attributes</span><span class="hljs-params">( array <span class="hljs-variable">$shared_attributes</span>, WP_Post <span class="hljs-variable">$post</span>)</span> </span>{
+<pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">vm_post_shared_attributes</span><span class="hljs-params">( array <span class="hljs-variable">$shared_attributes</span>, WP_Post <span class="hljs-variable">$post</span>)</span> </span>{
     <span class="hljs-variable">$shared_attributes</span>[<span class="hljs-string">&apos;visits_count&apos;</span>] = vm_get_post_visit_count( <span class="hljs-variable">$post</span>-&gt;ID );
 
     <span class="hljs-keyword">return</span> <span class="hljs-variable">$shared_attributes</span>;
@@ -195,7 +197,7 @@ add_filter( <span class="hljs-string">&apos;algolia_posts_index_settings&apos;</
 <p>Here we adjust our settings:</p>
 <pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">vm_post_index_settings</span><span class="hljs-params">( array <span class="hljs-variable">$settings</span> )</span> </span>{
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">vm_posts_index_settings</span><span class="hljs-params">( array <span class="hljs-variable">$settings</span> )</span> </span>{
     <span class="hljs-variable">$custom_ranking</span> = <span class="hljs-variable">$settings</span>[<span class="hljs-string">&apos;customRanking&apos;</span>];
     array_unshift( <span class="hljs-variable">$custom_ranking</span>, <span class="hljs-string">&apos;desc(visits_count)&apos;</span> );
     <span class="hljs-variable">$settings</span>[<span class="hljs-string">&apos;customRanking&apos;</span>] = <span class="hljs-variable">$custom_ranking</span>;
@@ -315,16 +317,19 @@ add_filter( <span class="hljs-string">&apos;algolia_posts_index_settings&apos;</
 
     <span class="hljs-variable">$task_queue</span> = <span class="hljs-variable">$algolia</span>-&gt;get_task_queue();
 
-    <span class="hljs-variable">$post_types</span> = <span class="hljs-variable">$algolia</span>-&gt;get_settings()-&gt;get_indexed_post_types();
-    <span class="hljs-keyword">foreach</span> ( <span class="hljs-variable">$post_types</span> <span class="hljs-keyword">as</span> <span class="hljs-variable">$post_type</span> ) {
-        <span class="hljs-variable">$task_queue</span>-&gt;queue( <span class="hljs-string">&apos;re_index_posts&apos;</span>, <span class="hljs-keyword">array</span>( <span class="hljs-string">&apos;post_type&apos;</span> =&gt; <span class="hljs-variable">$post_type</span> ) );
+    <span class="hljs-variable">$indices</span> = <span class="hljs-variable">$algolia</span>-&gt;get_indices( <span class="hljs-keyword">array</span>(
+        <span class="hljs-string">&apos;enabled&apos;</span> =&gt; <span class="hljs-keyword">true</span>,
+        <span class="hljs-string">&apos;contains&apos;</span> =&gt; <span class="hljs-string">&apos;posts&apos;</span>,
+    ) );
+    <span class="hljs-keyword">foreach</span> ( <span class="hljs-variable">$indices</span> <span class="hljs-keyword">as</span> <span class="hljs-variable">$index</span> ) {
+        <span class="hljs-variable">$task_queue</span>-&gt;queue( <span class="hljs-string">&apos;re_index_items&apos;</span>, <span class="hljs-keyword">array</span>( <span class="hljs-string">&apos;index_id&apos;</span> =&gt; <span class="hljs-variable">$index</span>-&gt;get_id() ) );
     }
 }
-<span class="hljs-comment">// This action is needed to so that the vm_re_index_posts method can be bound to the wp_schedule_event method.</span>
+<span class="hljs-comment">// This action is required for wp_schedule_event binding.</span>
 add_action( <span class="hljs-string">&apos;vm_re_index_posts&apos;</span>, <span class="hljs-string">&apos;vm_re_index_posts&apos;</span> );
 
 
-<span class="hljs-comment">// Registers the recurring re_index_posts event.</span>
+<span class="hljs-comment">// Registers the recurring vm_re_index_posts event.</span>
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">wp_register_re_index_posts</span><span class="hljs-params">()</span> </span>{
     <span class="hljs-keyword">if</span> ( ! wp_next_scheduled( <span class="hljs-string">&apos;vm_re_index_posts&apos;</span> ) ) {
         wp_schedule_event( time(), <span class="hljs-string">&apos;daily&apos;</span>, <span class="hljs-string">&apos;vm_re_index_posts&apos;</span> );
