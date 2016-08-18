@@ -3,13 +3,32 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Logs</title>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
 
+    <meta content='#' name='description'>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'>
+    <!-- / Twitter card -->
+    <meta content='summary_large_image' name='twitter:card'>
+    <meta content='@Algolia' name='twitter:site'>
+    <meta content='@Algolia' name='twitter:creator'>
+    <meta content="Algolia Product" name="twitter:title">
+    <meta content="Algolia Product description" name="twitter:description">
+    <meta content="Algolia Product image" name="twitter:image">
+    <!-- / OG meta -->
+    <meta content='#' property='og:url'>
+    <meta content='#' property='og:title'>
+    <meta content='#' property='og:image'>
+    <meta content='article' property='og:type'>
+    <meta content='#' property='og:description'>
+    <meta content='IMDb' property='og:site_name'>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 
     <meta name="description" content="Track what is going on with the built in logs.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
-    <link rel="stylesheet" href="css/app.css?v=1471425248182">
+    <link rel="stylesheet" href="css/app.css?v=1471522175863">
 
     <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
 
@@ -18,10 +37,6 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
 </head>
 <body class="">
-
-    <div class="beta-banner">
-        BETA PREVIEW - Work in progress...
-    </div>
     <div class='ac-nav'>
         <div class="row">
             <div class="large-12 columns">
@@ -45,16 +60,16 @@
                         </div>
                         <ul class='ac-nav-menu-list'>
                             <li class="ac-nav-menu-list-item">
-                                <a href="./">Home</a>
+                                <a href="./" data-path="./" title="Home">Home</a>
                             </li>
                             <li class="ac-nav-menu-list-item active">
-                                <a href="installation.html">Documentation</a>
+                                <a href="installation.html" data-path="installation.html" title="Documentation">Documentation</a>
                             </li>
                             <li class="ac-nav-menu-list-item">
-                                <a href="frequently-asked-questions.html">FAQ</a>
+                                <a href="frequently-asked-questions.html" data-path="frequently-asked-questions.html" title="FAQ">FAQ</a>
                             </li>
                             <li class='ac-nav-menu-list-icon'>
-                                <a class='ac-icon' href='https://github.com/algolia/algoliasearch-wordpress/' title='GitHub repository'>
+                                <a class='ac-icon' href='https://github.com/algolia/algoliasearch-wordpress/' data-path="https://github.com/algolia/algoliasearch-wordpress/" title='GitHub repository'>
                                     <span class='ac-icon ac-icon-github'></span>
                                 </a>
                             </li>
@@ -65,8 +80,8 @@
         </div>
     </div>
 
-<header id="top-section">
-    <div class="row">
+<header id="top-section" class="doc-header">
+    <div class="row row-doc">
         <div class="large-12 columns">
             <img class="header-logo" src="https://res.cloudinary.com/hilnmyskv/image/upload/logo-algolia-dark.png">
             <p class="lead header-lead">
@@ -166,15 +181,16 @@
 </div>
 
 <section class="ac-footer">
-    <div class="ac-footer-container">
-        <p class="ac-footer-links">
-            Code licensed under
-            <a href="#" class="ac-footer-link-item">MIT</a>
-            <br>
-            <a href="#" class="ac-footer-link-item">Github</a>
-            <a href="#" class="ac-footer-link-item">issues</a>
-        </p>
-    </div>
+  <div class="ac-footer-container">
+    <p class="ac-footer-links">
+      Code licensed under
+      <a href="#" class="ac-footer-link-item">MIT</a>
+      <br>
+      <a href="#" class="ac-footer-link-item">Github</a>
+      <a href="#" class="ac-footer-link-item">issues</a>
+      <a class="ac-footer-link-item" href="https://www.algolia.com/policies/privacy">Privacy policy</a>
+    </p>
+  </div>
 
     <div class="ac-footer-container ac-footer-brand">
         <p>This project is part of</p>
@@ -204,7 +220,7 @@
         <script src="vendor/jquery/jquery.js"></script>
         <script src="vendor/foundation-sites/foundation.js"></script>
         <script src="js/app.js"></script>
-
+        <script src="js/responsiveNavigation.js"></script>
         
         
     <!-- GA -->
