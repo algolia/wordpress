@@ -27,7 +27,7 @@
     <meta name="description" content="Discover the best way to extend the plugin to customize the behaviour.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
-    <link rel="stylesheet" href="css/app.css?v=1472218956739">
+    <link rel="stylesheet" href="css/app.css?v=1472459319226">
 
     <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
 
@@ -131,6 +131,11 @@ Plugin Name: My Blog
 
 <p>Then you should be able to enable that plugin from your WordPress admin panel.</p>
 <p>You can now hook into the Algolia Search for WordPress plugin!</p>
+<h2 id="extend-from-a-theme"><a class="heading-anchor" href="#extend-from-a-theme"><span></span></a>Extend from a theme</h2>
+<p>Every theme contains a <code>functions.php</code> file where you can also extend the Algolia Search plugin.</p>
+<p>If you choose to use your theme files to extend the plugin, please consider creating a child theme so that you can update your theme
+without loosing your changes.</p>
+<p>You can read more about <a href="https://codex.wordpress.org/Child_Themes">child themes in the official documentation</a>.</p>
 <h2 id="filters"><a class="heading-anchor" href="#filters"><span></span></a>Filters</h2>
 <p>Filters are a way to alter data during the lifecycle of a request. The idea is simple: you listen for a filter to be called by using <code>add_filter</code>, you edit your data and return it modified.</p>
 <h2 id="filter-example"><a class="heading-anchor" href="#filter-example"><span></span></a>Filter Example</h2>

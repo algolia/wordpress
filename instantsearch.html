@@ -27,7 +27,7 @@
     <meta name="description" content="Quick tutorial on how to implement instantsearch.js on your WordPress website.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
-    <link rel="stylesheet" href="css/app.css?v=1472218956739">
+    <link rel="stylesheet" href="css/app.css?v=1472459319226">
 
     <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
 
@@ -122,25 +122,40 @@
 <p>Instantsearch.js is a javascript library that eases the process of building rich search experiences.</p>
 <p>Please checkout the <a href="https://community.algolia.com/instantsearch.js/">official website of the instantsearch.js website</a>.</p>
 <p>Also take a look at some examples of <a href="https://community.algolia.com/instantsearch.js/examples/">what can be achieved with instantsearch.js</a>.</p>
-<h2 id="implementing-instantsearch-js"><a class="heading-anchor" href="#implementing-instantsearch-js"><span></span></a>Implementing Instantsearch.js</h2>
-<p>Every WordPress theme being different, we do not ship a plug &amp; play feature for building Instantsearch.js pages.</p>
-<p>That said, we provide with a default implementation to get you started quickly.</p>
-<ol>
-<li>Create the css/ais-wp.css file into your theme directory</li>
-<li>Create the js/ais-wp.js file into your theme directory</li>
-<li>Create a search.php template file in your theme directory. If it already exist you could try to merge the content we provide with your own.</li>
-<li>Create or add the enqueuing of the css and js files into your theme function.js file</li>
-</ol>
-<p><a href="https://gist.github.com/rayrutjes/0814a08ec0ad78e370299b572840405b">Checkout the files in this Gist</a></p>
-<p>By default the instantsearch.js implementation is based on the <code>Searchable Posts Index</code>. Please be sure that the corresponding index was flagged for sync on the admin <code>Indexing</code> page.</p>
-<p><img src="img/instantsearch/searchable-posts.png" alt="Searchable posts"></p>
-<p>From here, you should now have a working instantsearch.js experience like:</p>
-<p><img src="img/instantsearch/instantsearch.gif" alt="Searchable posts"></p>
+<h2 id="enabling-instantsearch-js"><a class="heading-anchor" href="#enabling-instantsearch-js"><span></span></a>Enabling Instantsearch.js</h2>
+<p>The instantsearch.js experience can be enabled on the <code>Search page</code> of the plugin.</p>
+<p>The instantsearch feature will do its search on the <code>Searchable posts index</code>. If you don&apos;t have that index flagged for indexing you will be invited to index it with a notice on every page of the WordPress admin.</p>
 <h2 id="customizing-implementation"><a class="heading-anchor" href="#customizing-implementation"><span></span></a>Customizing Implementation</h2>
-<p>You can customize the look and feel by editing the <code>ais-wp.css</code> file you copied into your theme directory.</p>
-<p>You customize the javascript implementation in the <code>ais-wp.js</code>.</p>
-<p>And you can of course edit the html in <code>search.php</code>.</p>
+<p><strong>You should never directly edit files of the plugin, because all changes would be lost at every update of the plugin.</strong></p>
+<p>Instead you should copy paste the <code>wp-content/plugins/algolia/templates</code> directory in your own theme, and rename it to <code>algolia</code>.</p>
+<p>eg: If your theme is named <code>mytheme</code>, then the folder should look like: <code>wp-content/themes/mytheme/algolia</code>.</p>
+<p>You can then tweak tke implementation by changing the <code>instantsearch.php</code> file. For simplicity purposes, that file contains both the HTML and the JavaScript required for the instantsearch.js to work.</p>
+<p>Feel free to extract the JavaScript to a separate script in your theme.</p>
 <p>Whatever changes you make, be sure to understand how the instantsearch.js library works by checking out the <a href="https://community.algolia.com/instantsearch.js/documentation/">official documentation</a>.</p>
+<h2 id="custom-css"><a class="heading-anchor" href="#custom-css"><span></span></a>Custom CSS</h2>
+<p>We provide with some default CSS rules that are locate on the <code>algolia/assets/css/algolia-instantsearch.css</code> stylesheet.</p>
+<p>You can very easily add your own CSS rules to your theme&apos;s stylesheet.</p>
+<p>If for any reason you don&apos;t want the default stylesheet to be included, you can remove it like this:</p>
+<pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
+
+
+<span class="hljs-comment">/**
+ * Dequeue the Algolia Instantsearch CSS file.
+ *
+ * Hooked to the wp_print_styles action, with a late priority (100),
+ * so that it is after the stylesheet was enqueued.
+ */</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">my_theme_dequeue_styles</span><span class="hljs-params">()</span> </span>{
+   wp_dequeue_style( <span class="hljs-string">&apos;algolia-instantsearch&apos;</span> );
+}
+add_action( <span class="hljs-string">&apos;wp_print_styles&apos;</span>, <span class="hljs-string">&apos;my_theme_dequeue_styles&apos;</span>, <span class="hljs-number">100</span> );</code></pre>
+
+
+
+
+
+
+
 
                 </div>
 

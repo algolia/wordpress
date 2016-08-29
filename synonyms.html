@@ -27,7 +27,7 @@
     <meta name="description" content="How to leverage the Algolia synonyms feature.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
-    <link rel="stylesheet" href="css/app.css?v=1472218956739">
+    <link rel="stylesheet" href="css/app.css?v=1472459319226">
 
     <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
 
@@ -140,6 +140,10 @@
 <td>array $synonyms</td>
 </tr>
 <tr>
+<td>algolia_searchable_posts_index_synonyms</td>
+<td>array $synonyms</td>
+</tr>
+<tr>
 <td>algolia_terms_index_synonyms</td>
 <td>array $synonyms, string $taxonomy</td>
 </tr>
@@ -185,7 +189,7 @@ Plugin Name: Algolia Greeting Synonyms Example
 
 add_filter( <span class="hljs-string">&apos;algolia_posts_page_index_synonyms&apos;</span>, <span class="hljs-string">&apos;custom_posts_page_index_synonyms&apos;</span> );</code></pre>
 
-<p>To fully understand the synonyms arguments please check out the official documentation. (link in the <a href="#introduction">introduction</a>).</p>
+<p>To fully understand the synonyms arguments please check out the <a href="https://www.algolia.com/doc/relevance/synonyms">official documentation about synonyms</a>.</p>
 <p><strong>As for index settings, synonyms will be reset by WordPress every time you re-index your content. You should NOT configure your synonyms via the Algolia Dashboard. Instead create a plugin as explained in <a href="extend-basics.html">the documentation page about extending this plugin</a>.</strong></p>
 
                 </div>
