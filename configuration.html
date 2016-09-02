@@ -27,7 +27,7 @@
     <meta name="description" content="Now that your plugin is installed, here is how to configure it.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
-    <link rel="stylesheet" href="css/app.css?v=1472575273636">
+    <link rel="stylesheet" href="css/app.css?v=1472838058847">
 
     <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
 
@@ -94,23 +94,17 @@
 <div class="row">
     <div class="medium-9 large-9 medium-push-3 large-push-3 columns">
 
-        <div id="algolia-search">
-            <input type="text" id="algolia-search-input" placeholder="Search anywhere in the documentation...">
-            <svg id="search-icon" width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M26.424 31.143a2 2 0 0 1 .004-2.824l1.12-1.12a2 2 0 0 1 2.824-.005l-3.948 3.948zm5.01-2.886l7.02 7.018a2 2 0 0 1 0 2.83l-1.12 1.12a2 2 0 0 1-2.83 0l-7.018-7.02 3.95-3.948zm-16.012 2.587c8.517 0 15.422-6.905 15.422-15.422S23.94 0 15.422 0 0 6.905 0 15.422s6.905 15.422 15.422 15.422zm0-3.856c6.388 0 11.566-5.178 11.566-11.566 0-6.388-5.178-11.567-11.566-11.567-6.388 0-11.567 5.18-11.567 11.567 0 6.388 5.18 11.566 11.567 11.566z" fill-rule="evenodd"/></svg>
-            <svg id="search-clear-icon"width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M16.228 20L1.886 5.657 0 3.772 3.772 0l1.885 1.886L20 16.228 34.343 1.886 36.228 0 40 3.772l-1.886 1.885L23.772 20l14.342 14.343L40 36.228 36.228 40l-1.885-1.886L20 23.772 5.657 38.114 3.772 40 0 36.228l1.886-1.885L16.228 20z" fill-rule="evenodd"/></svg>
-        </div>
-
         <article>
+            <div id="algolia-search">
+                <input type="text" id="algolia-search-input" placeholder="Search anywhere in the documentation...">
+                <svg id="search-icon" width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M26.424 31.143a2 2 0 0 1 .004-2.824l1.12-1.12a2 2 0 0 1 2.824-.005l-3.948 3.948zm5.01-2.886l7.02 7.018a2 2 0 0 1 0 2.83l-1.12 1.12a2 2 0 0 1-2.83 0l-7.018-7.02 3.95-3.948zm-16.012 2.587c8.517 0 15.422-6.905 15.422-15.422S23.94 0 15.422 0 0 6.905 0 15.422s6.905 15.422 15.422 15.422zm0-3.856c6.388 0 11.566-5.178 11.566-11.566 0-6.388-5.178-11.567-11.566-11.567-6.388 0-11.567 5.18-11.567 11.567 0 6.388 5.18 11.566 11.567 11.566z" fill-rule="evenodd"/></svg>
+                <svg id="search-clear-icon"width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M16.228 20L1.886 5.657 0 3.772 3.772 0l1.885 1.886L20 16.228 34.343 1.886 36.228 0 40 3.772l-1.886 1.885L23.772 20l14.342 14.343L40 36.228 36.228 40l-1.885-1.886L20 23.772 5.657 38.114 3.772 40 0 36.228l1.886-1.885L16.228 20z" fill-rule="evenodd"/></svg>
+            </div>
+
             <header>
                 <h1>Configuration</h1>
 
                 <p class="lead">Now that your plugin is installed, here is how to configure it.</p>
-
-                <ul class="menu simple">
-                    <li><a href="https://github.com/algolia/algoliasearch-wordpress/edit/master/docs/src/configuration.md" target="_blank"><i class="fi-pencil"></i> <span>Edit this Page</span></a></li>
-                    <li><a href="https://github.com/algolia/algoliasearch-wordpress/issues/new?title=%5BConfiguration%5D%20ISSUE%20NAME%20HERE" target="_blank"><i class="fi-social-github"></i> <span>Report a Bug</span></a></li>
-                    <li><a href="http://stackoverflow.com/questions/tagged/algolia+wordpress" target="_blank"><i class="fi-comment"></i> <span>Get Help</span></a></li>
-                </ul>
             </header>
 
             <hr>
@@ -132,117 +126,123 @@
 <li>Search-Only API Key</li>
 <li>Admin API Key</li>
 </ul>
-<p>Copy/pasting these keys manually is very error prone, fortunately there is a convenient little copy button at the right side of each key that will make this easy.</p>
-<p><img src="img/configuration/copy-button.png" alt="copy button"></p>
-<p>Once you have filled in the 3 required keys, click on the <code>Save Changes</code> button at the bottom of the form.</p>
-<p>If you provided the correct keys, a green success message will appear, otherwise you will get an error message.</p>
-<p>If you do get an error message, please ensure that you have correctly copy pasted the right key in the right WordPress admin field. Also be sure to use the copy button as showed earlier.</p>
-<p><strong>For security reasons, the Search-Only API key should only have the <code>search</code> ACL has it will be display publicly in your html templates.</strong></p>
+<div class="alert alert-info">Copy/pasting these keys manually is very error prone, fortunately there is a convenient little copy button at the right side of each key that will make this easy.</div>
+
+<p>Once you have filled in the 3 required keys, click on the <span class="wp-btn">Save Changes</span> button at the bottom of the form.</p>
+<p>If you provided the correct keys, a green success message will appear, otherwise you will get an error message. If you do get an error message, please ensure that you have correctly copy pasted the right key in the right WordPress admin field. Also be sure to use the copy button as showed earlier.</p>
+<div class="alert alert-warning">For security reasons, the Search-Only API key should only have the <code>search</code> ACL has it will be display publicly in your html templates.</div>
+
+
 <h2 id="indexing"><a class="heading-anchor" href="#indexing"><span></span></a>Indexing</h2>
 <p>Once you have correctly provided WordPress with your Algolia keys as explained in <a href="#algolia-credentials">the previous step</a>, you will now see that the Algolia Search menu entry has now expanded:</p>
 <p><img src="img/configuration/menu-exanded.png" alt="expanded menu"></p>
 <p>For now, lets head to the <code>Indexing</code> entry where you will be able to tell WordPress which indices you want to synchronize with Algolia.</p>
 <p>You should now be facing a list of checkboxes like:</p>
 <p><img src="img/configuration/indices-form.png" alt="indices form"></p>
-<p><strong>Please note that if you have already installed third party plugins to your WordPress installation, you might have more entries than in the above screenshot which is perfectly fine.</strong></p>
-<p>The Algolia Search plugin uses WordPress core features such as Post Types, Taxonomies or Users to find potential content types to index.</p>
-<p>Any plugin creating new Post Types or Taxonomies will automatically be listed here an eligible for synchronization with Algolia.</p>
-<p>Let&apos;s proceed by choosing the indices you want to make searchable on your website, for example <code>Posts</code>, <code>Pages</code> and <code>Users</code>.</p>
-<p>Simply check the corresponding checkboxes and click on <code>Save Changes</code>.</p>
+<div class="alert alert-warning">Please note that if you have already installed third party plugins to your WordPress installation, you might have more entries than in the above screenshot which is perfectly fine.</div>
+
+<p>The Algolia Search plugin uses WordPress core features such as <strong>Post Types</strong>, <strong>Taxonomies</strong> or <strong>Users</strong> to find potential content types to index. Any plugin creating new <em>Post Types</em> or <em>Taxonomies</em> will automatically be listed here an eligible for synchronization with Algolia.</p>
+<p>Let&apos;s proceed by choosing the indices you want to make searchable on your website, for example <strong>Posts</strong>, <strong>Pages</strong> and <strong>Users</strong>. Simply check the corresponding checkboxes and click on <span class="wp-btn">Save Changes</span>.</p>
 <p>Green validation messages should confirm that the selected indices are about to be synchronized with Algolia.</p>
 <p><img src="img/configuration/indexing-validation.png" alt="indexing validation messages"></p>
-<p>Your data will now be pushed asynchronously behind the scenes, and it might take a few seconds. You can track what is happening by navigating to the <code>Logs</code> page of the plugin.</p>
-<p><strong>For performances reasons, logging will only occur if <code>WP_DEBUG</code> is defined to <code>true</code>.</strong></p>
-<p>On the same page you will also see an text field called <code>Index name prefix</code> which defaults to <code>wp_</code>.</p>
+<p>Your data will now be pushed asynchronously behind the scenes, and it might take a few seconds. You can track what is happening by navigating to the <em>Logs</em> page of the plugin.</p>
+<div class="alert alert-warning">For performances reasons, logging will only occur if <code>WP_DEBUG</code> is defined to <code>true</code>.</div>
+
+<p>On the same page you will also see an text field called <strong>Index name prefix</strong> which defaults to <code>wp_</code>.</p>
 <p><img src="img/configuration/index-name-prefix.png" alt="Index name prefix field"></p>
 <p>By changing this you will update all the synchronized indices prefixes. This feature comes in handy when you want for example to use a same Algolia account for staging and production.</p>
 <p>In that case you would use for example <code>wp_staging_</code> and <code>wp_production_</code> for respectively staging and production environments.</p>
-<p><strong>Changing the index name prefix will automatically queue a move task to make existing indices adopt the new convention. No need to re-index everything after this kind of change.</strong></p>
+<div class="alert alert-warning">Changing the index name prefix will automatically queue a move task to make existing indices adopt the new convention. No need to re-index everything after this kind of change.</div>
+
+
 <h2 id="verify-synchronization"><a class="heading-anchor" href="#verify-synchronization"><span></span></a>Verify Synchronization</h2>
 <p>At this stage indices you selected in the <a href="#indexing">previous step</a> should now be available in Algolia.</p>
 <p>If you want to make sure the synchronization has succeeded you could go to your Algolia dashboard, on the <a href="https://www.algolia.com/explorer">indices page</a>.
 From the dropdown near the title, you should see the 3 indices we chose to push from WordPress to Algolia.</p>
 <p><img src="img/configuration/indices-dropdown.png" alt="indices dropdown"></p>
 <p>If your indices do not appear yet, you may want to check your logs. <a href="logs.html">Read more about logs here</a>.</p>
-<p><strong>Note that there can be more than 1 record per Post entry. To understand why, please read <a href="index-schema.html">our section about Indexing Schemas</a>.</strong></p>
+<div class="alert alert-info">Note that there can be more than 1 record per Post entry. To understand why, please read <a href="index-schema.html">our section about Indexing Schemas</a>.</div>
+
+
 <h2 id="autocomplete"><a class="heading-anchor" href="#autocomplete"><span></span></a>Autocomplete</h2>
-<p>Now that Algolia knows about your content, it is time to offer your users a nice <code>as you type</code> search experience.
+<p>Now that Algolia knows about your content, it is time to offer your users a nice <em>find-as-you-type</em> search experience.
 First of all, here is the search experience you will get out of the box at the end of this section:</p>
 <p><img src="img/configuration/autocomplete-preview.png" alt="autocomplete preview"></p>
-<p>To enable the Autocomplete feature, navigate to the <code>Autocomplete</code> admin page from the Algolia Search admin menu entry:</p>
+<p>To enable the Autocomplete feature, navigate to the <strong>Autocomplete</strong> admin page from the Algolia Search admin menu entry:</p>
 <p><img src="img/configuration/autocomplete-menu.png" alt="autocomplete menu entry"></p>
 <p>You should see the following:</p>
 <p><img src="img/configuration/autocomplete-form.png" alt="autocomplete form"></p>
 <p>You are able to enable or disable the autocomplete feature at any time by simply checking or un-checking the checkbox.
 For now, check the box!</p>
-<p>You should now see that the form has expanded as follow:</p>
+<p>Once enabled, you should now see that the form has expanded as follow:</p>
 <p><img src="img/configuration/autocomplete-form-expanded.png" alt="autocomplete form expanded"></p>
 <p>From here there are a couple of settings that you can customize.</p>
 <table>
 <thead>
 <tr>
-<th>setting name</th>
-<th>description</th>
+<th>Setting&#xA0;name</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Enable</td>
+<td><strong>Enable</strong></td>
 <td>Make search results for this index available through the autocomplete.</td>
 </tr>
 <tr>
-<td>Index</td>
+<td><strong>Index</strong></td>
 <td>The name of the index, this is just here for you to know what each row is about.</td>
 </tr>
 <tr>
-<td>Max. Suggestions</td>
+<td><strong>Max.&#xA0;Suggestions</strong></td>
 <td>The maximum number of suggestions to display for this index. Only the <code>n</code> most relevant search results will be displayed for this index, and the others will be discarded.</td>
 </tr>
 <tr>
-<td>Position</td>
+<td><strong>Position</strong></td>
 <td>Determines the display position of suggestions in relation to the other autocomplete enabled indices. The bigger the position, the lower the section will be in the display.</td>
 </tr>
 </tbody>
 </table>
-<p>Let&apos;s keep the default settings and enable all 3 content types for the <code>as you type</code> autocomplete experience. Do not forget to hit the <code>Save Changes</code> buttons once your finished.</p>
-<p>You should now be able to use the Algolia powered autocomplete on your website.</p>
-<h2 id="native-search"><a class="heading-anchor" href="#native-search"><span></span></a>Native Search</h2>
-<p>This feature is a bit more complex to understand but once you get it, you will understand why it plays so nicely with the <a href="#autocomplete">previously discovered autocomplete feature</a>.</p>
-<p>WordPress has a built in search engine relying on SQL queries. The problem is that it does not support the features of the Algolia search engine like typo tolerance, custom ranking, and a lot more that you can check out on the <a href="https://www.algolia.com/">https://www.algolia.com/</a> website.</p>
-<p>This is the very reason this plugin comes with a feature that overrides the native WordPress search engine with Algolia. This ensures that you get the same results between the <code>autocomplete</code> feature and the native search pages.</p>
-<h3 id="let-s-make-it-obvious"><a class="heading-anchor" href="#let-s-make-it-obvious"><span></span></a>Let&apos;s Make It Obvious</h3>
-<p>Let&apos;s say you have a post titled: <code>My awesome post</code> and you search into your autocompleted search input for <code>awsome</code>.
-The Algolia search engine is smart enough to understand that you made a typo on the word <code>awesome</code>, and will give relevant results:</p>
-<p><img src="img/configuration/autocomplete-typo.png" alt="autocomplete typo"></p>
-<p>If you where now to press the return/enter keyboard key without directly clicking on the giving suggestion, you will be redirected to the native WordPress search results page, but with no results:</p>
-<p><img src="img/configuration/no-results.png" alt="WordPress search no results"></p>
-<h3 id="let-s-fix-the-wordpress-native-search"><a class="heading-anchor" href="#let-s-fix-the-wordpress-native-search"><span></span></a>Let&apos;s fix the WordPress Native Search</h3>
-<p>Leat&apos;s head back to the WordPress admin interface and click on the <code>Native Search</code> entry under the <code>Algolia Search</code> menu entry.</p>
-<p>Here is what you will see:</p>
+<p>Let&apos;s keep the default settings and enable all 3 content types for the <em>find-as-you-type</em> autocomplete experience. Do not forget to hit the <span class="wp-btn">Save Changes</span> buttons once your finished.</p>
+<div class="alert alert-info">You should now be able to use the Algolia powered autocomplete on your website.</div>
+
+<h2 id="search-page"><a class="heading-anchor" href="#search-page"><span></span></a>Search Page</h2>
+<p>WordPress has a built-in search engine relying on SQL queries. The problem is that it does not support the features of the Algolia search engine like typo tolerance, custom ranking, and a lot more that you can check out on the <a href="https://www.algolia.com/">https://www.algolia.com/</a> website.</p>
+<p>This is the very reason this plugin comes with a feature that lets you override WordPress&apos;s native search feature with Algolia.</p>
+<div class="alert alert-warning">Replacing the WordPress search feature ensures you get the same results than what you see in the <em>autocomplete</em> feature.</div>
+
+<p>Once you click on the <strong>Search Page</strong> entry under the <strong>Algolia Search</strong> menu, here is what you will see:</p>
 <p><img src="img/configuration/native-search-form.png" alt="native search form"></p>
-<p>To enable the WordPress search override, simply check the checkbox.
-You will now see an additional configuration option:</p>
-<p><img src="img/configuration/native-search-form-extended.png" alt="native search form"></p>
-<p>The second option lets you customize on what index you want to search on. By default WordPress results will contain all <code>searchable</code> post types.</p>
-<p>You have 2 choices here. You can either limit the resultset to a give post type index like <code>pages</code>, or you can use the <code>All searchable post types</code>.</p>
-<p>The later will act as a drop in replacement for the WordPress search and is generally advised.</p>
-<p>If <code>All searchable post types</code> does not appear as an option you would have to synchronize it first on the <code>Indexing</code> page.</p>
-<p>If we now go back to our previous experimentation and we reach the stage where we access the native WordPress search results page, we now see that we get our expected result:</p>
-<p><img src="img/configuration/expected-result.png" alt="native search form"></p>
-<p><strong>We highly recommend you turn this feature on if you also have turned on the autocomplete feature. Otherwise, it might lead to a confusing user experience!</strong></p>
-<h3 id="final-word-about-the-native-search-override"><a class="heading-anchor" href="#final-word-about-the-native-search-override"><span></span></a>Final Word about the Native Search override</h3>
-<p>The nice part of the way we override the native WordPress search engine is that your templates will remain un-altered.
-This means that you can use this plugin without the fear of breaking your look &amp; feel.</p>
+<p>You have 2 options to override WordPress&apos;s default search feature:</p>
+<h3 id="use-algolia-in-the-backend"><a class="heading-anchor" href="#use-algolia-in-the-backend"><span></span></a>Use Algolia in the backend</h3>
+<p>With this option WordPress search will be powered by Algolia behind the scenes.</p>
+<div class="alert alert-info">This option does not support filtering and displaying instant search results but has the advantage to play nicely with any theme.</div>
+
+<p><img src="img/configuration/backend-search-page.png" alt="backend search page"></p>
+<h3 id="use-algolia-with-instantsearch-js"><a class="heading-anchor" href="#use-algolia-with-instantsearch-js"><span></span></a>Use Algolia with Instantsearch.js</h3>
+<p>With this option WordPress search will be powered by the <a href="https://community.algolia.com/instantsearch.js/">instantsearch.js</a> library. It replaces your search results page with an instant (JavaScript-based) search experience.</p>
+<div class="alert alert-warning">Please note that the plugin is shipped with some sensible default styling rules but it could require some CSS adjustments to provide an optimal search experience.</div>
+
+<p><img src="img/configuration/instant-search-page.gif" alt="instant search page"></p>
 <h2 id="from-here-on-out"><a class="heading-anchor" href="#from-here-on-out"><span></span></a>From Here On Out</h2>
-<p>You want to understand more in depth what Algolia is and how you can benefit from it?</p>
-<p>Please consult your gettting started: <a href="https://www.algolia.com/doc/getting-started">https://www.algolia.com/doc/getting-started</a></p>
-<p>Struggling with something? Go to the <a href="frequently-asked-questions.html">Q&amp;A section</a>.</p>
-<p>If you are a developer, please read the advanced sections.</p>
+<p>You want to understand more in depth what Algolia is and how you can benefit from it? Please consult our getting started: <a href="https://www.algolia.com/doc/getting-started">https://www.algolia.com/doc/getting-started</a></p>
+<div class="alert alert-warning">Struggling with something? Go to the <a href="frequently-asked-questions.html">Q&amp;A section</a>.</div>
+
+
+
+
+
+
 
                 </div>
 
             </div>
 
+            <ul class="menu simple text-center">
+                <li><a href="https://github.com/algolia/algoliasearch-wordpress/edit/master/docs/src/configuration.md" target="_blank"><i class="fi-pencil"></i> <span>Edit this Page</span></a></li>
+                <li><a href="https://github.com/algolia/algoliasearch-wordpress/issues/new?title=%5BConfiguration%5D%20ISSUE%20NAME%20HERE" target="_blank"><i class="fi-social-github"></i> <span>Report a Bug</span></a></li>
+                <li><a href="http://stackoverflow.com/questions/tagged/algolia+wordpress" target="_blank"><i class="fi-comment"></i> <span>Get Help</span></a></li>
+            </ul>
         </article>
     </div>
 
@@ -252,7 +252,7 @@ This means that you can use this plugin without the fear of breaking your look &
             <li class="menu-text">Getting Started</li>
             <li ><a href="installation.html">Installation</a></li>
             <li class="active"><a href="configuration.html">Configuration</a></li>
-            <li ><a href="instantsearch.html">Instantsearch</a></li>
+            <li ><a href="customization.html">Customization</a></li>
 
             <li class="menu-text">Indexing</li>
             <li ><a href="index-schema.html">Schemas</a></li>
@@ -264,7 +264,7 @@ This means that you can use this plugin without the fear of breaking your look &
             <li class="menu-text">Extend</li>
             <li ><a href="extend-basics.html">Basics</a></li>
             <li ><a href="customize-autocomplete.html">Autocomplete</a></li>
-            <li ><a href="custom-search.html">Custom Search</a></li>
+            <li ><a href="customize-search-page.html">Search Page</a></li>
 
             <li class="menu-text">Debugging</li>
             <li ><a href="logs.html">Logs</a></li>
