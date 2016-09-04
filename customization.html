@@ -27,7 +27,7 @@
     <meta name="description" content="Customize your drop-down menu and instant search results page.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
-    <link rel="stylesheet" href="css/app.css?v=1472838058847">
+    <link rel="stylesheet" href="css/app.css?v=1473002108401">
 
     <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
 
@@ -82,7 +82,9 @@
 <header id="top-section" class="doc-header">
     <div class="row row-doc">
         <div class="large-12 columns">
-            <img class="header-logo" src="https://res.cloudinary.com/hilnmyskv/image/upload/logo-algolia-dark.png">
+            <a href="./">
+                <img class="header-logo" src="https://res.cloudinary.com/hilnmyskv/image/upload/logo-algolia-dark.png">
+            </a>
             <p class="lead header-lead">
                 Plugin for
                 <span>WordPress</span>
@@ -110,7 +112,6 @@
             <hr>
 
             <div class="row">
-
                 <div class="large-12 columns" id="content">
                     <h2 id="introduction"><a class="heading-anchor" href="#introduction"><span></span></a>Introduction</h2>
 <h3 id="autocomplete"><a class="heading-anchor" href="#autocomplete"><span></span></a>Autocomplete</h3>
@@ -147,17 +148,20 @@
 <pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
 
 <span class="hljs-comment">/**
- * Dequeue the Algolia Instantsearch CSS file.
+ * Dequeue default CSS files.
  *
  * Hooked to the wp_print_styles action, with a late priority (100),
- * so that it is after the stylesheet was enqueued.
+ * so that it is after the stylesheets were enqueued.
  */</span>
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">my_theme_dequeue_styles</span><span class="hljs-params">()</span> </span>{
-   wp_dequeue_style( <span class="hljs-string">&apos;algolia-instantsearch&apos;</span> );
+    <span class="hljs-comment">// Remove the algolia-autocomplete.css.</span>
+    wp_dequeue_style( <span class="hljs-string">&apos;algolia-autocomplete&apos;</span> );
+
+    <span class="hljs-comment">// Remove the algolia-instantsearch.css.</span>
+    wp_dequeue_style( <span class="hljs-string">&apos;algolia-instantsearch&apos;</span> );
 }
 add_action( <span class="hljs-string">&apos;wp_print_styles&apos;</span>, <span class="hljs-string">&apos;my_theme_dequeue_styles&apos;</span>, <span class="hljs-number">100</span> );</code></pre>
                 </div>
-
             </div>
 
             <ul class="menu simple text-center">
@@ -179,9 +183,10 @@ add_action( <span class="hljs-string">&apos;wp_print_styles&apos;</span>, <span 
             <li class="menu-text">Indexing</li>
             <li ><a href="index-schema.html">Schemas</a></li>
             <li ><a href="indexing-settings.html">Settings</a></li>
-            <li ><a href="indexing-flow.html">Flow</a></li>
+            <li ><a href="indexing-flow.html">Automated Sync.</a></li>
             <li ><a href="synonyms.html">Synonyms</a></li>
             <li ><a href="custom-attributes.html">Custom Attributes</a></li>
+            <li ><a href="replicas.html">Index Replicas</a></li>
 
             <li class="menu-text">Extend</li>
             <li ><a href="extend-basics.html">Basics</a></li>

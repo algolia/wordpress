@@ -2,29 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
-    <title>Advanced Custom Fields integration with Algolia Search</title>
+    <title>Index Replicas</title>
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta charset="utf-8">
     <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
 
-    <meta content='Integrate Algolia Search for WordPress with Advanced Custom Fields.' name='description'>
+    <meta content='Create indices with the same content but with a different ranking formula.' name='description'>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'>
     <!-- / Twitter card -->
     <meta content='summary_large_image' name='twitter:card'>
     <meta content='@Algolia' name='twitter:site'>
     <meta content='@Algolia' name='twitter:creator'>
-    <meta content="Advanced Custom Fields integration with Algolia Search - Algolia Search plugin for WordPress" name="twitter:title">
-    <meta content="Integrate Algolia Search for WordPress with Advanced Custom Fields." name="twitter:description">
+    <meta content="Index Replicas - Algolia Search plugin for WordPress" name="twitter:title">
+    <meta content="Create indices with the same content but with a different ranking formula." name="twitter:description">
     <!--meta content="Algolia Product image" name="twitter:image"-->
     <!-- / OG meta -->
     <!--meta content='#' property='og:url'-->
-    <meta content='Advanced Custom Fields integration with Algolia Search - Algolia Search plugin for WordPress' property='og:title'>
+    <meta content='Index Replicas - Algolia Search plugin for WordPress' property='og:title'>
     <meta content='article' property='og:type'>
-    <meta content='Integrate Algolia Search for WordPress with Advanced Custom Fields.' property='og:description'>
+    <meta content='Create indices with the same content but with a different ranking formula.' property='og:description'>
     <meta content='Algolia Search plugin for WordPress' property='og:site_name'>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 
-    <meta name="description" content="Integrate Algolia Search for WordPress with Advanced Custom Fields.">
+    <meta name="description" content="Create indices with the same content but with a different ranking formula.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
     <link rel="stylesheet" href="css/app.css?v=1473002108401">
@@ -104,9 +104,9 @@
             </div>
 
             <header>
-                <h1>Advanced Custom Fields integration with Algolia Search</h1>
+                <h1>Index Replicas</h1>
 
-                <p class="lead">Integrate Algolia Search for WordPress with Advanced Custom Fields.</p>
+                <p class="lead">Create indices with the same content but with a different ranking formula.</p>
             </header>
 
             <hr>
@@ -114,124 +114,75 @@
             <div class="row">
                 <div class="large-12 columns" id="content">
                     <h2 id="introduction"><a class="heading-anchor" href="#introduction"><span></span></a>Introduction</h2>
-<p>The Advanced Custom Fields plugin is a very popular plugin that allows you to create your custom fields.</p>
-<p>On this page you we will give some examples on how to push these custom fields to Algolia, make them searchable and take them into account in the ranking algorithm.</p>
-<p>If you haven&apos;t read the <a href="extend-basics.html">basics of extending this plugin</a>, you should probably read that first.</p>
-<p>To get an in depth overview of methods introduced by the Advanced Custom Fields, check out the <a href="https://www.advancedcustomfields.com/resources/">Official Advanced Custom Fields documentation</a>.</p>
-<h2 id="push-custom-fields-to-algolia"><a class="heading-anchor" href="#push-custom-fields-to-algolia"><span></span></a>Push custom fields to Algolia</h2>
-<p>In the following example, we add the <code>bio</code> field to the posts that have a post type of <code>speaker</code>.</p>
-<p>Here we assume you have a custom post type <code>speaker</code> which is not natively available in WordPress.</p>
-<p>We add the <code>bio</code> attribute to both <code>searchable_posts</code> and <code>posts</code> indices.</p>
-<pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
+<p>Sometimes you may want to rank your results based on different criterias.</p>
+<p>For example, in a WordPress shop powered by WooCommerce, you might want to list products by displaying cheapest products first.</p>
+<p>In Algolia, to achieve different ranking on the same datasets, you can use Index Replicas.</p>
+<div class="alert alert-info">Index Replicas are automatically synced with the Master index, and write operations are not deduced from your monthly quota.</div>
 
-add_filter( <span class="hljs-string">&apos;algolia_post_shared_attributes&apos;</span>, <span class="hljs-string">&apos;my_post_attributes&apos;</span>, <span class="hljs-number">10</span>, <span class="hljs-number">2</span> );
-add_filter( <span class="hljs-string">&apos;algolia_searchable_post_shared_attributes&apos;</span>, <span class="hljs-string">&apos;my_post_attributes&apos;</span>, <span class="hljs-number">10</span>, <span class="hljs-number">2</span> );
+<h2 id="register-custom-index-replicas"><a class="heading-anchor" href="#register-custom-index-replicas"><span></span></a>Register custom index replicas</h2>
+<p>To register custom index replicas, there are 2 filters:</p>
+<table>
+<thead>
+<tr>
+<th>Filter Name</th>
+<th>Params</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>algolia_index_replicas</td>
+<td>array $replicas, Algolia_Index $index</td>
+</tr>
+<tr>
+<td>algolia_{$index_id}_index_replicas</td>
+<td>array $replicas, Algolia_Index $index</td>
+</tr>
+</tbody>
+</table>
+<p>Here is an example of creating an index replica that will order results based on the lowest <code>price</code>.</p>
+<div class="alert alert-warning">The <code>price</code> field is not natively available in WordPress, here we assume it is available.</div>
 
-<span class="hljs-comment">/**
- * <span class="hljs-doctag">@param</span> array   $attributes
- * <span class="hljs-doctag">@param</span> WP_Post $post
+<pre><code class="hljs">&lt;?php
+
+/**
+ * @param <span class="hljs-keyword">array</span>         <span class="hljs-variable">$replicas</span>
+ * @param Algolia_Index <span class="hljs-variable">$index</span>
  *
- * <span class="hljs-doctag">@return</span> array
- */</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">my_post_attributes</span><span class="hljs-params">( array <span class="hljs-variable">$attributes</span>, WP_Post <span class="hljs-variable">$post</span> )</span> </span>{
-
-    <span class="hljs-keyword">if</span> ( <span class="hljs-string">&apos;speaker&apos;</span> !== <span class="hljs-variable">$post</span>-&gt;post_type ) {
-        <span class="hljs-comment">// We only want to add an attribute for the &apos;speaker&apos; post type.</span>
-        <span class="hljs-comment">// Here the post isn&apos;t a &apos;speaker&apos;, so we return the attributes unaltered.</span>
-        <span class="hljs-keyword">return</span> <span class="hljs-variable">$attributes</span>;
+ * @<span class="hljs-keyword">return</span> <span class="hljs-keyword">array</span>
+ */
+<span class="hljs-keyword">function</span> my_products_index_replicas( <span class="hljs-keyword">array</span> <span class="hljs-variable">$replicas</span>, Algolia_Index <span class="hljs-variable">$index</span> ) {
+    if ( <span class="hljs-string">&apos;posts_product&apos;</span> === <span class="hljs-variable">$index-</span>&gt;get_id() ) {
+        <span class="hljs-variable">$replicas</span>[] = new Algolia_Index_Replica( <span class="hljs-string">&apos;price&apos;</span>, <span class="hljs-string">&apos;asc&apos;</span> );
+        <span class="hljs-variable">$replicas</span>[] = new Algolia_Index_Replica( <span class="hljs-string">&apos;price&apos;</span>, <span class="hljs-string">&apos;desc&apos;</span> );
     }
 
-    <span class="hljs-comment">// Get the field value with the &apos;get_field&apos; method and assign it to the attributes array.</span>
-    <span class="hljs-comment">// @see https://www.advancedcustomfields.com/resources/get_field/</span>
-    <span class="hljs-variable">$attributes</span>[<span class="hljs-string">&apos;bio&apos;</span>] = get_field( <span class="hljs-string">&apos;bio&apos;</span>, <span class="hljs-variable">$post</span>-&gt;ID );
+    return <span class="hljs-variable">$replicas</span>;
+}
+add_filter( <span class="hljs-string">&apos;algolia_index_replicas&apos;</span>, <span class="hljs-string">&apos;my_products_index_replicas&apos;</span>, <span class="hljs-number">10</span>, <span class="hljs-number">2</span> );</code></pre>
 
-    <span class="hljs-comment">// Always return the value we are filtering.</span>
-    <span class="hljs-keyword">return</span> <span class="hljs-variable">$attributes</span>;
-}</code></pre>
+<p>Note that you could also have used the second form of the filter to directly scope the replicas to a given index:</p>
+<pre><code class="hljs">&lt;?php
 
-<h2 id="make-custom-fields-searchable"><a class="heading-anchor" href="#make-custom-fields-searchable"><span></span></a>Make custom fields searchable</h2>
-<p>In this example we make sure that the <code>bio</code> attribute we pushed earlier is taken into account in the Algolia relevancy algorithm.</p>
-<p>Here we only alter the settings of the <code>posts_speaker</code> index because in the <code>searchable_posts</code> index not all posts have
-the <code>bio</code> attribute, so basing the relevancy on that field might lead to results that are difficult to understand for the end users.</p>
-<p>In this example, we also ask for Algolia to return a snippet of 50 chars of the <code>bio</code> attribute along with the record.
-This feature allows you to display a relevant snippet of the <code>bio</code> attribute to your end users.
-The snippet is dynamically generated by the Algolia engine to show the most relevant part of the attribute regarding the current user&apos;s request.</p>
-<pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
-
-add_filter( <span class="hljs-string">&apos;algolia_posts_speaker_index_settings&apos;</span>, <span class="hljs-string">&apos;my_posts_index_settings&apos;</span> );
-<span class="hljs-comment">// We could also have used a more general hook &apos;algolia_posts_index_settings&apos;,</span>
-<span class="hljs-comment">// but in that case we would have needed to add a check on the post type</span>
-<span class="hljs-comment">// to ensure we only adjust settings for the &apos;speaker&apos; post_type.</span>
-
-<span class="hljs-comment">/**
- * <span class="hljs-doctag">@param</span> array $settings
+/**
+ * @param <span class="hljs-keyword">array</span> <span class="hljs-variable">$replicas</span>
  *
- * <span class="hljs-doctag">@return</span> array
- */</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">my_posts_index_settings</span><span class="hljs-params">( array <span class="hljs-variable">$settings</span> )</span> </span>{
+ * @<span class="hljs-keyword">return</span> <span class="hljs-keyword">array</span>
+ */
+<span class="hljs-keyword">function</span> my_products_index_replicas( <span class="hljs-keyword">array</span> <span class="hljs-variable">$replicas</span>) {
+    <span class="hljs-variable">$replicas</span>[] = new Algolia_Index_Replica( <span class="hljs-string">&apos;price&apos;</span>, <span class="hljs-string">&apos;asc&apos;</span> );
+    <span class="hljs-variable">$replicas</span>[] = new Algolia_Index_Replica( <span class="hljs-string">&apos;price&apos;</span>, <span class="hljs-string">&apos;desc&apos;</span> );
 
-    <span class="hljs-comment">// Make Algolia search into the &apos;bio&apos; field when searching for results.</span>
-    <span class="hljs-comment">// Using ordered instead of unordered would make words matching in the beginning of the attribute</span>
-    <span class="hljs-comment">// make the record score higher.</span>
-    <span class="hljs-comment">// @see https://www.algolia.com/doc/api-client/ruby/parameters#attributestoindex</span>
-    <span class="hljs-variable">$settings</span>[<span class="hljs-string">&apos;attributesToIndex&apos;</span>][] = <span class="hljs-string">&apos;unordered(bio)&apos;</span>;
-
-    <span class="hljs-comment">// Make Algolia return a pre-computed snippet of 50 chars as part of the result set.</span>
-    <span class="hljs-comment">// @see https://www.algolia.com/doc/api-client/ruby/parameters#attributestohighlight</span>
-    <span class="hljs-variable">$settings</span>[<span class="hljs-string">&apos;attributesToSnippet&apos;</span>][] = <span class="hljs-string">&apos;bio:50&apos;</span>;
-
-    <span class="hljs-comment">// Always return the value we are filtering.</span>
-    <span class="hljs-keyword">return</span> <span class="hljs-variable">$settings</span>;
-}</code></pre>
-
-<h2 id="integrate-custom-fields-in-your-custom-ranking"><a class="heading-anchor" href="#integrate-custom-fields-in-your-custom-ranking"><span></span></a>Integrate custom fields in your custom ranking</h2>
-<p>You can integrate your custom metrics in the ranking algorithm of Algolia.
-That way, you can provide your end users with results ranked according to your business requirements.</p>
-<p>In this example, let&apos;s say you are a company selling videos on your WordPress website.
-Your website is tracking the number of views of each video in a custom attribute called <code>views_count</code>.</p>
-<p>In this example we will show you how to add the <code>views_count</code> attribute to the custom ranking.
-The idea being that if several videos are considered a good match regarding the current&apos;s user search query,
-we will order the results regarding the <code>views_count</code>. Read more about the custom ranking here: <a href="https://www.algolia.com/doc/guides/relevance/ranking#custom-ranking">https://www.algolia.com/doc/guides/relevance/ranking#custom-ranking</a></p>
-<p>Note that you can add as many attributes to the custom ranking as you want. The order in which the attributes appear in the custom ranking matters as under the hood
-Algolia uses a Tie Breaking algorithm. Read more about it here: <a href="https://www.algolia.com/doc/guides/relevance/ranking#ranking-formula-a-tie-breaking-algorithm">https://www.algolia.com/doc/guides/relevance/ranking#ranking-formula-a-tie-breaking-algorithm</a></p>
-<p>Here we assume you already made it so that the <code>views_count</code> are pushed to the <code>posts_video</code> index as explained in the &apos;<a href="#push-custom-fields-to-algolia">push custom fields to Algolia</a>&apos; section.</p>
-<pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
-
-add_filter( <span class="hljs-string">&apos;algolia_posts_video_index_settings&apos;</span>, <span class="hljs-string">&apos;my_video_index_settings&apos;</span> );
-<span class="hljs-comment">// We could also have used a more general hook &apos;algolia_posts_index_settings&apos;,</span>
-<span class="hljs-comment">// but in that case we would have needed to add a check on the post type</span>
-<span class="hljs-comment">// to ensure we only adjust settings for the &apos;video&apos; post_type.</span>
-
-<span class="hljs-comment">/**
- * <span class="hljs-doctag">@param</span> array $settings
- *
- * <span class="hljs-doctag">@return</span> array
- */</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">my_video_index_settings</span><span class="hljs-params">( array <span class="hljs-variable">$settings</span> )</span> </span>{
-
-    <span class="hljs-comment">// By default, the plugin uses &apos;is_sticky&apos; and the &apos;post_date&apos; in the custom ranking.</span>
-    <span class="hljs-comment">// Here we first retrieve the custom ranking to be able to alter it with more control.</span>
-    <span class="hljs-variable">$customRanking</span> = <span class="hljs-variable">$settings</span>[<span class="hljs-string">&apos;customRanking&apos;</span>];
-
-    <span class="hljs-comment">// We add our custom ranking rule at the beginning of the rules so that</span>
-    <span class="hljs-comment">// it is the first one considered in the algorithm.</span>
-    array_unshift( <span class="hljs-variable">$customRanking</span>, <span class="hljs-string">&apos;desc(views_count)&apos;</span> );
-
-    <span class="hljs-comment">// We override the initial custom ranking rules.</span>
-    <span class="hljs-variable">$settings</span>[<span class="hljs-string">&apos;customRanking&apos;</span>] = <span class="hljs-variable">$customRanking</span>;
-
-
-    <span class="hljs-comment">// Always return the value we are filtering.</span>
-    <span class="hljs-keyword">return</span> <span class="hljs-variable">$settings</span>;
-}</code></pre>
+    return <span class="hljs-variable">$replicas</span>;
+}
+add_filter( <span class="hljs-string">&apos;algolia_posts_product_index_replicas&apos;</span>, <span class="hljs-string">&apos;my_products_index_replicas&apos;</span>);</code></pre>
 
 
                 </div>
             </div>
 
             <ul class="menu simple text-center">
-                <li><a href="https://github.com/algolia/algoliasearch-wordpress/edit/master/docs/src/advanced-custom-fields.md" target="_blank"><i class="fi-pencil"></i> <span>Edit this Page</span></a></li>
-                <li><a href="https://github.com/algolia/algoliasearch-wordpress/issues/new?title=%5BAdvanced Custom Fields integration with Algolia Search%5D%20ISSUE%20NAME%20HERE" target="_blank"><i class="fi-social-github"></i> <span>Report a Bug</span></a></li>
+                <li><a href="https://github.com/algolia/algoliasearch-wordpress/edit/master/docs/src/replicas.md" target="_blank"><i class="fi-pencil"></i> <span>Edit this Page</span></a></li>
+                <li><a href="https://github.com/algolia/algoliasearch-wordpress/issues/new?title=%5BIndex Replicas%5D%20ISSUE%20NAME%20HERE" target="_blank"><i class="fi-social-github"></i> <span>Report a Bug</span></a></li>
                 <li><a href="http://stackoverflow.com/questions/tagged/algolia+wordpress" target="_blank"><i class="fi-comment"></i> <span>Get Help</span></a></li>
             </ul>
         </article>
@@ -251,7 +202,7 @@ add_filter( <span class="hljs-string">&apos;algolia_posts_video_index_settings&a
             <li ><a href="indexing-flow.html">Automated Sync.</a></li>
             <li ><a href="synonyms.html">Synonyms</a></li>
             <li ><a href="custom-attributes.html">Custom Attributes</a></li>
-            <li ><a href="replicas.html">Index Replicas</a></li>
+            <li class="active"><a href="replicas.html">Index Replicas</a></li>
 
             <li class="menu-text">Extend</li>
             <li ><a href="extend-basics.html">Basics</a></li>
@@ -262,7 +213,7 @@ add_filter( <span class="hljs-string">&apos;algolia_posts_video_index_settings&a
             <li ><a href="logs.html">Logs</a></li>
 
             <li class="menu-text">Integrations</li>
-            <li class="active"><a href="advanced-custom-fields.html">Advanced Custom Fields</a></li>
+            <li ><a href="advanced-custom-fields.html">Advanced Custom Fields</a></li>
             <li ><a href="wpml.html">WPML</a></li>
 
             <li class="menu-text">Other</li>

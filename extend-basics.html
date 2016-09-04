@@ -27,7 +27,7 @@
     <meta name="description" content="Discover the best way to extend the plugin to customize the behaviour.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
-    <link rel="stylesheet" href="css/app.css?v=1472838058847">
+    <link rel="stylesheet" href="css/app.css?v=1473002108401">
 
     <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
 
@@ -82,7 +82,9 @@
 <header id="top-section" class="doc-header">
     <div class="row row-doc">
         <div class="large-12 columns">
-            <img class="header-logo" src="https://res.cloudinary.com/hilnmyskv/image/upload/logo-algolia-dark.png">
+            <a href="./">
+                <img class="header-logo" src="https://res.cloudinary.com/hilnmyskv/image/upload/logo-algolia-dark.png">
+            </a>
             <p class="lead header-lead">
                 Plugin for
                 <span>WordPress</span>
@@ -110,7 +112,6 @@
             <hr>
 
             <div class="row">
-
                 <div class="large-12 columns" id="content">
                     <h2 id="how-to-extend"><a class="heading-anchor" href="#how-to-extend"><span></span></a>How To Extend</h2>
 <p>The plugin has been built with extensibility in mind. We have tried to wisely integrate <code>filters</code> and <code>actions</code>.</p>
@@ -181,6 +182,30 @@ This will also disable tasks being generated for that content type.</p>
 <tr>
 <td>algolia_taxonomies_blacklist</td>
 <td>array $blacklist, defaults to array( &apos;nav_menu&apos;, link_category&apos;, &apos;post_format&apos; )</td>
+</tr>
+<tr>
+<td>algolia_should_index_searchable_post</td>
+<td>bool $should_index, WP_Post $post</td>
+</tr>
+<tr>
+<td>algolia_searchable_post_parser</td>
+<td>Algolia\DOMParser $parser</td>
+</tr>
+<tr>
+<td>algolia_searchable_post_{$post_type}_shared_attributes</td>
+<td>array $shared_attributes, WP_Post $post</td>
+</tr>
+<tr>
+<td>algolia_searchable_posts_index_settings</td>
+<td>array $settings</td>
+</tr>
+<tr>
+<td>algolia_searchable_post_shared_attributes</td>
+<td>array $shared_attributes, WP_Post $post</td>
+</tr>
+<tr>
+<td>algolia_searchable_posts_index_synonyms</td>
+<td>array $synonyms</td>
 </tr>
 <tr>
 <td>algolia_should_index_post</td>
@@ -257,6 +282,14 @@ This will also disable tasks being generated for that content type.</p>
 <tr>
 <td>algolia_users_index_synonyms</td>
 <td>array $synonyms</td>
+</tr>
+<tr>
+<td>algolia_index_replicas</td>
+<td>array $replicas, Algolia_Index $index</td>
+</tr>
+<tr>
+<td>algolia_{$index_id}_index_replicas</td>
+<td>array $replicas, Algolia_Index $index</td>
 </tr>
 <tr>
 <td>algolia_config</td>
@@ -337,7 +370,6 @@ add_action( <span class="hljs-string">&apos;algolia_posts_index_post_updated&apo
 </table>
 
                 </div>
-
             </div>
 
             <ul class="menu simple text-center">
@@ -359,9 +391,10 @@ add_action( <span class="hljs-string">&apos;algolia_posts_index_post_updated&apo
             <li class="menu-text">Indexing</li>
             <li ><a href="index-schema.html">Schemas</a></li>
             <li ><a href="indexing-settings.html">Settings</a></li>
-            <li ><a href="indexing-flow.html">Flow</a></li>
+            <li ><a href="indexing-flow.html">Automated Sync.</a></li>
             <li ><a href="synonyms.html">Synonyms</a></li>
             <li ><a href="custom-attributes.html">Custom Attributes</a></li>
+            <li ><a href="replicas.html">Index Replicas</a></li>
 
             <li class="menu-text">Extend</li>
             <li class="active"><a href="extend-basics.html">Basics</a></li>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
-    <title>Indexing Flow</title>
+    <title>Automated Synchronization</title>
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta charset="utf-8">
     <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
@@ -13,12 +13,12 @@
     <meta content='summary_large_image' name='twitter:card'>
     <meta content='@Algolia' name='twitter:site'>
     <meta content='@Algolia' name='twitter:creator'>
-    <meta content="Indexing Flow - Algolia Search plugin for WordPress" name="twitter:title">
+    <meta content="Automated Synchronization - Algolia Search plugin for WordPress" name="twitter:title">
     <meta content="Understand the indexing flow and the generated operations." name="twitter:description">
     <!--meta content="Algolia Product image" name="twitter:image"-->
     <!-- / OG meta -->
     <!--meta content='#' property='og:url'-->
-    <meta content='Indexing Flow - Algolia Search plugin for WordPress' property='og:title'>
+    <meta content='Automated Synchronization - Algolia Search plugin for WordPress' property='og:title'>
     <meta content='article' property='og:type'>
     <meta content='Understand the indexing flow and the generated operations.' property='og:description'>
     <meta content='Algolia Search plugin for WordPress' property='og:site_name'>
@@ -27,7 +27,7 @@
     <meta name="description" content="Understand the indexing flow and the generated operations.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
-    <link rel="stylesheet" href="css/app.css?v=1472838058847">
+    <link rel="stylesheet" href="css/app.css?v=1473002108401">
 
     <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
 
@@ -82,7 +82,9 @@
 <header id="top-section" class="doc-header">
     <div class="row row-doc">
         <div class="large-12 columns">
-            <img class="header-logo" src="https://res.cloudinary.com/hilnmyskv/image/upload/logo-algolia-dark.png">
+            <a href="./">
+                <img class="header-logo" src="https://res.cloudinary.com/hilnmyskv/image/upload/logo-algolia-dark.png">
+            </a>
             <p class="lead header-lead">
                 Plugin for
                 <span>WordPress</span>
@@ -102,7 +104,7 @@
             </div>
 
             <header>
-                <h1>Indexing Flow</h1>
+                <h1>Automated Synchronization</h1>
 
                 <p class="lead">Understand the indexing flow and the generated operations.</p>
             </header>
@@ -110,16 +112,12 @@
             <hr>
 
             <div class="row">
-
                 <div class="large-12 columns" id="content">
                     <h2 id="introduction"><a class="heading-anchor" href="#introduction"><span></span></a>Introduction</h2>
-<p>The objectives of this plugin are:</p>
-<ul>
-<li>To offer webmasters a way to easily provide a better search experience to their visitors,</li>
-<li>To offer developers a way to easily adapt the search experience by extending this plugin with actions and filters.</li>
-</ul>
-<p>This page aims to explain how we index your data.</p>
-<p>As for now we support the indexing of 3 types of content:</p>
+<p>By default, this plugin will ensure your WordPress content flagged for indexing stays in sync with Algolia.</p>
+<div class="alert alert-info">This behaviour does not rely on CRON, but uses a custom private post_type <code>algolia_task</code>. </div>
+
+<p>We support the automatic synchronization of 3 types of content:</p>
 <ul>
 <li>Post Types,</li>
 <li>Taxonomies,</li>
@@ -127,24 +125,24 @@
 </ul>
 <p>Each content type has its own indexing flow.</p>
 <h2 id="triggers"><a class="heading-anchor" href="#triggers"><span></span></a>Triggers</h2>
-<p>We try as much as possible to automate the indexing for you. That means that we listen for events like &apos;post was saved&apos; to push the new data to Algolia&apos;s API.</p>
+<p>We try as much as possible to automate the indexing for you. That means that we listen for events like &apos;post was saved&apos; to push the new data to Algolia.</p>
 <p><strong>We synchronize posts when:</strong></p>
 <ul>
-<li>A post was created or updated</li>
-<li>A post was deleted</li>
-<li>The featured image was changed</li>
+<li>A post was created or updated,</li>
+<li>A post was deleted,</li>
+<li>The featured image was changed.</li>
 </ul>
 <p><strong>We synchronize taxonomy terms when:</strong></p>
 <ul>
-<li>A term was created or updated</li>
-<li>A term was deleted</li>
+<li>A term was created or updated,</li>
+<li>A term was deleted.</li>
 </ul>
 <p><strong>We synchronize users when:</strong></p>
 <ul>
-<li>A user was created or updated</li>
-<li>A term was deleted</li>
-<li>A post was created or updated</li>
-<li>A post was deleted</li>
+<li>A user was created or updated,</li>
+<li>A term was deleted,</li>
+<li>A post was created or updated,</li>
+<li>A post was deleted.</li>
 </ul>
 <div class="alert alert-warning">We synchronize without trying to detect if the updates has lead to real changes. This ensures consistency and easier extensibility.</div>
 
@@ -200,18 +198,26 @@ add_filter( <span class="hljs-string">&apos;algolia_should_index_user&apos;</spa
 
 <p>In the above example, User with ID 1 would never get indexed. This example is trivial, but at least gives you a quick overview on how to filter your items to index.
 Also note how we return <code>false</code> early on if the decision has already been taken to not index the content.</p>
-<h2 id="queue-tasks"><a class="heading-anchor" href="#queue-tasks"><span></span></a>Queue Tasks</h2>
-<p>Every time an indexing task is triggered, see <a href="#triggers">previous section</a>, we queue a synchronization task with the minimum required information for the task to be handled.</p>
-<p>Every time one or multiple tasks are queued, we automatically trigger the processing of the queue. The queue is then processed with a FIFO logic, and ensures there is only one task handled at the same time. For scalability reasons, each task handling is done in its own process and triggered by an asynchronous http call.</p>
+<h2 id="queue-processing"><a class="heading-anchor" href="#queue-processing"><span></span></a>Queue processing</h2>
+<p>Every time a change of your content is detected, see <a href="#triggers">previous section</a>, we queue a synchronization task with the minimum required information for the task to be handled.</p>
+<p>When that happens, we directly try to trigger the processing of the queue. The queue follows the FIFO logic, and ensures there is only one task handled at the same time. For scalability reasons, each task handling is done in its own PHP process and triggered by an asynchronous http call.</p>
 <div class="alert alert-warning">By default WordPress will ensure that your ssl certificate is valid on every remote call. If you have an invalid ssl certificate, the queue processing won&apos;t work.</div>
 
-                </div>
+<h2 id="queue-processing-troubleshooting"><a class="heading-anchor" href="#queue-processing-troubleshooting"><span></span></a>Queue processing troubleshooting</h2>
+<p>Queue processing is the most critical part of the plugin. If the queue processing doesn&apos;t work, then the whole plugin becomes un-usable.</p>
+<p>If you have queue processing problems, please:</p>
+<ul>
+<li>Make sure you take advantage of built in logs and WordPress logs, see the <a href="logs.html">Debugging</a> section of the docs,</li>
+<li>Check out the <a href="frequently-asked-questions.html">FAQ</a> for answers,</li>
+<li>If you don&apos;t manage to solve the issue by yourself, ask for help, see: <a href="frequently-asked-questions.html">FAQ</a>.</li>
+</ul>
 
+                </div>
             </div>
 
             <ul class="menu simple text-center">
                 <li><a href="https://github.com/algolia/algoliasearch-wordpress/edit/master/docs/src/indexing-flow.md" target="_blank"><i class="fi-pencil"></i> <span>Edit this Page</span></a></li>
-                <li><a href="https://github.com/algolia/algoliasearch-wordpress/issues/new?title=%5BIndexing Flow%5D%20ISSUE%20NAME%20HERE" target="_blank"><i class="fi-social-github"></i> <span>Report a Bug</span></a></li>
+                <li><a href="https://github.com/algolia/algoliasearch-wordpress/issues/new?title=%5BAutomated Synchronization%5D%20ISSUE%20NAME%20HERE" target="_blank"><i class="fi-social-github"></i> <span>Report a Bug</span></a></li>
                 <li><a href="http://stackoverflow.com/questions/tagged/algolia+wordpress" target="_blank"><i class="fi-comment"></i> <span>Get Help</span></a></li>
             </ul>
         </article>
@@ -228,9 +234,10 @@ Also note how we return <code>false</code> early on if the decision has already 
             <li class="menu-text">Indexing</li>
             <li ><a href="index-schema.html">Schemas</a></li>
             <li ><a href="indexing-settings.html">Settings</a></li>
-            <li class="active"><a href="indexing-flow.html">Flow</a></li>
+            <li class="active"><a href="indexing-flow.html">Automated Sync.</a></li>
             <li ><a href="synonyms.html">Synonyms</a></li>
             <li ><a href="custom-attributes.html">Custom Attributes</a></li>
+            <li ><a href="replicas.html">Index Replicas</a></li>
 
             <li class="menu-text">Extend</li>
             <li ><a href="extend-basics.html">Basics</a></li>
