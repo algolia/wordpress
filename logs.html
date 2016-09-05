@@ -27,7 +27,7 @@
     <meta name="description" content="Track what is going on with the built in logs.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
-    <link rel="stylesheet" href="css/app.css?v=1473084044198">
+    <link rel="stylesheet" href="css/app.css?v=1473084805732">
 
     <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
 
@@ -140,8 +140,11 @@ For that reason we introduced our custom logs like explained in the previous sec
 <ol>
 <li><p>Turn WordPress debug mode on:</p>
 <p> Simply add the following lines to your <code>wp-config.php</code>:</p>
- <pre><code class="hljs"><span class="hljs-class"><span class="hljs-keyword">define</span></span>( <span class="hljs-string">&apos;WP_DEBUG&apos;</span>, <span class="hljs-literal">true</span> );
- <span class="hljs-class"><span class="hljs-keyword">define</span></span>( <span class="hljs-string">&apos;WP_DEBUG_LOG&apos;</span>, <span class="hljs-literal">true</span> );</code></pre>
+ <pre><code class="hljs">&lt;?php
+ <span class="hljs-comment">// [...]</span>
+ <span class="hljs-class"><span class="hljs-keyword">define</span></span>( <span class="hljs-string">&apos;WP_DEBUG&apos;</span>, <span class="hljs-literal">true</span> );
+ <span class="hljs-class"><span class="hljs-keyword">define</span></span>( <span class="hljs-string">&apos;WP_DEBUG_LOG&apos;</span>, <span class="hljs-literal">true</span> );
+ <span class="hljs-comment">// [...]</span></code></pre>
 
  <div class="alert alert-warning">If these lines are already there, be sure they are defined to <code>true</code>.</div>
 </li>
