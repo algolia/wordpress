@@ -27,7 +27,7 @@
     <meta name="description" content="Customize your drop-down menu and instant search results page.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
-    <link rel="stylesheet" href="css/app.css?v=1473084805732">
+    <link rel="stylesheet" href="css/app.css?v=1473183857719">
 
     <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
 
@@ -131,14 +131,7 @@
 <p><strong>Example</strong>: If your theme is named <code>mytheme</code>, then the folder should look like: <code>wp-content/themes/mytheme/algolia</code>.</p>
 <p>Edit the files in your <code>algolia</code> folder to customize the look &amp; feel and the overall search experience of your autocomplete and instant search results page.</p>
 <ul>
-<li><code>autocomplete-empty.php</code>: The template of the empty dropdown menu (when no results).</li>
-<li><code>autocomplete-footer.php</code>: The template of the dropdown menu footer.</li>
-<li><code>autocomplete-header.php</code>: The template of the dropdown menu header.</li>
-<li><code>autocomplete-post-suggestion.php</code>: The template of the <code>Post</code> suggestions.</li>
-<li><code>autocomplete-term-suggestion.php</code>: The template of the <code>Term</code> suggestions.</li>
-<li><code>autocomplete-user-suggestion.php</code>: The template of the <code>User</code> suggestions.</li>
-</ul>
-<ul>
+<li><code>autocomplete.php</code>: The autocomplete dropdown menu (suggestions, header, footer) templates &amp; JavaScript code.</li>
 <li><code>instantsearch.php</code>: The instantsearch (hits, filters, search bar &amp; pagination) templates &amp; JavaScript code.</li>
 </ul>
 <div class="alert alert-info">Whatever changes you make, be sure to understand how the autocomplete.js &amp; instantsearch.js library work by checking out their official documentations.</div>
@@ -190,7 +183,6 @@ add_action( <span class="hljs-string">&apos;wp_print_styles&apos;</span>, <span 
 
             <li class="menu-text">Extend</li>
             <li ><a href="extend-basics.html">Basics</a></li>
-            <li ><a href="customize-autocomplete.html">Autocomplete</a></li>
             <li ><a href="customize-search-page.html">Search Page</a></li>
 
             <li class="menu-text">Debugging</li>

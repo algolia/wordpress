@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
-    <title>Installation</title>
+    <title>Algolia Search plugin for WordPress Installation</title>
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta charset="utf-8">
     <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
@@ -13,12 +13,12 @@
     <meta content='summary_large_image' name='twitter:card'>
     <meta content='@Algolia' name='twitter:site'>
     <meta content='@Algolia' name='twitter:creator'>
-    <meta content="Installation - Algolia Search plugin for WordPress" name="twitter:title">
+    <meta content="Algolia Search plugin for WordPress Installation - Algolia Search plugin for WordPress" name="twitter:title">
     <meta content="Algolia Search for WordPress system requirements and plugin installation." name="twitter:description">
     <!--meta content="Algolia Product image" name="twitter:image"-->
     <!-- / OG meta -->
     <!--meta content='#' property='og:url'-->
-    <meta content='Installation - Algolia Search plugin for WordPress' property='og:title'>
+    <meta content='Algolia Search plugin for WordPress Installation - Algolia Search plugin for WordPress' property='og:title'>
     <meta content='article' property='og:type'>
     <meta content='Algolia Search for WordPress system requirements and plugin installation.' property='og:description'>
     <meta content='Algolia Search plugin for WordPress' property='og:site_name'>
@@ -27,7 +27,7 @@
     <meta name="description" content="Algolia Search for WordPress system requirements and plugin installation.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
-    <link rel="stylesheet" href="css/app.css?v=1473084805732">
+    <link rel="stylesheet" href="css/app.css?v=1473183857719">
 
     <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
 
@@ -104,7 +104,7 @@
             </div>
 
             <header>
-                <h1>Installation</h1>
+                <h1>Algolia Search plugin for WordPress Installation</h1>
 
                 <p class="lead">Algolia Search for WordPress system requirements and plugin installation.</p>
             </header>
@@ -127,13 +127,24 @@
 <h2 id="plugin-installation"><a class="heading-anchor" href="#plugin-installation"><span></span></a>Plugin Installation</h2>
 <p>If you are not familiar with the way you install plugins on WordPress, you can read this <a href="http://www.wpbeginner.com/beginners-guide/step-by-step-guide-to-install-a-wordpress-plugin-for-beginners/">excellent blog post</a>.</p>
 <p>The official name of the plugin is: <strong>Algolia Search for WordPress</strong>.</p>
+<h2 id="conflicting-plugins"><a class="heading-anchor" href="#conflicting-plugins"><span></span></a>Conflicting plugins</h2>
+<p>Here is a list of known incompatibilities with other plugins. Be sure you go through them as you are installing the plugin:</p>
+<p><strong>W3 Total Cache:</strong></p>
+<ul>
+<li>The autocomplete experience will not work if JavaScript is minified with W3 Total Cache</li>
+<li>It looks like the queue processing does not work with object caching turned on. (We have been unable to reproduce this one yet).</li>
+</ul>
+<p><strong>Post Type Switcher</strong></p>
+<ul>
+<li>This plugin will trigger an infinite loop upon updating/creating/saving a post because it will convert &apos;algolia_task&apos; post types to the one provided on the post form instead.</li>
+</ul>
 
                 </div>
             </div>
 
             <ul class="menu simple text-center">
                 <li><a href="https://github.com/algolia/algoliasearch-wordpress/edit/master/docs/src/installation.md" target="_blank"><i class="fi-pencil"></i> <span>Edit this Page</span></a></li>
-                <li><a href="https://github.com/algolia/algoliasearch-wordpress/issues/new?title=%5BInstallation%5D%20ISSUE%20NAME%20HERE" target="_blank"><i class="fi-social-github"></i> <span>Report a Bug</span></a></li>
+                <li><a href="https://github.com/algolia/algoliasearch-wordpress/issues/new?title=%5BAlgolia Search plugin for WordPress Installation%5D%20ISSUE%20NAME%20HERE" target="_blank"><i class="fi-social-github"></i> <span>Report a Bug</span></a></li>
                 <li><a href="http://stackoverflow.com/questions/tagged/algolia+wordpress" target="_blank"><i class="fi-comment"></i> <span>Get Help</span></a></li>
             </ul>
         </article>
@@ -157,7 +168,6 @@
 
             <li class="menu-text">Extend</li>
             <li ><a href="extend-basics.html">Basics</a></li>
-            <li ><a href="customize-autocomplete.html">Autocomplete</a></li>
             <li ><a href="customize-search-page.html">Search Page</a></li>
 
             <li class="menu-text">Debugging</li>
