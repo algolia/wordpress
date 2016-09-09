@@ -2,32 +2,32 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
-    <title>Extend Search Page</title>
+    <title>Customize your search page</title>
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta charset="utf-8">
     <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
 
-    <meta content='Discover how to build your custom WordPress search experience with the Algolia plugin.' name='description'>
+    <meta content='Learn how to customize the WordPress search page.' name='description'>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'>
     <!-- / Twitter card -->
     <meta content='summary_large_image' name='twitter:card'>
     <meta content='@Algolia' name='twitter:site'>
     <meta content='@Algolia' name='twitter:creator'>
-    <meta content="Extend Search Page - Algolia Search plugin for WordPress" name="twitter:title">
-    <meta content="Discover how to build your custom WordPress search experience with the Algolia plugin." name="twitter:description">
+    <meta content="Customize your search page - Algolia Search plugin for WordPress" name="twitter:title">
+    <meta content="Learn how to customize the WordPress search page." name="twitter:description">
     <!--meta content="Algolia Product image" name="twitter:image"-->
     <!-- / OG meta -->
     <!--meta content='#' property='og:url'-->
-    <meta content='Extend Search Page - Algolia Search plugin for WordPress' property='og:title'>
+    <meta content='Customize your search page - Algolia Search plugin for WordPress' property='og:title'>
     <meta content='article' property='og:type'>
-    <meta content='Discover how to build your custom WordPress search experience with the Algolia plugin.' property='og:description'>
+    <meta content='Learn how to customize the WordPress search page.' property='og:description'>
     <meta content='Algolia Search plugin for WordPress' property='og:site_name'>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 
-    <meta name="description" content="Discover how to build your custom WordPress search experience with the Algolia plugin.">
+    <meta name="description" content="Learn how to customize the WordPress search page.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
-    <link rel="stylesheet" href="css/app.css?v=1473245835694">
+    <link rel="stylesheet" href="css/app.css?v=1473427842082">
 
     <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
 
@@ -104,86 +104,125 @@
             </div>
 
             <header>
-                <h1>Extend Search Page</h1>
+                <h1>Customize your search page</h1>
 
-                <p class="lead">Discover how to build your custom WordPress search experience with the Algolia plugin.</p>
+                <p class="lead">Learn how to customize the WordPress search page.</p>
             </header>
 
             <hr>
 
             <div class="row">
                 <div class="large-12 columns" id="content">
-                    <h2 id="introduction"><a class="heading-anchor" href="#introduction"><span></span></a>Introduction</h2>
-<p>By default, this plugin is shipped with a way to override the default WordPress search and also provides an as you type experience called &quot;autocomplete&quot;.</p>
-<p>In your case you may want to provide some very specific search experience depending of the data you have, in the UI you want to build.</p>
-<p>Here we are not going to show you the whole process of creating a full featured custom search experience, because it would probably not be useful for your needs.</p>
-<p>That said we are going to give you some of the resources end extension points the plugin provides allowing you to build any kind of search experience you&apos;d like!</p>
-<h2 id="static-assets"><a class="heading-anchor" href="#static-assets"><span></span></a>Static Assets</h2>
-<p>This plugin ships with several javascript libraries that can be used for implementing your custom search experience.</p>
-<table>
-<thead>
-<tr>
-<th>name</th>
-<th>description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>algolia-search</td>
-<td>The official Algolia Javascript API Client: <a href="https://www.algolia.com/doc/javascript">https://www.algolia.com/doc/javascript</a></td>
-</tr>
-<tr>
-<td>algolia-autocomplete</td>
-<td>The official autocomplete.js library: <a href="https://github.com/algolia/autocomplete.js">https://github.com/algolia/autocomplete.js</a></td>
-</tr>
-<tr>
-<td>algolia-instantsearch</td>
-<td>The official instantsearch.js library: <a href="https://community.algolia.com/instantsearch.js/">https://community.algolia.com/instantsearch.js/</a></td>
-</tr>
-</tbody>
-</table>
-<p>If you want to create your custom search experience, you should take care of &quot;enqueuing&quot; scripts.</p>
-<p>The best way would be to declare the scripts as required dependencies:</p>
+                    <div class="alert alert-warning"><strong>Reminder</strong>: You should never directly edit the plugin files because all your changes would be lost at every plugin update.</div>
+
+<h2 id="introduction"><a class="heading-anchor" href="#introduction"><span></span></a>Introduction</h2>
+<p><em>The instant search results experience can be enabled in the <strong>Search page</strong> section of the plugin.</em></p>
+<p>The instant search results page is powered by <strong>instantsearch.js</strong>, a JavaScript library that eases the process of building rich search experiences.</p>
+<p>Please checkout the <a href="https://community.algolia.com/instantsearch.js/">official documentation of the instantsearch.js website</a>. Also take a look at some examples of <a href="https://community.algolia.com/instantsearch.js/examples/">what can be achieved with instantsearch.js</a>.</p>
+<p>The instantsearch feature will do its search on the <strong>Searchable posts</strong> index. If you don&apos;t have that index flagged for indexing you will be invited to index it with a notice on every page of the WordPress admin.</p>
+<div class="alert alert-info">Whatever changes you make, be sure to understand how the <strong>instantsearch.js</strong> library work by checking out their official documentations.</div>
+
+<h2 id="customization"><a class="heading-anchor" href="#customization"><span></span></a>Customization</h2>
+<p>To start customizing your search results page, copy/paste the <code>wp-content/plugins/algolia/templates</code> directory in your own theme, and rename it to <code>algolia</code>. If your theme is named <code>mytheme</code>, then the folder should look like: <code>wp-content/themes/mytheme/algolia</code>.</p>
+<p>You can then edit the <code>algolia/instantsearch.php</code> file to customize the instant search results page (search widgets &amp; page layout).</p>
+<div class="alert alert-info">All instantsearch.js templates are using the underscore templating, learn more about it reading this <a href="http://www.2ality.com/2012/06/underscore-templates.html">complete documentation</a>.</div>
+
+<h2 id="edit-the-page-layout"><a class="heading-anchor" href="#edit-the-page-layout"><span></span></a>Edit the page layout</h2>
+<p>The instant search results page is provided with a default layout. You&apos;ll need to slightly customize it to fit your theme&apos;s look &amp; feel. To configure the layout, edit the <code>algolia/instantsearch.php</code> file and locate the <code>&lt;div id=&quot;ais-wrapper&quot;&gt;...&lt;/div&gt;</code> code:</p>
+<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">&quot;ais-wrapper&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">main</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">&quot;ais-main&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">&quot;algolia-search-box&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">&quot;algolia-stats&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">svg</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;search-icon&quot;</span> <span class="hljs-attribute">width</span>=<span class="hljs-value">&quot;25&quot;</span> <span class="hljs-attribute">height</span>=<span class="hljs-value">&quot;25&quot;</span> <span class="hljs-attribute">viewBox</span>=<span class="hljs-value">&quot;0 0 40 40&quot;</span> <span class="hljs-attribute">xmlns</span>=<span class="hljs-value">&quot;http://www.w3.org/2000/svg&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">path</span> <span class="hljs-attribute">d</span>=<span class="hljs-value">&quot;M24.828 31.657a16.76 16.76 0 0 1-7.992 2.015C7.538 33.672 0 26.134 0 16.836 0 7.538 7.538 0 16.836 0c9.298 0 16.836 7.538 16.836 16.836 0 3.22-.905 6.23-2.475 8.79.288.18.56.395.81.645l5.985 5.986A4.54 4.54 0 0 1 38 38.673a4.535 4.535 0 0 1-6.417-.007l-5.986-5.986a4.545 4.545 0 0 1-.77-1.023zm-7.992-4.046c5.95 0 10.775-4.823 10.775-10.774 0-5.95-4.823-10.775-10.774-10.775-5.95 0-10.775 4.825-10.775 10.776 0 5.95 4.825 10.775 10.776 10.775z&quot;</span> <span class="hljs-attribute">fill-rule</span>=<span class="hljs-value">&quot;evenodd&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">path</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">svg</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">&quot;algolia-hits&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">&quot;algolia-pagination&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">main</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">aside</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">&quot;ais-facets&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">section</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;ais-facets&quot;</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">&quot;facet-post-types&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">section</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">section</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;ais-facets&quot;</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">&quot;facet-categories&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">section</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">section</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;ais-facets&quot;</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">&quot;facet-tags&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">section</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">section</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;ais-facets&quot;</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">&quot;facet-users&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">section</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">aside</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span></code></pre>
+
+<p>Edit this HTML layout to change the way the overall page is structured.</p>
+<h2 id="edit-the-hit-template"><a class="heading-anchor" href="#edit-the-hit-template"><span></span></a>Edit the hit template</h2>
+<p>Each matching <strong>Searchable Post</strong> will be rendered with a default hit template. To customize it, edit the <code>algolia/instantsearch.php</code> file and locate the <code>tmpl-hit</code> template:</p>
+<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">&quot;text/html&quot;</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">&quot;tmpl-instantsearch-hit&quot;</span>&gt;</span><span class="handlebars"><span class="xml">
+    <span class="hljs-tag">&lt;<span class="hljs-title">article</span> <span class="hljs-attribute">itemtype</span>=<span class="hljs-value">&quot;http://schema.org/Article&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">#</span> <span class="hljs-attribute">if</span> ( <span class="hljs-attribute">data.images.thumbnail</span> ) { #&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;ais-hits--thumbnail&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">&quot;</span></span></span><span class="hljs-expression">{{ <span class="hljs-variable">data.permalink</span> }}</span><span class="xml"><span class="hljs-tag"><span class="hljs-value">&quot;</span> <span class="hljs-attribute">title</span>=<span class="hljs-value">&quot;</span></span></span><span class="hljs-expression">{{ <span class="hljs-variable">data.post</span>_<span class="hljs-variable">title</span> }}</span><span class="xml"><span class="hljs-tag"><span class="hljs-value">&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">img</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">&quot;</span></span></span><span class="hljs-expression">{{ <span class="hljs-variable">data.images.thumbnail.url</span> }}</span><span class="xml"><span class="hljs-tag"><span class="hljs-value">&quot;</span> <span class="hljs-attribute">alt</span>=<span class="hljs-value">&quot;</span></span></span><span class="hljs-expression">{{ <span class="hljs-variable">data.post</span>_<span class="hljs-variable">title</span> }}</span><span class="xml"><span class="hljs-tag"><span class="hljs-value">&quot;</span> <span class="hljs-attribute">title</span>=<span class="hljs-value">&quot;</span></span></span><span class="hljs-expression">{{ <span class="hljs-variable">data.post</span>_<span class="hljs-variable">title</span> }}</span><span class="xml"><span class="hljs-tag"><span class="hljs-value">&quot;</span> <span class="hljs-attribute">itemprop</span>=<span class="hljs-value">&quot;image&quot;</span> /&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">#</span> } #&gt;</span>
+
+        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;ais-hits--content&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">h2</span> <span class="hljs-attribute">itemprop</span>=<span class="hljs-value">&quot;name headline&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">&quot;</span></span></span><span class="hljs-expression">{{ <span class="hljs-variable">data.permalink</span> }}</span><span class="xml"><span class="hljs-tag"><span class="hljs-value">&quot;</span> <span class="hljs-attribute">title</span>=<span class="hljs-value">&quot;</span></span></span><span class="hljs-expression">{{ <span class="hljs-variable">data.post</span>_<span class="hljs-variable">title</span> }}</span><span class="xml"><span class="hljs-tag"><span class="hljs-value">&quot;</span> <span class="hljs-attribute">itemprop</span>=<span class="hljs-value">&quot;url&quot;</span>&gt;</span></span><span class="hljs-expression">{{{ <span class="hljs-variable">data.</span>_<span class="hljs-variable">highlightResult.post</span>_<span class="hljs-variable">title.value</span> }}</span><span class="xml">}<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">h2</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;ais-hits--tags&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">#</span> <span class="hljs-attribute">for</span> (<span class="hljs-attribute">var</span> <span class="hljs-attribute">index</span> <span class="hljs-attribute">in</span> <span class="hljs-attribute">data.taxonomies.post_tag</span>) { #&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;ais-hits--tag&quot;</span>&gt;</span></span><span class="hljs-expression">{{{ <span class="hljs-variable">data.</span>_<span class="hljs-variable">highlightResult.taxonomies.post</span>_<span class="hljs-variable">tag</span>[<span class="hljs-variable">index</span>]<span class="hljs-variable">.value</span> }}</span><span class="xml">}<span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">#</span> } #&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;excerpt&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-title">#</span>
+                    <span class="hljs-attribute">var</span> <span class="hljs-attribute">attributes</span> = [&apos;<span class="hljs-attribute">content</span>&apos;, &apos;<span class="hljs-attribute">title6</span>&apos;, &apos;<span class="hljs-attribute">title5</span>&apos;, &apos;<span class="hljs-attribute">title4</span>&apos;, &apos;<span class="hljs-attribute">title3</span>&apos;, &apos;<span class="hljs-attribute">title2</span>&apos;, &apos;<span class="hljs-attribute">title1</span>&apos;];
+                    <span class="hljs-attribute">var</span> <span class="hljs-attribute">attribute_name</span>;
+                    <span class="hljs-attribute">var</span> <span class="hljs-attribute">relevant_content</span> = &apos;&apos;;
+                    <span class="hljs-attribute">for</span> ( <span class="hljs-attribute">var</span> <span class="hljs-attribute">index</span> <span class="hljs-attribute">in</span> <span class="hljs-attribute">attributes</span> ) {
+                        <span class="hljs-attribute">attribute_name</span> = <span class="hljs-attribute">attributes</span>[ <span class="hljs-attribute">index</span> ];
+                        <span class="hljs-attribute">if</span> ( <span class="hljs-attribute">data._highlightResult</span>[ <span class="hljs-attribute">attribute_name</span> ]<span class="hljs-attribute">.matchedWords.length</span> &gt;</span> 0 ) {
+                            relevant_content = data._snippetResult[ attribute_name ].value;
+                        }
+                    }
+
+                    relevant_content = data._snippetResult[ attributes[ 0 ] ].value;
+                    #&gt;
+                    </span><span class="hljs-expression">{{{ <span class="hljs-variable">relevant</span>_<span class="hljs-variable">content</span> }}</span><span class="xml">}
+                <span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;ais-clearfix&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">article</span>&gt;</span>
+</span></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span></code></pre>
+
+<h2 id="adding-an-extra-search-widget"><a class="heading-anchor" href="#adding-an-extra-search-widget"><span></span></a>Adding an extra search widget</h2>
+<p>To add an extra search widget, the best is to follow the <a href="https://community.algolia.com/instantsearch.js/">official documentation of instantsearch.js</a> and instantiate the widget in the <code>algolia/instantsearch.php</code> file, just before the <code>Search.start()</code> call.</p>
+<pre><code class="hljs js"><span class="hljs-comment">// new widget</span>
+search.addWidget(<span class="hljs-comment">/* ... */</span>);
+
+search.start();</code></pre>
+
+
+<h2 id="look-feel"><a class="heading-anchor" href="#look-feel"><span></span></a>Look &amp; feel</h2>
+<p>We provide with some default CSS rules that are located in the <code>algolia/assets/css/algolia-instantsearch.css</code>. You can very easily add your own CSS rules to your theme&apos;s stylesheet.</p>
+<p>If for any reason you don&apos;t want the default stylesheet to be included, you can remove it like this:</p>
 <pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">register_custom_search_assets</span><span class="hljs-params">()</span> </span>{
-    wp_enqueue_script( <span class="hljs-string">&apos;custom-search&apos;</span>, plugins_url( <span class="hljs-string">&apos;js/custom-search.js&apos;</span>, dirname(<span class="hljs-keyword">__FILE__</span>) ), <span class="hljs-keyword">array</span>( <span class="hljs-string">&apos;algolia-search&apos;</span>, <span class="hljs-string">&apos;algolia-autocomplete&apos;</span> ) );
+<span class="hljs-comment">/**
+ * Dequeue default CSS files.
+ *
+ * Hooked to the wp_print_styles action, with a late priority (100),
+ * so that it is after the stylesheets were enqueued.
+ */</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">my_theme_dequeue_styles</span><span class="hljs-params">()</span> </span>{
+  <span class="hljs-comment">// Remove the algolia-instantsearch.css.</span>
+  wp_dequeue_style( <span class="hljs-string">&apos;algolia-instantsearch&apos;</span> );
 }
+add_action( <span class="hljs-string">&apos;wp_print_styles&apos;</span>, <span class="hljs-string">&apos;my_theme_dequeue_styles&apos;</span>, <span class="hljs-number">100</span> );</code></pre>
 
-add_action( <span class="hljs-string">&apos;wp_enqueue_scripts&apos;</span>, <span class="hljs-string">&apos;register_custom_search_assets&apos;</span> );</code></pre>
-This code will ensure that the &apos;algolia-search&apos; and &apos;algolia-autocomplete&apos; scripts are also added to the page.
 
-In this example, you can now use the Algolia JS client and the autocomplete library in your custom search script.
-Please take a look at the documentation of the underlying libraries by following the links shared above.
 
-## Work With The Existing Indices
-
-The Algolia Plugin exports a global `$algolia` variable. That variable contains a reference to the `Algolia_Plugin` class.
-
-That class gives you access to all of the features of the plugin.
-
-Here is one way to get the class instance:
-
-<pre><code class="hljs php"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">custom_algolia_usage</span><span class="hljs-params">()</span> </span>{
-    <span class="hljs-comment">/** <span class="hljs-doctag">@var</span> Algolia_Plugin $algolia */</span>
-    <span class="hljs-keyword">global</span> <span class="hljs-variable">$algolia</span>;
-
-    <span class="hljs-comment">// Use the Algolia plugin in your own.</span>
-}
-
-add_action( <span class="hljs-string">&apos;plugins_loaded&apos;</span>, <span class="hljs-string">&apos;custom_algolia_usage&apos;</span> );</code></pre>
-
-<div class="alert alert-warning">You should always access the variable once the plugins are loaded. Otherwise, depending on the order in which the user enabled the plugins it could fail.</div>
-
-<p>Now that you have access to the <code>Algolia_Plugin</code> instance, you can start using it.</p>
-<p>Also be sure to checkout the <a href="custom-attributes.html">custom attributes documentation</a> which contains a detailed example of a plugin creation.</p>
 
                 </div>
             </div>
 
             <ul class="menu simple text-center">
                 <li><a href="https://github.com/algolia/algoliasearch-wordpress/edit/master/docs/src/customize-search-page.md" target="_blank"><i class="fi-pencil"></i> <span>Edit this Page</span></a></li>
-                <li><a href="https://github.com/algolia/algoliasearch-wordpress/issues/new?title=%5BExtend Search Page%5D%20ISSUE%20NAME%20HERE" target="_blank"><i class="fi-social-github"></i> <span>Report a Bug</span></a></li>
+                <li><a href="https://github.com/algolia/algoliasearch-wordpress/issues/new?title=%5BCustomize your search page%5D%20ISSUE%20NAME%20HERE" target="_blank"><i class="fi-social-github"></i> <span>Report a Bug</span></a></li>
                 <li><a href="http://stackoverflow.com/questions/tagged/algolia+wordpress" target="_blank"><i class="fi-comment"></i> <span>Get Help</span></a></li>
             </ul>
         </article>
@@ -195,7 +234,8 @@ add_action( <span class="hljs-string">&apos;plugins_loaded&apos;</span>, <span c
             <li class="menu-text">Getting Started</li>
             <li ><a href="installation.html">Installation</a></li>
             <li ><a href="configuration.html">Configuration</a></li>
-            <li ><a href="customization.html">Customization</a></li>
+            <li ><a href="customize-autocomplete.html">Customize Autocomplete</a></li>
+            <li class="active"><a href="customize-search-page.html">Customize Search Page</a></li>
 
             <li class="menu-text">Indexing</li>
             <li ><a href="index-schema.html">Schemas</a></li>
@@ -207,7 +247,6 @@ add_action( <span class="hljs-string">&apos;plugins_loaded&apos;</span>, <span c
 
             <li class="menu-text">Extend</li>
             <li ><a href="extend-basics.html">Basics</a></li>
-            <li class="active"><a href="customize-search-page.html">Search Page</a></li>
 
             <li class="menu-text">Debugging</li>
             <li ><a href="logs.html">Logs</a></li>
@@ -249,7 +288,7 @@ add_action( <span class="hljs-string">&apos;plugins_loaded&apos;</span>, <span c
         <span class="ac-icon ac-icon-love-dark"></span>
     </div>
 
-    <p class="ac-footer-version">Latest version: 0.5.0</p>
+    <p class="ac-footer-version">Latest version: 0.6.0</p>
 
     <div class="ac-footer-actions">
         <div class="footer-container">
