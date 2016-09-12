@@ -27,7 +27,7 @@
     <meta name="description" content="Discover the best way to extend the plugin to customize the behaviour.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
-    <link rel="stylesheet" href="css/app.css?v=1473427842082">
+    <link rel="stylesheet" href="css/app.css?v=1473691369353">
 
     <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
 
@@ -300,19 +300,11 @@ This will also disable tasks being generated for that content type.</p>
 <td>int $ttl</td>
 </tr>
 <tr>
-<td>algolia_searchable_posts_indexing_batch_size</td>
-<td>int $batch_size</td>
+<td>algolia_indexing_batch_size</td>
+<td>int $batch_size (default: 50)</td>
 </tr>
 <tr>
-<td>algolia_posts_indexing_batch_size</td>
-<td>int $batch_size</td>
-</tr>
-<tr>
-<td>algolia_terms_indexing_batch_size</td>
-<td>int $batch_size</td>
-</tr>
-<tr>
-<td>algolia_users_indexing_batch_size</td>
+<td>algolia_{$index_id}_indexing_batch_size</td>
 <td>int $batch_size</td>
 </tr>
 <tr>
@@ -440,7 +432,7 @@ add_action( <span class="hljs-string">&apos;algolia_posts_index_post_updated&apo
         <span class="ac-icon ac-icon-love-dark"></span>
     </div>
 
-    <p class="ac-footer-version">Latest version: 0.6.0</p>
+    <p class="ac-footer-version">Latest version: 0.6.1</p>
 
     <div class="ac-footer-actions">
         <div class="footer-container">
