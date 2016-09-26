@@ -27,7 +27,7 @@
     <meta name="description" content="Most common issues and how to fix them.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
-    <link rel="stylesheet" href="css/app.css?v=1474631328060">
+    <link rel="stylesheet" href="css/app.css?v=1474894465155">
 
     <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
 
@@ -152,6 +152,27 @@ For security reasons, we reject every filled Search-Only API key that has additi
 <h3 id="can-i-use-one-algolia-account-for-multiple-wordpress-sites-"><a class="heading-anchor" href="#can-i-use-one-algolia-account-for-multiple-wordpress-sites-"><span></span></a>Can I use one Algolia account for multiple WordPress sites?</h3>
 <p>Definitely! In the same fashion that WordPress lets you prefix all database tables, we allow you to prefix every indices in Algolia.</p>
 <p>This can be configured on the <code>Indexing</code> section of the plugin.</p>
+<h3 id="why-doesn-t-my-autocomplete-dropdown-show-up-"><a class="heading-anchor" href="#why-doesn-t-my-autocomplete-dropdown-show-up-"><span></span></a>Why doesn&apos;t my autocomplete dropdown show up?</h3>
+<ol>
+<li>First of all ensure the autocomplete feature is turned on on the Autocomplete page of the admin UI,</li>
+<li>Make sure you actually selected at least one index to display from that same page, and ensure those indices were created in Algolia,</li>
+<li>Make sure your theme calls the <code>wp_footer()</code> method in your template files.</li>
+</ol>
+<h3 id="how-do-i-resolve-wp_remote-errors-on-indexing-admin-page-"><a class="heading-anchor" href="#how-do-i-resolve-wp_remote-errors-on-indexing-admin-page-"><span></span></a>How do I resolve <code>wp_remote()</code> errors on <code>indexing</code> admin page?</h3>
+<p>It really depends what error you are getting, but here are a few know issues:</p>
+<p><strong>You are using an SSL certificate (your website url starts with <code>https://</code>):</strong></p>
+<p>Our plugin uses cURL and the underlying OpenSSL library to loop over the queued indexing tasks.</p>
+<p>If the OpenSSL library is too old, then you might face cURL error 35 with messages containing <code>handshake failure</code>, or <code>unknown protocol</code>.</p>
+<p>In that case you should ask your hosting provider to upgrade your cURL/OpenSSL version.</p>
+<p>If you are unable to upgrade your cURL/OpenSSL versions, and if your website can also be accessed over &apos;HTTP&apos;, you can force the loopback to access your website over HTTP by adding the following line to your wp-config.php file: <code>define( &apos;ALGOLIA_LOOPBACK_HTTP&apos;, true );</code></p>
+<p><strong>Htaccess password protected:</strong></p>
+<p>If your /wp-admin section of your website instance is .htaccess password protected, then you currently have no way to make the queue work.</p>
+<p>We might support this in the future.</p>
+<p><strong>You are using Docker:</strong></p>
+<p>If you are using Docker, you should make sure that the domain name you are using is listed in the <code>/etc/hosts</code> file of your container.</p>
+<p>Port forwarding is currently unsupported, so you should use port 80 or 443 depending on if you are using http or https to access your website.</p>
+<p><strong>My case is not listed here:</strong></p>
+<p>If your problem is covered here, please submit an issue with the error details here: <a href="https://github.com/algolia/algoliasearch-wordpress/issues">https://github.com/algolia/algoliasearch-wordpress/issues</a></p>
 
                 </div>
             </div>
@@ -224,7 +245,7 @@ For security reasons, we reject every filled Search-Only API key that has additi
         <span class="ac-icon ac-icon-love-dark"></span>
     </div>
 
-    <p class="ac-footer-version">Latest version: 1.0.0</p>
+    <p class="ac-footer-version">Latest version: 1.1.0</p>
 
     <div class="ac-footer-actions">
         <div class="footer-container">
