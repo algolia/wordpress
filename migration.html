@@ -2,31 +2,31 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
-  <title>Advanced Custom Fields integration with Algolia Search</title>
+  <title>Migration Best Practices</title>
   <meta content="IE=edge" http-equiv="X-UA-Compatible">
   <meta charset="utf-8">
   <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
 
-  <meta content='Integrate Algolia Search for WordPress with Advanced Custom Fields.' name='description'>
+  <meta content='How to promote the plugin from dev to staging and from staging to production.' name='description'>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'>
   <!-- / Twitter card -->
   <meta content='summary_large_image' name='twitter:card'>
   <meta content='@Algolia' name='twitter:site'>
   <meta content='@Algolia' name='twitter:creator'>
-  <meta content="Advanced Custom Fields integration with Algolia Search - Algolia Search plugin for WordPress" name="twitter:title">
-  <meta content="Integrate Algolia Search for WordPress with Advanced Custom Fields." name="twitter:description">
+  <meta content="Migration Best Practices - Algolia Search plugin for WordPress" name="twitter:title">
+  <meta content="How to promote the plugin from dev to staging and from staging to production." name="twitter:description">
   <meta content="https://community.algolia.com/wordpress/img/og-screen.png" name="twitter:image">
   <!--meta content="Algolia Product image" name="twitter:image"-->
   <!-- / OG meta -->
   <meta content='https://community.algolia.com/wordpress/' property='og:url'>
   <meta content='https://community.algolia.com/wordpress/img/og-screen.png' property='og:image'>
-  <meta content='Advanced Custom Fields integration with Algolia Search - Algolia Search plugin for WordPress' property='og:title'>
+  <meta content='Migration Best Practices - Algolia Search plugin for WordPress' property='og:title'>
   <meta content='article' property='og:type'>
-  <meta content='Integrate Algolia Search for WordPress with Advanced Custom Fields.' property='og:description'>
+  <meta content='How to promote the plugin from dev to staging and from staging to production.' property='og:description'>
   <meta content='Algolia Search plugin for WordPress' property='og:site_name'>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 
-  <meta name="description" content="Integrate Algolia Search for WordPress with Advanced Custom Fields.">
+  <meta name="description" content="How to promote the plugin from dev to staging and from staging to production.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
   <link rel="stylesheet" href="css/app.css?v=1475308317659">
@@ -101,9 +101,9 @@
             </div>
 
             <header>
-                <h1>Advanced Custom Fields integration with Algolia Search</h1>
+                <h1>Migration Best Practices</h1>
 
-                <p class="lead">Integrate Algolia Search for WordPress with Advanced Custom Fields.</p>
+                <p class="lead">How to promote the plugin from dev to staging and from staging to production.</p>
             </header>
 
             <hr>
@@ -111,124 +111,65 @@
             <div class="row">
                 <div class="large-12 columns" id="content">
                     <h2 id="introduction"><a class="heading-anchor" href="#introduction"><span></span></a>Introduction</h2>
-<p>The Advanced Custom Fields plugin is a very popular plugin that allows you to create your custom fields.</p>
-<p>On this page you we will give some examples on how to push these custom fields to Algolia, make them searchable and take them into account in the ranking algorithm.</p>
-<p>If you haven&apos;t read the <a href="extend-basics.html">basics of extending this plugin</a>, you should probably read that first.</p>
-<p>To get an in depth overview of methods introduced by the Advanced Custom Fields, check out the <a href="https://www.advancedcustomfields.com/resources/">Official Advanced Custom Fields documentation</a>.</p>
-<h2 id="push-custom-fields-to-algolia"><a class="heading-anchor" href="#push-custom-fields-to-algolia"><span></span></a>Push custom fields to Algolia</h2>
-<p>In the following example, we add the <code>bio</code> field to the posts that have a post type of <code>speaker</code>.</p>
-<p>Here we assume you have a custom post type <code>speaker</code> which is not natively available in WordPress.</p>
-<p>We add the <code>bio</code> attribute to both <code>searchable_posts</code> and <code>posts</code> indices.</p>
-<pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
+<p>It is a common practice to run your website changes on a development or staging environment before pushing them to production.</p>
+<p>The Algolia plugin for WordPress requires you to take some additional steps in order to work properly once promoted.</p>
+<p>First we have to understand some of the challenges.</p>
+<h2 id="full-urls-are-indexed"><a class="heading-anchor" href="#full-urls-are-indexed"><span></span></a>Full URLS are indexed</h2>
+<p>When indexing content, we always index full URLS to allow every plugin to be able to intervene in the generation process.
+We can not simply remove the domain name of URLS, because one website might use a CDN strategy for example.</p>
+<div class="alert alert-warning">You will always need to re-index all your content from your production environment to update all URLS, otherwise the results will point to your staging environment.</div>
 
-add_filter( <span class="hljs-string">&apos;algolia_post_shared_attributes&apos;</span>, <span class="hljs-string">&apos;my_post_attributes&apos;</span>, <span class="hljs-number">10</span>, <span class="hljs-number">2</span> );
-add_filter( <span class="hljs-string">&apos;algolia_searchable_post_shared_attributes&apos;</span>, <span class="hljs-string">&apos;my_post_attributes&apos;</span>, <span class="hljs-number">10</span>, <span class="hljs-number">2</span> );
+<h2 id="use-index-prefixes-to-allow-multiple-websites-on-a-same-algolia-account"><a class="heading-anchor" href="#use-index-prefixes-to-allow-multiple-websites-on-a-same-algolia-account"><span></span></a>Use index prefixes to allow multiple websites on a same Algolia account</h2>
+<p>Each index stored in Algolia has a prefix. You should always use a prefix that contains a reference to your current environment&apos;s purpose.</p>
+<p>For example, use the following index prefixes to make things obvious:</p>
+<ul>
+<li><code>mywebsite_prod_</code> =&gt; for production</li>
+<li><code>mywebsite_staging_</code> =&gt; for staging</li>
+<li><code>mywebsite_dev_</code> =&gt; for development</li>
+</ul>
+<p>As you might notice, we always also include a unique way to identify the website, here <code>mywebsite_</code>.
+By doing so, you ensure that you will easily identify indices even if you have multiple website bound to a single Algolia account.</p>
+<div class="alert alert-info">As rule of thumb, I&apos;d recommend you always use the following pattern for your index prefixes: <code>{websitename}_{environment}_</code>.</div>
+<div class="alert alert-warning">Don&apos;t forget the trailing underscore; <code>_</code>; if you want your index names to stay readable in the Algolia dashboard.</div>
 
-<span class="hljs-comment">/**
- * <span class="hljs-doctag">@param</span> array   $attributes
- * <span class="hljs-doctag">@param</span> WP_Post $post
- *
- * <span class="hljs-doctag">@return</span> array
- */</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">my_post_attributes</span><span class="hljs-params">( array <span class="hljs-variable">$attributes</span>, WP_Post <span class="hljs-variable">$post</span> )</span> </span>{
+<h2 id="avoid-breaking-frontend-search"><a class="heading-anchor" href="#avoid-breaking-frontend-search"><span></span></a>Avoid breaking frontend search</h2>
+<p>There are several situations where your frontend implementations might break if you don&apos;t take some precautions.</p>
+<p>Here are some situations where the frontend might break:</p>
+<ul>
+<li>If your templates rely on newly indexed fields that have not been pushed yet</li>
+<li>If you upgrade the plugin and there is a mention of a breaking change on the plugin</li>
+<li>If you customize the data pushed to Algolia by the means of filter hooks</li>
+<li>If you install a plugin that uses filter hooks to customize the data pushed to Algolia</li>
+</ul>
+<p><strong>To avoid search downtime, we recommend you always make sure your website works fine when disabling Algolia.</strong></p>
+<p>You should be able to disable the <code>autocomplete dropdown</code> and the <code>instant search results page</code> experiences without breaking your website.</p>
+<p>This is the default behaviour if you use the template overriding strategy defined here:</p>
+<ul>
+<li><a href="customize-autocomplete.html#customization">Override autocomplete template</a></li>
+<li><a href="customize-search-page.html#customization">Override search page template</a></li>
+</ul>
+<div class="alert alert-info">As a best practice, before pushing your implementation to production, we recommend you turn off <code>autocomplete</code> and <code>instant search page</code>. You will be able to re-enable them from the production environment once you made sure your indices are up-to-date with the templates.</div>
 
-    <span class="hljs-keyword">if</span> ( <span class="hljs-string">&apos;speaker&apos;</span> !== <span class="hljs-variable">$post</span>-&gt;post_type ) {
-        <span class="hljs-comment">// We only want to add an attribute for the &apos;speaker&apos; post type.</span>
-        <span class="hljs-comment">// Here the post isn&apos;t a &apos;speaker&apos;, so we return the attributes unaltered.</span>
-        <span class="hljs-keyword">return</span> <span class="hljs-variable">$attributes</span>;
-    }
-
-    <span class="hljs-comment">// Get the field value with the &apos;get_field&apos; method and assign it to the attributes array.</span>
-    <span class="hljs-comment">// @see https://www.advancedcustomfields.com/resources/get_field/</span>
-    <span class="hljs-variable">$attributes</span>[<span class="hljs-string">&apos;bio&apos;</span>] = get_field( <span class="hljs-string">&apos;bio&apos;</span>, <span class="hljs-variable">$post</span>-&gt;ID );
-
-    <span class="hljs-comment">// Always return the value we are filtering.</span>
-    <span class="hljs-keyword">return</span> <span class="hljs-variable">$attributes</span>;
-}</code></pre>
-
-<h2 id="make-custom-fields-searchable"><a class="heading-anchor" href="#make-custom-fields-searchable"><span></span></a>Make custom fields searchable</h2>
-<p>In this example we make sure that the <code>bio</code> attribute we pushed earlier is taken into account in the Algolia relevancy algorithm.</p>
-<p>Here we only alter the settings of the <code>posts_speaker</code> index because in the <code>searchable_posts</code> index not all posts have
-the <code>bio</code> attribute, so basing the relevancy on that field might lead to results that are difficult to understand for the end users.</p>
-<p>In this example, we also ask for Algolia to return a snippet of 50 chars of the <code>bio</code> attribute along with the record.
-This feature allows you to display a relevant snippet of the <code>bio</code> attribute to your end users.
-The snippet is dynamically generated by the Algolia engine to show the most relevant part of the attribute regarding the current user&apos;s request.</p>
-<pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
-
-add_filter( <span class="hljs-string">&apos;algolia_posts_speaker_index_settings&apos;</span>, <span class="hljs-string">&apos;my_posts_index_settings&apos;</span> );
-<span class="hljs-comment">// We could also have used a more general hook &apos;algolia_posts_index_settings&apos;,</span>
-<span class="hljs-comment">// but in that case we would have needed to add a check on the post type</span>
-<span class="hljs-comment">// to ensure we only adjust settings for the &apos;speaker&apos; post_type.</span>
-
-<span class="hljs-comment">/**
- * <span class="hljs-doctag">@param</span> array $settings
- *
- * <span class="hljs-doctag">@return</span> array
- */</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">my_posts_index_settings</span><span class="hljs-params">( array <span class="hljs-variable">$settings</span> )</span> </span>{
-
-    <span class="hljs-comment">// Make Algolia search into the &apos;bio&apos; field when searching for results.</span>
-    <span class="hljs-comment">// Using ordered instead of unordered would make words matching in the beginning of the attribute</span>
-    <span class="hljs-comment">// make the record score higher.</span>
-    <span class="hljs-comment">// @see https://www.algolia.com/doc/api-client/ruby/parameters#attributestoindex</span>
-    <span class="hljs-variable">$settings</span>[<span class="hljs-string">&apos;attributesToIndex&apos;</span>][] = <span class="hljs-string">&apos;unordered(bio)&apos;</span>;
-
-    <span class="hljs-comment">// Make Algolia return a pre-computed snippet of 50 chars as part of the result set.</span>
-    <span class="hljs-comment">// @see https://www.algolia.com/doc/api-client/ruby/parameters#attributestohighlight</span>
-    <span class="hljs-variable">$settings</span>[<span class="hljs-string">&apos;attributesToSnippet&apos;</span>][] = <span class="hljs-string">&apos;bio:50&apos;</span>;
-
-    <span class="hljs-comment">// Always return the value we are filtering.</span>
-    <span class="hljs-keyword">return</span> <span class="hljs-variable">$settings</span>;
-}</code></pre>
-
-<h2 id="integrate-custom-fields-in-your-custom-ranking"><a class="heading-anchor" href="#integrate-custom-fields-in-your-custom-ranking"><span></span></a>Integrate custom fields in your custom ranking</h2>
-<p>You can integrate your custom metrics in the ranking algorithm of Algolia.
-That way, you can provide your end users with results ranked according to your business requirements.</p>
-<p>In this example, let&apos;s say you are a company selling videos on your WordPress website.
-Your website is tracking the number of views of each video in a custom attribute called <code>views_count</code>.</p>
-<p>In this example we will show you how to add the <code>views_count</code> attribute to the custom ranking.
-The idea being that if several videos are considered a good match regarding the current&apos;s user search query,
-we will order the results regarding the <code>views_count</code>. Read more about the custom ranking here: <a href="https://www.algolia.com/doc/guides/relevance/ranking#custom-ranking">https://www.algolia.com/doc/guides/relevance/ranking#custom-ranking</a></p>
-<p>Note that you can add as many attributes to the custom ranking as you want. The order in which the attributes appear in the custom ranking matters as under the hood
-Algolia uses a Tie Breaking algorithm. Read more about it here: <a href="https://www.algolia.com/doc/guides/relevance/ranking#ranking-formula-a-tie-breaking-algorithm">https://www.algolia.com/doc/guides/relevance/ranking#ranking-formula-a-tie-breaking-algorithm</a></p>
-<p>Here we assume you already made it so that the <code>views_count</code> are pushed to the <code>posts_video</code> index as explained in the &apos;<a href="#push-custom-fields-to-algolia">push custom fields to Algolia</a>&apos; section.</p>
-<pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
-
-add_filter( <span class="hljs-string">&apos;algolia_posts_video_index_settings&apos;</span>, <span class="hljs-string">&apos;my_video_index_settings&apos;</span> );
-<span class="hljs-comment">// We could also have used a more general hook &apos;algolia_posts_index_settings&apos;,</span>
-<span class="hljs-comment">// but in that case we would have needed to add a check on the post type</span>
-<span class="hljs-comment">// to ensure we only adjust settings for the &apos;video&apos; post_type.</span>
-
-<span class="hljs-comment">/**
- * <span class="hljs-doctag">@param</span> array $settings
- *
- * <span class="hljs-doctag">@return</span> array
- */</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">my_video_index_settings</span><span class="hljs-params">( array <span class="hljs-variable">$settings</span> )</span> </span>{
-
-    <span class="hljs-comment">// By default, the plugin uses &apos;is_sticky&apos; and the &apos;post_date&apos; in the custom ranking.</span>
-    <span class="hljs-comment">// Here we first retrieve the custom ranking to be able to alter it with more control.</span>
-    <span class="hljs-variable">$customRanking</span> = <span class="hljs-variable">$settings</span>[<span class="hljs-string">&apos;customRanking&apos;</span>];
-
-    <span class="hljs-comment">// We add our custom ranking rule at the beginning of the rules so that</span>
-    <span class="hljs-comment">// it is the first one considered in the algorithm.</span>
-    array_unshift( <span class="hljs-variable">$customRanking</span>, <span class="hljs-string">&apos;desc(views_count)&apos;</span> );
-
-    <span class="hljs-comment">// We override the initial custom ranking rules.</span>
-    <span class="hljs-variable">$settings</span>[<span class="hljs-string">&apos;customRanking&apos;</span>] = <span class="hljs-variable">$customRanking</span>;
-
-
-    <span class="hljs-comment">// Always return the value we are filtering.</span>
-    <span class="hljs-keyword">return</span> <span class="hljs-variable">$settings</span>;
-}</code></pre>
-
+<h2 id="from-staging-to-production-steps"><a class="heading-anchor" href="#from-staging-to-production-steps"><span></span></a>From staging to production steps</h2>
+<p>To conclude this section, here are the steps to bring the Search by Algolia plugin to production from a staging environment.</p>
+<ol>
+<li><strong>Make sure you are using a prefix like <code>mywebsite_staging_</code></strong>, and if not, change it on the Indexing page of the plugin,</li>
+<li><strong>Disable the autocomplete and instantsearch experiences</strong> to make sure your search still works without Algolia,</li>
+<li><strong>Promote your code and your plugin configuration</strong> to production</li>
+<li><strong>Update the index name prefix</strong> to <code>mywebsite_production_</code>,</li>
+<li><strong>Hit the <span class="wp-btn">Re-index everything</span> button</strong> on the Indexing page of the plugin,</li>
+<li><strong>Wait for the indexing to finish</strong> by watching the queue emptying itself (you don&apos;t need to stay on the page though, the queue processing will continue even if you leave the page).</li>
+<li><strong>Re-enable to autocomplete and the search page features</strong> of the plugin on the dedicated pages of those features.</li>
+</ol>
+<p>&#x1F389;You should now have Algolia up and running smoothly in your production environment &#x1F389; !</p>
+<div class="alert alert-info">If you experience any problem applying this guide, please reach out to support+wordpress@algolia.com so we can improve it!</div>
 
                 </div>
             </div>
 
             <ul class="menu simple text-center">
-                <li><a href="https://github.com/algolia/algoliasearch-wordpress/edit/master/docs/src/advanced-custom-fields.md" target="_blank"><i class="fi-pencil"></i> <span>Edit this Page</span></a></li>
-                <li><a href="https://github.com/algolia/algoliasearch-wordpress/issues/new?title=%5BAdvanced Custom Fields integration with Algolia Search%5D%20ISSUE%20NAME%20HERE" target="_blank"><i class="fi-social-github"></i> <span>Report a Bug</span></a></li>
+                <li><a href="https://github.com/algolia/algoliasearch-wordpress/edit/master/docs/src/migration.md" target="_blank"><i class="fi-pencil"></i> <span>Edit this Page</span></a></li>
+                <li><a href="https://github.com/algolia/algoliasearch-wordpress/issues/new?title=%5BMigration Best Practices%5D%20ISSUE%20NAME%20HERE" target="_blank"><i class="fi-social-github"></i> <span>Report a Bug</span></a></li>
                 <li><a href="http://stackoverflow.com/questions/tagged/algolia+wordpress" target="_blank"><i class="fi-comment"></i> <span>Get Help</span></a></li>
             </ul>
         </article>
@@ -250,7 +191,7 @@ add_filter( <span class="hljs-string">&apos;algolia_posts_video_index_settings&a
             <li ><a href="synonyms.html">Synonyms</a></li>
             <li ><a href="custom-attributes.html">Custom Attributes</a></li>
             <li ><a href="replicas.html">Index Replicas</a></li>
-            <li ><a href="migration.html">Migration Guide</a></li>
+            <li class="active"><a href="migration.html">Migration Guide</a></li>
 
             <li class="menu-text">Code References</li>
             <li ><a href="extend-basics.html">Extend & Customize</a></li>
@@ -259,7 +200,7 @@ add_filter( <span class="hljs-string">&apos;algolia_posts_video_index_settings&a
             <li ><a href="actions.html">Action Hooks</a></li>
 
             <li class="menu-text">Integrations</li>
-            <li class="active"><a href="advanced-custom-fields.html">Advanced Custom Fields</a></li>
+            <li ><a href="advanced-custom-fields.html">Advanced Custom Fields</a></li>
             <li ><a href="wpml.html">WPML</a></li>
 
             <li class="menu-text">Debugging</li>

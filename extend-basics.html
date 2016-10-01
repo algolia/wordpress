@@ -29,7 +29,7 @@
   <meta name="description" content="Discover the best way to extend the plugin to customize the behaviour.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
-  <link rel="stylesheet" href="css/app.css?v=1475225954784">
+  <link rel="stylesheet" href="css/app.css?v=1475308317659">
 
   <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
 
@@ -111,7 +111,7 @@
             <div class="row">
                 <div class="large-12 columns" id="content">
                     <h2 id="how-to-extend"><a class="heading-anchor" href="#how-to-extend"><span></span></a>How To Extend</h2>
-<p>The plugin has been built with extensibility in mind. We have tried to wisely integrate <code>filters</code> and <code>actions</code>.</p>
+<p>The plugin has been built with extensibility in mind. We have tried to wisely provide <code>filters</code> and <code>actions</code> but also <code>constants</code>.</p>
 <div class="alert alert-warning">You should never modify files inside the <code>wp-content/plugins</code> directory. If you find yourself in a situation where you require to hack the plugin, let us know so that we can improve the plugin.</div>
 
 <h2 id="create-your-custom-plugin"><a class="heading-anchor" href="#create-your-custom-plugin"><span></span></a>Create your Custom Plugin</h2>
@@ -129,234 +129,6 @@ Plugin Name: My Blog
 <p>If you choose to use your theme files to extend the plugin, please consider creating a child theme so that you can update your theme
 without loosing your changes.</p>
 <p>You can read more about <a href="https://codex.wordpress.org/Child_Themes">child themes in the official documentation</a>.</p>
-<h2 id="filters"><a class="heading-anchor" href="#filters"><span></span></a>Filters</h2>
-<p>Filters are a way to alter data during the lifecycle of a request. The idea is simple: you listen for a filter to be called by using <code>add_filter</code>, you edit your data and return it modified.</p>
-<h2 id="filter-example"><a class="heading-anchor" href="#filter-example"><span></span></a>Filter Example</h2>
-<p>The plugin has a blacklist mechanism to not display certain post types in the admin UI.
-By default, we disabled the following post types to appear:</p>
-<ul>
-<li>nav_menu_item</li>
-<li>revision</li>
-<li>algolia_task</li>
-<li>algolia_log</li>
-<li>kr_request_token</li>
-<li>kr_access_token</li>
-<li>deprecated_log</li>
-<li>async-scan-result</li>
-<li>scanresult</li>
-</ul>
-<p>Let&apos;s say that you have a your plugin introducing some custom content types, but these are meant to be used internally and you don&apos;t want to expose them for indexing.</p>
-<pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">mb_blacklist_custom_post_type</span><span class="hljs-params">( array <span class="hljs-variable">$blacklist</span> )</span> </span>{
-    <span class="hljs-variable">$blacklist</span>[] = <span class="hljs-string">&apos;custom_post_type&apos;</span>;
-
-    <span class="hljs-keyword">return</span> <span class="hljs-variable">$blacklist</span>;
-}
-
-add_filter( <span class="hljs-string">&apos;algolia_post_types_blacklist&apos;</span>, <span class="hljs-string">&apos;mb_blacklist_custom_post_type&apos;</span> );</code></pre>
-
-<p>Your custom_post_type will no longer appear for indexing in the indexing screen.
-This will also disable tasks being generated for that content type.</p>
-<h2 id="filters-reference"><a class="heading-anchor" href="#filters-reference"><span></span></a>Filters Reference</h2>
-<p>Here is the list of all available Filters.</p>
-<table>
-<thead>
-<tr>
-<th>Filter Name</th>
-<th>Params</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>algolia_autocomplete_config</td>
-<td>$config</td>
-</tr>
-<tr>
-<td>algolia_post_types_blacklist</td>
-<td>array $blacklist, defaults to array( &apos;nav_menu_item&apos;, revision&apos; )</td>
-</tr>
-<tr>
-<td>algolia_taxonomies_blacklist</td>
-<td>array $blacklist, defaults to array( &apos;nav_menu&apos;, link_category&apos;, &apos;post_format&apos; )</td>
-</tr>
-<tr>
-<td>algolia_should_index_searchable_post</td>
-<td>bool $should_index, WP_Post $post</td>
-</tr>
-<tr>
-<td>algolia_searchable_post_parser</td>
-<td>Algolia\DOMParser $parser</td>
-</tr>
-<tr>
-<td>algolia_searchable_post_{$post_type}_shared_attributes</td>
-<td>array $shared_attributes, WP_Post $post</td>
-</tr>
-<tr>
-<td>algolia_searchable_posts_index_settings</td>
-<td>array $settings</td>
-</tr>
-<tr>
-<td>algolia_searchable_post_shared_attributes</td>
-<td>array $shared_attributes, WP_Post $post</td>
-</tr>
-<tr>
-<td>algolia_searchable_posts_index_synonyms</td>
-<td>array $synonyms</td>
-</tr>
-<tr>
-<td>algolia_should_index_post</td>
-<td>bool $should_index, WP_Post $post</td>
-</tr>
-<tr>
-<td>algolia_post_parser</td>
-<td>Algolia\DOMParser $parser</td>
-</tr>
-<tr>
-<td>algolia_post_shared_attributes</td>
-<td>array $shared_attributes, WP_Post $post</td>
-</tr>
-<tr>
-<td>algolia_post_{$post_type}_shared_attributes</td>
-<td>array $shared_attributes, WP_Post $post</td>
-</tr>
-<tr>
-<td>algolia_posts_index_settings</td>
-<td>array $settings, string $post_type</td>
-</tr>
-<tr>
-<td>algolia_posts_{$post_type}_index_settings</td>
-<td>array $settings</td>
-</tr>
-<tr>
-<td>algolia_posts_index_synonyms</td>
-<td>array $synonyms, string $post_type</td>
-</tr>
-<tr>
-<td>algolia_posts_{$post_type}_index_synonyms</td>
-<td>array $synonyms</td>
-</tr>
-<tr>
-<td>algolia_should_index_term</td>
-<td>bool $should_index, WP_Term/object $term</td>
-</tr>
-<tr>
-<td>algolia_term_record</td>
-<td>array $record, WP_Term/object$term</td>
-</tr>
-<tr>
-<td>algolia_term_{$taxonomy}_record</td>
-<td>array $record, WP_Term/object $term</td>
-</tr>
-<tr>
-<td>algolia_terms_index_settings</td>
-<td>array $settings</td>
-</tr>
-<tr>
-<td>algolia_terms_{$taxonomy}_index_settings</td>
-<td>array $settings</td>
-</tr>
-<tr>
-<td>algolia_terms_index_synonyms</td>
-<td>array $synonyms, string $taxonomy</td>
-</tr>
-<tr>
-<td>algolia_terms_{$taxonomy}_index_synonyms</td>
-<td>array $synonyms</td>
-</tr>
-<tr>
-<td>algolia_should_index_user</td>
-<td>bool $should_index, WP_User $user</td>
-</tr>
-<tr>
-<td>algolia_user_record</td>
-<td>array $record, WP_User $user</td>
-</tr>
-<tr>
-<td>algolia_users_index_settings</td>
-<td>array $settings</td>
-</tr>
-<tr>
-<td>algolia_users_index_synonyms</td>
-<td>array $synonyms</td>
-</tr>
-<tr>
-<td>algolia_index_replicas</td>
-<td>array $replicas, Algolia_Index $index</td>
-</tr>
-<tr>
-<td>algolia_{$index_id}_index_replicas</td>
-<td>array $replicas, Algolia_Index $index</td>
-</tr>
-<tr>
-<td>algolia_config</td>
-<td>array $config</td>
-</tr>
-<tr>
-<td>algolia_task_queue_lock_ttl</td>
-<td>int $ttl</td>
-</tr>
-<tr>
-<td>algolia_indexing_batch_size</td>
-<td>int $batch_size (default: 50)</td>
-</tr>
-<tr>
-<td>algolia_{$index_id}_indexing_batch_size</td>
-<td>int $batch_size</td>
-</tr>
-<tr>
-<td>algolia_logs_per_page</td>
-<td>int $logs_per_page</td>
-</tr>
-</tbody>
-</table>
-<h2 id="actions"><a class="heading-anchor" href="#actions"><span></span></a>Actions</h2>
-<p>Actions are a way to execute something at a given point in time or after something happened.</p>
-<h2 id="action-example"><a class="heading-anchor" href="#action-example"><span></span></a>Action Example</h2>
-<p>Let&apos;s say we want to log every post indexing task.</p>
-<pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">mb_log_posts_index_updated</span><span class="hljs-params">( <span class="hljs-variable">$post</span> )</span> </span>{
-    <span class="hljs-variable">$log</span> = print_r( <span class="hljs-variable">$post</span>-&gt;to_array(), <span class="hljs-keyword">true</span> );
-    file_put_contents( <span class="hljs-string">&apos;../mb_logs.txt&apos;</span>, <span class="hljs-variable">$log</span>, FILE_APPEND );
-}
-
-add_action( <span class="hljs-string">&apos;algolia_posts_index_post_updated&apos;</span>, <span class="hljs-string">&apos;mb_log_post_index_updated&apos;</span> );</code></pre>
-
-<p>Note that an action does not need to return anything. If it does, it will be ignored anyway.</p>
-<p>In this example, we would simply log an array representation of the post that has been re-indexed.</p>
-<h2 id="actions-reference"><a class="heading-anchor" href="#actions-reference"><span></span></a>Actions Reference</h2>
-<p>Here is the list of all available Actions.</p>
-<table>
-<thead>
-<tr>
-<th>Action Name</th>
-<th>Params</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>algolia_re_indexed_items</td>
-<td>string $index_id</td>
-</tr>
-<tr>
-<td>algolia_de_indexed_items</td>
-<td>string $index_id</td>
-</tr>
-<tr>
-<td>algolia_autocomplete_scripts</td>
-<td><em>none</em></td>
-</tr>
-<tr>
-<td>algolia_instantsearch_scripts</td>
-<td><em>none</em></td>
-</tr>
-<tr>
-<td>algolia_task_handled</td>
-<td>WP_Post $task</td>
-</tr>
-</tbody>
-</table>
 
                 </div>
             </div>
@@ -374,7 +146,7 @@ add_action( <span class="hljs-string">&apos;algolia_posts_index_post_updated&apo
 
             <li class="menu-text">Getting Started</li>
             <li ><a href="installation.html">Installation</a></li>
-            <li ><a href="configuration.html">Configuration</a></li>
+            <li ><a href="configuration.html">Getting Started</a></li>
             <li ><a href="customize-autocomplete.html">Customize Autocomplete</a></li>
             <li ><a href="customize-search-page.html">Customize Search Page</a></li>
 
@@ -385,17 +157,21 @@ add_action( <span class="hljs-string">&apos;algolia_posts_index_post_updated&apo
             <li ><a href="synonyms.html">Synonyms</a></li>
             <li ><a href="custom-attributes.html">Custom Attributes</a></li>
             <li ><a href="replicas.html">Index Replicas</a></li>
+            <li ><a href="migration.html">Migration Guide</a></li>
 
-            <li class="menu-text">Extend</li>
-            <li class="active"><a href="extend-basics.html">Basics</a></li>
-
-            <li class="menu-text">Debugging</li>
-            <li ><a href="logs.html">Logs</a></li>
+            <li class="menu-text">Code References</li>
+            <li class="active"><a href="extend-basics.html">Extend & Customize</a></li>
+            <li ><a href="constants.html">Constants</a></li>
+            <li ><a href="filters.html">Filter Hooks</a></li>
+            <li ><a href="actions.html">Action Hooks</a></li>
 
             <li class="menu-text">Integrations</li>
             <li ><a href="advanced-custom-fields.html">Advanced Custom Fields</a></li>
             <li ><a href="wpml.html">WPML</a></li>
 
+            <li class="menu-text">Debugging</li>
+            <li ><a href="logs.html">Logs</a></li>
+            
             <li class="menu-text">Other</li>
             <li ><a href="internationalization.html">Internationalization</a></li>
             <li ><a href="resources.html">Additional Resources</a></li>
@@ -433,7 +209,7 @@ add_action( <span class="hljs-string">&apos;algolia_posts_index_post_updated&apo
   <a class="ac-footer-btn ac-footer-btn-cta" href="https://community.algolia.com/">See More</a>
   <span class="ac-icon ac-icon-love-dark"></span>
 </div>
-<p class="ac-footer-version">Latest version: 1.1.0</p>
+<p class="ac-footer-version">Latest version: 1.2.0</p>
 <div class="ac-footer-actions">
     <div class="footer-container">
       <p>Build unique search experiences with Algolia</p>

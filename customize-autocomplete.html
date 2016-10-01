@@ -29,7 +29,7 @@
   <meta name="description" content="Customize your drop-down menu that appears underneath every search bar of your WordPress website.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
-  <link rel="stylesheet" href="css/app.css?v=1475225954784">
+  <link rel="stylesheet" href="css/app.css?v=1475308317659">
 
   <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
 
@@ -238,7 +238,10 @@ autocomplete(<span class="hljs-comment">/* .... */</span>);</code></pre>
 }
 add_action( <span class="hljs-string">&apos;wp_print_styles&apos;</span>, <span class="hljs-string">&apos;my_theme_dequeue_styles&apos;</span>, <span class="hljs-number">100</span> );</code></pre>
 
-
+<h2 id="disable-autocomplete-on-certain-search-inputs"><a class="heading-anchor" href="#disable-autocomplete-on-certain-search-inputs"><span></span></a>Disable autocomplete on certain search inputs</h2>
+<p>By default, if the autocomplete feature is turned on, we will attach an Algolia dropdown to every search input of your website matching the jQuery selector <code>input[name=&apos;s&apos;]</code>.</p>
+<p>Note however that we also exclude inputs that have an associated <code>no-autocomplete</code> class.</p>
+<p>So to easily disable the Algolia autocomplete dropdown for a given search input, simply add the <code>no-autocomplete</code> class to it.</p>
 
                 </div>
             </div>
@@ -256,7 +259,7 @@ add_action( <span class="hljs-string">&apos;wp_print_styles&apos;</span>, <span 
 
             <li class="menu-text">Getting Started</li>
             <li ><a href="installation.html">Installation</a></li>
-            <li ><a href="configuration.html">Configuration</a></li>
+            <li ><a href="configuration.html">Getting Started</a></li>
             <li class="active"><a href="customize-autocomplete.html">Customize Autocomplete</a></li>
             <li ><a href="customize-search-page.html">Customize Search Page</a></li>
 
@@ -267,17 +270,21 @@ add_action( <span class="hljs-string">&apos;wp_print_styles&apos;</span>, <span 
             <li ><a href="synonyms.html">Synonyms</a></li>
             <li ><a href="custom-attributes.html">Custom Attributes</a></li>
             <li ><a href="replicas.html">Index Replicas</a></li>
+            <li ><a href="migration.html">Migration Guide</a></li>
 
-            <li class="menu-text">Extend</li>
-            <li ><a href="extend-basics.html">Basics</a></li>
-
-            <li class="menu-text">Debugging</li>
-            <li ><a href="logs.html">Logs</a></li>
+            <li class="menu-text">Code References</li>
+            <li ><a href="extend-basics.html">Extend & Customize</a></li>
+            <li ><a href="constants.html">Constants</a></li>
+            <li ><a href="filters.html">Filter Hooks</a></li>
+            <li ><a href="actions.html">Action Hooks</a></li>
 
             <li class="menu-text">Integrations</li>
             <li ><a href="advanced-custom-fields.html">Advanced Custom Fields</a></li>
             <li ><a href="wpml.html">WPML</a></li>
 
+            <li class="menu-text">Debugging</li>
+            <li ><a href="logs.html">Logs</a></li>
+            
             <li class="menu-text">Other</li>
             <li ><a href="internationalization.html">Internationalization</a></li>
             <li ><a href="resources.html">Additional Resources</a></li>
@@ -315,7 +322,7 @@ add_action( <span class="hljs-string">&apos;wp_print_styles&apos;</span>, <span 
   <a class="ac-footer-btn ac-footer-btn-cta" href="https://community.algolia.com/">See More</a>
   <span class="ac-icon ac-icon-love-dark"></span>
 </div>
-<p class="ac-footer-version">Latest version: 1.1.0</p>
+<p class="ac-footer-version">Latest version: 1.2.0</p>
 <div class="ac-footer-actions">
     <div class="footer-container">
       <p>Build unique search experiences with Algolia</p>

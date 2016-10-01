@@ -2,31 +2,31 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
-  <title>Indices Settings</title>
+  <title>Filters Reference</title>
   <meta content="IE=edge" http-equiv="X-UA-Compatible">
   <meta charset="utf-8">
   <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
 
-  <meta content='Understand the indices default settings and how to customize the ranking.' name='description'>
+  <meta content='The available filters and how to use them to customize the behaviour.' name='description'>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'>
   <!-- / Twitter card -->
   <meta content='summary_large_image' name='twitter:card'>
   <meta content='@Algolia' name='twitter:site'>
   <meta content='@Algolia' name='twitter:creator'>
-  <meta content="Indices Settings - Algolia Search plugin for WordPress" name="twitter:title">
-  <meta content="Understand the indices default settings and how to customize the ranking." name="twitter:description">
+  <meta content="Filters Reference - Algolia Search plugin for WordPress" name="twitter:title">
+  <meta content="The available filters and how to use them to customize the behaviour." name="twitter:description">
   <meta content="https://community.algolia.com/wordpress/img/og-screen.png" name="twitter:image">
   <!--meta content="Algolia Product image" name="twitter:image"-->
   <!-- / OG meta -->
   <meta content='https://community.algolia.com/wordpress/' property='og:url'>
   <meta content='https://community.algolia.com/wordpress/img/og-screen.png' property='og:image'>
-  <meta content='Indices Settings - Algolia Search plugin for WordPress' property='og:title'>
+  <meta content='Filters Reference - Algolia Search plugin for WordPress' property='og:title'>
   <meta content='article' property='og:type'>
-  <meta content='Understand the indices default settings and how to customize the ranking.' property='og:description'>
+  <meta content='The available filters and how to use them to customize the behaviour.' property='og:description'>
   <meta content='Algolia Search plugin for WordPress' property='og:site_name'>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 
-  <meta name="description" content="Understand the indices default settings and how to customize the ranking.">
+  <meta name="description" content="The available filters and how to use them to customize the behaviour.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
   <link rel="stylesheet" href="css/app.css?v=1475308317659">
@@ -101,9 +101,9 @@
             </div>
 
             <header>
-                <h1>Indices Settings</h1>
+                <h1>Filters Reference</h1>
 
-                <p class="lead">Understand the indices default settings and how to customize the ranking.</p>
+                <p class="lead">The available filters and how to use them to customize the behaviour.</p>
             </header>
 
             <hr>
@@ -111,134 +111,36 @@
             <div class="row">
                 <div class="large-12 columns" id="content">
                     <h2 id="introduction"><a class="heading-anchor" href="#introduction"><span></span></a>Introduction</h2>
-<p>Algolia allows you to configure your indices to improve the relevancy of your search results.</p>
-<p>Each index comes with its own customizable settings and <a href="https://www.algolia.com/doc/php#index-settings">a complete list of the settings parameters can be found here</a>.</p>
-<p>This plugin automatically configures each index with some sensible default settings, that being said, you can of course <a href="#custom-index-settings">customize the settings by using some filters</a>.</p>
-<div class="alert alert-warning">Every time an index is re-indexed, the settings will be pushed and override existing ones. This means that you should not edit your settings directly in the Algolia Dashboard. Instead, you should use <code>filters</code>  to hook into this plugin and alter the settings.</div>
-
-<h2 id="settings-anatomy"><a class="heading-anchor" href="#settings-anatomy"><span></span></a>Settings Anatomy</h2>
-<p>Before telling you about the default settings per content type and how to customize them, let&apos;s have a quick overview of a few parameters.</p>
-<p><strong>attributesToIndex</strong>:
-Refers to the attributes that the search will be based on. By default we will generally list here all the text attributes that the user would like to search in.
-Unless we wrap our attribute name in <code>unordered()</code>, word match position matters, meaning that if a word is find earlier in the indexed attribute, it will be considered a better match.</p>
-<p><strong>customRanking</strong>
-Internally, the Algolia Search engine uses a Tie breaking algorithm, which means that at every step of the search process, it will keep only the most relevant results by applying consequently every available ranking algorithm.
-There are a lot of ranking strategies provided out of the box, like <code>typo</code>, <code>geo</code>, etc. If the search engine has more results to offer than expected, we consider as best practice to provide the engine with some custom metrics to take the best decisions.
-In this plugin we provide some sensible defaults so that your search results are as accurate as possible. Feel free to add your custom business metrics.</p>
-<p><strong>attributesForDistinct</strong>
-For the <code>post</code> content type we actually store multiple records for the same item. Why we do that is explained in <a href="index-schema.html">the index schema</a>.
-Even though we have multiple records for a unique <code>post</code>, we only want to display one post as part of the result. For this we use the Algolia <code>attributeForDistinct</code> &amp; <code>distinct</code> feature which is kind of similar to the SQL <code>DISTINCT</code> feature.
-By using this feature, the search engine will only return the most relevant record for a given query.</p>
-<p><strong>attributesForFaceting</strong>
-Algolia allows to prepare your records for faceting. Faceting is the feature allowing you for example to list all posts of a category.
-Even though we do not yet provide out of the box usage of faceting in the plugin, we tried to already push some sensible default values for the <code>attributesForFaceting</code>.</p>
-<div class="alert alert-info">Feel free to dig further into the Algolia Search engine to optimize even more your search relevancy: <a href="https://www.algolia.com/doc#relevance">Relevancy in Algolia&apos;s documentation</a>.</div>
-
-<h2 id="searchable-posts-index-settings"><a class="heading-anchor" href="#searchable-posts-index-settings"><span></span></a>Searchable Posts Index Settings</h2>
-<p><strong>Default searchable posts settings:</strong></p>
+<p>Filters are a way to alter data during the lifecycle of a request. The idea is simple: you listen for a filter to be called by using <code>add_filter</code>, you edit your data and return it modified.</p>
+<h2 id="filter-example"><a class="heading-anchor" href="#filter-example"><span></span></a>Filter Example</h2>
+<p>The plugin has a blacklist mechanism to not display certain post types in the admin UI.
+By default, we disabled the following post types to appear:</p>
+<ul>
+<li>nav_menu_item</li>
+<li>revision</li>
+<li>algolia_task</li>
+<li>algolia_log</li>
+<li>kr_request_token</li>
+<li>kr_access_token</li>
+<li>deprecated_log</li>
+<li>async-scan-result</li>
+<li>scanresult</li>
+</ul>
+<p>Let&apos;s say that you have a your plugin introducing some custom content types, but these are meant to be used internally and you don&apos;t want to expose them for indexing.</p>
 <pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
-<span class="hljs-variable">$settings</span> = <span class="hljs-keyword">array</span>(
-    <span class="hljs-string">&apos;attributesToIndex&apos;</span> =&gt; <span class="hljs-keyword">array</span>(
-        <span class="hljs-string">&apos;unordered(post_title)&apos;</span>,
-        <span class="hljs-string">&apos;unordered(title1)&apos;</span>,
-        <span class="hljs-string">&apos;unordered(title2)&apos;</span>,
-        <span class="hljs-string">&apos;unordered(title3)&apos;</span>,
-        <span class="hljs-string">&apos;unordered(title4)&apos;</span>,
-        <span class="hljs-string">&apos;unordered(title5)&apos;</span>,
-        <span class="hljs-string">&apos;unordered(title6)&apos;</span>,
-        <span class="hljs-string">&apos;unordered(content)&apos;</span>,
-    ),
-    <span class="hljs-string">&apos;customRanking&apos;</span> =&gt; <span class="hljs-keyword">array</span>(
-        <span class="hljs-string">&apos;desc(is_sticky)&apos;</span>,
-        <span class="hljs-string">&apos;desc(post_date)&apos;</span>,
-    ),
-    <span class="hljs-string">&apos;attributeForDistinct&apos;</span>  =&gt; <span class="hljs-string">&apos;post_id&apos;</span>,
-    <span class="hljs-string">&apos;distinct&apos;</span>              =&gt; <span class="hljs-keyword">true</span>,
-    <span class="hljs-string">&apos;attributesForFaceting&apos;</span> =&gt; <span class="hljs-keyword">array</span>(
-        <span class="hljs-string">&apos;taxonomy_post_tag&apos;</span>,
-        <span class="hljs-string">&apos;taxonomy_category&apos;</span>,
-        <span class="hljs-string">&apos;post_author.display_name&apos;</span>,
-        <span class="hljs-string">&apos;post_type_label&apos;</span>,
-    ),
-    <span class="hljs-string">&apos;attributesToSnippet&apos;</span> =&gt; <span class="hljs-keyword">array</span>(
-        <span class="hljs-string">&apos;post_title:30&apos;</span>,
-        <span class="hljs-string">&apos;title1:30&apos;</span>,
-        <span class="hljs-string">&apos;title2:30&apos;</span>,
-        <span class="hljs-string">&apos;title3:30&apos;</span>,
-        <span class="hljs-string">&apos;title4:30&apos;</span>,
-        <span class="hljs-string">&apos;title5:30&apos;</span>,
-        <span class="hljs-string">&apos;title6:30&apos;</span>,
-        <span class="hljs-string">&apos;content:30&apos;</span>,
-    ),
-    <span class="hljs-string">&apos;snippetEllipsisText&apos;</span> =&gt; <span class="hljs-string">&apos;&#x2026;&apos;</span>,
-);</code></pre>
 
-<h2 id="posts-index-settings"><a class="heading-anchor" href="#posts-index-settings"><span></span></a>Posts Index Settings</h2>
-<p><strong>Default posts settings:</strong></p>
-<pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
-<span class="hljs-variable">$settings</span> = <span class="hljs-keyword">array</span>(
-    <span class="hljs-string">&apos;attributesToIndex&apos;</span> =&gt; <span class="hljs-keyword">array</span>(
-        <span class="hljs-string">&apos;unordered(post_title)&apos;</span>,
-        <span class="hljs-string">&apos;unordered(title1)&apos;</span>,
-        <span class="hljs-string">&apos;unordered(title2)&apos;</span>,
-        <span class="hljs-string">&apos;unordered(title3)&apos;</span>,
-        <span class="hljs-string">&apos;unordered(title4)&apos;</span>,
-        <span class="hljs-string">&apos;unordered(title5)&apos;</span>,
-        <span class="hljs-string">&apos;unordered(title6)&apos;</span>,
-        <span class="hljs-string">&apos;unordered(content)&apos;</span>,
-    ),
-    <span class="hljs-string">&apos;customRanking&apos;</span> =&gt; <span class="hljs-keyword">array</span>(
-        <span class="hljs-string">&apos;desc(is_sticky)&apos;</span>,
-        <span class="hljs-string">&apos;desc(post_date)&apos;</span>,
-    ),
-    <span class="hljs-string">&apos;attributeForDistinct&apos;</span>  =&gt; <span class="hljs-string">&apos;post_id&apos;</span>,
-    <span class="hljs-string">&apos;distinct&apos;</span>              =&gt; <span class="hljs-keyword">true</span>,
-    <span class="hljs-string">&apos;attributesForFaceting&apos;</span> =&gt; <span class="hljs-keyword">array</span>(
-        <span class="hljs-string">&apos;taxonomy_post_tag&apos;</span>,
-        <span class="hljs-string">&apos;taxonomy_category&apos;</span>,
-        <span class="hljs-string">&apos;post_author.display_name&apos;</span>,
-    ),
-    <span class="hljs-string">&apos;attributesToSnippet&apos;</span> =&gt; <span class="hljs-keyword">array</span>(
-        <span class="hljs-string">&apos;post_title:30&apos;</span>,
-        <span class="hljs-string">&apos;title1:30&apos;</span>,
-        <span class="hljs-string">&apos;title2:30&apos;</span>,
-        <span class="hljs-string">&apos;title3:30&apos;</span>,
-        <span class="hljs-string">&apos;title4:30&apos;</span>,
-        <span class="hljs-string">&apos;title5:30&apos;</span>,
-        <span class="hljs-string">&apos;title6:30&apos;</span>,
-        <span class="hljs-string">&apos;content:30&apos;</span>,
-    ),
-    <span class="hljs-string">&apos;snippetEllipsisText&apos;</span> =&gt; <span class="hljs-string">&apos;&#x2026;&apos;</span>,
-);</code></pre>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">mb_blacklist_custom_post_type</span><span class="hljs-params">( array <span class="hljs-variable">$blacklist</span> )</span> </span>{
+    <span class="hljs-variable">$blacklist</span>[] = <span class="hljs-string">&apos;custom_post_type&apos;</span>;
 
-<h2 id="terms-index-settings"><a class="heading-anchor" href="#terms-index-settings"><span></span></a>Terms Index Settings</h2>
-<p><strong>Default terms settings:</strong></p>
-<pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
-<span class="hljs-variable">$settings</span> = <span class="hljs-keyword">array</span>(
-    <span class="hljs-string">&apos;attributesToIndex&apos;</span> =&gt; <span class="hljs-keyword">array</span>(
-        <span class="hljs-string">&apos;unordered(name)&apos;</span>,
-        <span class="hljs-string">&apos;unordered(description)&apos;</span>,
-    ),
-    <span class="hljs-string">&apos;customRanking&apos;</span> =&gt; <span class="hljs-keyword">array</span>(
-        <span class="hljs-string">&apos;desc(posts_count)&apos;</span>,
-    ),
-);</code></pre>
+    <span class="hljs-keyword">return</span> <span class="hljs-variable">$blacklist</span>;
+}
 
-<h2 id="users-index-settings"><a class="heading-anchor" href="#users-index-settings"><span></span></a>Users Index Settings</h2>
-<p><strong>Default users settings:</strong></p>
-<pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
-<span class="hljs-variable">$settings</span> = <span class="hljs-keyword">array</span>(
-    <span class="hljs-string">&apos;attributesToIndex&apos;</span> =&gt; <span class="hljs-keyword">array</span>(
-        <span class="hljs-string">&apos;unordered(display_name)&apos;</span>,
-    ),
-    <span class="hljs-string">&apos;customRanking&apos;</span> =&gt; <span class="hljs-keyword">array</span>(
-        <span class="hljs-string">&apos;desc(posts_count)&apos;</span>,
-    ),
-);</code></pre>
+add_filter( <span class="hljs-string">&apos;algolia_post_types_blacklist&apos;</span>, <span class="hljs-string">&apos;mb_blacklist_custom_post_type&apos;</span> );</code></pre>
 
-<h2 id="custom-index-settings"><a class="heading-anchor" href="#custom-index-settings"><span></span></a>Custom Index Settings</h2>
-<p>You can customize the settings pushed to Algolia for every content type.
-To do so simply use the available filters:</p>
+<p>Your custom_post_type will no longer appear for indexing in the indexing screen.
+This will also disable tasks being generated for that content type.</p>
+<h2 id="filters-reference"><a class="heading-anchor" href="#filters-reference"><span></span></a>Filters Reference</h2>
+<p>Here is the list of all available Filters.</p>
 <table>
 <thead>
 <tr>
@@ -248,64 +150,154 @@ To do so simply use the available filters:</p>
 </thead>
 <tbody>
 <tr>
+<td>algolia_autocomplete_config</td>
+<td>$config</td>
+</tr>
+<tr>
+<td>algolia_post_types_blacklist</td>
+<td>array $blacklist, defaults to array( &apos;nav_menu_item&apos;, revision&apos; )</td>
+</tr>
+<tr>
+<td>algolia_taxonomies_blacklist</td>
+<td>array $blacklist, defaults to array( &apos;nav_menu&apos;, link_category&apos;, &apos;post_format&apos; )</td>
+</tr>
+<tr>
+<td>algolia_should_index_searchable_post</td>
+<td>bool $should_index, WP_Post $post</td>
+</tr>
+<tr>
+<td>algolia_searchable_post_parser</td>
+<td>Algolia\DOMParser $parser</td>
+</tr>
+<tr>
+<td>algolia_searchable_post_{$post_type}_shared_attributes</td>
+<td>array $shared_attributes, WP_Post $post</td>
+</tr>
+<tr>
+<td>algolia_searchable_posts_index_settings</td>
+<td>array $settings</td>
+</tr>
+<tr>
+<td>algolia_searchable_post_shared_attributes</td>
+<td>array $shared_attributes, WP_Post $post</td>
+</tr>
+<tr>
+<td>algolia_searchable_posts_index_synonyms</td>
+<td>array $synonyms</td>
+</tr>
+<tr>
+<td>algolia_should_index_post</td>
+<td>bool $should_index, WP_Post $post</td>
+</tr>
+<tr>
+<td>algolia_post_parser</td>
+<td>Algolia\DOMParser $parser</td>
+</tr>
+<tr>
+<td>algolia_post_shared_attributes</td>
+<td>array $shared_attributes, WP_Post $post</td>
+</tr>
+<tr>
+<td>algolia_post_{$post_type}_shared_attributes</td>
+<td>array $shared_attributes, WP_Post $post</td>
+</tr>
+<tr>
 <td>algolia_posts_index_settings</td>
-<td><code>$settings</code>, the posts index settings. <code>$post_type</code>, the post type, like &quot;page&quot; or &quot;post&quot;.</td>
+<td>array $settings, string $post_type</td>
 </tr>
 <tr>
 <td>algolia_posts_{$post_type}_index_settings</td>
-<td><code>$settings</code>, the posts index settings.</td>
+<td>array $settings</td>
+</tr>
+<tr>
+<td>algolia_posts_index_synonyms</td>
+<td>array $synonyms, string $post_type</td>
+</tr>
+<tr>
+<td>algolia_posts_{$post_type}_index_synonyms</td>
+<td>array $synonyms</td>
+</tr>
+<tr>
+<td>algolia_should_index_term</td>
+<td>bool $should_index, WP_Term/object $term</td>
+</tr>
+<tr>
+<td>algolia_term_record</td>
+<td>array $record, WP_Term/object$term</td>
+</tr>
+<tr>
+<td>algolia_term_{$taxonomy}_record</td>
+<td>array $record, WP_Term/object $term</td>
 </tr>
 <tr>
 <td>algolia_terms_index_settings</td>
-<td><code>$settings</code>, the terms index settings. <code>$taxonomy</code>, the taxonomy like &quot;post_tag&quot; or &quot;category&quot;.</td>
+<td>array $settings</td>
 </tr>
 <tr>
 <td>algolia_terms_{$taxonomy}_index_settings</td>
-<td><code>$settings</code>, the terms index settings.</td>
+<td>array $settings</td>
+</tr>
+<tr>
+<td>algolia_terms_index_synonyms</td>
+<td>array $synonyms, string $taxonomy</td>
+</tr>
+<tr>
+<td>algolia_terms_{$taxonomy}_index_synonyms</td>
+<td>array $synonyms</td>
+</tr>
+<tr>
+<td>algolia_should_index_user</td>
+<td>bool $should_index, WP_User $user</td>
+</tr>
+<tr>
+<td>algolia_user_record</td>
+<td>array $record, WP_User $user</td>
 </tr>
 <tr>
 <td>algolia_users_index_settings</td>
-<td><code>$settings</code>, the users index settings.</td>
+<td>array $settings</td>
+</tr>
+<tr>
+<td>algolia_users_index_synonyms</td>
+<td>array $synonyms</td>
+</tr>
+<tr>
+<td>algolia_index_replicas</td>
+<td>array $replicas, Algolia_Index $index</td>
+</tr>
+<tr>
+<td>algolia_{$index_id}_index_replicas</td>
+<td>array $replicas, Algolia_Index $index</td>
+</tr>
+<tr>
+<td>algolia_config</td>
+<td>array $config</td>
+</tr>
+<tr>
+<td>algolia_task_queue_lock_ttl</td>
+<td>int $ttl</td>
+</tr>
+<tr>
+<td>algolia_indexing_batch_size</td>
+<td>int $batch_size (default: 50)</td>
+</tr>
+<tr>
+<td>algolia_{$index_id}_indexing_batch_size</td>
+<td>int $batch_size</td>
+</tr>
+<tr>
+<td>algolia_logs_per_page</td>
+<td>int $logs_per_page</td>
 </tr>
 </tbody>
 </table>
-<h2 id="custom-index-settings-example"><a class="heading-anchor" href="#custom-index-settings-example"><span></span></a>Custom Index Settings Example</h2>
-<p>Let&apos;s say you have some custom metric named <code>visits_count</code> and you would like to add a custom ranking rule on that one:</p>
-<pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">custom_posts_index_settings</span><span class="hljs-params">( array <span class="hljs-variable">$settings</span> )</span> </span>{
-    <span class="hljs-variable">$custom_ranking</span> = <span class="hljs-variable">$settings</span>[<span class="hljs-string">&apos;customRanking&apos;</span>];
-    array_unshift( <span class="hljs-variable">$custom_ranking</span>, <span class="hljs-string">&apos;desc(visits_count)&apos;</span> );
-    <span class="hljs-variable">$settings</span>[<span class="hljs-string">&apos;customRanking&apos;</span>] = <span class="hljs-variable">$custom_ranking</span>;
-
-    <span class="hljs-keyword">return</span> <span class="hljs-variable">$settings</span>;
-}
-add_filter( <span class="hljs-string">&apos;algolia_posts_index_settings&apos;</span>, <span class="hljs-string">&apos;custom_posts_index_settings&apos;</span> );</code></pre>
-
-<p>Every post type having it&apos;s own index in Algolia, we can also determine custom settings per post type like:</p>
-<pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
-
-<span class="hljs-comment">// Customize settings for pages only.</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">custom_pages_index_settings</span><span class="hljs-params">( array <span class="hljs-variable">$settings</span> )</span> </span>{
-    <span class="hljs-comment">/* Your adjustments */</span>
-
-    <span class="hljs-keyword">return</span> <span class="hljs-variable">$settings</span>;
-}
-add_filter( <span class="hljs-string">&apos;algolia_posts_page_index_settings&apos;</span>, <span class="hljs-string">&apos;custom_pages_index_settings&apos;</span> );
-
-<span class="hljs-comment">// OR customize for posts only.</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">custom_posts_index_settings</span><span class="hljs-params">( array <span class="hljs-variable">$settings</span> )</span> </span>{
-    <span class="hljs-comment">/* Your adjustments */</span>
-
-    <span class="hljs-keyword">return</span> <span class="hljs-variable">$settings</span>;
-}
-add_filter( <span class="hljs-string">&apos;algolia_posts_post_index_settings&apos;</span>, <span class="hljs-string">&apos;custom_posts_index_settings&apos;</span> );</code></pre>
                 </div>
             </div>
 
             <ul class="menu simple text-center">
-                <li><a href="https://github.com/algolia/algoliasearch-wordpress/edit/master/docs/src/indexing-settings.md" target="_blank"><i class="fi-pencil"></i> <span>Edit this Page</span></a></li>
-                <li><a href="https://github.com/algolia/algoliasearch-wordpress/issues/new?title=%5BIndices Settings%5D%20ISSUE%20NAME%20HERE" target="_blank"><i class="fi-social-github"></i> <span>Report a Bug</span></a></li>
+                <li><a href="https://github.com/algolia/algoliasearch-wordpress/edit/master/docs/src/filters.md" target="_blank"><i class="fi-pencil"></i> <span>Edit this Page</span></a></li>
+                <li><a href="https://github.com/algolia/algoliasearch-wordpress/issues/new?title=%5BFilters Reference%5D%20ISSUE%20NAME%20HERE" target="_blank"><i class="fi-social-github"></i> <span>Report a Bug</span></a></li>
                 <li><a href="http://stackoverflow.com/questions/tagged/algolia+wordpress" target="_blank"><i class="fi-comment"></i> <span>Get Help</span></a></li>
             </ul>
         </article>
@@ -322,7 +314,7 @@ add_filter( <span class="hljs-string">&apos;algolia_posts_post_index_settings&ap
 
             <li class="menu-text">Indexing</li>
             <li ><a href="index-schema.html">Schemas</a></li>
-            <li class="active"><a href="indexing-settings.html">Settings</a></li>
+            <li ><a href="indexing-settings.html">Settings</a></li>
             <li ><a href="indexing-flow.html">Automated Sync.</a></li>
             <li ><a href="synonyms.html">Synonyms</a></li>
             <li ><a href="custom-attributes.html">Custom Attributes</a></li>
@@ -332,7 +324,7 @@ add_filter( <span class="hljs-string">&apos;algolia_posts_post_index_settings&ap
             <li class="menu-text">Code References</li>
             <li ><a href="extend-basics.html">Extend & Customize</a></li>
             <li ><a href="constants.html">Constants</a></li>
-            <li ><a href="filters.html">Filter Hooks</a></li>
+            <li class="active"><a href="filters.html">Filter Hooks</a></li>
             <li ><a href="actions.html">Action Hooks</a></li>
 
             <li class="menu-text">Integrations</li>
