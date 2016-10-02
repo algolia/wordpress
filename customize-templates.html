@@ -2,31 +2,31 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
-  <title>WPML integration with Algolia Search</title>
+  <title>Customize templates from your theme</title>
   <meta content="IE=edge" http-equiv="X-UA-Compatible">
   <meta charset="utf-8">
   <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
 
-  <meta content='Integrate Algolia Search for WordPress with WPML.' name='description'>
+  <meta content='Ship custom templates for Algolia Search with your theme.' name='description'>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'>
   <!-- / Twitter card -->
   <meta content='summary_large_image' name='twitter:card'>
   <meta content='@Algolia' name='twitter:site'>
   <meta content='@Algolia' name='twitter:creator'>
-  <meta content="WPML integration with Algolia Search - Algolia Search plugin for WordPress" name="twitter:title">
-  <meta content="Integrate Algolia Search for WordPress with WPML." name="twitter:description">
+  <meta content="Customize templates from your theme - Algolia Search plugin for WordPress" name="twitter:title">
+  <meta content="Ship custom templates for Algolia Search with your theme." name="twitter:description">
   <meta content="https://community.algolia.com/wordpress/img/og-screen.png" name="twitter:image">
   <!--meta content="Algolia Product image" name="twitter:image"-->
   <!-- / OG meta -->
   <meta content='https://community.algolia.com/wordpress/' property='og:url'>
   <meta content='https://community.algolia.com/wordpress/img/og-screen.png' property='og:image'>
-  <meta content='WPML integration with Algolia Search - Algolia Search plugin for WordPress' property='og:title'>
+  <meta content='Customize templates from your theme - Algolia Search plugin for WordPress' property='og:title'>
   <meta content='article' property='og:type'>
-  <meta content='Integrate Algolia Search for WordPress with WPML.' property='og:description'>
+  <meta content='Ship custom templates for Algolia Search with your theme.' property='og:description'>
   <meta content='Algolia Search plugin for WordPress' property='og:site_name'>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 
-  <meta name="description" content="Integrate Algolia Search for WordPress with WPML.">
+  <meta name="description" content="Ship custom templates for Algolia Search with your theme.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
   <link rel="stylesheet" href="css/app.css?v=1475417615126">
@@ -101,9 +101,9 @@
             </div>
 
             <header>
-                <h1>WPML integration with Algolia Search</h1>
+                <h1>Customize templates from your theme</h1>
 
-                <p class="lead">Integrate Algolia Search for WordPress with WPML.</p>
+                <p class="lead">Ship custom templates for Algolia Search with your theme.</p>
             </header>
 
             <hr>
@@ -111,61 +111,87 @@
             <div class="row">
                 <div class="large-12 columns" id="content">
                     <h2 id="introduction"><a class="heading-anchor" href="#introduction"><span></span></a>Introduction</h2>
-<p>WPML is a very famous plugin that makes managing multilingual WordPress websites easy.</p>
-<p>On this page you we will give some examples on how to push language related data along with your content.</p>
-<h2 id="push-wpml-language-data-to-algolia"><a class="heading-anchor" href="#push-wpml-language-data-to-algolia"><span></span></a>Push WPML language data to Algolia</h2>
-<p>In the following example, we add the <code>wpml</code> field to the posts.</p>
+<p>We provide users with a default look &amp; feel for the 2 main features of the plugin which are the autocomplete drop-down and the instant search page.</p>
+<p>That being said, as a theme author you might want to customize the appearance of the search experiences so that they fit into your theme even more.</p>
+<p>To do so, you can ship one of the 2 template files with your theme or both like explained in:</p>
+<ul>
+<li><a href="customize-autocomplete.html">The customization of the autocomplete dropdown</a></li>
+<li><a href="customize-search-page.html">The customization of the instant search page</a></li>
+</ul>
+<div class="alert alert-warning">If you are not the author of the theme you are using, we recommend you create a <a href="https://codex.wordpress.org/Child_Themes">child theme</a> so that you don&apos;t loose your changes after updating the theme.</div>
+
+<h2 id="default-location-of-template-files"><a class="heading-anchor" href="#default-location-of-template-files"><span></span></a>Default location of template files</h2>
+<p>By default, the plugin will look for the template files in your theme in different locations by order of priority:</p>
+<ol>
+<li>In the root folder of your theme, e.g. <code>wp-content/themes/yourtheme/autocomplete.php</code></li>
+<li>In a folder named <code>algolia</code>, e.g. <code>wp-content/themes/yourtheme/algolia/autocomplete.php</code></li>
+<li>In a custom defined directory like explained in the (Customize template folder name section)[#customize-templates-folder-name]</li>
+<li>At custom locations like explained in (Customize template names and location)[#customize-template-names-and-location]</li>
+<li>In the plugin&apos;s <code>templates</code> folder if none of the preceeding matched.</li>
+</ol>
+<div class="alert alert-warning">
+The first matching template found will be used.
+Even if you defined a custom directory like explained in the next section, and if a template is found in <code>wp-content/themes/yourtheme/algolia/*</code>, then that later one would be used.
+</div>
+
+<h2 id="customize-templates-folder-name"><a class="heading-anchor" href="#customize-templates-folder-name"><span></span></a>Customize templates folder name</h2>
+<p>We provide a filter called <code>algolia_templates_path</code> which allows you to customize the name of the folder where the plugin will look for templates.</p>
+<p>Here is an example that let&apos;s you place your template files for customizing the Algolia Search experiences in a folder named <code>partials/</code> instead of <code>algolia/</code>.</p>
+ <pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
+ <span class="hljs-comment">// functions.php in your theme&apos;s root directory.</span>
+
+ add_filter( <span class="hljs-string">&apos;algolia_templates_path&apos;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+     <span class="hljs-keyword">return</span> <span class="hljs-string">&apos;partials/&apos;</span>;
+ } );</code></pre>
+
+ <div class="alert alert-warning">Be sure you don&apos;t omit the trailing slash.</div>
+
+<p> You can now place your algolia template inside of the <code>partials</code> folder.</p>
+<p> The plugin will try to load:</p>
+<ul>
+<li>wp-content/themes/yourtheme/partials/autocomplete.php</li>
+<li>wp-content/themes/yourtheme/partials/instantsearch.php</li>
+</ul>
+ <div class="alert alert-info">If one of the template is not present in the folder, it will fallback to the template shipped with the plugin only for that one, still loading your custom version for the other.</div>
+
+<h2 id="customize-template-names-and-location"><a class="heading-anchor" href="#customize-template-names-and-location"><span></span></a>Customize template names and location</h2>
+<p>In the previous section you learned how to customize the folder where the plugin will try to load the templates from.</p>
+<p>As a theme author, maybe you are respecting some kind of naming convention, and it that regard you would also like to change the template names in addition to their location.</p>
+<p>Here again we provide a filter hook called <code>algolia_template_locations</code> that allows you to suggest the plugin additional locations to look at when loading templates.</p>
+<p>In the next example, we make it so that the templates will be loaded from:</p>
+<ul>
+<li>wp-content/themes/yourtheme/search/algolia-autocomplete.php</li>
+<li>wp-content/themes/yourtheme/search/algolia-instantsearch.php</li>
+</ul>
 <pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
 
 <span class="hljs-comment">/**
- * <span class="hljs-doctag">@param</span> array   $shared_attributes
- * <span class="hljs-doctag">@param</span> WP_Post $post
+ * <span class="hljs-doctag">@param</span> array  $locations
+ * <span class="hljs-doctag">@param</span> string $file
  *
  * <span class="hljs-doctag">@return</span> array
  */</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">my_post_shared_attributes</span><span class="hljs-params">( array <span class="hljs-variable">$shared_attributes</span>, WP_Post <span class="hljs-variable">$post</span> )</span> </span>{
-    <span class="hljs-comment">// Here we make sure we push the post&apos;s language data to Algolia.</span>
-    <span class="hljs-variable">$shared_attributes</span>[<span class="hljs-string">&apos;wpml&apos;</span>] = apply_filters( <span class="hljs-string">&apos;wpml_post_language_details&apos;</span>, <span class="hljs-keyword">null</span>,  <span class="hljs-variable">$post</span>-&gt;ID );
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">yourtheme_algolia_template_locations</span><span class="hljs-params">( array <span class="hljs-variable">$locations</span>, <span class="hljs-variable">$file</span> )</span> </span>{
+    <span class="hljs-keyword">if</span> ( <span class="hljs-variable">$file</span> === <span class="hljs-string">&apos;autocomplete.php&apos;</span> ) {
+        <span class="hljs-variable">$locations</span>[] = <span class="hljs-string">&apos;search/algolia-autocomplete.php&apos;</span>;
+    } <span class="hljs-keyword">elseif</span> ( <span class="hljs-variable">$file</span> === <span class="hljs-string">&apos;instantsearch.php&apos;</span> ) {
+        <span class="hljs-variable">$locations</span>[] = <span class="hljs-string">&apos;search/algolia-instantsearch.php&apos;</span>;
+    }
 
-    <span class="hljs-keyword">return</span> <span class="hljs-variable">$shared_attributes</span>;
+    <span class="hljs-keyword">return</span> <span class="hljs-variable">$locations</span>;
 }
 
-<span class="hljs-comment">// Push WPML data for both posts and searchable posts indices.</span>
-add_filter( <span class="hljs-string">&apos;algolia_post_shared_attributes&apos;</span>, <span class="hljs-string">&apos;my_post_shared_attributes&apos;</span>, <span class="hljs-number">10</span>, <span class="hljs-number">2</span> );
-add_filter( <span class="hljs-string">&apos;algolia_searchable_post_shared_attributes&apos;</span>, <span class="hljs-string">&apos;my_post_shared_attributes&apos;</span>, <span class="hljs-number">10</span>, <span class="hljs-number">2</span> );</code></pre>
+<span class="hljs-comment">// functions.php in your theme&apos;s root directory.</span>
+add_filter( <span class="hljs-string">&apos;algolia_template_locations&apos;</span>, <span class="hljs-string">&apos;yourtheme_algolia_template_locations&apos;</span>, <span class="hljs-number">10</span>, <span class="hljs-number">2</span> );</code></pre>
 
-<p><strong>Do not forget to hit the &apos;re-index all&apos; button after making such changes to indices configuration.</strong></p>
-<h2 id="prepare-your-indices-for-filtering-based-on-language-code"><a class="heading-anchor" href="#prepare-your-indices-for-filtering-based-on-language-code"><span></span></a>Prepare your indices for filtering based on language code</h2>
-<p>In the previous section you learned you to <a href="#push-wpml-language-data-to-algolia">push language data to Algolia</a>.</p>
-<p>Now what you will probably want at some point is to scope your search on given language codes.</p>
-<p>To be able to filter on language codes, we first need to tell Algolia that <code>wpml.language_code</code> should be an attribute to consider for faceting.</p>
-<pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
-
-<span class="hljs-comment">/**
- * <span class="hljs-doctag">@param</span> array $settings
- *
- * <span class="hljs-doctag">@return</span> array
- */</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">my_posts_index_settings</span><span class="hljs-params">( array <span class="hljs-variable">$settings</span> )</span> </span>{
-    <span class="hljs-comment">// We add the language code to the facets to be able to easily filter on it.</span>
-    <span class="hljs-variable">$settings</span>[<span class="hljs-string">&apos;attributesForFaceting&apos;</span>][] = <span class="hljs-string">&apos;wpml.language_code&apos;</span>;
-
-    <span class="hljs-keyword">return</span> <span class="hljs-variable">$settings</span>;
-}
-
-add_filter( <span class="hljs-string">&apos;algolia_posts_index_settings&apos;</span>, <span class="hljs-string">&apos;my_posts_index_settings&apos;</span> );
-add_filter( <span class="hljs-string">&apos;algolia_searchable_posts_index_settings&apos;</span>, <span class="hljs-string">&apos;my_posts_index_settings&apos;</span> );</code></pre>
-
-<div class="alert alert-warning">Do not forget to hit the &apos;re-index all&apos; button after making such changes to indices configuration.</div>
-
-
+<div class="alert alert-warning">Please note that templates found in the templates directory we customized in the previous section will always take preceedence.</div>
 
                 </div>
             </div>
 
             <ul class="menu simple text-center">
-                <li><a href="https://github.com/algolia/algoliasearch-wordpress/edit/master/docs/src/wpml.md" target="_blank"><i class="fi-pencil"></i> <span>Edit this Page</span></a></li>
-                <li><a href="https://github.com/algolia/algoliasearch-wordpress/issues/new?title=%5BWPML integration with Algolia Search%5D%20ISSUE%20NAME%20HERE" target="_blank"><i class="fi-social-github"></i> <span>Report a Bug</span></a></li>
+                <li><a href="https://github.com/algolia/algoliasearch-wordpress/edit/master/docs/src/customize-templates.md" target="_blank"><i class="fi-pencil"></i> <span>Edit this Page</span></a></li>
+                <li><a href="https://github.com/algolia/algoliasearch-wordpress/issues/new?title=%5BCustomize templates from your theme%5D%20ISSUE%20NAME%20HERE" target="_blank"><i class="fi-social-github"></i> <span>Report a Bug</span></a></li>
                 <li><a href="http://stackoverflow.com/questions/tagged/algolia+wordpress" target="_blank"><i class="fi-comment"></i> <span>Get Help</span></a></li>
             </ul>
         </article>
@@ -197,10 +223,10 @@ add_filter( <span class="hljs-string">&apos;algolia_searchable_posts_index_setti
 
             <li class="menu-text">Integrations</li>
             <li ><a href="advanced-custom-fields.html">Advanced Custom Fields</a></li>
-            <li class="active"><a href="wpml.html">WPML</a></li>
+            <li ><a href="wpml.html">WPML</a></li>
 
             <li class="menu-text">Theme Development</li>
-            <li ><a href="customize-templates.html">Customize Templates</a></li>
+            <li class="active"><a href="customize-templates.html">Customize Templates</a></li>
 
             <li class="menu-text">Debugging</li>
             <li ><a href="logs.html">Logs</a></li>
