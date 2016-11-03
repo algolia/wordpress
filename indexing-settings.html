@@ -29,7 +29,7 @@
   <meta name="description" content="Understand the indices default settings and how to customize the ranking.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
-  <link rel="stylesheet" href="css/app.css?v=1476789780891">
+  <link rel="stylesheet" href="css/app.css?v=1478169403863">
 
   <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
 
@@ -120,7 +120,7 @@
 <p>Before telling you about the default settings per content type and how to customize them, let&apos;s have a quick overview of a few parameters.</p>
 <p><strong>attributesToIndex</strong>:
 Refers to the attributes that the search will be based on. By default we will generally list here all the text attributes that the user would like to search in.
-Unless we wrap our attribute name in <code>unordered()</code>, word match position matters, meaning that if a word is find earlier in the indexed attribute, it will be considered a better match.</p>
+Unless we wrap our attribute name in <code>unordered()</code>, word match position matters, meaning that if a word is found earlier in the indexed attribute, it will be considered a better match.</p>
 <p><strong>customRanking</strong>
 Internally, the Algolia Search engine uses a Tie breaking algorithm, which means that at every step of the search process, it will keep only the most relevant results by applying consequently every available ranking algorithm.
 There are a lot of ranking strategies provided out of the box, like <code>typo</code>, <code>geo</code>, etc. If the search engine has more results to offer than expected, we consider as best practice to provide the engine with some custom metrics to take the best decisions.
@@ -519,8 +519,8 @@ add_filter( <span class="hljs-string">&apos;algolia_posts_post_index_settings&ap
 </svg>
 <script src="vendor/jquery/jquery.js"></script>
 <script src="vendor/foundation-sites/foundation.js"></script>
-<script src="js/app.js?v=1476789780891"></script>
-<script src="js/responsiveNavigation.js?v=1476789780891"></script>
+<script src="js/app.js?v=1478169403863"></script>
+<script src="js/responsiveNavigation.js?v=1478169403863"></script>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <script src="https://cdn.jsdelivr.net/lodash/4.16.2/lodash.min.js"></script>
 
