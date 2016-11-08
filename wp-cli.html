@@ -2,31 +2,31 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
-  <title>Internationalization</title>
+  <title>WP-CLI</title>
   <meta content="IE=edge" http-equiv="X-UA-Compatible">
   <meta charset="utf-8">
   <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
 
-  <meta content='How the plugin handles different languages.' name='description'>
+  <meta content='WP-CLI Algolia commands.' name='description'>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'>
   <!-- / Twitter card -->
   <meta content='summary_large_image' name='twitter:card'>
   <meta content='@Algolia' name='twitter:site'>
   <meta content='@Algolia' name='twitter:creator'>
-  <meta content="Internationalization - Algolia Search plugin for WordPress" name="twitter:title">
-  <meta content="How the plugin handles different languages." name="twitter:description">
+  <meta content="WP-CLI - Algolia Search plugin for WordPress" name="twitter:title">
+  <meta content="WP-CLI Algolia commands." name="twitter:description">
   <meta content="https://community.algolia.com/wordpress/img/og-screen.png" name="twitter:image">
   <!--meta content="Algolia Product image" name="twitter:image"-->
   <!-- / OG meta -->
   <meta content='https://community.algolia.com/wordpress/' property='og:url'>
   <meta content='https://community.algolia.com/wordpress/img/og-screen.png' property='og:image'>
-  <meta content='Internationalization - Algolia Search plugin for WordPress' property='og:title'>
+  <meta content='WP-CLI - Algolia Search plugin for WordPress' property='og:title'>
   <meta content='article' property='og:type'>
-  <meta content='How the plugin handles different languages.' property='og:description'>
+  <meta content='WP-CLI Algolia commands.' property='og:description'>
   <meta content='Algolia Search plugin for WordPress' property='og:site_name'>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 
-  <meta name="description" content="How the plugin handles different languages.">
+  <meta name="description" content="WP-CLI Algolia commands.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
   <link rel="stylesheet" href="css/app.css?v=1478609668517">
@@ -101,9 +101,9 @@
             </div>
 
             <header>
-                <h1>Internationalization</h1>
+                <h1>WP-CLI</h1>
 
-                <p class="lead">How the plugin handles different languages.</p>
+                <p class="lead">WP-CLI Algolia commands.</p>
             </header>
 
             <hr>
@@ -111,18 +111,36 @@
             <div class="row">
                 <div class="large-12 columns" id="content">
                     <h2 id="introduction"><a class="heading-anchor" href="#introduction"><span></span></a>Introduction</h2>
-<p>For now, the plugin is only shipped in English. This does not mean that you can not use the plugin for your WordPress website which is in another language.</p>
-<p>Indeed, the Algolia search engine is language-agnostic: both alphabet-based and symbol-based languages such as Chinese, Japanese or Korean are supported.</p>
-<p>What it means though is that the WordPress admin user interface of the plugin is in English for now. We implemented internationalization (I18n) by following <a href="https://developer.wordpress.org/plugins/internationalization/">WordPress principles found here</a>.</p>
-<p>We are open for contributions if you want to share the translation for a given language.
-You can <a href="contribute.html#missing-translations">read more about contributing here</a>.</p>
+<p>WP-CLI is an extensible third party <a href="http://wp-cli.org/">Command Line tool for WordPress</a>.</p>
+<p>This plugin comes shipped with commands that can be triggered via the tool.</p>
+<h2 id="installation"><a class="heading-anchor" href="#installation"><span></span></a>Installation</h2>
+<p>To setup WP-CLI please checkout its <a href="http://wp-cli.org/#installing">official documentation</a>.</p>
+<h2 id="command-algolia-process-queue"><a class="heading-anchor" href="#command-algolia-process-queue"><span></span></a>Command: algolia process-queue</h2>
+<p>The following command will process all the pending tasks of the queue.</p>
+<p>By triggering the processing this way, you won&apos;t trigger any http remote call to loop over the task, making it a good alternative to the default indexing logic.</p>
+<div class="alert alert-warning">Please note that your queue must not be already running. You can go stop it from the Indexing page of the plugin if needed.</div>
+
+<pre><code class="hljs bash">wp algolia process-queue
+<span class="hljs-comment"># or</span>
+wp algolia process_queue</code></pre>
+
+<h2 id="command-algolia-re-index-all"><a class="heading-anchor" href="#command-algolia-re-index-all"><span></span></a>Command: algolia re-index-all</h2>
+<p>The following command will queue all indices for re-indexing.</p>
+<div class="alert alert-warning">This does not trigger the processing of the queue. Please see the <code>process-queue</code> command to process all generated tasks.</div>
+
+<pre><code class="hljs bash">wp algolia re-index-all
+<span class="hljs-comment"># or</span>
+wp algolia re_index_all</code></pre>
+
+
+
 
                 </div>
             </div>
 
             <ul class="menu simple text-center">
-                <li><a href="https://github.com/algolia/algoliasearch-wordpress/edit/master/docs/src/internationalization.md" target="_blank"><i class="fi-pencil"></i> <span>Edit this Page</span></a></li>
-                <li><a href="https://github.com/algolia/algoliasearch-wordpress/issues/new?title=%5BInternationalization%5D%20ISSUE%20NAME%20HERE" target="_blank"><i class="fi-social-github"></i> <span>Report a Bug</span></a></li>
+                <li><a href="https://github.com/algolia/algoliasearch-wordpress/edit/master/docs/src/wp-cli.md" target="_blank"><i class="fi-pencil"></i> <span>Edit this Page</span></a></li>
+                <li><a href="https://github.com/algolia/algoliasearch-wordpress/issues/new?title=%5BWP-CLI%5D%20ISSUE%20NAME%20HERE" target="_blank"><i class="fi-social-github"></i> <span>Report a Bug</span></a></li>
                 <li><a href="http://stackoverflow.com/questions/tagged/algolia+wordpress" target="_blank"><i class="fi-comment"></i> <span>Get Help</span></a></li>
             </ul>
         </article>
@@ -155,7 +173,7 @@ You can <a href="contribute.html#missing-translations">read more about contribut
             <li class="menu-text">Integrations</li>
             <li ><a href="advanced-custom-fields.html">Advanced Custom Fields</a></li>
             <li ><a href="wpml.html">WPML</a></li>
-            <li ><a href="wp-cli.html">WP-CLI</a></li>
+            <li class="active"><a href="wp-cli.html">WP-CLI</a></li>
 
             <li class="menu-text">Theme Development</li>
             <li ><a href="customize-templates.html">Customize Templates</a></li>
@@ -164,7 +182,7 @@ You can <a href="contribute.html#missing-translations">read more about contribut
             <li ><a href="logs.html">Logs</a></li>
             
             <li class="menu-text">Other</li>
-            <li class="active"><a href="internationalization.html">Internationalization</a></li>
+            <li ><a href="internationalization.html">Internationalization</a></li>
             <li ><a href="resources.html">Additional Resources</a></li>
             <li ><a href="contribute.html">Contribute</a></li>
             <li ><a href="frequently-asked-questions.html">FAQ</a></li>
