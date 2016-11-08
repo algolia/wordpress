@@ -29,7 +29,7 @@
   <meta name="description" content="Most common issues and how to fix them.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
-  <link rel="stylesheet" href="css/app.css?v=1478609668517">
+  <link rel="stylesheet" href="css/app.css?v=1478617165653">
 
   <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
 
@@ -183,7 +183,38 @@ add_filter( <span class="hljs-string">&apos;algolia_loopback_request_args&apos;<
 <p><strong>Does the instant search results work with IE9?</strong></p>
 <p>The default implementation will break on IE9. You can use the <code>useHash</code> option of the instantsearch.js library to enable support for IE9.</p>
 <p>See <a href="https://github.com/algolia/algoliasearch-wordpress/pull/375">https://github.com/algolia/algoliasearch-wordpress/pull/375</a> for an example of how to enable IE9 support.</p>
-<p><strong>My case is not listed here:</strong></p>
+<h3 id="can-i-remove-non-required-thumbnail-sizes-from-the-records-"><a class="heading-anchor" href="#can-i-remove-non-required-thumbnail-sizes-from-the-records-"><span></span></a>Can I remove non required thumbnail sizes from the records?</h3>
+<p>By default the plugin pushes all the thumbnail sizes available so that you can easily switch the displayed format in your frontend integration.</p>
+<p>If you want to optimize the records size you can definitely remove non-used sizes.</p>
+<p>Let&apos;s say you only use <code>thumbnail</code> and the <code>medium</code> thumbnail sizes, here is how to remove all the others:</p>
+<pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
+
+<span class="hljs-comment">/**
+ * <span class="hljs-doctag">@param</span> array $shared_attributes
+ *
+ * <span class="hljs-doctag">@return</span> array
+ */</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">vm_post_shared_attributes</span><span class="hljs-params">( array <span class="hljs-variable">$shared_attributes</span> )</span> </span>{
+    <span class="hljs-variable">$keep_sizes</span> = <span class="hljs-keyword">array</span>( <span class="hljs-string">&apos;thumbnail&apos;</span>, <span class="hljs-string">&apos;medium&apos;</span> );
+    <span class="hljs-variable">$images</span> = <span class="hljs-keyword">array</span>();
+    <span class="hljs-keyword">foreach</span> ( <span class="hljs-variable">$shared_attributes</span>[<span class="hljs-string">&apos;images&apos;</span>] <span class="hljs-keyword">as</span> <span class="hljs-variable">$size</span> =&gt; <span class="hljs-variable">$info</span> ) {
+        <span class="hljs-keyword">if</span> ( in_array( <span class="hljs-variable">$size</span>, <span class="hljs-variable">$keep_sizes</span> ) ) {
+            <span class="hljs-variable">$images</span>[<span class="hljs-variable">$size</span>] = <span class="hljs-variable">$info</span>;
+        }
+    }
+
+    <span class="hljs-variable">$shared_attributes</span>[<span class="hljs-string">&apos;images&apos;</span>] = <span class="hljs-variable">$images</span>;
+
+    <span class="hljs-keyword">return</span> <span class="hljs-variable">$shared_attributes</span>;
+}
+
+<span class="hljs-comment">// Remove the un-necessary sizes from the posts index.</span>
+add_filter( <span class="hljs-string">&apos;algolia_post_shared_attributes&apos;</span>, <span class="hljs-string">&apos;vm_post_shared_attributes&apos;</span> );
+
+<span class="hljs-comment">// Also remove the un-necessary sizes from the searchable posts index.</span>
+add_filter( <span class="hljs-string">&apos;algolia_searchable_post_shared_attributes&apos;</span>, <span class="hljs-string">&apos;vm_post_shared_attributes&apos;</span> );</code></pre>
+
+<h3 id="my-case-is-not-listed-here-what-to-do-"><a class="heading-anchor" href="#my-case-is-not-listed-here-what-to-do-"><span></span></a>My case is not listed here, what to do?</h3>
 <p>If your problem is covered here, please submit an issue with the error details here: <a href="https://github.com/algolia/algoliasearch-wordpress/issues">https://github.com/algolia/algoliasearch-wordpress/issues</a></p>
 
                 </div>
@@ -406,8 +437,8 @@ add_filter( <span class="hljs-string">&apos;algolia_loopback_request_args&apos;<
 </svg>
 <script src="deps/jquery/jquery.js"></script>
 <script src="deps/foundation-sites/foundation.js"></script>
-<script src="js/app.js?v=1478609668517"></script>
-<script src="js/responsiveNavigation.js?v=1478609668517"></script>
+<script src="js/app.js?v=1478617165653"></script>
+<script src="js/responsiveNavigation.js?v=1478617165653"></script>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <script src="https://cdn.jsdelivr.net/lodash/4.16.2/lodash.min.js"></script>
 
