@@ -29,7 +29,7 @@
   <meta name="description" content="How to promote the plugin from dev to staging and from staging to production.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
-  <link rel="stylesheet" href="css/app.css?v=1480339652901">
+  <link rel="stylesheet" href="css/app.css?v=1481128302986">
 
   <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
 
@@ -164,6 +164,17 @@ By doing so, you ensure that you will easily identify indices even if you have m
 <p>&#x1F389;You should now have Algolia up and running smoothly in your production environment &#x1F389; !</p>
 <div class="alert alert-info">If you experience any problem applying this guide, please reach out to support+wordpress@algolia.com so we can improve it!</div>
 
+<h2 id="ease-environment-switching-with-constants"><a class="heading-anchor" href="#ease-environment-switching-with-constants"><span></span></a>Ease environment switching with constants</h2>
+<p>Starting from version 1.6.0, you can add the following lines to your <code>wp-config.php</code> file:</p>
+<pre><code class="hljs"><span class="hljs-class"><span class="hljs-keyword">define</span></span>( <span class="hljs-string">&apos;ALGOLIA_APPLICATION_ID&apos;</span>, <span class="hljs-string">&apos;&lt;your_application_id&gt;&apos;</span> );
+<span class="hljs-class"><span class="hljs-keyword">define</span></span>( <span class="hljs-string">&apos;ALGOLIA_SEARCH_API_KEY&apos;</span>, <span class="hljs-string">&apos;&lt;your_search_api_key&gt;&apos;</span> );
+<span class="hljs-class"><span class="hljs-keyword">define</span></span>( <span class="hljs-string">&apos;ALGOLIA_API_KEY&apos;</span>, <span class="hljs-string">&apos;&lt;your_api_key&gt;&apos;</span> );
+<span class="hljs-class"><span class="hljs-keyword">define</span></span>( <span class="hljs-string">&apos;ALGOLIA_INDEX_NAME_PREFIX&apos;</span>, <span class="hljs-string">&apos;&lt;your_index_name_prefix&gt;&apos;</span> );</code></pre>
+
+<div class="alert alert-info">Adding the constants to your <code>wp-config.php</code> will disable the editing of those fields via the admin panel.</div>
+<div class="alert alert-warning">When you are using the constant for setting the indices name prefix we have no way to detect the change so you should re-index your data form the admin panel.</div>
+
+
                 </div>
             </div>
 
@@ -247,7 +258,7 @@ By doing so, you ensure that you will easily identify indices even if you have m
   <a class="ac-footer-btn ac-footer-btn-cta" href="https://community.algolia.com/">See More</a>
   <span class="ac-icon ac-icon-love-dark"></span>
 </div>
-<p class="ac-footer-version">Latest version: 1.5.0</p>
+<p class="ac-footer-version">Latest version: 1.6.0</p>
 <div class="ac-footer-actions">
     <div class="footer-container">
       <p>Build unique search experiences with Algolia</p>
@@ -384,8 +395,8 @@ By doing so, you ensure that you will easily identify indices even if you have m
 </svg>
 <script src="deps/jquery/jquery.js"></script>
 <script src="deps/foundation-sites/foundation.js"></script>
-<script src="js/app.js?v=1480339652901"></script>
-<script src="js/responsiveNavigation.js?v=1480339652901"></script>
+<script src="js/app.js?v=1481128302986"></script>
+<script src="js/responsiveNavigation.js?v=1481128302986"></script>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <script src="https://cdn.jsdelivr.net/lodash/4.16.2/lodash.min.js"></script>
 

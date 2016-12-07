@@ -29,7 +29,7 @@
   <meta name="description" content="Understand the indexing flow and the generated operations.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
-  <link rel="stylesheet" href="css/app.css?v=1480339652901">
+  <link rel="stylesheet" href="css/app.css?v=1481128302986">
 
   <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
 
@@ -195,6 +195,33 @@ add_filter( <span class="hljs-string">&apos;algolia_should_index_user&apos;</spa
 
 <p>In the above example, User with ID 1 would never get indexed. This example is trivial, but at least gives you a quick overview on how to filter your items to index.
 Also note how we return <code>false</code> early on if the decision has already been taken to not index the content.</p>
+<p><strong>Another example to exclude posts from the searchable_posts index where the noindex option from the Yoast SEO plugin is set to &quot;noindex&quot;</strong></p>
+<p><pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span></code></pre></p>
+<p><span class="hljs-comment">/**</span></p>
+<ul>
+<li>Don&apos;t index pages where the robot index option</li>
+<li>in the Yoast SEO plugin is set to noindex.</li>
+<li></li>
+<li><span class="hljs-doctag">@param</span> bool $should_index</li>
+<li><span class="hljs-doctag">@param</span> WP_Post $post
+*</li>
+<li><p><span class="hljs-doctag">@return</span> bool
+*/
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">filter_post</span><span class="hljs-params">( bool <span class="hljs-variable">$should_index</span>, WP_Post <span class="hljs-variable">$post</span> )</span>
+</span>{
+ <span class="hljs-keyword">if</span> ( <span class="hljs-keyword">false</span> === <span class="hljs-variable">$should_index</span> ) {</p>
+<pre><code> &lt;span class=&quot;hljs-keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;hljs-keyword&quot;&gt;false&lt;/span&gt;;
+</code></pre><p> }</p>
+<p> <span class="hljs-keyword">return</span> get_post_meta(<span class="hljs-variable">$post</span>-&gt;ID, <span class="hljs-string">&apos;_yoast_wpseo_meta-robots-noindex&apos;</span>, <span class="hljs-keyword">true</span>) == <span class="hljs-number">1</span> ? <span class="hljs-keyword">false</span> : <span class="hljs-keyword">true</span>;
+}</p>
+</li>
+</ul>
+<p><span class="hljs-comment">// Hook into Algolia to manipulate the post that should be indexed.</span>
+add_filter( <span class="hljs-string">&apos;algolia_should_index_searchable_post&apos;</span>, <span class="hljs-string">&apos;filter_post&apos;</span>, <span class="hljs-number">10</span>, <span class="hljs-number">2</span> );</p>
+<div class="alert alert-warning">This example assumes you are using the Yoast SEO plugin for WordPress</div>
+
+
+
 <h2 id="queue-processing"><a class="heading-anchor" href="#queue-processing"><span></span></a>Queue processing</h2>
 <p>Every time a change of your content is detected, see <a href="#triggers">previous section</a>, we queue a synchronization task with the minimum required information for the task to be handled.</p>
 <p>When that happens, we directly try to trigger the processing of the queue. The queue follows the FIFO logic, and ensures there is only one task handled at the same time. For scalability reasons, each task handling is done in its own PHP process and triggered by an asynchronous http call.</p>
@@ -292,7 +319,7 @@ Also note how we return <code>false</code> early on if the decision has already 
   <a class="ac-footer-btn ac-footer-btn-cta" href="https://community.algolia.com/">See More</a>
   <span class="ac-icon ac-icon-love-dark"></span>
 </div>
-<p class="ac-footer-version">Latest version: 1.5.0</p>
+<p class="ac-footer-version">Latest version: 1.6.0</p>
 <div class="ac-footer-actions">
     <div class="footer-container">
       <p>Build unique search experiences with Algolia</p>
@@ -429,8 +456,8 @@ Also note how we return <code>false</code> early on if the decision has already 
 </svg>
 <script src="deps/jquery/jquery.js"></script>
 <script src="deps/foundation-sites/foundation.js"></script>
-<script src="js/app.js?v=1480339652901"></script>
-<script src="js/responsiveNavigation.js?v=1480339652901"></script>
+<script src="js/app.js?v=1481128302986"></script>
+<script src="js/responsiveNavigation.js?v=1481128302986"></script>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <script src="https://cdn.jsdelivr.net/lodash/4.16.2/lodash.min.js"></script>
 
