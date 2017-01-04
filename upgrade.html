@@ -2,31 +2,31 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
-  <title>WP-CLI</title>
+  <title>Upgrade instructions</title>
   <meta content="IE=edge" http-equiv="X-UA-Compatible">
   <meta charset="utf-8">
   <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
 
-  <meta content='WP-CLI Algolia commands.' name='description'>
+  <meta content='How to upgrade the Algolia plugin for WordPress from one version to another.' name='description'>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'>
   <!-- / Twitter card -->
   <meta content='summary_large_image' name='twitter:card'>
   <meta content='@Algolia' name='twitter:site'>
   <meta content='@Algolia' name='twitter:creator'>
-  <meta content="WP-CLI - Algolia Search plugin for WordPress" name="twitter:title">
-  <meta content="WP-CLI Algolia commands." name="twitter:description">
+  <meta content="Upgrade instructions - Algolia Search plugin for WordPress" name="twitter:title">
+  <meta content="How to upgrade the Algolia plugin for WordPress from one version to another." name="twitter:description">
   <meta content="https://community.algolia.com/wordpress/img/og-screen.png" name="twitter:image">
   <!--meta content="Algolia Product image" name="twitter:image"-->
   <!-- / OG meta -->
   <meta content='https://community.algolia.com/wordpress/' property='og:url'>
   <meta content='https://community.algolia.com/wordpress/img/og-screen.png' property='og:image'>
-  <meta content='WP-CLI - Algolia Search plugin for WordPress' property='og:title'>
+  <meta content='Upgrade instructions - Algolia Search plugin for WordPress' property='og:title'>
   <meta content='article' property='og:type'>
-  <meta content='WP-CLI Algolia commands.' property='og:description'>
+  <meta content='How to upgrade the Algolia plugin for WordPress from one version to another.' property='og:description'>
   <meta content='Algolia Search plugin for WordPress' property='og:site_name'>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 
-  <meta name="description" content="WP-CLI Algolia commands.">
+  <meta name="description" content="How to upgrade the Algolia plugin for WordPress from one version to another.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
   <link rel="stylesheet" href="css/app.css?v=1483555426928">
@@ -101,50 +101,31 @@
             </div>
 
             <header>
-                <h1>WP-CLI</h1>
+                <h1>Upgrade instructions</h1>
 
-                <p class="lead">WP-CLI Algolia commands.</p>
+                <p class="lead">How to upgrade the Algolia plugin for WordPress from one version to another.</p>
             </header>
 
             <hr>
 
             <div class="row">
                 <div class="large-12 columns" id="content">
-                    <h2 id="introduction"><a class="heading-anchor" href="#introduction"><span></span></a>Introduction</h2>
-<p>WP-CLI is an extensible third party <a href="http://wp-cli.org/">Command Line tool for WordPress</a>.</p>
-<p>This plugin comes shipped with commands that can be triggered via the tool.</p>
-<h2 id="installation"><a class="heading-anchor" href="#installation"><span></span></a>Installation</h2>
-<p>To setup WP-CLI please checkout its <a href="http://wp-cli.org/#installing">official documentation</a>.</p>
-<h2 id="command-algolia-process-queue"><a class="heading-anchor" href="#command-algolia-process-queue"><span></span></a>Command: algolia process-queue</h2>
-<p>The following command will process all the pending tasks of the queue.</p>
-<p>By triggering the processing this way, you won&apos;t trigger any http remote call to loop over the task, making it a good alternative to the default indexing logic.</p>
-<div class="alert alert-warning">Please note that your queue must not be already running. You can go stop it from the Indexing page of the plugin if needed.</div>
+                    <h2 id="about"><a class="heading-anchor" href="#about"><span></span></a>About</h2>
+<p>This section explains the required changes from one version of a plugin to another.</p>
+<h2 id="from-1-6-0-to-1-7-0"><a class="heading-anchor" href="#from-1-6-0-to-1-7-0"><span></span></a>From &lt;= 1.6.0 to 1.7.0</h2>
+<p><strong>The change</strong></p>
+<p>In 1.7.0 we made sure the <code>autocomplete.js</code> library does not conflict with jQuery UI autocomplete and Google Maps Autocomplete.</p>
+<p>To do so we introduced a <code>noConflict</code> strategy.</p>
+<p>The Algolia autocomplete instance is now accessible under the <code>algoliaAutocomplete</code> name.</p>
+<p><strong>Required change on your side</strong></p>
+<p>If you previously implemented a custom <code>autocomplete.php</code> template, you need to replace occurrences of <code>autocomplete</code> with <code>algoliaAutocomplete</code> in your JavaScript implementations.</p>
 
-<pre><code class="hljs bash">wp algolia process-queue
-<span class="hljs-comment"># or</span>
-wp algolia process_queue</code></pre>
-
-<h2 id="command-algolia-re-index-all"><a class="heading-anchor" href="#command-algolia-re-index-all"><span></span></a>Command: algolia re-index-all</h2>
-<p>The following command will queue all indices for re-indexing.</p>
-<div class="alert alert-warning">This does not trigger the processing of the queue. Please see the <code>process-queue</code> command to process all generated tasks.</div>
-
-<pre><code class="hljs bash">wp algolia re-index-all
-<span class="hljs-comment"># or</span>
-wp algolia re_index_all</code></pre>
-
-<h2 id="command-algolia-re-index"><a class="heading-anchor" href="#command-algolia-re-index"><span></span></a>Command: algolia re-index</h2>
-<p>The following command will queue a single index for re-indexing.</p>
-<div class="alert alert-warning">This does not trigger the processing of the queue. Please see the <code>process-queue</code> command to process all generated tasks.</div>
-
-<pre><code class="hljs bash">wp algolia re-index &lt;index_id&gt;
-<span class="hljs-comment"># or</span>
-wp algolia re_index &lt;index_id&gt;</code></pre>
                 </div>
             </div>
 
             <ul class="menu simple text-center">
-                <li><a href="https://github.com/algolia/algoliasearch-wordpress/edit/master/docs/src/wp-cli.md" target="_blank"><i class="fi-pencil"></i> <span>Edit this Page</span></a></li>
-                <li><a href="https://github.com/algolia/algoliasearch-wordpress/issues/new?title=%5BWP-CLI%5D%20ISSUE%20NAME%20HERE" target="_blank"><i class="fi-social-github"></i> <span>Report a Bug</span></a></li>
+                <li><a href="https://github.com/algolia/algoliasearch-wordpress/edit/master/docs/src/upgrade.md" target="_blank"><i class="fi-pencil"></i> <span>Edit this Page</span></a></li>
+                <li><a href="https://github.com/algolia/algoliasearch-wordpress/issues/new?title=%5BUpgrade instructions%5D%20ISSUE%20NAME%20HERE" target="_blank"><i class="fi-social-github"></i> <span>Report a Bug</span></a></li>
                 <li><a href="http://stackoverflow.com/questions/tagged/algolia+wordpress" target="_blank"><i class="fi-comment"></i> <span>Get Help</span></a></li>
             </ul>
         </article>
@@ -158,7 +139,7 @@ wp algolia re_index &lt;index_id&gt;</code></pre>
             <li ><a href="configuration.html">Getting Started</a></li>
             <li ><a href="customize-autocomplete.html">Customize Autocomplete</a></li>
             <li ><a href="customize-search-page.html">Customize Search Page</a></li>
-            <li ><a href="upgrade.html">Upgrade</a></li>
+            <li class="active"><a href="upgrade.html">Upgrade</a></li>
 
             <li class="menu-text">Indexing</li>
             <li ><a href="index-schema.html">Schemas</a></li>
@@ -178,7 +159,7 @@ wp algolia re_index &lt;index_id&gt;</code></pre>
             <li class="menu-text">Integrations</li>
             <li ><a href="advanced-custom-fields.html">Advanced Custom Fields</a></li>
             <li ><a href="wpml.html">WPML</a></li>
-            <li class="active"><a href="wp-cli.html">WP-CLI</a></li>
+            <li ><a href="wp-cli.html">WP-CLI</a></li>
 
             <li class="menu-text">Theme Development</li>
             <li ><a href="customize-templates.html">Customize Templates</a></li>

@@ -29,7 +29,7 @@
   <meta name="description" content="Track what is going on with the built in logs.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
-  <link rel="stylesheet" href="css/app.css?v=1482748392268">
+  <link rel="stylesheet" href="css/app.css?v=1483555426928">
 
   <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
 
@@ -129,7 +129,10 @@
 <h2 id="communicating-logs"><a class="heading-anchor" href="#communicating-logs"><span></span></a>Communicating Logs</h2>
 <p>When you are asking for support on <a href="http://stackoverflow.com/questions/tagged/algolia+wordpress">Stack Overflow</a> for example, we recommend you join some logs if your issue is related to indexing problems, or if your question is quota related.</p>
 <p>This way, people will get a better sense of what is happening in your WordPress website.</p>
-<h2 id="php-logs"><a class="heading-anchor" href="#php-logs"><span></span></a>PHP logs</h2>
+<h2 id="php-logs-with-an-extension"><a class="heading-anchor" href="#php-logs-with-an-extension"><span></span></a>PHP logs - With an extension</h2>
+<p>If you are not technical or find it easier to use a plugin to access the PHP error logs, you can use: <a href="https://wordpress.org/plugins/error-log-monitor/">https://wordpress.org/plugins/error-log-monitor/</a></p>
+<p>Once installed, you will be able to see your PHP error logs in a widget on the WordPress dashboard screen.</p>
+<h2 id="php-logs-manual"><a class="heading-anchor" href="#php-logs-manual"><span></span></a>PHP logs - Manual</h2>
 <p>Most of the job done by this plugin is done asynchronously which makes debugging a bit harder.
 For that reason we introduced our custom logs like explained in the previous sections of this page.</p>
 <p>When you are unable to debug your issues with the provided logs, it probably means you have PHP exceptions that are being raised behind the scenes.</p>
@@ -170,6 +173,7 @@ For that reason we introduced our custom logs like explained in the previous sec
             <li ><a href="configuration.html">Getting Started</a></li>
             <li ><a href="customize-autocomplete.html">Customize Autocomplete</a></li>
             <li ><a href="customize-search-page.html">Customize Search Page</a></li>
+            <li ><a href="upgrade.html">Upgrade</a></li>
 
             <li class="menu-text">Indexing</li>
             <li ><a href="index-schema.html">Schemas</a></li>
@@ -196,7 +200,7 @@ For that reason we introduced our custom logs like explained in the previous sec
 
             <li class="menu-text">Debugging</li>
             <li class="active"><a href="logs.html">Logs</a></li>
-            
+
             <li class="menu-text">Other</li>
             <li ><a href="internationalization.html">Internationalization</a></li>
             <li ><a href="resources.html">Additional Resources</a></li>
@@ -207,11 +211,6 @@ For that reason we introduced our custom logs like explained in the previous sec
 
 </div>
 </div>
-
-
-<script src="deps/jquery/jquery.js"></script>
-<script src="deps/foundation-sites/foundation.js"></script>
-<script src="js/doc.js"></script>
 
 <section class="ac-footer">
   <div class="ac-footer-container">
@@ -369,10 +368,9 @@ For that reason we introduced our custom logs like explained in the previous sec
 </symbol>
 </defs>
 </svg>
-<script src="deps/jquery/jquery.js"></script>
-<script src="deps/foundation-sites/foundation.js"></script>
-<script src="js/app.js?v=1482748392268"></script>
-<script src="js/responsiveNavigation.js?v=1482748392268"></script>
+<script src="deps/jquery/jquery.min.js"></script>
+<script src="js/app.js?v=1483555426928"></script>
+<script src="js/responsiveNavigation.js?v=1483555426928"></script>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <script src="https://cdn.jsdelivr.net/lodash/4.16.2/lodash.min.js"></script>
 
