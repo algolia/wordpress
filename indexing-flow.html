@@ -29,7 +29,7 @@
   <meta name="description" content="Understand the indexing flow and the generated operations.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
-  <link rel="stylesheet" href="css/app.css?v=1483555537811">
+  <link rel="stylesheet" href="css/app.css?v=1483604180074">
 
   <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
 
@@ -195,6 +195,8 @@ add_filter( <span class="hljs-string">&apos;algolia_should_index_user&apos;</spa
 <p>In the above example, User with ID 1 would never get indexed. This example is trivial, but at least gives you a quick overview on how to filter your items to index.
 Also note how we return <code>false</code> early on if the decision has already been taken to not index the content.</p>
 <p><strong>Another example to exclude posts from the searchable_posts index where the noindex option from the Yoast SEO plugin is set to &quot;noindex&quot;</strong></p>
+<div class="alert alert-warning">This example assumes you are using the Yoast SEO plugin for WordPress</div>
+
 <pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
 <span class="hljs-comment">/**
  * Don&apos;t index pages where the robot index option
@@ -205,7 +207,7 @@ Also note how we return <code>false</code> early on if the decision has already 
  *
  * <span class="hljs-doctag">@return</span> bool
  */</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">filter_post</span><span class="hljs-params">(<span class="hljs-variable">$should_index</span>, WP_Post <span class="hljs-variable">$post</span> )</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">filter_post</span><span class="hljs-params">( <span class="hljs-variable">$should_index</span>, WP_Post <span class="hljs-variable">$post</span> )</span>
 </span>{
     <span class="hljs-keyword">if</span> ( <span class="hljs-keyword">false</span> === <span class="hljs-variable">$should_index</span> ) {
         <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
@@ -217,7 +219,28 @@ Also note how we return <code>false</code> early on if the decision has already 
 <span class="hljs-comment">// Hook into Algolia to manipulate the post that should be indexed.</span>
 add_filter( <span class="hljs-string">&apos;algolia_should_index_searchable_post&apos;</span>, <span class="hljs-string">&apos;filter_post&apos;</span>, <span class="hljs-number">10</span>, <span class="hljs-number">2</span> );</code></pre>
 
-<div class="alert alert-warning">This example assumes you are using the Yoast SEO plugin for WordPress</div>
+<p><strong>Exclude post types from <code>searchable_posts_index</code></strong></p>
+<p>In this example we exclude the <code>page</code> post type from the <code>searchable_posts</code> index.</p>
+<pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
+<span class="hljs-comment">/**
+ * <span class="hljs-doctag">@param</span> bool    $should_index
+ * <span class="hljs-doctag">@param</span> WP_Post $post
+ *
+ * <span class="hljs-doctag">@return</span> bool
+ */</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">exclude_post_types</span><span class="hljs-params">( <span class="hljs-variable">$should_index</span>, WP_Post <span class="hljs-variable">$post</span> )</span>
+</span>{
+    <span class="hljs-comment">// Add all post types you don&apos;t want to make searchable.</span>
+    <span class="hljs-variable">$excluded_post_types</span> = <span class="hljs-keyword">array</span>( <span class="hljs-string">&apos;page&apos;</span> );
+    <span class="hljs-keyword">if</span> ( <span class="hljs-keyword">false</span> === <span class="hljs-variable">$should_index</span> ) {
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+    }
+
+    <span class="hljs-keyword">return</span> ! in_array( <span class="hljs-variable">$post</span>-&gt;post_type, <span class="hljs-variable">$excluded_post_types</span>, <span class="hljs-keyword">true</span> );
+}
+
+<span class="hljs-comment">// Hook into Algolia to manipulate the post that should be indexed.</span>
+add_filter( <span class="hljs-string">&apos;algolia_should_index_searchable_post&apos;</span>, <span class="hljs-string">&apos;exclude_post_types&apos;</span>, <span class="hljs-number">10</span>, <span class="hljs-number">2</span> );</code></pre>
 
 
 
@@ -450,8 +473,8 @@ add_filter( <span class="hljs-string">&apos;algolia_should_index_searchable_post
 </defs>
 </svg>
 <script src="deps/jquery/jquery.min.js"></script>
-<script src="js/app.js?v=1483555537811"></script>
-<script src="js/responsiveNavigation.js?v=1483555537811"></script>
+<script src="js/app.js?v=1483604180074"></script>
+<script src="js/responsiveNavigation.js?v=1483604180074"></script>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <script src="https://cdn.jsdelivr.net/lodash/4.16.2/lodash.min.js"></script>
 
