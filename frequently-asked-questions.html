@@ -29,7 +29,7 @@
   <meta name="description" content="Most common issues and how to fix them.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
-  <link rel="stylesheet" href="css/app.css?v=1483604180074">
+  <link rel="stylesheet" href="css/app.css?v=1483605178275">
 
   <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
 
@@ -190,6 +190,17 @@ add_filter( <span class="hljs-string">&apos;algolia_loopback_request_args&apos;<
 <p><strong>Does the instant search results work with IE9?</strong></p>
 <p>The default implementation will break on IE9. You can use the <code>useHash</code> option of the instantsearch.js library to enable support for IE9.</p>
 <p>See <a href="https://github.com/algolia/algoliasearch-wordpress/pull/375">https://github.com/algolia/algoliasearch-wordpress/pull/375</a> for an example of how to enable IE9 support.</p>
+<h3 id="the-indexing-is-slow-can-i-optimize-the-required-time-"><a class="heading-anchor" href="#the-indexing-is-slow-can-i-optimize-the-required-time-"><span></span></a>The indexing is slow, can I optimize the required time?</h3>
+<p>Yes, it depends on your servers capacities though and the number of plugins you have enabled.</p>
+<p>By default we only index 50 items per indexing process to ensure we don&apos;t reach PHP max execution time or memory limits.</p>
+<p>Here is a way to increase the number of items indexed on each PHP indexing process:</p>
+<pre><code class="hljs"><span class="php"><span class="hljs-preprocessor">&lt;?php</span>
+
+add_filter( <span class="hljs-string">&apos;algolia_indexing_batch_size&apos;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-number">200</span>;
+} );</span></code></pre>
+
+<p>If indexing doesn&apos;t work anymore after the change, it probably means you pushed the number to high. Checkout the logs in that case to be sure.</p>
 <h3 id="can-i-remove-non-required-thumbnail-sizes-from-the-records-"><a class="heading-anchor" href="#can-i-remove-non-required-thumbnail-sizes-from-the-records-"><span></span></a>Can I remove non required thumbnail sizes from the records?</h3>
 <p>By default the plugin pushes all the thumbnail sizes available so that you can easily switch the displayed format in your frontend integration.</p>
 <p>If you want to optimize the records size you can definitely remove non-used sizes.</p>
@@ -458,8 +469,8 @@ add_filter( <span class="hljs-string">&apos;algolia_user_record&apos;</span>, <s
 </defs>
 </svg>
 <script src="deps/jquery/jquery.min.js"></script>
-<script src="js/app.js?v=1483604180074"></script>
-<script src="js/responsiveNavigation.js?v=1483604180074"></script>
+<script src="js/app.js?v=1483605178275"></script>
+<script src="js/responsiveNavigation.js?v=1483605178275"></script>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <script src="https://cdn.jsdelivr.net/lodash/4.16.2/lodash.min.js"></script>
 
