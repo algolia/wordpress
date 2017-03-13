@@ -29,7 +29,7 @@
   <meta name="description" content="Most common issues and how to fix them.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
-  <link rel="stylesheet" href="css/app.css?v=1488993828593">
+  <link rel="stylesheet" href="css/app.css?v=1489437003262">
 
   <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
 
@@ -439,6 +439,18 @@ add_filter( <span class="hljs-string">&apos;algolia_searchable_post_shared_attri
 
 add_filter( <span class="hljs-string">&apos;algolia_user_record&apos;</span>, <span class="hljs-string">&apos;custom_user_record&apos;</span>, <span class="hljs-number">10</span>, <span class="hljs-number">2</span> );</code></pre>
 
+<h3 id="how-do-i-remove-the-powered-by-algolia-logo-"><a class="heading-anchor" href="#how-do-i-remove-the-powered-by-algolia-logo-"><span></span></a>How do I remove the powered by Algolia logo?</h3>
+<div class="alert alert-warning">Please note that the powered by logo is mandatory if you are on a hacker plan (free plan).</div>
+
+<p>To remove the powered by logo you must add the following to your <code>wp-config.php</code> file:</p>
+<pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
+<span class="hljs-comment">// [...]</span>
+
+define( <span class="hljs-string">&apos;ALGOLIA_POWERED_BY&apos;</span>, <span class="hljs-keyword">false</span> );
+
+<span class="hljs-comment">/* That&apos;s all, stop editing! Happy blogging. */</span>
+<span class="hljs-comment">// [...]</span></code></pre>
+
 <h3 id="my-case-is-not-listed-here-what-to-do-"><a class="heading-anchor" href="#my-case-is-not-listed-here-what-to-do-"><span></span></a>My case is not listed here, what to do?</h3>
 <p>If your problem is covered here, please submit an issue with the error details here: <a href="https://github.com/algolia/algoliasearch-wordpress/issues">https://github.com/algolia/algoliasearch-wordpress/issues</a></p>
 
@@ -657,8 +669,8 @@ add_filter( <span class="hljs-string">&apos;algolia_user_record&apos;</span>, <s
 </defs>
 </svg>
 <script src="deps/jquery/jquery.min.js"></script>
-<script src="js/communityHeader.js?v=1488993828593"></script>
-<script src="js/app.js?v=1488993828593"></script>
+<script src="js/communityHeader.js?v=1489437003262"></script>
+<script src="js/app.js?v=1489437003262"></script>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <script src="https://cdn.jsdelivr.net/lodash/4.16.2/lodash.min.js"></script>
 

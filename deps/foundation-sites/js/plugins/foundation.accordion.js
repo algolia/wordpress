@@ -227,22 +227,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /**
      * Amount of time to animate the opening of an accordion pane.
      * @option
-     * @type {number}
-     * @default 250
+     * @example 250
      */
     slideSpeed: 250,
     /**
      * Allow the accordion to have multiple open panes.
      * @option
-     * @type {boolean}
-     * @default false
+     * @example false
      */
     multiExpand: false,
     /**
      * Allow the accordion to close all panes.
      * @option
-     * @type {boolean}
-     * @default false
+     * @example false
      */
     allowAllClosed: false
   };
