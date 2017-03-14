@@ -64,6 +64,7 @@ var communityHeader = function () {
     this.enableDocSearch = this.verifyDocSearchParams(docSearchCredentials);
     this.hasDocSearchRendered = document.querySelector('.algc-navigation .algc-search__input--docsearch');
     this.triggerMenu = this.triggerMenu.bind(this);
+    this.shouldTriggerMenu = this.shouldTriggerMenu.bind(this);
     this.closeMenu = this.closeMenu.bind(this);
     this.toggleMobileMenu = this.toggleMobileMenu.bind(this);
     this.docSearchToggling = this.docSearchToggling.bind(this);
@@ -175,14 +176,28 @@ var communityHeader = function () {
       this.menuState.isOpen = true;
     }
   }, {
-    key: 'closeMenu',
-    value: function closeMenu(event) {
+    key: 'shouldTriggerMenu',
+    value: function shouldTriggerMenu(event) {
       var _this3 = this;
 
+      if (this.menuState.isOpen) {
+        this.triggerMenu(event);
+      } else {
+        this.triggerMenuTimeout = setTimeout(function () {
+          _this3.triggerMenu(event);
+        }, 200);
+      }
+    }
+  }, {
+    key: 'closeMenu',
+    value: function closeMenu(event) {
+      var _this4 = this;
+
+      window.clearTimeout(this.triggerMenuTimeout);
       this.menuState.isOpen = false;
       this.disableTransitionTimeout = setTimeout(function () {
-        _this3.dropdownRoot.style.pointerEvents = "none";
-        _this3.navRoot.className = "algc-dropdownroot notransition";
+        _this4.dropdownRoot.style.pointerEvents = "none";
+        _this4.navRoot.className = "algc-dropdownroot notransition";
       }, 50);
     }
   }, {
@@ -197,22 +212,22 @@ var communityHeader = function () {
   }, {
     key: 'docSearchToggling',
     value: function docSearchToggling() {
-      var _this4 = this;
+      var _this5 = this;
 
       this.searchInput = document.querySelector(this.docSearchCredentials.inputSelector);
       var openSearchInput = function openSearchInput() {
-        _this4.searchContainer.classList.add('open');
-        _this4.searchInput.focus();
+        _this5.searchContainer.classList.add('open');
+        _this5.searchInput.focus();
       };
 
       var closeSearchInput = function closeSearchInput() {
-        _this4.searchInput.blur();
-        _this4.searchContainer.classList.remove('open');
+        _this5.searchInput.blur();
+        _this5.searchContainer.classList.remove('open');
       };
 
       var emptySearchInput = function emptySearchInput() {
-        if (_this4.searchInput.value !== '') {
-          _this4.searchInput.value = '';
+        if (_this5.searchInput.value !== '') {
+          _this5.searchInput.value = '';
         } else {
           closeSearchInput();
         }
@@ -230,7 +245,7 @@ var communityHeader = function () {
   }, {
     key: 'initDocSearchStrategy',
     value: function initDocSearchStrategy() {
-      var _this5 = this;
+      var _this6 = this;
 
       if (this.enableDocSearch && typeof this.docSearchInit === "function") {
         this.initDocSearch();
@@ -242,8 +257,8 @@ var communityHeader = function () {
         document.body.appendChild(docSearchScript);
 
         docSearchScript.onload = function () {
-          _this5.docSearchInit = docsearch;
-          _this5.initDocSearch();
+          _this6.docSearchInit = docsearch;
+          _this6.initDocSearch();
         };
 
         docSearchScript.src = "https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js";
@@ -273,23 +288,23 @@ var communityHeader = function () {
   }, {
     key: 'bindListeners',
     value: function bindListeners() {
-      var _this6 = this;
+      var _this7 = this;
 
       this.subList.forEach(function (link) {
-        link.addEventListener('click', _this6.openSublist);
+        link.addEventListener('click', _this7.openSublist);
       });
 
       this.menuTriggers.forEach(function (item) {
-        item.addEventListener('mouseenter', _this6.triggerMenu);
-        item.addEventListener('focus', _this6.triggerMenu);
+        item.addEventListener('mouseenter', _this7.shouldTriggerMenu);
+        item.addEventListener('focus', _this7.triggerMenu);
       });
 
       this.navItems.forEach(function (item) {
-        item.addEventListener('mouseleave', _this6.closeMenu);
+        item.addEventListener('mouseleave', _this7.closeMenu);
       });
 
       this.navContainer.addEventListener('mouseenter', function () {
-        clearTimeout(_this6.disableTransitionTimeout);
+        clearTimeout(_this7.disableTransitionTimeout);
       });
 
       this.mobileMenuButton.addEventListener('click', this.toggleMobileMenu);
