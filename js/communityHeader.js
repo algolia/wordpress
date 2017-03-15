@@ -140,14 +140,10 @@ var communityHeader = function () {
         Y: newTargetCoordinates.realHeight / this.INIT_VAL.HEIGHT
       };
 
-      if (navItem.center < menuContainerOffset.center / 2) {
-        leftDistance = "calc(50% - 36px)";
-      } else {
-        leftDistance = navItem.center - menuContainerOffset.left + "px";
-      }
+      leftDistance = navItem.center - menuContainerOffset.left + "px";
 
-      if (window.innerWidth < 576) {
-        leftDistance = "0";
+      if (menuContainerOffset.left < 20) {
+        leftDistance = "calc(50% - 36px)";
       }
 
       this.navBg.style.cssText = '\n      transform: translateX(' + leftDistance + ') scale(' + scaleFactors.X + ', ' + scaleFactors.Y + ')';
