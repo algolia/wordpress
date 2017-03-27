@@ -18,7 +18,7 @@ var communityHeader = function () {
     _classCallCheck(this, communityHeader);
 
     this.docSearchCredentials = docSearchCredentials;
-    this.docSearch = docSearch;
+    this.docSearch = docSearch || null;
 
     this.menuState = {
       isOpen: false,
@@ -77,7 +77,6 @@ var communityHeader = function () {
 
     this.verifyDocSearchParams();
     this.shouldInitDocSearch();
-    this.checkDocSearch();
     this.initDocSearchStrategy();
     this.bindListeners();
   }
@@ -104,16 +103,19 @@ var communityHeader = function () {
     value: function shouldInitDocSearch() {
       if (!this.enableDocSearch && this.hasDocSearchRendered) {
         throw new Error('You need to pass docSearch: { apiKey, indexName, inputSelector } to communityHeader function in order to initialise docSearch');
-      } else if (this.enableDocSearch && this.hasDocSearchRendered) {}
+      }
     }
   }, {
     key: 'checkDocSearch',
     value: function checkDocSearch() {
       var docSearch = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
 
-
-      if (docSearch) return docSearch;else if (typeof docsearch === "function") {
+      if (docSearch) return docSearch;
+      if (typeof docsearch === "function") {
         return docsearch;
+      }
+      if (docsearch.default && typeof docsearch.default === "function") {
+        return docsearch.default;
       }
     }
   }, {
@@ -262,12 +264,12 @@ var communityHeader = function () {
     }
   }, {
     key: 'openSublist',
-    value: function openSublist(event) {
+    value: function openSublist(node) {
       event.preventDefault();
       event.stopPropagation();
-
+      var parent = node.parentNode;
       this.subListHolders.forEach(function (holder) {
-        if (holder === event.target.parentNode && !event.target.parentNode.classList.contains('open')) {
+        if (holder === parent && !parent.classList.contains('open')) {
           holder.classList.add('open');
         } else {
           holder.classList.remove('open');
@@ -286,8 +288,11 @@ var communityHeader = function () {
     value: function bindListeners() {
       var _this7 = this;
 
+      var that = this;
       this.subList.forEach(function (link) {
-        link.addEventListener('click', _this7.openSublist);
+        link.addEventListener('click', function (event) {
+          that.openSublist(this);
+        });
       });
 
       this.menuTriggers.forEach(function (item) {
