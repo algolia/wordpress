@@ -29,7 +29,7 @@
   <meta name="description" content="How to upgrade the Algolia plugin for WordPress from one version to another.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
-  <link rel="stylesheet" href="css/app.css?v=1493291815532">
+  <link rel="stylesheet" href="css/app.css?v=1494339230306">
 
   <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
 
@@ -301,9 +301,18 @@
                 <div class="large-12 columns" id="content">
                     <h2 id="about"><a class="heading-anchor" href="#about"><span></span></a>About</h2>
 <p>This section explains the required changes from one version of a plugin to another.</p>
-<h2 id="from-1-6-0-to-1-7-0"><a class="heading-anchor" href="#from-1-6-0-to-1-7-0"><span></span></a>From &lt;= 1.6.0 to 1.7.0</h2>
+<h2 id="from-v1-7-0-to-v2-0-0"><a class="heading-anchor" href="#from-v1-7-0-to-v2-0-0"><span></span></a>From &lt;= v1.7.0 to v2.0.0</h2>
 <p><strong>The change</strong></p>
-<p>In 1.7.0 we made sure the <code>autocomplete.js</code> library does not conflict with jQuery UI autocomplete and Google Maps Autocomplete.</p>
+<p>In v2.0.0 we resolved most of the conflicts with third party plugins. We did so by simplifying the way we index data.</p>
+<p><strong>Required change on your side</strong></p>
+<ol>
+<li>If you previously implemented a custom <code>autocomplete.php</code> template, you need to update your changes according to the new template shipped with the plugin.</li>
+<li>If you previously implemented a custom <code>instantsearch.php</code> template, you need to update your changes according to the new template shipped with the plugin.</li>
+<li>You will need to re-index all your indices and also hit the &quot;save&quot; button of the autocomplete &amp; search page in the admin.</li>
+</ol>
+<h2 id="from-v1-6-0-to-v1-7-0"><a class="heading-anchor" href="#from-v1-6-0-to-v1-7-0"><span></span></a>From &lt;= v1.6.0 to v1.7.0</h2>
+<p><strong>The change</strong></p>
+<p>In v1.7.0 we made sure the <code>autocomplete.js</code> library does not conflict with jQuery UI autocomplete and Google Maps Autocomplete.</p>
 <p>To do so we introduced a <code>noConflict</code> strategy.</p>
 <p>The Algolia autocomplete instance is now accessible under the <code>algoliaAutocomplete</code> name.</p>
 <p><strong>Required change on your side</strong></p>
@@ -389,7 +398,7 @@
   <a class="ac-footer-btn ac-footer-btn-cta" href="https://community.algolia.com/">See More</a>
   <span class="ac-icon ac-icon-love-dark"></span>
 </div>
-<p class="ac-footer-version">Latest version: 1.7.0</p>
+<p class="ac-footer-version">Latest version: 2.0.0</p>
 <div class="ac-footer-actions">
     <div class="footer-container">
       <p>Build unique search experiences with Algolia</p>
@@ -525,8 +534,8 @@
 </defs>
 </svg>
 <script src="deps/jquery/jquery.min.js"></script>
-<script src="js/communityHeader.js?v=1493291815532"></script>
-<script src="js/app.js?v=1493291815532"></script>
+<script src="js/communityHeader.js?v=1494339230306"></script>
+<script src="js/app.js?v=1494339230306"></script>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <script src="https://cdn.jsdelivr.net/lodash/4.16.2/lodash.min.js"></script>
 

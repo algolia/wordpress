@@ -29,7 +29,7 @@
   <meta name="description" content="The available filters and how to use them to customize the behaviour.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
-  <link rel="stylesheet" href="css/app.css?v=1493291815532">
+  <link rel="stylesheet" href="css/app.css?v=1494339230306">
 
   <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
 
@@ -333,174 +333,170 @@ This will also disable tasks being generated for that content type.</p>
 <table>
 <thead>
 <tr>
-<th>Filter Name</th>
-<th>Params</th>
+<th style="text-align:left">Filter Name</th>
+<th style="text-align:left">Params</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>algolia_autocomplete_config</td>
-<td>$config</td>
+<td style="text-align:left">algolia_autocomplete_config</td>
+<td style="text-align:left">$config</td>
 </tr>
 <tr>
-<td>algolia_post_types_blacklist</td>
-<td>array $blacklist, defaults to array( &apos;nav_menu_item&apos;, revision&apos; )</td>
+<td style="text-align:left">algolia_post_types_blacklist</td>
+<td style="text-align:left">array $blacklist, defaults to array( &apos;nav_menu_item&apos;, revision&apos; )</td>
 </tr>
 <tr>
-<td>algolia_taxonomies_blacklist</td>
-<td>array $blacklist, defaults to array( &apos;nav_menu&apos;, link_category&apos;, &apos;post_format&apos; )</td>
+<td style="text-align:left">algolia_taxonomies_blacklist</td>
+<td style="text-align:left">array $blacklist, defaults to array( &apos;nav_menu&apos;, link_category&apos;, &apos;post_format&apos; )</td>
 </tr>
 <tr>
-<td>algolia_should_index_searchable_post</td>
-<td>bool $should_index, WP_Post $post</td>
+<td style="text-align:left">algolia_should_index_searchable_post</td>
+<td style="text-align:left">bool $should_index, WP_Post $post</td>
 </tr>
 <tr>
-<td>algolia_searchable_post_parser</td>
-<td>Algolia\DOMParser $parser</td>
+<td style="text-align:left">algolia_searchable_post_parser</td>
+<td style="text-align:left">Algolia\DOMParser $parser</td>
 </tr>
 <tr>
-<td>algolia_searchable_post_{$post_type}_shared_attributes</td>
-<td>array $shared_attributes, WP_Post $post</td>
+<td style="text-align:left">algolia_searchable_post_{$post_type}_shared_attributes</td>
+<td style="text-align:left">array $shared_attributes, WP_Post $post</td>
 </tr>
 <tr>
-<td>algolia_searchable_posts_index_settings</td>
-<td>array $settings</td>
+<td style="text-align:left">algolia_searchable_posts_index_settings</td>
+<td style="text-align:left">array $settings</td>
 </tr>
 <tr>
-<td>algolia_searchable_post_shared_attributes</td>
-<td>array $shared_attributes, WP_Post $post</td>
+<td style="text-align:left">algolia_searchable_post_shared_attributes</td>
+<td style="text-align:left">array $shared_attributes, WP_Post $post</td>
 </tr>
 <tr>
-<td>algolia_searchable_posts_index_synonyms</td>
-<td>array $synonyms</td>
+<td style="text-align:left">algolia_searchable_posts_index_synonyms</td>
+<td style="text-align:left">array $synonyms</td>
 </tr>
 <tr>
-<td>algolia_should_index_post</td>
-<td>bool $should_index, WP_Post $post</td>
+<td style="text-align:left">algolia_should_index_post</td>
+<td style="text-align:left">bool $should_index, WP_Post $post</td>
 </tr>
 <tr>
-<td>algolia_post_parser</td>
-<td>Algolia\DOMParser $parser</td>
+<td style="text-align:left">algolia_post_parser</td>
+<td style="text-align:left">Algolia\DOMParser $parser</td>
 </tr>
 <tr>
-<td>algolia_post_shared_attributes</td>
-<td>array $shared_attributes, WP_Post $post</td>
+<td style="text-align:left">algolia_post_shared_attributes</td>
+<td style="text-align:left">array $shared_attributes, WP_Post $post</td>
 </tr>
 <tr>
-<td>algolia_post_{$post_type}_shared_attributes</td>
-<td>array $shared_attributes, WP_Post $post</td>
+<td style="text-align:left">algolia_post_{$post_type}_shared_attributes</td>
+<td style="text-align:left">array $shared_attributes, WP_Post $post</td>
 </tr>
 <tr>
-<td>algolia_posts_index_settings</td>
-<td>array $settings, string $post_type</td>
+<td style="text-align:left">algolia_posts_index_settings</td>
+<td style="text-align:left">array $settings, string $post_type</td>
 </tr>
 <tr>
-<td>algolia_posts_{$post_type}_index_settings</td>
-<td>array $settings</td>
+<td style="text-align:left">algolia_posts_{$post_type}_index_settings</td>
+<td style="text-align:left">array $settings</td>
 </tr>
 <tr>
-<td>algolia_posts_index_synonyms</td>
-<td>array $synonyms, string $post_type</td>
+<td style="text-align:left">algolia_posts_index_synonyms</td>
+<td style="text-align:left">array $synonyms, string $post_type</td>
 </tr>
 <tr>
-<td>algolia_posts_{$post_type}_index_synonyms</td>
-<td>array $synonyms</td>
+<td style="text-align:left">algolia_posts_{$post_type}_index_synonyms</td>
+<td style="text-align:left">array $synonyms</td>
 </tr>
 <tr>
-<td>algolia_should_index_term</td>
-<td>bool $should_index, WP_Term/object $term</td>
+<td style="text-align:left">algolia_should_index_term</td>
+<td style="text-align:left">bool $should_index, WP_Term/object $term</td>
 </tr>
 <tr>
-<td>algolia_term_record</td>
-<td>array $record, WP_Term/object$term</td>
+<td style="text-align:left">algolia_term_record</td>
+<td style="text-align:left">array $record, WP_Term/object$term</td>
 </tr>
 <tr>
-<td>algolia_term_{$taxonomy}_record</td>
-<td>array $record, WP_Term/object $term</td>
+<td style="text-align:left">algolia_term_{$taxonomy}_record</td>
+<td style="text-align:left">array $record, WP_Term/object $term</td>
 </tr>
 <tr>
-<td>algolia_terms_index_settings</td>
-<td>array $settings</td>
+<td style="text-align:left">algolia_terms_index_settings</td>
+<td style="text-align:left">array $settings</td>
 </tr>
 <tr>
-<td>algolia_terms_{$taxonomy}_index_settings</td>
-<td>array $settings</td>
+<td style="text-align:left">algolia_terms_{$taxonomy}_index_settings</td>
+<td style="text-align:left">array $settings</td>
 </tr>
 <tr>
-<td>algolia_terms_index_synonyms</td>
-<td>array $synonyms, string $taxonomy</td>
+<td style="text-align:left">algolia_terms_index_synonyms</td>
+<td style="text-align:left">array $synonyms, string $taxonomy</td>
 </tr>
 <tr>
-<td>algolia_terms_{$taxonomy}_index_synonyms</td>
-<td>array $synonyms</td>
+<td style="text-align:left">algolia_terms_{$taxonomy}_index_synonyms</td>
+<td style="text-align:left">array $synonyms</td>
 </tr>
 <tr>
-<td>algolia_should_index_user</td>
-<td>bool $should_index, WP_User $user</td>
+<td style="text-align:left">algolia_should_index_user</td>
+<td style="text-align:left">bool $should_index, WP_User $user</td>
 </tr>
 <tr>
-<td>algolia_user_record</td>
-<td>array $record, WP_User $user</td>
+<td style="text-align:left">algolia_user_record</td>
+<td style="text-align:left">array $record, WP_User $user</td>
 </tr>
 <tr>
-<td>algolia_users_index_settings</td>
-<td>array $settings</td>
+<td style="text-align:left">algolia_users_index_settings</td>
+<td style="text-align:left">array $settings</td>
 </tr>
 <tr>
-<td>algolia_users_index_synonyms</td>
-<td>array $synonyms</td>
+<td style="text-align:left">algolia_users_index_synonyms</td>
+<td style="text-align:left">array $synonyms</td>
 </tr>
 <tr>
-<td>algolia_index_replicas</td>
-<td>array $replicas, Algolia_Index $index</td>
+<td style="text-align:left">algolia_index_replicas</td>
+<td style="text-align:left">array $replicas, Algolia_Index $index</td>
 </tr>
 <tr>
-<td>algolia_{$index_id}_index_replicas</td>
-<td>array $replicas, Algolia_Index $index</td>
+<td style="text-align:left">algolia_{$index_id}_index_replicas</td>
+<td style="text-align:left">array $replicas, Algolia_Index $index</td>
 </tr>
 <tr>
-<td>algolia_config</td>
-<td>array $config</td>
+<td style="text-align:left">algolia_config</td>
+<td style="text-align:left">array $config</td>
 </tr>
 <tr>
-<td>algolia_task_queue_lock_ttl</td>
-<td>int $ttl</td>
+<td style="text-align:left">algolia_indexing_batch_size</td>
+<td style="text-align:left">int $batch_size (default: 50)</td>
 </tr>
 <tr>
-<td>algolia_indexing_batch_size</td>
-<td>int $batch_size (default: 50)</td>
+<td style="text-align:left">algolia_{$index_id}_indexing_batch_size</td>
+<td style="text-align:left">int $batch_size</td>
 </tr>
 <tr>
-<td>algolia_{$index_id}_indexing_batch_size</td>
-<td>int $batch_size</td>
+<td style="text-align:left">algolia_templates_path</td>
+<td style="text-align:left">string $path (default: &apos;algolia/&apos;)</td>
 </tr>
 <tr>
-<td>algolia_logs_per_page</td>
-<td>int $logs_per_page</td>
+<td style="text-align:left">algolia_template_locations</td>
+<td style="text-align:left">array $locations</td>
 </tr>
 <tr>
-<td>algolia_templates_path</td>
-<td>string $path (default: &apos;algolia/&apos;)</td>
+<td style="text-align:left">algolia_default_template</td>
+<td style="text-align:left">string $template, string $file</td>
 </tr>
 <tr>
-<td>algolia_template_locations</td>
-<td>array $locations</td>
+<td style="text-align:left">algolia_search_params</td>
+<td style="text-align:left">array $params</td>
 </tr>
 <tr>
-<td>algolia_default_template</td>
-<td>string $template, string $file</td>
+<td style="text-align:left">algolia_should_override_search_with_instantsearch</td>
+<td style="text-align:left">bool $bool (default: depending on configuration)</td>
 </tr>
 <tr>
-<td>algolia_search_params</td>
-<td>array $params</td>
+<td style="text-align:left">algolia_post_images_sizes</td>
+<td style="text-align:left">array $sizes (default: only the &apos;thumbnail&apos; size)</td>
 </tr>
 <tr>
-<td>algolia_loopback_request_args</td>
-<td>array $request_args</td>
-</tr>
-<tr>
-<td>algolia_should_override_search_with_instantsearch</td>
-<td>bool $bool (default: depending on configuration)</td>
+<td style="text-align:left">algolia_get_post_images</td>
+<td style="text-align:left">array $images (default: only the info about the &apos;thumbnail&apos; size)</td>
 </tr>
 </tbody>
 </table>
@@ -585,7 +581,7 @@ This will also disable tasks being generated for that content type.</p>
   <a class="ac-footer-btn ac-footer-btn-cta" href="https://community.algolia.com/">See More</a>
   <span class="ac-icon ac-icon-love-dark"></span>
 </div>
-<p class="ac-footer-version">Latest version: 1.7.0</p>
+<p class="ac-footer-version">Latest version: 2.0.0</p>
 <div class="ac-footer-actions">
     <div class="footer-container">
       <p>Build unique search experiences with Algolia</p>
@@ -721,8 +717,8 @@ This will also disable tasks being generated for that content type.</p>
 </defs>
 </svg>
 <script src="deps/jquery/jquery.min.js"></script>
-<script src="js/communityHeader.js?v=1493291815532"></script>
-<script src="js/app.js?v=1493291815532"></script>
+<script src="js/communityHeader.js?v=1494339230306"></script>
+<script src="js/app.js?v=1494339230306"></script>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <script src="https://cdn.jsdelivr.net/lodash/4.16.2/lodash.min.js"></script>
 

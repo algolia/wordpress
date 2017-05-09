@@ -29,7 +29,7 @@
   <meta name="description" content="Understand the indices default settings and how to customize the ranking.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
-  <link rel="stylesheet" href="css/app.css?v=1493291815532">
+  <link rel="stylesheet" href="css/app.css?v=1494339230306">
 
   <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
 
@@ -329,12 +329,6 @@ Even though we do not yet provide out of the box usage of faceting in the plugin
 <span class="hljs-variable">$settings</span> = <span class="hljs-keyword">array</span>(
     <span class="hljs-string">&apos;attributesToIndex&apos;</span> =&gt; <span class="hljs-keyword">array</span>(
         <span class="hljs-string">&apos;unordered(post_title)&apos;</span>,
-        <span class="hljs-string">&apos;unordered(title1)&apos;</span>,
-        <span class="hljs-string">&apos;unordered(title2)&apos;</span>,
-        <span class="hljs-string">&apos;unordered(title3)&apos;</span>,
-        <span class="hljs-string">&apos;unordered(title4)&apos;</span>,
-        <span class="hljs-string">&apos;unordered(title5)&apos;</span>,
-        <span class="hljs-string">&apos;unordered(title6)&apos;</span>,
         <span class="hljs-string">&apos;unordered(content)&apos;</span>,
     ),
     <span class="hljs-string">&apos;customRanking&apos;</span> =&gt; <span class="hljs-keyword">array</span>(
@@ -351,12 +345,6 @@ Even though we do not yet provide out of the box usage of faceting in the plugin
     ),
     <span class="hljs-string">&apos;attributesToSnippet&apos;</span> =&gt; <span class="hljs-keyword">array</span>(
         <span class="hljs-string">&apos;post_title:30&apos;</span>,
-        <span class="hljs-string">&apos;title1:30&apos;</span>,
-        <span class="hljs-string">&apos;title2:30&apos;</span>,
-        <span class="hljs-string">&apos;title3:30&apos;</span>,
-        <span class="hljs-string">&apos;title4:30&apos;</span>,
-        <span class="hljs-string">&apos;title5:30&apos;</span>,
-        <span class="hljs-string">&apos;title6:30&apos;</span>,
         <span class="hljs-string">&apos;content:30&apos;</span>,
     ),
     <span class="hljs-string">&apos;snippetEllipsisText&apos;</span> =&gt; <span class="hljs-string">&apos;&#x2026;&apos;</span>,
@@ -368,12 +356,6 @@ Even though we do not yet provide out of the box usage of faceting in the plugin
 <span class="hljs-variable">$settings</span> = <span class="hljs-keyword">array</span>(
     <span class="hljs-string">&apos;attributesToIndex&apos;</span> =&gt; <span class="hljs-keyword">array</span>(
         <span class="hljs-string">&apos;unordered(post_title)&apos;</span>,
-        <span class="hljs-string">&apos;unordered(title1)&apos;</span>,
-        <span class="hljs-string">&apos;unordered(title2)&apos;</span>,
-        <span class="hljs-string">&apos;unordered(title3)&apos;</span>,
-        <span class="hljs-string">&apos;unordered(title4)&apos;</span>,
-        <span class="hljs-string">&apos;unordered(title5)&apos;</span>,
-        <span class="hljs-string">&apos;unordered(title6)&apos;</span>,
         <span class="hljs-string">&apos;unordered(content)&apos;</span>,
     ),
     <span class="hljs-string">&apos;customRanking&apos;</span> =&gt; <span class="hljs-keyword">array</span>(
@@ -389,12 +371,6 @@ Even though we do not yet provide out of the box usage of faceting in the plugin
     ),
     <span class="hljs-string">&apos;attributesToSnippet&apos;</span> =&gt; <span class="hljs-keyword">array</span>(
         <span class="hljs-string">&apos;post_title:30&apos;</span>,
-        <span class="hljs-string">&apos;title1:30&apos;</span>,
-        <span class="hljs-string">&apos;title2:30&apos;</span>,
-        <span class="hljs-string">&apos;title3:30&apos;</span>,
-        <span class="hljs-string">&apos;title4:30&apos;</span>,
-        <span class="hljs-string">&apos;title5:30&apos;</span>,
-        <span class="hljs-string">&apos;title6:30&apos;</span>,
         <span class="hljs-string">&apos;content:30&apos;</span>,
     ),
     <span class="hljs-string">&apos;snippetEllipsisText&apos;</span> =&gt; <span class="hljs-string">&apos;&#x2026;&apos;</span>,
@@ -431,30 +407,30 @@ To do so simply use the available filters:</p>
 <table>
 <thead>
 <tr>
-<th>Filter Name</th>
-<th>Params</th>
+<th style="text-align:left">Filter Name</th>
+<th style="text-align:left">Params</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>algolia_posts_index_settings</td>
-<td><code>$settings</code>, the posts index settings. <code>$post_type</code>, the post type, like &quot;page&quot; or &quot;post&quot;.</td>
+<td style="text-align:left">algolia_posts_index_settings</td>
+<td style="text-align:left"><code>$settings</code>, the posts index settings. <code>$post_type</code>, the post type, like &quot;page&quot; or &quot;post&quot;.</td>
 </tr>
 <tr>
-<td>algolia_posts_{$post_type}_index_settings</td>
-<td><code>$settings</code>, the posts index settings.</td>
+<td style="text-align:left">algolia_posts_{$post_type}_index_settings</td>
+<td style="text-align:left"><code>$settings</code>, the posts index settings.</td>
 </tr>
 <tr>
-<td>algolia_terms_index_settings</td>
-<td><code>$settings</code>, the terms index settings. <code>$taxonomy</code>, the taxonomy like &quot;post_tag&quot; or &quot;category&quot;.</td>
+<td style="text-align:left">algolia_terms_index_settings</td>
+<td style="text-align:left"><code>$settings</code>, the terms index settings. <code>$taxonomy</code>, the taxonomy like &quot;post_tag&quot; or &quot;category&quot;.</td>
 </tr>
 <tr>
-<td>algolia_terms_{$taxonomy}_index_settings</td>
-<td><code>$settings</code>, the terms index settings.</td>
+<td style="text-align:left">algolia_terms_{$taxonomy}_index_settings</td>
+<td style="text-align:left"><code>$settings</code>, the terms index settings.</td>
 </tr>
 <tr>
-<td>algolia_users_index_settings</td>
-<td><code>$settings</code>, the users index settings.</td>
+<td style="text-align:left">algolia_users_index_settings</td>
+<td style="text-align:left"><code>$settings</code>, the users index settings.</td>
 </tr>
 </tbody>
 </table>
@@ -580,7 +556,7 @@ add_filter( <span class="hljs-string">&apos;algolia_posts_index_settings&apos;</
   <a class="ac-footer-btn ac-footer-btn-cta" href="https://community.algolia.com/">See More</a>
   <span class="ac-icon ac-icon-love-dark"></span>
 </div>
-<p class="ac-footer-version">Latest version: 1.7.0</p>
+<p class="ac-footer-version">Latest version: 2.0.0</p>
 <div class="ac-footer-actions">
     <div class="footer-container">
       <p>Build unique search experiences with Algolia</p>
@@ -716,8 +692,8 @@ add_filter( <span class="hljs-string">&apos;algolia_posts_index_settings&apos;</
 </defs>
 </svg>
 <script src="deps/jquery/jquery.min.js"></script>
-<script src="js/communityHeader.js?v=1493291815532"></script>
-<script src="js/app.js?v=1493291815532"></script>
+<script src="js/communityHeader.js?v=1494339230306"></script>
+<script src="js/app.js?v=1494339230306"></script>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <script src="https://cdn.jsdelivr.net/lodash/4.16.2/lodash.min.js"></script>
 

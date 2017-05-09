@@ -29,7 +29,7 @@
   <meta name="description" content="Constants that can be added to your wp-config.php">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
-  <link rel="stylesheet" href="css/app.css?v=1493291815532">
+  <link rel="stylesheet" href="css/app.css?v=1494339230306">
 
   <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
 
@@ -316,66 +316,46 @@
 <table>
 <thead>
 <tr>
-<th>Constant Name</th>
-<th>Default Value</th>
-<th>Description</th>
+<th style="text-align:left">Constant Name</th>
+<th style="text-align:left">Default Value</th>
+<th style="text-align:left">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>ALGOLIA_AUTO_PROCESS_QUEUE</td>
-<td>true</td>
-<td>By default, every time a new indexing task is queued, the plugin tries to process them. By passing this constant to false, you can process the queue by pressing the &apos;process queue&apos; button on the indexing page, or choose to programatically trigger it.</td>
+<td style="text-align:left">ALGOLIA_HIDE_HELP_NOTICES</td>
+<td style="text-align:left">false</td>
+<td style="text-align:left">By turning this on, you will hide help notices on the autocomplete and instantsearch admin pages. This is sometimes useful if you are using a custom autocomplete or instantsearch implementation.</td>
 </tr>
 <tr>
-<td>ALGOLIA_LOOPBACK_HTTP</td>
-<td>false</td>
-<td>Allow you to force the queue remote calls to be done over HTTP even if your site is served over HTTPS. This is useful in certain environments where the SSL certificates can not be validated because of old version of the cURL library.</td>
+<td style="text-align:left">ALGOLIA_SPLIT_POSTS</td>
+<td style="text-align:left">true</td>
+<td style="text-align:left">By turning this off, 1 post will equal 1 record but content will be truncated to fit into the Algolia payload max size.</td>
 </tr>
 <tr>
-<td>ALGOLIA_MAX_LOG_ENTRIES</td>
-<td>50</td>
-<td>Maximum number of log entries before we start discarding old entries.</td>
+<td style="text-align:left">ALGOLIA_CONTENT_MAX_SIZE</td>
+<td style="text-align:left">2000</td>
+<td style="text-align:left">Split the content over several records when exceeding ALGOLIA_CONTENT_MAX_SIZE (size in bytes). WARNING: you should only reduce this value, otherwise your queue will break.</td>
 </tr>
 <tr>
-<td>ALGOLIA_POWERED_BY</td>
-<td>true</td>
-<td>By passing this constant to false, you will remove the Algolia branding from the autocomplete.js and instantsearch.js implementations. Please note however that we ask you to not remove the Algolia logo if you are on a Hacker plan.</td>
+<td style="text-align:left">ALGOLIA_APPLICATION_ID</td>
+<td style="text-align:left">null</td>
+<td style="text-align:left">The Algolia application to use.</td>
 </tr>
 <tr>
-<td>ALGOLIA_HIDE_HELP_NOTICES</td>
-<td>false</td>
-<td>By turning this on, you will hide help notices on the autocomplete and instantsearch admin pages. This is sometimes useful if you are using a custom autocomplete or instantsearch implementation.</td>
+<td style="text-align:left">ALGOLIA_SEARCH_API_KEY</td>
+<td style="text-align:left">null</td>
+<td style="text-align:left">The Algolia search only API key to use.</td>
 </tr>
 <tr>
-<td>ALGOLIA_SPLIT_POSTS</td>
-<td>true</td>
-<td>By turning this off, 1 post will equal 1 record but content will be truncated to fit into the Algolia payload max size.</td>
+<td style="text-align:left">ALGOLIA_API_KEY</td>
+<td style="text-align:left">null</td>
+<td style="text-align:left">The Algolia admin API key to use.</td>
 </tr>
 <tr>
-<td>ALGOLIA_CONTENT_MAX_SIZE</td>
-<td>5000</td>
-<td>Split the content over several records when exceeding ALGOLIA_CONTENT_MAX_SIZE (size in bytes). WARNING: you should only reduce this value, otherwise your queue will break.</td>
-</tr>
-<tr>
-<td>ALGOLIA_APPLICATION_ID</td>
-<td>null</td>
-<td>The Algolia application to use.</td>
-</tr>
-<tr>
-<td>ALGOLIA_SEARCH_API_KEY</td>
-<td>null</td>
-<td>The Algolia search only API key to use.</td>
-</tr>
-<tr>
-<td>ALGOLIA_API_KEY</td>
-<td>null</td>
-<td>The Algolia admin API key to use.</td>
-</tr>
-<tr>
-<td>ALGOLIA_INDEX_NAME_PREFIX</td>
-<td>&apos;wp_&apos;</td>
-<td>The index name prefix to use.</td>
+<td style="text-align:left">ALGOLIA_INDEX_NAME_PREFIX</td>
+<td style="text-align:left">&apos;wp_&apos;</td>
+<td style="text-align:left">The index name prefix to use.</td>
 </tr>
 </tbody>
 </table>
@@ -460,7 +440,7 @@
   <a class="ac-footer-btn ac-footer-btn-cta" href="https://community.algolia.com/">See More</a>
   <span class="ac-icon ac-icon-love-dark"></span>
 </div>
-<p class="ac-footer-version">Latest version: 1.7.0</p>
+<p class="ac-footer-version">Latest version: 2.0.0</p>
 <div class="ac-footer-actions">
     <div class="footer-container">
       <p>Build unique search experiences with Algolia</p>
@@ -596,8 +576,8 @@
 </defs>
 </svg>
 <script src="deps/jquery/jquery.min.js"></script>
-<script src="js/communityHeader.js?v=1493291815532"></script>
-<script src="js/app.js?v=1493291815532"></script>
+<script src="js/communityHeader.js?v=1494339230306"></script>
+<script src="js/app.js?v=1494339230306"></script>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <script src="https://cdn.jsdelivr.net/lodash/4.16.2/lodash.min.js"></script>
 

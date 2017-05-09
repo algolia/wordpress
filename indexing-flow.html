@@ -29,7 +29,7 @@
   <meta name="description" content="Understand the indexing flow and the generated operations.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
-  <link rel="stylesheet" href="css/app.css?v=1493291815532">
+  <link rel="stylesheet" href="css/app.css?v=1494339230306">
 
   <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
 
@@ -339,26 +339,26 @@
 <table>
 <thead>
 <tr>
-<th>Content Type</th>
-<th>Rule</th>
+<th style="text-align:left">Content Type</th>
+<th style="text-align:left">Rule</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Searchable Post</td>
-<td>We only index a post when it is in the <code>published</code> state and if its post type is not <code>excluded_from_search</code>.</td>
+<td style="text-align:left">Searchable Post</td>
+<td style="text-align:left">We only index a post when it is in the <code>published</code> state and if its post type is not <code>excluded_from_search</code>.</td>
 </tr>
 <tr>
-<td>Post</td>
-<td>We only index a post when it is in the <code>published</code> state if it has no password.</td>
+<td style="text-align:left">Post</td>
+<td style="text-align:left">We only index a post when it is in the <code>published</code> state if it has no password.</td>
 </tr>
 <tr>
-<td>Term</td>
-<td>We only index a term if it has been assigned to at least 1 post (count &gt; 0).</td>
+<td style="text-align:left">Term</td>
+<td style="text-align:left">We only index a term if it has been assigned to at least 1 post (count &gt; 0).</td>
 </tr>
 <tr>
-<td>User</td>
-<td>We index a user if he has authored at least 1 post.</td>
+<td style="text-align:left">User</td>
+<td style="text-align:left">We index a user if he has authored at least 1 post.</td>
 </tr>
 </tbody>
 </table>
@@ -434,18 +434,7 @@ add_filter( <span class="hljs-string">&apos;algolia_should_index_searchable_post
 
 
 <h2 id="queue-processing"><a class="heading-anchor" href="#queue-processing"><span></span></a>Queue processing</h2>
-<p>Every time a change of your content is detected, see <a href="#triggers">previous section</a>, we queue a synchronization task with the minimum required information for the task to be handled.</p>
-<p>When that happens, we directly try to trigger the processing of the queue. The queue follows the FIFO logic, and ensures there is only one task handled at the same time. For scalability reasons, each task handling is done in its own PHP process and triggered by an asynchronous http call.</p>
-<div class="alert alert-warning">By default WordPress will ensure that your ssl certificate is valid on every remote call. If you have an invalid ssl certificate, the queue processing won&apos;t work.</div>
-
-<h2 id="queue-processing-troubleshooting"><a class="heading-anchor" href="#queue-processing-troubleshooting"><span></span></a>Queue processing troubleshooting</h2>
-<p>Queue processing is the most critical part of the plugin. If the queue processing doesn&apos;t work, then the whole plugin becomes un-usable.</p>
-<p>If you have queue processing problems, please:</p>
-<ul>
-<li>Make sure you take advantage of built in logs and WordPress logs, see the <a href="logs.html">Debugging</a> section of the docs,</li>
-<li>Check out the <a href="frequently-asked-questions.html">FAQ</a> for answers,</li>
-<li>If you don&apos;t manage to solve the issue by yourself, ask for help, see: <a href="frequently-asked-questions.html">FAQ</a>.</li>
-</ul>
+<p>Every time a change of your content is detected, see <a href="#triggers">previous section</a>, we synchronize the item.</p>
 
                 </div>
             </div>
@@ -527,7 +516,7 @@ add_filter( <span class="hljs-string">&apos;algolia_should_index_searchable_post
   <a class="ac-footer-btn ac-footer-btn-cta" href="https://community.algolia.com/">See More</a>
   <span class="ac-icon ac-icon-love-dark"></span>
 </div>
-<p class="ac-footer-version">Latest version: 1.7.0</p>
+<p class="ac-footer-version">Latest version: 2.0.0</p>
 <div class="ac-footer-actions">
     <div class="footer-container">
       <p>Build unique search experiences with Algolia</p>
@@ -663,8 +652,8 @@ add_filter( <span class="hljs-string">&apos;algolia_should_index_searchable_post
 </defs>
 </svg>
 <script src="deps/jquery/jquery.min.js"></script>
-<script src="js/communityHeader.js?v=1493291815532"></script>
-<script src="js/app.js?v=1493291815532"></script>
+<script src="js/communityHeader.js?v=1494339230306"></script>
+<script src="js/app.js?v=1494339230306"></script>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <script src="https://cdn.jsdelivr.net/lodash/4.16.2/lodash.min.js"></script>
 

@@ -29,7 +29,7 @@
   <meta name="description" content="WP-CLI Algolia commands.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
-  <link rel="stylesheet" href="css/app.css?v=1493291815532">
+  <link rel="stylesheet" href="css/app.css?v=1494339230306">
 
   <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
 
@@ -310,30 +310,15 @@ If you get the following message: <code>The configuration for this website does 
 is not configured properly to reach the Algolia API (missing the API keys for example).
 </div>
 
-<h2 id="command-algolia-process-queue"><a class="heading-anchor" href="#command-algolia-process-queue"><span></span></a>Command: algolia process-queue</h2>
-<p>The following command will process all the pending tasks of the queue.</p>
-<p>By triggering the processing this way, you won&apos;t trigger any http remote call to loop over the task, making it a good alternative to the default indexing logic.</p>
-<div class="alert alert-warning">Please note that your queue must not be already running. You can go stop it from the Indexing page of the plugin if needed.</div>
-
-<pre><code class="hljs bash">wp algolia process-queue
+<h2 id="command-algolia-reindex-indexname-clear-all-"><a class="heading-anchor" href="#command-algolia-reindex-indexname-clear-all-"><span></span></a>Command: algolia reindex [<indexname>] [--clear] [--all]</indexname></h2>
+<p>The following command will re-index all items belonging to a given index.</p>
+<p>If the <code>--all</code> parameter is passed, all enabled indices will be re-indexed.</p>
+<p>If the <code>--clear</code> parameter is passed, all existing records will be cleared prior to pushing new records. Also works with in combination with the <code>--all</code> parameter.</p>
+<pre><code class="hljs bash">wp algolia reindex posts_post
 <span class="hljs-comment"># or</span>
-wp algolia process_queue</code></pre>
-
-<h2 id="command-algolia-re-index-all"><a class="heading-anchor" href="#command-algolia-re-index-all"><span></span></a>Command: algolia re-index-all</h2>
-<p>The following command will queue all indices for re-indexing.</p>
-<div class="alert alert-warning">This does not trigger the processing of the queue. Please see the <code>process-queue</code> command to process all generated tasks.</div>
-
-<pre><code class="hljs bash">wp algolia re-index-all
+wp algolia reindex --all
 <span class="hljs-comment"># or</span>
-wp algolia re_index_all</code></pre>
-
-<h2 id="command-algolia-re-index"><a class="heading-anchor" href="#command-algolia-re-index"><span></span></a>Command: algolia re-index</h2>
-<p>The following command will queue a single index for re-indexing.</p>
-<div class="alert alert-warning">This does not trigger the processing of the queue. Please see the <code>process-queue</code> command to process all generated tasks.</div>
-
-<pre><code class="hljs bash">wp algolia re-index &lt;index_id&gt;
-<span class="hljs-comment"># or</span>
-wp algolia re_index &lt;index_id&gt;</code></pre>
+wp algolia reindex --clear --all</code></pre>
                 </div>
             </div>
 
@@ -414,7 +399,7 @@ wp algolia re_index &lt;index_id&gt;</code></pre>
   <a class="ac-footer-btn ac-footer-btn-cta" href="https://community.algolia.com/">See More</a>
   <span class="ac-icon ac-icon-love-dark"></span>
 </div>
-<p class="ac-footer-version">Latest version: 1.7.0</p>
+<p class="ac-footer-version">Latest version: 2.0.0</p>
 <div class="ac-footer-actions">
     <div class="footer-container">
       <p>Build unique search experiences with Algolia</p>
@@ -550,8 +535,8 @@ wp algolia re_index &lt;index_id&gt;</code></pre>
 </defs>
 </svg>
 <script src="deps/jquery/jquery.min.js"></script>
-<script src="js/communityHeader.js?v=1493291815532"></script>
-<script src="js/app.js?v=1493291815532"></script>
+<script src="js/communityHeader.js?v=1494339230306"></script>
+<script src="js/app.js?v=1494339230306"></script>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <script src="https://cdn.jsdelivr.net/lodash/4.16.2/lodash.min.js"></script>
 

@@ -29,7 +29,7 @@
   <meta name="description" content="Most common issues and how to fix them.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
-  <link rel="stylesheet" href="css/app.css?v=1493291815532">
+  <link rel="stylesheet" href="css/app.css?v=1494339230306">
 
   <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
 
@@ -314,15 +314,7 @@
 <p>Yes, you can turn off the post splitting by defining a constant in your WordPress <code>wp-config.php</code> file.</p>
 <pre><code class="hljs"><span class="hljs-class"><span class="hljs-keyword">define</span></span>( <span class="hljs-string">&apos;ALGOLIA_SPLIT_POSTS&apos;</span>, <span class="hljs-literal">false</span> );</code></pre>
 
-<p>Then you will need to <span class="wp-btn">Re-index everything</span> from the <code>Indexing</code> page of the plugin.</p>
-<h3 id="i-was-using-the-beta-version-of-your-plugin-what-exactly-has-changed-"><a class="heading-anchor" href="#i-was-using-the-beta-version-of-your-plugin-what-exactly-has-changed-"><span></span></a>I was using the Beta version of your plugin, what exactly has changed?</h3>
-<p>Everything. Indeed we realized that the scope of our previous implementation was to large to be able to offer a good user experience.
-We have since focused on the core features of this new plugin which allows to seamlessly synchronize any kind of content type you have with Algolia.
-We also tried to be more close to the WordPress philosophy, allowing developers to easily extend this plugin so that it can be a good fit for any WordPress project.</p>
-<p>We will definitely add features in the future, so if you are really missing something, feel free to suggest</p>
-<h3 id="the-previous-beta-version-of-the-plugin-had-some-support-for-woocommerce-what-about-this-one-"><a class="heading-anchor" href="#the-previous-beta-version-of-the-plugin-had-some-support-for-woocommerce-what-about-this-one-"><span></span></a>The previous Beta version of the plugin had some support for WooCommerce, what about this one?</h3>
-<p>As stated earlier, we narrowed down the scope of this plugin for now. That being said, we really want to offer a flexible way to use Algolia in your WooComerce website in the future.</p>
-<p>If you are a developer and have built something based on this plugin, maybe we could work something out together fast enough!</p>
+<p>You will need to re-index the indices to see the change.</p>
 <h3 id="can-i-customize-the-autocomplete-dropdown-look-feel-"><a class="heading-anchor" href="#can-i-customize-the-autocomplete-dropdown-look-feel-"><span></span></a>Can I customize the Autocomplete dropdown look &amp; feel?</h3>
 <p>Yes. You can find some detailed explanations on <a href="customize-autocomplete.html">this page</a>.</p>
 <h3 id="i-have-created-a-custom-api-key-but-it-is-not-accepted-as-search-only-api-key-in-the-plugin-settings-"><a class="heading-anchor" href="#i-have-created-a-custom-api-key-but-it-is-not-accepted-as-search-only-api-key-in-the-plugin-settings-"><span></span></a>I have created a custom API key, but it is not accepted as Search-Only API key in the plugin settings.</h3>
@@ -349,36 +341,7 @@ For security reasons, we reject every filled Search-Only API key that has additi
 <ol>
 <li>First of all ensure the autocomplete feature is turned on on the Autocomplete page of the admin UI,</li>
 <li>Make sure you actually selected at least one index to display from that same page, and ensure those indices were created in Algolia,</li>
-<li>Make sure your theme calls the <code>wp_footer()</code> method in your template files.</li>
 </ol>
-<h3 id="how-do-i-resolve-wp_remote-errors-on-indexing-admin-page-"><a class="heading-anchor" href="#how-do-i-resolve-wp_remote-errors-on-indexing-admin-page-"><span></span></a>How do I resolve <code>wp_remote()</code> errors on <code>indexing</code> admin page?</h3>
-<p>It really depends what error you are getting, but here are a few know issues:</p>
-<p><strong>You are using an SSL certificate (your website url starts with <code>https://</code>):</strong></p>
-<p>Our plugin uses cURL and the underlying OpenSSL library to loop over the queued indexing tasks.</p>
-<p>If the OpenSSL library is too old, then you might face cURL error 35 with messages containing <code>handshake failure</code>, or <code>unknown protocol</code>.</p>
-<p>In that case you should ask your hosting provider to upgrade your cURL/OpenSSL version.</p>
-<p>If you are unable to upgrade your cURL/OpenSSL versions, and if your website can also be accessed over &apos;HTTP&apos;, you can force the loopback to access your website over HTTP by adding the following line to your wp-config.php file: <code>define( &apos;ALGOLIA_LOOPBACK_HTTP&apos;, true );</code></p>
-<p><strong>Htaccess password protected:</strong></p>
-<p>If your /wp-admin section of your website is protected with Basic HTTP Authentication, you can use the <code>algolia_loopback_request_args</code> filter to add your username and password to the remote calls headers.</p>
-<pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
-<span class="hljs-comment">// In your current active theme functions.php.</span>
-define( <span class="hljs-string">&apos;MY_USERNAME&apos;</span>, <span class="hljs-string">&apos;test&apos;</span> );
-define( <span class="hljs-string">&apos;MY_PASSWORD&apos;</span>, <span class="hljs-string">&apos;test&apos;</span> );
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">custom_loopback_request_args</span><span class="hljs-params">( array <span class="hljs-variable">$request_args</span> )</span> </span>{
-    <span class="hljs-variable">$request_args</span>[<span class="hljs-string">&apos;headers&apos;</span>][<span class="hljs-string">&apos;Authorization&apos;</span>] = <span class="hljs-string">&apos;Basic &apos;</span> . base64_encode( MY_USERNAME . <span class="hljs-string">&apos;:&apos;</span> . MY_PASSWORD );
-
-    <span class="hljs-keyword">return</span> <span class="hljs-variable">$request_args</span>;
-}
-
-add_filter( <span class="hljs-string">&apos;algolia_loopback_request_args&apos;</span>, <span class="hljs-string">&apos;custom_loopback_request_args&apos;</span> );</code></pre>
-
-<p><strong>You are using Docker:</strong></p>
-<p>If you are using Docker, you should make sure that the domain name you are using is listed in the <code>/etc/hosts</code> file of your container.</p>
-<p>Port forwarding is currently unsupported, so you should use port 80 or 443 depending on if you are using http or https to access your website.</p>
-<p><strong>Does the instant search results work with IE9?</strong></p>
-<p>The default implementation will break on IE9. You can use the <code>useHash</code> option of the instantsearch.js library to enable support for IE9.</p>
-<p>See <a href="https://github.com/algolia/algoliasearch-wordpress/pull/375">https://github.com/algolia/algoliasearch-wordpress/pull/375</a> for an example of how to enable IE9 support.</p>
 <h3 id="the-indexing-is-slow-can-i-optimize-the-required-time-"><a class="heading-anchor" href="#the-indexing-is-slow-can-i-optimize-the-required-time-"><span></span></a>The indexing is slow, can I optimize the required time?</h3>
 <p>Yes, it depends on your servers capacities though and the number of plugins you have enabled.</p>
 <p>By default we only index 50 items per indexing process to ensure we don&apos;t reach PHP max execution time or memory limits.</p>
@@ -390,37 +353,6 @@ add_filter( <span class="hljs-string">&apos;algolia_indexing_batch_size&apos;</s
 } );</span></code></pre>
 
 <p>If indexing doesn&apos;t work anymore after the change, it probably means you pushed the number to high. Checkout the logs in that case to be sure.</p>
-<h3 id="can-i-remove-non-required-thumbnail-sizes-from-the-records-"><a class="heading-anchor" href="#can-i-remove-non-required-thumbnail-sizes-from-the-records-"><span></span></a>Can I remove non required thumbnail sizes from the records?</h3>
-<p>By default the plugin pushes all the thumbnail sizes available so that you can easily switch the displayed format in your frontend integration.</p>
-<p>If you want to optimize the records size you can definitely remove non-used sizes.</p>
-<p>Let&apos;s say you only use <code>thumbnail</code> and the <code>medium</code> thumbnail sizes, here is how to remove all the others:</p>
-<pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
-
-<span class="hljs-comment">/**
- * <span class="hljs-doctag">@param</span> array $shared_attributes
- *
- * <span class="hljs-doctag">@return</span> array
- */</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">vm_post_shared_attributes</span><span class="hljs-params">( array <span class="hljs-variable">$shared_attributes</span> )</span> </span>{
-    <span class="hljs-variable">$keep_sizes</span> = <span class="hljs-keyword">array</span>( <span class="hljs-string">&apos;thumbnail&apos;</span>, <span class="hljs-string">&apos;medium&apos;</span> );
-    <span class="hljs-variable">$images</span> = <span class="hljs-keyword">array</span>();
-    <span class="hljs-keyword">foreach</span> ( <span class="hljs-variable">$shared_attributes</span>[<span class="hljs-string">&apos;images&apos;</span>] <span class="hljs-keyword">as</span> <span class="hljs-variable">$size</span> =&gt; <span class="hljs-variable">$info</span> ) {
-        <span class="hljs-keyword">if</span> ( in_array( <span class="hljs-variable">$size</span>, <span class="hljs-variable">$keep_sizes</span> ) ) {
-            <span class="hljs-variable">$images</span>[<span class="hljs-variable">$size</span>] = <span class="hljs-variable">$info</span>;
-        }
-    }
-
-    <span class="hljs-variable">$shared_attributes</span>[<span class="hljs-string">&apos;images&apos;</span>] = <span class="hljs-variable">$images</span>;
-
-    <span class="hljs-keyword">return</span> <span class="hljs-variable">$shared_attributes</span>;
-}
-
-<span class="hljs-comment">// Remove the un-necessary sizes from the posts index.</span>
-add_filter( <span class="hljs-string">&apos;algolia_post_shared_attributes&apos;</span>, <span class="hljs-string">&apos;vm_post_shared_attributes&apos;</span> );
-
-<span class="hljs-comment">// Also remove the un-necessary sizes from the searchable posts index.</span>
-add_filter( <span class="hljs-string">&apos;algolia_searchable_post_shared_attributes&apos;</span>, <span class="hljs-string">&apos;vm_post_shared_attributes&apos;</span> );</code></pre>
-
 <h3 id="can-i-push-my-custom-user-attributes-"><a class="heading-anchor" href="#can-i-push-my-custom-user-attributes-"><span></span></a>Can I push my custom user attributes?</h3>
 <p>Yes, and you can do so by using the <code>algolia_user_record</code> filter:</p>
 <pre><code class="hljs">&lt;?php
@@ -439,18 +371,6 @@ add_filter( <span class="hljs-string">&apos;algolia_searchable_post_shared_attri
 }
 
 add_filter( <span class="hljs-string">&apos;algolia_user_record&apos;</span>, <span class="hljs-string">&apos;custom_user_record&apos;</span>, <span class="hljs-number">10</span>, <span class="hljs-number">2</span> );</code></pre>
-
-<h3 id="how-do-i-remove-the-powered-by-algolia-logo-"><a class="heading-anchor" href="#how-do-i-remove-the-powered-by-algolia-logo-"><span></span></a>How do I remove the powered by Algolia logo?</h3>
-<div class="alert alert-warning">Please note that the powered by logo is mandatory if you are on a hacker plan (free plan).</div>
-
-<p>To remove the powered by logo you must add the following to your <code>wp-config.php</code> file:</p>
-<pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
-<span class="hljs-comment">// [...]</span>
-
-define( <span class="hljs-string">&apos;ALGOLIA_POWERED_BY&apos;</span>, <span class="hljs-keyword">false</span> );
-
-<span class="hljs-comment">/* That&apos;s all, stop editing! Happy blogging. */</span>
-<span class="hljs-comment">// [...]</span></code></pre>
 
 <h3 id="my-case-is-not-listed-here-what-to-do-"><a class="heading-anchor" href="#my-case-is-not-listed-here-what-to-do-"><span></span></a>My case is not listed here, what to do?</h3>
 <p>If your problem is covered here, please submit an issue with the error details here: <a href="https://github.com/algolia/algoliasearch-wordpress/issues">https://github.com/algolia/algoliasearch-wordpress/issues</a></p>
@@ -535,7 +455,7 @@ define( <span class="hljs-string">&apos;ALGOLIA_POWERED_BY&apos;</span>, <span c
   <a class="ac-footer-btn ac-footer-btn-cta" href="https://community.algolia.com/">See More</a>
   <span class="ac-icon ac-icon-love-dark"></span>
 </div>
-<p class="ac-footer-version">Latest version: 1.7.0</p>
+<p class="ac-footer-version">Latest version: 2.0.0</p>
 <div class="ac-footer-actions">
     <div class="footer-container">
       <p>Build unique search experiences with Algolia</p>
@@ -671,8 +591,8 @@ define( <span class="hljs-string">&apos;ALGOLIA_POWERED_BY&apos;</span>, <span c
 </defs>
 </svg>
 <script src="deps/jquery/jquery.min.js"></script>
-<script src="js/communityHeader.js?v=1493291815532"></script>
-<script src="js/app.js?v=1493291815532"></script>
+<script src="js/communityHeader.js?v=1494339230306"></script>
+<script src="js/app.js?v=1494339230306"></script>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <script src="https://cdn.jsdelivr.net/lodash/4.16.2/lodash.min.js"></script>
 

@@ -29,7 +29,7 @@
   <meta name="description" content="Customize your drop-down menu that appears underneath every search bar of your WordPress website.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
-  <link rel="stylesheet" href="css/app.css?v=1493291815532">
+  <link rel="stylesheet" href="css/app.css?v=1494339230306">
 
   <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
 
@@ -431,25 +431,6 @@ add_action( <span class="hljs-string">&apos;wp_print_styles&apos;</span>, <span 
 <p>By default, if the autocomplete feature is turned on, we will attach an Algolia dropdown to every search input of your website matching the jQuery selector <code>input[name=&apos;s&apos;]</code>.</p>
 <p>Note however that we also exclude inputs that have an associated <code>no-autocomplete</code> class.</p>
 <p>So to easily disable the Algolia autocomplete dropdown for a given search input, simply add the <code>no-autocomplete</code> class to it.</p>
-<h2 id="customize-autocomplete-labels"><a class="heading-anchor" href="#customize-autocomplete-labels"><span></span></a>Customize autocomplete labels</h2>
-<p>By default the plugin uses the post type label for each data source section.</p>
-<p>To customize the displayed label, you can add the following to your <code>functions.php</code> file of your theme:</p>
-<pre><code class="hljs php">add_filter(<span class="hljs-string">&apos;algolia_autocomplete_config&apos;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(array <span class="hljs-variable">$config</span>)</span> </span>{
-    <span class="hljs-variable">$new_labels</span> = <span class="hljs-keyword">array</span>(
-        <span class="hljs-string">&apos;searchable_posts&apos;</span> =&gt; <span class="hljs-string">&apos;All posts&apos;</span>,
-        <span class="hljs-string">&apos;posts_product&apos;</span> =&gt; <span class="hljs-string">&apos;Video&apos;</span>,
-    );
-
-    <span class="hljs-keyword">foreach</span> (<span class="hljs-variable">$config</span> <span class="hljs-keyword">as</span> &amp;<span class="hljs-variable">$item</span>) {
-        <span class="hljs-keyword">if</span>(<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$new_labels</span>[<span class="hljs-variable">$item</span>[<span class="hljs-string">&apos;index_id&apos;</span>]])) {
-            <span class="hljs-variable">$item</span>[<span class="hljs-string">&apos;label&apos;</span>] = <span class="hljs-variable">$new_labels</span>[<span class="hljs-variable">$item</span>[<span class="hljs-string">&apos;index_id&apos;</span>]];
-        }
-    }
-
-    <span class="hljs-keyword">return</span> <span class="hljs-variable">$config</span>;
-});</code></pre>
-
-<p>In this example, the autocomplete will display &quot;All posts&quot; instead of &quot;Searchable Posts&quot; and &quot;Video&quot; instead of &quot;Posts&quot;.</p>
 
                 </div>
             </div>
@@ -531,7 +512,7 @@ add_action( <span class="hljs-string">&apos;wp_print_styles&apos;</span>, <span 
   <a class="ac-footer-btn ac-footer-btn-cta" href="https://community.algolia.com/">See More</a>
   <span class="ac-icon ac-icon-love-dark"></span>
 </div>
-<p class="ac-footer-version">Latest version: 1.7.0</p>
+<p class="ac-footer-version">Latest version: 2.0.0</p>
 <div class="ac-footer-actions">
     <div class="footer-container">
       <p>Build unique search experiences with Algolia</p>
@@ -667,8 +648,8 @@ add_action( <span class="hljs-string">&apos;wp_print_styles&apos;</span>, <span 
 </defs>
 </svg>
 <script src="deps/jquery/jquery.min.js"></script>
-<script src="js/communityHeader.js?v=1493291815532"></script>
-<script src="js/app.js?v=1493291815532"></script>
+<script src="js/communityHeader.js?v=1494339230306"></script>
+<script src="js/app.js?v=1494339230306"></script>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <script src="https://cdn.jsdelivr.net/lodash/4.16.2/lodash.min.js"></script>
 

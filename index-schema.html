@@ -29,7 +29,7 @@
   <meta name="description" content="Understand how we format the data pushed to Algolia.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
-  <link rel="stylesheet" href="css/app.css?v=1493291815532">
+  <link rel="stylesheet" href="css/app.css?v=1494339230306">
 
   <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
 
@@ -309,168 +309,136 @@
 <table>
 <thead>
 <tr>
-<th>Attribute Name</th>
-<th>Description</th>
+<th style="text-align:left">Attribute Name</th>
+<th style="text-align:left">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>objectID</td>
-<td>The unique identifier for this record.</td>
+<td style="text-align:left">objectID</td>
+<td style="text-align:left">The unique identifier for this record.</td>
 </tr>
 <tr>
-<td>post_id</td>
-<td>The unique identifier for the post.</td>
+<td style="text-align:left">post_id</td>
+<td style="text-align:left">The unique identifier for the post.</td>
 </tr>
 <tr>
-<td>post_type</td>
-<td>The post type slug.</td>
+<td style="text-align:left">post_type</td>
+<td style="text-align:left">The post type slug.</td>
 </tr>
 <tr>
-<td>post_type_label</td>
-<td>The post type nice-name.</td>
+<td style="text-align:left">post_type_label</td>
+<td style="text-align:left">The post type nice-name.</td>
 </tr>
 <tr>
-<td>post_title</td>
-<td>The title of the post.</td>
+<td style="text-align:left">post_title</td>
+<td style="text-align:left">The title of the post.</td>
 </tr>
 <tr>
-<td>post_excerpt</td>
-<td>The excerpt of the post. An empty string if not available.</td>
+<td style="text-align:left">post_excerpt</td>
+<td style="text-align:left">The excerpt of the post. An empty string if not available.</td>
 </tr>
 <tr>
-<td>post_date</td>
-<td>The first publication date as a unix timestamp.</td>
+<td style="text-align:left">post_date</td>
+<td style="text-align:left">The first publication date as a unix timestamp.</td>
 </tr>
 <tr>
-<td>post_modified</td>
-<td>The last time the post was updated as a unix timestamp.</td>
+<td style="text-align:left">post_modified</td>
+<td style="text-align:left">The last time the post was updated as a unix timestamp.</td>
 </tr>
 <tr>
-<td>comment_count</td>
-<td>The number of comments for the post.</td>
+<td style="text-align:left">comment_count</td>
+<td style="text-align:left">The number of comments for the post.</td>
 </tr>
 <tr>
-<td>post_author</td>
-<td>The post author as an array containing the <code>author_ID</code>, the <code>display_name</code> and the <code>user_url</code>.</td>
+<td style="text-align:left">post_author</td>
+<td style="text-align:left">The post author as an array containing the <code>author_ID</code>, the <code>display_name</code> and the <code>user_url</code>.</td>
 </tr>
 <tr>
-<td>thumbnail_url</td>
-<td>The url to the featured image of the post.</td>
+<td style="text-align:left">thumbnail_url</td>
+<td style="text-align:left">The url to the featured image of the post.</td>
 </tr>
 <tr>
-<td>permalink</td>
-<td>The url to the public page of the post.</td>
+<td style="text-align:left">permalink</td>
+<td style="text-align:left">The url to the public page of the post.</td>
 </tr>
 <tr>
-<td>post_mime_type</td>
-<td>The Mime Type of the post, available only for Medias (attachments).</td>
+<td style="text-align:left">post_mime_type</td>
+<td style="text-align:left">The Mime Type of the post, available only for Medias (attachments).</td>
 </tr>
 <tr>
-<td>taxonomy_post_tag</td>
-<td>An array of strings representing the post tags.</td>
+<td style="text-align:left">taxonomy_post_tag</td>
+<td style="text-align:left">An array of strings representing the post tags.</td>
 </tr>
 <tr>
-<td>taxonomy_category</td>
-<td>An array of strings representing categories the post is attached to.</td>
+<td style="text-align:left">taxonomy_category</td>
+<td style="text-align:left">An array of strings representing categories the post is attached to.</td>
 </tr>
 <tr>
-<td>is_sticky</td>
-<td>1 if the post is marked as sticky, 0 otherwise.</td>
+<td style="text-align:left">is_sticky</td>
+<td style="text-align:left">1 if the post is marked as sticky, 0 otherwise.</td>
 </tr>
 </tbody>
 </table>
 <p>The above attributes are what we call <code>shared attributes</code>.</p>
 <p>Algolia is very performing when searching into small chunks of text. As posts can become large pieces of text, we have a mechanism splitting your posts into several Algolia records.</p>
-<p>Each record of a same post would have the same shared attributes and the following <code>content attributes</code>.</p>
+<p>Each record of a same post would have the same shared attributes and the content.</p>
 <table>
 <thead>
 <tr>
-<th>Attribute Name</th>
-<th>Description</th>
+<th style="text-align:left">Attribute Name</th>
+<th style="text-align:left">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>title{1-6}</td>
-<td>Content found in hierarchical dom elements of your post.</td>
-</tr>
-<tr>
-<td>content</td>
-<td>Content found it the bottom most hierarchical level in your post.</td>
+<td style="text-align:left">content</td>
+<td style="text-align:left">Content found it the bottom most hierarchical level in your post.</td>
 </tr>
 </tbody>
 </table>
-<p>To extract the content of the generated post DOM, we use the following library: <a href="https://github.com/algolia/php-dom-parser">https://github.com/algolia/php-dom-parser</a>.</p>
-<p>By default, the parser will fetch content in your heading tags, from h1 to h6, to respectively fill the title1 to title 6.
-Then it will fetch the content in p, ul, ol, dl, table tags. We excluded the <code>pre</code> tag in this plugin.</p>
-<p>If you want to change the way you data is fetched, you can use an available filter to customize the parser:</p>
-<pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">my_custom_parser</span><span class="hljs-params">( Algolia\DOMParser <span class="hljs-variable">$parser</span> )</span> </span>{
-    <span class="hljs-comment">// Custom selectors.</span>
-    <span class="hljs-variable">$parser</span>-&gt;setAttributeSelectors( <span class="hljs-keyword">array</span>(
-       <span class="hljs-string">&apos;title1&apos;</span>  =&gt; <span class="hljs-string">&apos;title&apos;</span>,
-       <span class="hljs-string">&apos;title2&apos;</span>  =&gt; <span class="hljs-string">&apos;div.heading&apos;</span>,
-       <span class="hljs-string">&apos;title3&apos;</span>  =&gt; <span class="hljs-string">&apos;p.sub-header&apos;</span>,
-       <span class="hljs-string">&apos;title4&apos;</span>  =&gt; <span class="hljs-string">&apos;h4&apos;</span>,
-       <span class="hljs-string">&apos;title5&apos;</span>  =&gt; <span class="hljs-string">&apos;h5&apos;</span>,
-       <span class="hljs-string">&apos;title6&apos;</span>  =&gt; <span class="hljs-string">&apos;h6&apos;</span>,
-       <span class="hljs-string">&apos;content&apos;</span> =&gt; <span class="hljs-string">&apos;p, ul, ol, dl, table&apos;</span>,
-   ) );
-
-   <span class="hljs-comment">// Custom exlusion rules.</span>
-   <span class="hljs-variable">$parser</span>-&gt;setExcludeSelectors( <span class="hljs-keyword">array</span>(
-    <span class="hljs-string">&apos;pre&apos;</span>, <span class="hljs-string">&apos;.related-articles&apos;</span>, <span class="hljs-string">&apos;#toc&apos;</span>, <span class="hljs-string">&apos;#social-medias&apos;</span>
-   ) );
-
-   <span class="hljs-keyword">return</span> <span class="hljs-variable">$parser</span>;
-}
-
-add_filter( <span class="hljs-string">&apos;algolia_post_parser&apos;</span>, <span class="hljs-string">&apos;my_custom_parser&apos;</span> );</code></pre>
-
 <h2 id="terms"><a class="heading-anchor" href="#terms"><span></span></a>Terms</h2>
 <p>As there are no huge chunks of text in terms, we have one record per item.</p>
 <p>Here are the default attributes we push:</p>
 <table>
 <thead>
 <tr>
-<th>Attribute Name</th>
-<th>Description</th>
+<th style="text-align:left">Attribute Name</th>
+<th style="text-align:left">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>objectID</td>
-<td>The unique identifier for this record.</td>
+<td style="text-align:left">objectID</td>
+<td style="text-align:left">The unique identifier for this record.</td>
 </tr>
 <tr>
-<td>term_id</td>
-<td>The unique identifier for the term.</td>
+<td style="text-align:left">term_id</td>
+<td style="text-align:left">The unique identifier for the term.</td>
 </tr>
 <tr>
-<td>taxonomy</td>
-<td>The taxonomy slug.</td>
+<td style="text-align:left">taxonomy</td>
+<td style="text-align:left">The taxonomy slug.</td>
 </tr>
 <tr>
-<td>name</td>
-<td>The term name.</td>
+<td style="text-align:left">name</td>
+<td style="text-align:left">The term name.</td>
 </tr>
 <tr>
-<td>description</td>
-<td>The term description.</td>
+<td style="text-align:left">description</td>
+<td style="text-align:left">The term description.</td>
 </tr>
 <tr>
-<td>slug</td>
-<td>The slug of the term.</td>
+<td style="text-align:left">slug</td>
+<td style="text-align:left">The slug of the term.</td>
 </tr>
 <tr>
-<td>posts_count</td>
-<td>The number of times this term was assigned to a post.</td>
+<td style="text-align:left">posts_count</td>
+<td style="text-align:left">The number of times this term was assigned to a post.</td>
 </tr>
 <tr>
-<td>permalink</td>
-<td>The url to the public page of the term.</td>
+<td style="text-align:left">permalink</td>
+<td style="text-align:left">The url to the public page of the term.</td>
 </tr>
 </tbody>
 </table>
@@ -479,38 +447,38 @@ add_filter( <span class="hljs-string">&apos;algolia_post_parser&apos;</span>, <s
 <table>
 <thead>
 <tr>
-<th>Attribute Name</th>
-<th>Description</th>
+<th style="text-align:left">Attribute Name</th>
+<th style="text-align:left">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>objectID</td>
-<td>The unique identifier for this record.</td>
+<td style="text-align:left">objectID</td>
+<td style="text-align:left">The unique identifier for this record.</td>
 </tr>
 <tr>
-<td>user_id</td>
-<td>The unique identifier for the user.</td>
+<td style="text-align:left">user_id</td>
+<td style="text-align:left">The unique identifier for the user.</td>
 </tr>
 <tr>
-<td>display_name</td>
-<td>The display name for the user.</td>
+<td style="text-align:left">display_name</td>
+<td style="text-align:left">The display name for the user.</td>
 </tr>
 <tr>
-<td>posts_url</td>
-<td>URL to the page listing all posts of the author.</td>
+<td style="text-align:left">posts_url</td>
+<td style="text-align:left">URL to the page listing all posts of the author.</td>
 </tr>
 <tr>
-<td>description</td>
-<td>The bio of the author.</td>
+<td style="text-align:left">description</td>
+<td style="text-align:left">The bio of the author.</td>
 </tr>
 <tr>
-<td>posts_count</td>
-<td>The number of posts written by the user.</td>
+<td style="text-align:left">posts_count</td>
+<td style="text-align:left">The number of posts written by the user.</td>
 </tr>
 <tr>
-<td>avatar_url</td>
-<td>The URL of the user&apos;s avatar picture.</td>
+<td style="text-align:left">avatar_url</td>
+<td style="text-align:left">The URL of the user&apos;s avatar picture.</td>
 </tr>
 </tbody>
 </table>
@@ -595,7 +563,7 @@ add_filter( <span class="hljs-string">&apos;algolia_post_parser&apos;</span>, <s
   <a class="ac-footer-btn ac-footer-btn-cta" href="https://community.algolia.com/">See More</a>
   <span class="ac-icon ac-icon-love-dark"></span>
 </div>
-<p class="ac-footer-version">Latest version: 1.7.0</p>
+<p class="ac-footer-version">Latest version: 2.0.0</p>
 <div class="ac-footer-actions">
     <div class="footer-container">
       <p>Build unique search experiences with Algolia</p>
@@ -731,8 +699,8 @@ add_filter( <span class="hljs-string">&apos;algolia_post_parser&apos;</span>, <s
 </defs>
 </svg>
 <script src="deps/jquery/jquery.min.js"></script>
-<script src="js/communityHeader.js?v=1493291815532"></script>
-<script src="js/app.js?v=1493291815532"></script>
+<script src="js/communityHeader.js?v=1494339230306"></script>
+<script src="js/app.js?v=1494339230306"></script>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <script src="https://cdn.jsdelivr.net/lodash/4.16.2/lodash.min.js"></script>
 
