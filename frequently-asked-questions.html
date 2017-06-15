@@ -29,7 +29,7 @@
   <meta name="description" content="Most common issues and how to fix them.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
-  <link rel="stylesheet" href="css/app.css?v=1494504200233">
+  <link rel="stylesheet" href="css/app.css?v=1497527262375">
 
   <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
 
@@ -344,7 +344,7 @@ For security reasons, we reject every filled Search-Only API key that has additi
 </ol>
 <h3 id="the-indexing-is-slow-can-i-optimize-the-required-time-"><a class="heading-anchor" href="#the-indexing-is-slow-can-i-optimize-the-required-time-"><span></span></a>The indexing is slow, can I optimize the required time?</h3>
 <p>Yes, it depends on your servers capacities though and the number of plugins you have enabled.</p>
-<p>By default we only index 50 items per indexing process to ensure we don&apos;t reach PHP max execution time or memory limits.</p>
+<p>By default we only index 100 items per indexing process to ensure we don&apos;t reach PHP max execution time or memory limits.</p>
 <p>Here is a way to increase the number of items indexed on each PHP indexing process:</p>
 <pre><code class="hljs"><span class="php"><span class="hljs-preprocessor">&lt;?php</span>
 
@@ -371,6 +371,21 @@ add_filter( <span class="hljs-string">&apos;algolia_indexing_batch_size&apos;</s
 }
 
 add_filter( <span class="hljs-string">&apos;algolia_user_record&apos;</span>, <span class="hljs-string">&apos;custom_user_record&apos;</span>, <span class="hljs-number">10</span>, <span class="hljs-number">2</span> );</code></pre>
+
+<h3 id="can-i-use-custom-thumbnail-sizes-"><a class="heading-anchor" href="#can-i-use-custom-thumbnail-sizes-"><span></span></a>Can I use custom thumbnail sizes?</h3>
+<p>Yes,</p>
+<p>If the thumbnail size you are willing to display is medium, you can do:</p>
+<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-title">#</span> <span class="hljs-attribute">if</span> ( <span class="hljs-attribute">data.images.medium</span> ) { #&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">img</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">&quot;suggestion-post-thumbnail&quot;</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">&quot;{{ data.images.medium.url }}&quot;</span> <span class="hljs-attribute">alt</span>=<span class="hljs-value">&quot;{{ data.post_title }}&quot;</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">#</span> } #&gt;</span></code></pre>
+
+<p>Since version 2.x of the plugin, we do not push all thumbnail sizes by default to avoid huge record payloads.</p>
+<p>You now need to use a filter hook that allows you to specify the thumbnail sizes you want to push. i.e.</p>
+<pre><code class="hljs php">add_filter(<span class="hljs-string">&apos;algolia_post_images_sizes&apos;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(<span class="hljs-variable">$sizes</span>)</span> </span>{
+    <span class="hljs-variable">$sizes</span>[] = <span class="hljs-string">&apos;medium&apos;</span>;
+
+    <span class="hljs-keyword">return</span> <span class="hljs-variable">$sizes</span>;
+});</code></pre>
 
 <h3 id="my-case-is-not-listed-here-what-to-do-"><a class="heading-anchor" href="#my-case-is-not-listed-here-what-to-do-"><span></span></a>My case is not listed here, what to do?</h3>
 <p>If your problem is covered here, please submit an issue with the error details here: <a href="https://github.com/algolia/algoliasearch-wordpress/issues">https://github.com/algolia/algoliasearch-wordpress/issues</a></p>
@@ -455,7 +470,7 @@ add_filter( <span class="hljs-string">&apos;algolia_user_record&apos;</span>, <s
   <a class="ac-footer-btn ac-footer-btn-cta" href="https://community.algolia.com/">See More</a>
   <span class="ac-icon ac-icon-love-dark"></span>
 </div>
-<p class="ac-footer-version">Latest version: 2.2.0</p>
+<p class="ac-footer-version">Latest version: 2.3.0</p>
 <div class="ac-footer-actions">
     <div class="footer-container">
       <p>Build unique search experiences with Algolia</p>
@@ -591,8 +606,8 @@ add_filter( <span class="hljs-string">&apos;algolia_user_record&apos;</span>, <s
 </defs>
 </svg>
 <script src="deps/jquery/jquery.min.js"></script>
-<script src="js/communityHeader.js?v=1494504200233"></script>
-<script src="js/app.js?v=1494504200233"></script>
+<script src="js/communityHeader.js?v=1497527262375"></script>
+<script src="js/app.js?v=1497527262375"></script>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <script src="https://cdn.jsdelivr.net/lodash/4.16.2/lodash.min.js"></script>
 
