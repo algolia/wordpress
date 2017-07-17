@@ -29,7 +29,7 @@
   <meta name="description" content="Create indices with the same content but with a different ranking formula.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
-  <link rel="stylesheet" href="css/app.css?v=1497527262375">
+  <link rel="stylesheet" href="css/app.css?v=1500295940826">
 
   <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
 
@@ -361,6 +361,63 @@ add_filter( <span class="hljs-string">&apos;algolia_index_replicas&apos;</span>,
     return <span class="hljs-variable">$replicas</span>;
 }
 add_filter( <span class="hljs-string">&apos;algolia_posts_product_index_replicas&apos;</span>, <span class="hljs-string">&apos;my_products_index_replicas&apos;</span>);</code></pre>
+
+<h2 id="search-on-replica-when-using-backend-search"><a class="heading-anchor" href="#search-on-replica-when-using-backend-search"><span></span></a>Search on replica when using backend search</h2>
+<p>When using Algolia in the backend, you can use 2 hooks to customize the replica to search on.</p>
+<p>In the example, let&apos;s register a custom replica to allow to list searchable posts by date by oldest entry:</p>
+<pre><code class="hljs">&lt;?php
+
+/**
+ * @param <span class="hljs-keyword">array</span>         <span class="hljs-variable">$replicas</span>
+ * @param Algolia_Index <span class="hljs-variable">$index</span>
+ *
+ * @<span class="hljs-keyword">return</span> <span class="hljs-keyword">array</span>
+ */
+<span class="hljs-keyword">function</span> my_custom_index_replicas( <span class="hljs-keyword">array</span> <span class="hljs-variable">$replicas</span>, Algolia_Index <span class="hljs-variable">$index</span> ) {
+    if ( <span class="hljs-string">&apos;searchable_posts&apos;</span> === <span class="hljs-variable">$index-</span>&gt;get_id() ) {
+        <span class="hljs-variable">$replicas</span>[] = new Algolia_Index_Replica( <span class="hljs-string">&apos;post_date&apos;</span>, <span class="hljs-string">&apos;asc&apos;</span> );
+    }
+
+    return <span class="hljs-variable">$replicas</span>;
+}
+add_filter( <span class="hljs-string">&apos;algolia_index_replicas&apos;</span>, <span class="hljs-string">&apos;my_custom_index_replicas&apos;</span>, <span class="hljs-number">10</span>, <span class="hljs-number">2</span> );</code></pre>
+
+<p>After this change in your code, you will need to push the settings of the searchable posts index from the &quot;autocomplete&quot;
+page of the plugin.</p>
+<p>You should now have a newly created replica index which you can see in the Algolia dashboard.</p>
+<p>You now need to use filters to correctly target the new replica:</p>
+<pre><code class="hljs"><span class="php"><span class="hljs-preprocessor">&lt;?php</span>
+
+add_filter( <span class="hljs-string">&apos;algolia_search_order_by&apos;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+   <span class="hljs-keyword">return</span> <span class="hljs-string">&apos;post_date&apos;</span>;
+} );
+
+add_filter( <span class="hljs-string">&apos;algolia_search_order&apos;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-string">&apos;asc&apos;</span>;
+} );</span></code></pre>
+
+<p>Your search page should now return results from oldest to newest one.</p>
+<p>You could also dynamically switch ordering based on a <code>$_GET</code> parameter:</p>
+<pre><code class="hljs">&lt;?php
+
+add_filter( <span class="hljs-string">&apos;algolia_search_order_by&apos;</span>, <span class="hljs-keyword">function</span>( <span class="hljs-variable">$attribute</span>_name ) {
+    if ( isset( $_GET[<span class="hljs-string">&apos;orderby&apos;</span>] ) &amp;&amp; $_GET[<span class="hljs-string">&apos;orderby&apos;</span>] === <span class="hljs-string">&apos;date-asc&apos;</span> ) {
+        return <span class="hljs-string">&apos;post_date&apos;</span>;
+    }
+
+   return <span class="hljs-variable">$attribute</span>_name;
+} );
+
+add_filter( <span class="hljs-string">&apos;algolia_search_order&apos;</span>, <span class="hljs-keyword">function</span>( <span class="hljs-variable">$order</span> ) {
+    if ( isset( $_GET[<span class="hljs-string">&apos;orderby&apos;</span>] ) &amp;&amp; $_GET[<span class="hljs-string">&apos;orderby&apos;</span>] === <span class="hljs-string">&apos;date-asc&apos;</span> ) {
+        return <span class="hljs-string">&apos;asc&apos;</span>;
+    }
+
+  return <span class="hljs-variable">$order</span>;
+} );</code></pre>
+
+
+
                 </div>
             </div>
 
@@ -441,7 +498,7 @@ add_filter( <span class="hljs-string">&apos;algolia_posts_product_index_replicas
   <a class="ac-footer-btn ac-footer-btn-cta" href="https://community.algolia.com/">See More</a>
   <span class="ac-icon ac-icon-love-dark"></span>
 </div>
-<p class="ac-footer-version">Latest version: 2.3.0</p>
+<p class="ac-footer-version">Latest version: 2.5.0</p>
 <div class="ac-footer-actions">
     <div class="footer-container">
       <p>Build unique search experiences with Algolia</p>
@@ -577,8 +634,8 @@ add_filter( <span class="hljs-string">&apos;algolia_posts_product_index_replicas
 </defs>
 </svg>
 <script src="deps/jquery/jquery.min.js"></script>
-<script src="js/communityHeader.js?v=1497527262375"></script>
-<script src="js/app.js?v=1497527262375"></script>
+<script src="js/communityHeader.js?v=1500295940826"></script>
+<script src="js/app.js?v=1500295940826"></script>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <script src="https://cdn.jsdelivr.net/lodash/4.16.2/lodash.min.js"></script>
 
