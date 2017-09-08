@@ -29,7 +29,7 @@
   <meta name="description" content="Understand the indexing flow and the generated operations.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
-  <link rel="stylesheet" href="css/app.css?v=1500295940826">
+  <link rel="stylesheet" href="css/app.css?v=1504876164374">
 
   <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
 
@@ -435,7 +435,10 @@ add_filter( <span class="hljs-string">&apos;algolia_should_index_searchable_post
 
 <h2 id="queue-processing"><a class="heading-anchor" href="#queue-processing"><span></span></a>Queue processing</h2>
 <p>Every time a change of your content is detected, see <a href="#triggers">previous section</a>, we synchronize the item.</p>
-
+<p>You can disable automatic sychronization by removing all the watchers using the <code>algolia_changes_watchers</code> filter:</p>
+<pre><code class="hljs php">add_filter( <span class="hljs-string">&apos;algolia_changes_watchers&apos;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">array</span>();
+} );</code></pre>
                 </div>
             </div>
 
@@ -516,7 +519,7 @@ add_filter( <span class="hljs-string">&apos;algolia_should_index_searchable_post
   <a class="ac-footer-btn ac-footer-btn-cta" href="https://community.algolia.com/">See More</a>
   <span class="ac-icon ac-icon-love-dark"></span>
 </div>
-<p class="ac-footer-version">Latest version: 2.5.0</p>
+<p class="ac-footer-version">Latest version: 2.7.0</p>
 <div class="ac-footer-actions">
     <div class="footer-container">
       <p>Build unique search experiences with Algolia</p>
@@ -652,8 +655,8 @@ add_filter( <span class="hljs-string">&apos;algolia_should_index_searchable_post
 </defs>
 </svg>
 <script src="deps/jquery/jquery.min.js"></script>
-<script src="js/communityHeader.js?v=1500295940826"></script>
-<script src="js/app.js?v=1500295940826"></script>
+<script src="js/communityHeader.js?v=1504876164374"></script>
+<script src="js/app.js?v=1504876164374"></script>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <script src="https://cdn.jsdelivr.net/lodash/4.16.2/lodash.min.js"></script>
 

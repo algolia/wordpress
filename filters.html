@@ -29,7 +29,7 @@
   <meta name="description" content="The available filters and how to use them to customize the behaviour.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
-  <link rel="stylesheet" href="css/app.css?v=1500295940826">
+  <link rel="stylesheet" href="css/app.css?v=1504876164374">
 
   <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
 
@@ -359,10 +359,6 @@ This will also disable tasks being generated for that content type.</p>
 <td style="text-align:left">bool $should_index, WP_Post $post</td>
 </tr>
 <tr>
-<td style="text-align:left">algolia_searchable_post_parser</td>
-<td style="text-align:left">Algolia\DOMParser $parser</td>
-</tr>
-<tr>
 <td style="text-align:left">algolia_searchable_post_{$post_type}_shared_attributes</td>
 <td style="text-align:left">array $shared_attributes, WP_Post $post</td>
 </tr>
@@ -385,10 +381,6 @@ This will also disable tasks being generated for that content type.</p>
 <tr>
 <td style="text-align:left">algolia_should_index_post</td>
 <td style="text-align:left">bool $should_index, WP_Post $post</td>
-</tr>
-<tr>
-<td style="text-align:left">algolia_post_parser</td>
-<td style="text-align:left">Algolia\DOMParser $parser</td>
 </tr>
 <tr>
 <td style="text-align:left">algolia_post_shared_attributes</td>
@@ -518,6 +510,10 @@ This will also disable tasks being generated for that content type.</p>
 <td style="text-align:left">algolia_get_synced_indices_ids</td>
 <td style="text-align:left">array $ids</td>
 </tr>
+<tr>
+<td style="text-align:left">algolia_strip_patterns</td>
+<td style="text-align:left">array $noise_patterns (default: regular expressions to strip comments, cdata, script, style, code, and pre)</td>
+</tr>
 </tbody>
 </table>
 
@@ -601,7 +597,7 @@ This will also disable tasks being generated for that content type.</p>
   <a class="ac-footer-btn ac-footer-btn-cta" href="https://community.algolia.com/">See More</a>
   <span class="ac-icon ac-icon-love-dark"></span>
 </div>
-<p class="ac-footer-version">Latest version: 2.5.0</p>
+<p class="ac-footer-version">Latest version: 2.7.0</p>
 <div class="ac-footer-actions">
     <div class="footer-container">
       <p>Build unique search experiences with Algolia</p>
@@ -737,8 +733,8 @@ This will also disable tasks being generated for that content type.</p>
 </defs>
 </svg>
 <script src="deps/jquery/jquery.min.js"></script>
-<script src="js/communityHeader.js?v=1500295940826"></script>
-<script src="js/app.js?v=1500295940826"></script>
+<script src="js/communityHeader.js?v=1504876164374"></script>
+<script src="js/app.js?v=1504876164374"></script>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <script src="https://cdn.jsdelivr.net/lodash/4.16.2/lodash.min.js"></script>
 
