@@ -29,7 +29,7 @@
   <meta name="description" content="Discover how to push your custom attributes and adapt your Algolia ranking settings.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
-  <link rel="stylesheet" href="css/app.css?v=1507117841019">
+  <link rel="stylesheet" href="css/app.css?v=1507627143737">
 
   <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
 
@@ -420,50 +420,12 @@ add_filter( <span class="hljs-string">&apos;algolia_posts_index_settings&apos;</
     <span class="hljs-keyword">return</span> <span class="hljs-variable">$settings</span>;
 }</code></pre>
 
-<div class="alert alert-warning">After making changes to settings, you need to re-index the indices. To do so, simply click on the <code>Re-index everything</code> button on the <code>Indexing</code> admin page of this plugin:</div>
+<div class="alert alert-warning">After making changes to settings, you need to re-index the indices. To do so, simply click on the <code>Re-index</code> button on the admin page of this plugin:</div>
 
 <p><img src="img/custom-attributes/re-index-everything.png" alt="Re-index everything button"></p>
 <p>Your data is now safely stored in Algolia, used in the ranking formula but un-retrievable from the frontend!</p>
 <h2 id="sync-data-with-algolia"><a class="heading-anchor" href="#sync-data-with-algolia"><span></span></a>Sync data with Algolia</h2>
-<p>We now have everything ready, the only missing part is to sync the posts with Algolia.</p>
-<p>2 possible ways to achive this would be:</p>
-<ol>
-<li>Listen for the WordPress <code>updated_post_meta</code> action hook, and queue a <code>sync_post</code> task every time a new visit has been noticed</li>
-<li>Schedule a re-index task at a given interval</li>
-</ol>
-<p>In this case, we certainly do not want to trigger a sync task every time a visitor accesses a page of your website. So let&apos;s follow the second path.</p>
-<pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
-
-<span class="hljs-comment">// Queues re-indexation of every post type.</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">vm_re_index_posts</span><span class="hljs-params">()</span> </span>{
-    <span class="hljs-comment">/** <span class="hljs-doctag">@var</span> Algolia_Plugin $algolia */</span>
-    <span class="hljs-keyword">global</span> <span class="hljs-variable">$algolia</span>;
-
-    <span class="hljs-variable">$task_queue</span> = <span class="hljs-variable">$algolia</span>-&gt;get_task_queue();
-
-    <span class="hljs-variable">$indices</span> = <span class="hljs-variable">$algolia</span>-&gt;get_indices( <span class="hljs-keyword">array</span>(
-        <span class="hljs-string">&apos;enabled&apos;</span> =&gt; <span class="hljs-keyword">true</span>,
-        <span class="hljs-string">&apos;contains&apos;</span> =&gt; <span class="hljs-string">&apos;posts&apos;</span>,
-    ) );
-    <span class="hljs-keyword">foreach</span> ( <span class="hljs-variable">$indices</span> <span class="hljs-keyword">as</span> <span class="hljs-variable">$index</span> ) {
-        <span class="hljs-variable">$task_queue</span>-&gt;queue( <span class="hljs-string">&apos;re_index_items&apos;</span>, <span class="hljs-keyword">array</span>( <span class="hljs-string">&apos;index_id&apos;</span> =&gt; <span class="hljs-variable">$index</span>-&gt;get_id() ) );
-    }
-}
-<span class="hljs-comment">// This action is required for wp_schedule_event binding.</span>
-add_action( <span class="hljs-string">&apos;vm_re_index_posts&apos;</span>, <span class="hljs-string">&apos;vm_re_index_posts&apos;</span> );
-
-
-<span class="hljs-comment">// Registers the recurring vm_re_index_posts event.</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">wp_register_re_index_posts</span><span class="hljs-params">()</span> </span>{
-    <span class="hljs-keyword">if</span> ( ! wp_next_scheduled( <span class="hljs-string">&apos;vm_re_index_posts&apos;</span> ) ) {
-        wp_schedule_event( time(), <span class="hljs-string">&apos;daily&apos;</span>, <span class="hljs-string">&apos;vm_re_index_posts&apos;</span> );
-    }
-}
-
-<span class="hljs-comment">// Only register the event on WordPress init.</span>
-add_action( <span class="hljs-string">&apos;init&apos;</span>, <span class="hljs-string">&apos;wp_register_re_index_posts&apos;</span> );</code></pre>
-
-<p>We now have a fully functional plugin that will force a re-indexation of all post types every day.</p>
+<p>To push your page visits along with your records to Algolia, the easiest is to hit the <code>re-index</code> button from the admin interface.</p>
 <h2 id="complete-plugin-code"><a class="heading-anchor" href="#complete-plugin-code"><span></span></a>Complete Plugin Code</h2>
 <p>Here is the complete plugin source code:</p>
 <pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
@@ -517,37 +479,7 @@ add_filter( <span class="hljs-string">&apos;algolia_post_shared_attributes&apos;
     <span class="hljs-keyword">return</span> <span class="hljs-variable">$settings</span>;
 }
 
-add_filter( <span class="hljs-string">&apos;algolia_posts_index_settings&apos;</span>, <span class="hljs-string">&apos;vm_posts_index_settings&apos;</span> );
-
-
-<span class="hljs-comment">// Queues re-indexation of every post type.</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">vm_re_index_posts</span><span class="hljs-params">()</span> </span>{
-    <span class="hljs-comment">/** <span class="hljs-doctag">@var</span> Algolia_Plugin $algolia */</span>
-    <span class="hljs-keyword">global</span> <span class="hljs-variable">$algolia</span>;
-
-    <span class="hljs-variable">$task_queue</span> = <span class="hljs-variable">$algolia</span>-&gt;get_task_queue();
-
-    <span class="hljs-variable">$indices</span> = <span class="hljs-variable">$algolia</span>-&gt;get_indices( <span class="hljs-keyword">array</span>(
-        <span class="hljs-string">&apos;enabled&apos;</span> =&gt; <span class="hljs-keyword">true</span>,
-        <span class="hljs-string">&apos;contains&apos;</span> =&gt; <span class="hljs-string">&apos;posts&apos;</span>,
-    ) );
-    <span class="hljs-keyword">foreach</span> ( <span class="hljs-variable">$indices</span> <span class="hljs-keyword">as</span> <span class="hljs-variable">$index</span> ) {
-        <span class="hljs-variable">$task_queue</span>-&gt;queue( <span class="hljs-string">&apos;re_index_items&apos;</span>, <span class="hljs-keyword">array</span>( <span class="hljs-string">&apos;index_id&apos;</span> =&gt; <span class="hljs-variable">$index</span>-&gt;get_id() ) );
-    }
-}
-<span class="hljs-comment">// This action is required for wp_schedule_event binding.</span>
-add_action( <span class="hljs-string">&apos;vm_re_index_posts&apos;</span>, <span class="hljs-string">&apos;vm_re_index_posts&apos;</span> );
-
-
-<span class="hljs-comment">// Registers the recurring vm_re_index_posts event.</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">wp_register_re_index_posts</span><span class="hljs-params">()</span> </span>{
-    <span class="hljs-keyword">if</span> ( ! wp_next_scheduled( <span class="hljs-string">&apos;vm_re_index_posts&apos;</span> ) ) {
-        wp_schedule_event( time(), <span class="hljs-string">&apos;daily&apos;</span>, <span class="hljs-string">&apos;vm_re_index_posts&apos;</span> );
-    }
-}
-
-<span class="hljs-comment">// Only register the event on WordPress init.</span>
-add_action( <span class="hljs-string">&apos;init&apos;</span>, <span class="hljs-string">&apos;wp_register_re_index_posts&apos;</span> );</code></pre>
+add_filter( <span class="hljs-string">&apos;algolia_posts_index_settings&apos;</span>, <span class="hljs-string">&apos;vm_posts_index_settings&apos;</span> );</code></pre>
                 </div>
             </div>
 
@@ -764,8 +696,8 @@ add_action( <span class="hljs-string">&apos;init&apos;</span>, <span class="hljs
 </defs>
 </svg>
 <script src="deps/jquery/jquery.min.js"></script>
-<script src="js/communityHeader.js?v=1507117841019"></script>
-<script src="js/app.js?v=1507117841019"></script>
+<script src="js/communityHeader.js?v=1507627143737"></script>
+<script src="js/app.js?v=1507627143737"></script>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <script src="https://cdn.jsdelivr.net/lodash/4.16.2/lodash.min.js"></script>
 
