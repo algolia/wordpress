@@ -29,7 +29,7 @@
   <meta name="description" content="The available filters and how to use them to customize the behaviour.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
-  <link rel="stylesheet" href="css/app.css?v=1507627143737">
+  <link rel="stylesheet" href="css/app.css?v=1509377491665">
 
   <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
 
@@ -392,11 +392,11 @@ This will also disable tasks being generated for that content type.</p>
 </tr>
 <tr>
 <td>algolia_post_records</td>
-<td>array $record, WP_Post $post</td>
+<td>array $records, WP_Post $post</td>
 </tr>
 <tr>
 <td>algolia_post_{$post_type}_records</td>
-<td>array $record, WP_Post</td>
+<td>array $records, WP_Post</td>
 </tr>
 <tr>
 <td>algolia_posts_index_settings</td>
@@ -526,6 +526,10 @@ This will also disable tasks being generated for that content type.</p>
 <td>algolia_searchable_post_types</td>
 <td>array $post_types</td>
 </tr>
+<tr>
+<td>algolia_native_search_index_id</td>
+<td>string $index_id</td>
+</tr>
 </tbody>
 </table>
 
@@ -609,7 +613,7 @@ This will also disable tasks being generated for that content type.</p>
   <a class="ac-footer-btn ac-footer-btn-cta" href="https://community.algolia.com/">See More</a>
   <span class="ac-icon ac-icon-love-dark"></span>
 </div>
-<p class="ac-footer-version">Latest version: 2.8.0</p>
+<p class="ac-footer-version">Latest version: 2.8.1</p>
 <div class="ac-footer-actions">
     <div class="footer-container">
       <p>Build unique search experiences with Algolia</p>
@@ -745,8 +749,8 @@ This will also disable tasks being generated for that content type.</p>
 </defs>
 </svg>
 <script src="deps/jquery/jquery.min.js"></script>
-<script src="js/communityHeader.js?v=1507627143737"></script>
-<script src="js/app.js?v=1507627143737"></script>
+<script src="js/communityHeader.js?v=1509377491665"></script>
+<script src="js/app.js?v=1509377491665"></script>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <script src="https://cdn.jsdelivr.net/lodash/4.16.2/lodash.min.js"></script>
 
