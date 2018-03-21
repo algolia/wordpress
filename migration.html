@@ -3,12 +3,10 @@
 <head>
   <meta charset="UTF-8"/>
   <title>Migration Best Practices</title>
+  <meta name="description" content="How to promote the plugin from dev to staging and from staging to production.">
   <meta content="IE=edge" http-equiv="X-UA-Compatible">
-  <meta charset="utf-8">
-  <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
-
-  <meta content='How to promote the plugin from dev to staging and from staging to production.' name='description'>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'>
+  
   <!-- / Twitter card -->
   <meta content='summary_large_image' name='twitter:card'>
   <meta content='@Algolia' name='twitter:site'>
@@ -16,7 +14,6 @@
   <meta content="Migration Best Practices - Algolia Search plugin for WordPress" name="twitter:title">
   <meta content="How to promote the plugin from dev to staging and from staging to production." name="twitter:description">
   <meta content="https://community.algolia.com/wordpress/img/og-screen.png" name="twitter:image">
-  <!--meta content="Algolia Product image" name="twitter:image"-->
   <!-- / OG meta -->
   <meta content='https://community.algolia.com/wordpress/' property='og:url'>
   <meta content='https://community.algolia.com/wordpress/img/og-screen.png' property='og:image'>
@@ -24,18 +21,28 @@
   <meta content='article' property='og:type'>
   <meta content='How to promote the plugin from dev to staging and from staging to production.' property='og:description'>
   <meta content='Algolia Search plugin for WordPress' property='og:site_name'>
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
 
-  <meta name="description" content="How to promote the plugin from dev to staging and from staging to production.">
+  
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-N8JP8G" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-N8JP8G');</script>
+    
+  
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
-  <link rel="stylesheet" href="css/app.css?v=1509377491665">
-
+  <link rel="stylesheet" href="css/app.css?v=1521636631449">
+  
   <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
-
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
-  <!-- at the end of the BODY -->
+  
   <script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+  
 </head>
 <body class="">
   <!-- Start community header -->
@@ -351,7 +358,7 @@ By doing so, you ensure that you will easily identify indices even if you have m
 <li><strong>Re-enable to autocomplete and the search page features</strong> of the plugin on the dedicated pages of those features.</li>
 </ol>
 <p>&#x1F389;You should now have Algolia up and running smoothly in your production environment &#x1F389; !</p>
-<div class="alert alert-info">If you experience any problem applying this guide, please reach out to support+wordpress@algolia.com so we can improve it!</div>
+<div class="alert alert-info">If you experience any problem applying this guide, please reach out to <a href="mailto:support+wordpress@algolia.com">support+wordpress@algolia.com</a> so we can improve it!</div>
 
 <h2 id="ease-environment-switching-with-constants"><a class="heading-anchor" href="#ease-environment-switching-with-constants"><span></span></a>Ease environment switching with constants</h2>
 <p>Starting from version 1.6.0, you can add the following lines to your <code>wp-config.php</code> file:</p>
@@ -401,6 +408,7 @@ By doing so, you ensure that you will easily identify indices even if you have m
 
             <li class="menu-text">Integrations</li>
             <li ><a href="advanced-custom-fields.html">Advanced Custom Fields</a></li>
+            <li ><a href="polylang.html">Polylang</a></li>
             <li ><a href="wpml.html">WPML</a></li>
             <li ><a href="wp-cli.html">WP-CLI</a></li>
 
@@ -443,7 +451,7 @@ By doing so, you ensure that you will easily identify indices even if you have m
   <a class="ac-footer-btn ac-footer-btn-cta" href="https://community.algolia.com/">See More</a>
   <span class="ac-icon ac-icon-love-dark"></span>
 </div>
-<p class="ac-footer-version">Latest version: 2.8.1</p>
+<p class="ac-footer-version">Latest version: 2.10.2</p>
 <div class="ac-footer-actions">
     <div class="footer-container">
       <p>Build unique search experiences with Algolia</p>
@@ -579,21 +587,12 @@ By doing so, you ensure that you will easily identify indices even if you have m
 </defs>
 </svg>
 <script src="deps/jquery/jquery.min.js"></script>
-<script src="js/communityHeader.js?v=1509377491665"></script>
-<script src="js/app.js?v=1509377491665"></script>
+<script src="js/communityHeader.js?v=1521636631449"></script>
+<script src="js/app.js?v=1521636631449"></script>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <script src="https://cdn.jsdelivr.net/lodash/4.16.2/lodash.min.js"></script>
 
 
-
-<!-- Google Tag Manager -->
-<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-N8JP8G" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-N8JP8G');</script>
-    
 
 <script type="text/javascript">
     var $searchInput = $("#algolia-search-input");
