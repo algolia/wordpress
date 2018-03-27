@@ -36,7 +36,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
-  <link rel="stylesheet" href="css/app.css?v=1521636631449">
+  <link rel="stylesheet" href="css/app.css?v=1522139103359">
   
   <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
@@ -447,6 +447,24 @@ add_filter( <span class="hljs-string">&apos;algolia_should_index_searchable_post
     <span class="hljs-keyword">return</span> <span class="hljs-variable">$post_types</span>;
 } );</code></pre>
 
+<p><strong>Exclude a post by it&apos;s ID</strong></p>
+<p>The following snippets skips the post with ID <code>18517</code>.</p>
+<pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">filter_post</span><span class="hljs-params">( <span class="hljs-variable">$should_index</span>, WP_Post <span class="hljs-variable">$post</span> )</span>
+</span>{
+    <span class="hljs-keyword">if</span> ( <span class="hljs-number">18517</span> === <span class="hljs-variable">$post</span>-&gt;ID ) {
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+    }
+
+    <span class="hljs-keyword">return</span> <span class="hljs-variable">$should_index</span>;
+}
+
+<span class="hljs-comment">// Hook into Algolia to manipulate the post that should be indexed.</span>
+add_filter( <span class="hljs-string">&apos;algolia_should_index_searchable_post&apos;</span>, <span class="hljs-string">&apos;filter_post&apos;</span>, <span class="hljs-number">10</span>, <span class="hljs-number">2</span> );
+add_filter( <span class="hljs-string">&apos;algolia_should_index_post&apos;</span>, <span class="hljs-string">&apos;filter_post&apos;</span>, <span class="hljs-number">10</span>, <span class="hljs-number">2</span> );</code></pre>
+
+
 <h2 id="queue-processing"><a class="heading-anchor" href="#queue-processing"><span></span></a>Queue processing</h2>
 <p>Every time a change of your content is detected, see <a href="#triggers">previous section</a>, we synchronize the item.</p>
 <p>You can disable automatic sychronization by removing all the watchers using the <code>algolia_changes_watchers</code> filter:</p>
@@ -670,8 +688,8 @@ add_filter( <span class="hljs-string">&apos;algolia_should_index_searchable_post
 </defs>
 </svg>
 <script src="deps/jquery/jquery.min.js"></script>
-<script src="js/communityHeader.js?v=1521636631449"></script>
-<script src="js/app.js?v=1521636631449"></script>
+<script src="js/communityHeader.js?v=1522139103359"></script>
+<script src="js/app.js?v=1522139103359"></script>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <script src="https://cdn.jsdelivr.net/lodash/4.16.2/lodash.min.js"></script>
 
