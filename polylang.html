@@ -36,7 +36,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
-  <link rel="stylesheet" href="css/app.css?v=1522226612672">
+  <link rel="stylesheet" href="css/app.css?v=1522226885756">
   
   <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
@@ -376,7 +376,20 @@ Add the <code>filters</code> line to your instantsearch initialization:</p>
 
 <p>Now your results on the dedicated search page should be properly filtered.</p>
 <p>For the autocomplete dropdown experience, you need to do a similar change.</p>
-<p>First copy the autocomplete.php file to your own theme</p>
+<p>First <a href="https://community.algolia.com/wordpress/customize-autocomplete.html#customization">copy the autocomplete.php file to your own theme</a>, 
+and then do the following change to your file:</p>
+<pre><code class="hljs js">source: algoliaAutocomplete.sources.hits(client.initIndex(config[<span class="hljs-string">&apos;index_name&apos;</span>]), {
+  hitsPerPage: config[<span class="hljs-string">&apos;max_suggestions&apos;</span>],
+  attributesToSnippet: [
+    <span class="hljs-string">&apos;content:10&apos;</span>
+  ],
+  highlightPreTag: <span class="hljs-string">&apos;__ais-highlight__&apos;</span>,
+  highlightPostTag: <span class="hljs-string">&apos;__/ais-highlight__&apos;</span>,
+  filters: <span class="hljs-string">&apos;locale:&quot;&apos;</span> + current_locale + <span class="hljs-string">&apos;&quot;&apos;</span>, <span class="hljs-comment">// This is the added line.</span>
+
+}),</code></pre>
+
+<p>After this change your autocomplete dropdown results should now also be filtered by the current locale.</p>
 
                 </div>
             </div>
@@ -595,8 +608,8 @@ Add the <code>filters</code> line to your instantsearch initialization:</p>
 </defs>
 </svg>
 <script src="deps/jquery/jquery.min.js"></script>
-<script src="js/communityHeader.js?v=1522226612672"></script>
-<script src="js/app.js?v=1522226612672"></script>
+<script src="js/communityHeader.js?v=1522226885756"></script>
+<script src="js/app.js?v=1522226885756"></script>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <script src="https://cdn.jsdelivr.net/lodash/4.16.2/lodash.min.js"></script>
 
