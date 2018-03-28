@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
-  <title>WPML integration with Algolia Search</title>
-  <meta name="description" content="Integrate Algolia Search for WordPress with WPML.">
+  <title>Polylang integration with Algolia Search</title>
+  <meta name="description" content="Integrate Algolia Search for WordPress with Polylang.">
   <meta content="IE=edge" http-equiv="X-UA-Compatible">
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'>
   
@@ -11,15 +11,15 @@
   <meta content='summary_large_image' name='twitter:card'>
   <meta content='@Algolia' name='twitter:site'>
   <meta content='@Algolia' name='twitter:creator'>
-  <meta content="WPML integration with Algolia Search - Algolia Search plugin for WordPress" name="twitter:title">
-  <meta content="Integrate Algolia Search for WordPress with WPML." name="twitter:description">
+  <meta content="Polylang integration with Algolia Search - Algolia Search plugin for WordPress" name="twitter:title">
+  <meta content="Integrate Algolia Search for WordPress with Polylang." name="twitter:description">
   <meta content="https://community.algolia.com/wordpress/img/og-screen.png" name="twitter:image">
   <!-- / OG meta -->
   <meta content='https://community.algolia.com/wordpress/' property='og:url'>
   <meta content='https://community.algolia.com/wordpress/img/og-screen.png' property='og:image'>
-  <meta content='WPML integration with Algolia Search - Algolia Search plugin for WordPress' property='og:title'>
+  <meta content='Polylang integration with Algolia Search - Algolia Search plugin for WordPress' property='og:title'>
   <meta content='article' property='og:type'>
-  <meta content='Integrate Algolia Search for WordPress with WPML.' property='og:description'>
+  <meta content='Integrate Algolia Search for WordPress with Polylang.' property='og:description'>
   <meta content='Algolia Search plugin for WordPress' property='og:site_name'>
 
   
@@ -36,7 +36,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
-  <link rel="stylesheet" href="css/app.css?v=1522139103359">
+  <link rel="stylesheet" href="css/app.css?v=1522226612672">
   
   <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
@@ -297,9 +297,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             </div>
 
             <header>
-                <h1>WPML integration with Algolia Search</h1>
+                <h1>Polylang integration with Algolia Search</h1>
 
-                <p class="lead">Integrate Algolia Search for WordPress with WPML.</p>
+                <p class="lead">Integrate Algolia Search for WordPress with Polylang.</p>
             </header>
 
             <hr>
@@ -307,59 +307,83 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             <div class="row">
                 <div class="large-12 columns" id="content">
                     <h2 id="introduction"><a class="heading-anchor" href="#introduction"><span></span></a>Introduction</h2>
-<p>WPML is a very famous plugin that makes managing multilingual WordPress websites easy.</p>
-<p>On this page you we will give some examples on how to push language related data along with your content.</p>
-<h2 id="push-wpml-language-data-to-algolia"><a class="heading-anchor" href="#push-wpml-language-data-to-algolia"><span></span></a>Push WPML language data to Algolia</h2>
-<p>In the following example, we add the <code>wpml</code> field to the posts.</p>
+<p><a href="https://wordpress.org/plugins/polylang/">Polylang</a> helps WordPress users offer different content to their users 
+depending on the locale of the displayed page.</p>
+<p>In this guide you will learn how to filter the search results based on the current locale.</p>
+<h2 id="initial-setup"><a class="heading-anchor" href="#initial-setup"><span></span></a>Initial Setup</h2>
+<p>Before being able to filter on the locale, we need to ensure that:</p>
+<ul>
+<li>the locale is added to every post record in Algolia</li>
+<li>the locale attribute is considered as being a facet by adding it to the index settings.</li>
+</ul>
+<p>Copy paste the following directly in the <code>functions.php</code> file of your active theme.</p>
+<p>You can also create a new file like: <code>wp-content/plugins/mu-plugins/algolia-polylang.php</code>. 
+This will automatically be picked up by WordPress and be run and has the benefit of 
+not requiring you to change your theme files.</p>
 <pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
 
-<span class="hljs-comment">/**
- * <span class="hljs-doctag">@param</span> array   $shared_attributes
- * <span class="hljs-doctag">@param</span> WP_Post $post
- *
- * <span class="hljs-doctag">@return</span> array
- */</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">my_post_shared_attributes</span><span class="hljs-params">( array <span class="hljs-variable">$shared_attributes</span>, WP_Post <span class="hljs-variable">$post</span> )</span> </span>{
-    <span class="hljs-comment">// Here we make sure we push the post&apos;s language data to Algolia.</span>
-    <span class="hljs-variable">$shared_attributes</span>[<span class="hljs-string">&apos;wpml&apos;</span>] = apply_filters( <span class="hljs-string">&apos;wpml_post_language_details&apos;</span>, <span class="hljs-keyword">null</span>,  <span class="hljs-variable">$post</span>-&gt;ID );
-
-    <span class="hljs-keyword">return</span> <span class="hljs-variable">$shared_attributes</span>;
+<span class="hljs-comment">// Add the locale of every post to every record of every post type indexed.</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">add_locales_to_records</span><span class="hljs-params">( array <span class="hljs-variable">$attrs</span>, WP_Post <span class="hljs-variable">$post</span> )</span> </span>{
+    <span class="hljs-keyword">if</span> (function_exists(<span class="hljs-string">&apos;pll_get_post_language&apos;</span>)) {
+        <span class="hljs-variable">$attrs</span>[<span class="hljs-string">&apos;locale&apos;</span>] = pll_get_post_language( <span class="hljs-variable">$post</span>-&gt;ID, <span class="hljs-string">&quot;locale&quot;</span> );
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-variable">$attrs</span>;
 }
+add_filter( <span class="hljs-string">&apos;algolia_post_shared_attributes&apos;</span>, <span class="hljs-string">&apos;add_locales_to_records&apos;</span>, <span class="hljs-number">10</span>, <span class="hljs-number">2</span> );
+add_filter( <span class="hljs-string">&apos;algolia_searchable_post_shared_attributes&apos;</span>, <span class="hljs-string">&apos;add_locales_to_records&apos;</span>, <span class="hljs-number">10</span>, <span class="hljs-number">2</span> );
 
-<span class="hljs-comment">// Push WPML data for both posts and searchable posts indices.</span>
-add_filter( <span class="hljs-string">&apos;algolia_post_shared_attributes&apos;</span>, <span class="hljs-string">&apos;my_post_shared_attributes&apos;</span>, <span class="hljs-number">10</span>, <span class="hljs-number">2</span> );
-add_filter( <span class="hljs-string">&apos;algolia_searchable_post_shared_attributes&apos;</span>, <span class="hljs-string">&apos;my_post_shared_attributes&apos;</span>, <span class="hljs-number">10</span>, <span class="hljs-number">2</span> );</code></pre>
-
-<p><strong>Do not forget to hit the &apos;re-index all&apos; button after making such changes to indices configuration.</strong></p>
-<h2 id="prepare-your-indices-for-filtering-based-on-language-code"><a class="heading-anchor" href="#prepare-your-indices-for-filtering-based-on-language-code"><span></span></a>Prepare your indices for filtering based on language code</h2>
-<p>In the previous section you learned you to <a href="#push-wpml-language-data-to-algolia">push language data to Algolia</a>.</p>
-<p>Now what you will probably want at some point is to scope your search on given language codes.</p>
-<p>To be able to filter on language codes, we first need to tell Algolia that <code>wpml.language_code</code> should be an attribute to consider for faceting.</p>
-<pre><code class="hljs php"><span class="hljs-preprocessor">&lt;?php</span>
-
-<span class="hljs-comment">/**
- * <span class="hljs-doctag">@param</span> array $settings
- *
- * <span class="hljs-doctag">@return</span> array
- */</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">my_posts_index_settings</span><span class="hljs-params">( array <span class="hljs-variable">$settings</span> )</span> </span>{
-    <span class="hljs-comment">// We add the language code to the facets to be able to easily filter on it.</span>
-    <span class="hljs-variable">$settings</span>[<span class="hljs-string">&apos;attributesForFaceting&apos;</span>][] = <span class="hljs-string">&apos;wpml.language_code&apos;</span>;
+<span class="hljs-comment">// Register the locale attribute as an Algolia facet which will allow us to filter on the current displayed locale.</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">add_locale_to_facets</span><span class="hljs-params">( array <span class="hljs-variable">$settings</span> )</span> </span>{
+    <span class="hljs-variable">$settings</span>[<span class="hljs-string">&apos;attributesForFaceting&apos;</span>][] = <span class="hljs-string">&apos;locale&apos;</span>;
 
     <span class="hljs-keyword">return</span> <span class="hljs-variable">$settings</span>;
 }
+add_filter( <span class="hljs-string">&apos;algolia_searchable_posts_index_settings&apos;</span>, <span class="hljs-string">&apos;add_locale_to_facets&apos;</span> );
+add_filter( <span class="hljs-string">&apos;algolia_posts_index_settings&apos;</span>, <span class="hljs-string">&apos;add_locale_to_facets&apos;</span> );
 
-add_filter( <span class="hljs-string">&apos;algolia_posts_index_settings&apos;</span>, <span class="hljs-string">&apos;my_posts_index_settings&apos;</span> );
-add_filter( <span class="hljs-string">&apos;algolia_searchable_posts_index_settings&apos;</span>, <span class="hljs-string">&apos;my_posts_index_settings&apos;</span> );</code></pre>
+<span class="hljs-comment">// Expose the current locale of the displayed page in JavaScript.</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">enqueue_locale</span><span class="hljs-params">()</span> </span>{
+    wp_add_inline_script( <span class="hljs-string">&apos;algolia-search&apos;</span>, sprintf(<span class="hljs-string">&apos;var current_locale = &quot;%s&quot;;&apos;</span>, get_locale()), <span class="hljs-string">&apos;before&apos;</span> );
+}
+add_action( <span class="hljs-string">&apos;wp_enqueue_scripts&apos;</span>, <span class="hljs-string">&apos;enqueue_locale&apos;</span>, <span class="hljs-number">99</span> );</code></pre>
 
-<div class="alert alert-warning">Do not forget to hit the &apos;re-index all&apos; button after making such changes to indices configuration.</div>
+<p><strong>After you implemented the above code, you need to re-index every index you are using from the &quot;Algolia Search -&gt; Autocomplete&quot; page.</strong></p>
+<p><strong>You also need to hit the &quot;Push Settings&quot; button for every used index.</strong></p>
+<h2 id="filter-search-results-page-based-on-current-locale"><a class="heading-anchor" href="#filter-search-results-page-based-on-current-locale"><span></span></a>Filter search results page based on current locale</h2>
+<p>In the previous section you should have put in place all the logic required for you to filter your results 
+based on the current locale.</p>
+<p>Now what you need to do is tell InstantSearch.js and Autocomplete.js to &quot;facet&quot; on the &quot;locale&quot; attribute of your post records.</p>
+<p>To do so you first need to <a href="https://community.algolia.com/wordpress/customize-search-page.html#customization">copy instantsearch.php template file in your own theme</a> in order to customize it 
+without changing the plugin&apos;s files.</p>
+<p>Once that is done, you need to filter on the <code>locale</code> facet.
+Add the <code>filters</code> line to your instantsearch initialization:</p>
+<pre><code class="hljs js"><span class="hljs-comment">/* Instantiate instantsearch.js */</span>
+<span class="hljs-keyword">var</span> search = instantsearch({
+    appId: algolia.application_id,
+    apiKey: algolia.search_api_key,
+    indexName: algolia.indices.searchable_posts.name,
+    urlSync: {
+        mapping: {<span class="hljs-string">&apos;q&apos;</span>: <span class="hljs-string">&apos;s&apos;</span>},
+        trackedParameters: [<span class="hljs-string">&apos;query&apos;</span>]
+    },
+    searchParameters: {
+        facetingAfterDistinct: <span class="hljs-literal">true</span>,
+    highlightPreTag: <span class="hljs-string">&apos;__ais-highlight__&apos;</span>,
+    highlightPostTag: <span class="hljs-string">&apos;__/ais-highlight__&apos;</span>,
+    filters: <span class="hljs-string">&apos;locale:&quot;&apos;</span> + current_locale + <span class="hljs-string">&apos;&quot;&apos;</span>, <span class="hljs-comment">// This is the line we added.</span>
+    }
+});</code></pre>
+
+<p>Now your results on the dedicated search page should be properly filtered.</p>
+<p>For the autocomplete dropdown experience, you need to do a similar change.</p>
+<p>First copy the autocomplete.php file to your own theme</p>
 
                 </div>
             </div>
 
             <ul class="menu simple text-center">
                 <li><a href="https://github.com/algolia/algoliasearch-wordpress/edit/master/docs/src/polylang.md" target="_blank"><i class="fi-pencil"></i> <span>Edit this Page</span></a></li>
-                <li><a href="https://github.com/algolia/algoliasearch-wordpress/issues/new?title=%5BWPML integration with Algolia Search%5D%20ISSUE%20NAME%20HERE" target="_blank"><i class="fi-social-github"></i> <span>Report a Bug</span></a></li>
+                <li><a href="https://github.com/algolia/algoliasearch-wordpress/issues/new?title=%5BPolylang integration with Algolia Search%5D%20ISSUE%20NAME%20HERE" target="_blank"><i class="fi-social-github"></i> <span>Report a Bug</span></a></li>
                 <li><a href="http://stackoverflow.com/questions/tagged/algolia+wordpress" target="_blank"><i class="fi-comment"></i> <span>Get Help</span></a></li>
             </ul>
         </article>
@@ -571,8 +595,8 @@ add_filter( <span class="hljs-string">&apos;algolia_searchable_posts_index_setti
 </defs>
 </svg>
 <script src="deps/jquery/jquery.min.js"></script>
-<script src="js/communityHeader.js?v=1522139103359"></script>
-<script src="js/app.js?v=1522139103359"></script>
+<script src="js/communityHeader.js?v=1522226612672"></script>
+<script src="js/app.js?v=1522226612672"></script>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <script src="https://cdn.jsdelivr.net/lodash/4.16.2/lodash.min.js"></script>
 
